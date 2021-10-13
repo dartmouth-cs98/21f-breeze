@@ -1,7 +1,6 @@
 # Breeze
 
-![Team Photo](Insert a Team Photo URL here)
-[*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
+![Team Photo](./groupPhoto.jpg)
 
 TODO: short project description, some sample screenshots or mockups
 
@@ -9,7 +8,7 @@ Welcome to Breeze! We are an app to help build good habits in your social media 
 
 ## Architecture
 
-TODO:  descriptions of code organization and tools and libraries used
+TODO: descriptions of code organization and tools and libraries used
 
 ## Setup
 
