@@ -12,7 +12,7 @@ Breeze is an iOS app. To build, we plan to use Swift, Xcode, Apple ScreenTime AP
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc
+For now, open up the project in XCode and hit play!
 
 ## Deployment
 
