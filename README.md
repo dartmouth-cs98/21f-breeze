@@ -8,7 +8,7 @@ Welcome to Breeze! We are an iOS app that helps you build good habits in your so
 
 ## Architecture
 
-TODO: descriptions of code organization and tools and libraries used
+Breeze is an iOS app. To build, we plan to use Swift, Xcode, Apple ScreenTime API, and Apple Spritekit.
 
 ## Setup
 
