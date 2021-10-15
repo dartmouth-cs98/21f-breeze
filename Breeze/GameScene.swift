@@ -1,6 +1,5 @@
 //
 //  GameScene.swift
-//  test
 //
 //  Created by Sabrina Jain on 10/13/21.
 //
@@ -13,6 +12,13 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     
     override func didMove(to view: SKView) {
+        
+        let helloWorld = SKLabelNode(fontNamed: "Chalkduster")
+        helloWorld.text = "Hello World!"
+        helloWorld.fontSize = 30
+        helloWorld.fontColor = SKColor.green
+        helloWorld.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(helloWorld)
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode

@@ -16,8 +16,8 @@
 		461E9E342717725F00E6C510 /* BreezeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E332717725F00E6C510 /* BreezeTests.swift */; };
 		461E9E3E2717725F00E6C510 /* BreezeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E3D2717725F00E6C510 /* BreezeUITests.swift */; };
 		461E9E402717725F00E6C510 /* BreezeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */; };
-		461E9E8D271773AE00E6C510 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E8B271773AE00E6C510 /* GameScene.sks */; };
-		461E9E8E271773AE00E6C510 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E8C271773AE00E6C510 /* GameScene.swift */; };
+		461E9E902719464E00E6C510 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E8F2719464E00E6C510 /* GameScene.sks */; };
+		461E9E942719468900E6C510 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E932719468900E6C510 /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +50,8 @@
 		461E9E392717725F00E6C510 /* BreezeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreezeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		461E9E3D2717725F00E6C510 /* BreezeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeUITests.swift; sourceTree = "<group>"; };
 		461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		461E9E8B271773AE00E6C510 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameScene.sks; path = ../../test/test/GameScene.sks; sourceTree = "<group>"; };
-		461E9E8C271773AE00E6C510 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = ../../test/test/GameScene.swift; sourceTree = "<group>"; };
+		461E9E8F2719464E00E6C510 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		461E9E932719468900E6C510 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +102,10 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
+				461E9E932719468900E6C510 /* GameScene.swift */,
+				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
 				461E9E1F2717725E00E6C510 /* ContentView.swift */,
-				461E9E8B271773AE00E6C510 /* GameScene.sks */,
-				461E9E8C271773AE00E6C510 /* GameScene.swift */,
 				461E9E212717725F00E6C510 /* Assets.xcassets */,
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
@@ -243,8 +243,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
-				461E9E8D271773AE00E6C510 /* GameScene.sks in Resources */,
 				461E9E222717725F00E6C510 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				461E9E8E271773AE00E6C510 /* GameScene.swift in Sources */,
+				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
