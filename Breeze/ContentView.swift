@@ -14,16 +14,17 @@ struct ContentView: View {
     
     var scene: SKScene {
         let scene = GameScene()
-        scene.size = CGSize(width: 300, height: 400)
-        scene.scaleMode = .fill
+        scene.scaleMode = .resizeFill
         return scene
         
     }
     
     var body: some View {
-        SpriteView(scene: scene)
-            .frame(width: 300, height: 400)
-            .ignoresSafeArea()
+        
+        GeometryReader { gp in
+            SpriteView(scene: scene)
+                .frame(width: gp.size.width, height: gp.size.height)
+        }.ignoresSafeArea()
     }
 }
 
