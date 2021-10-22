@@ -1,0 +1,17 @@
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+type Task @model {
+  id: ID!
+  title: String!
+  description: String
+  priority: Priority
+  status: String
+}
+type Note @model {
+  id: ID!
+  content: String!
+}

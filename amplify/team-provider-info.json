@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-21f-breeze-dev-155237-authRole",
+      "UnauthRoleArn": "arn:aws:iam::159005707732:role/amplify-21f-breeze-dev-155237-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::159005707732:role/amplify-21f-breeze-dev-155237-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-21f-breeze-dev-155237-deployment",
+      "UnauthRoleName": "amplify-21f-breeze-dev-155237-unauthRole",
+      "StackName": "amplify-21f-breeze-dev-155237",
+      "StackId": "arn:aws:cloudformation:us-east-1:159005707732:stack/amplify-21f-breeze-dev-155237/1e47b460-3116-11ec-8cc0-0a596c25fead",
+      "AmplifyAppId": "d38mo59rnyqgn"
+    }
+  }
+}
