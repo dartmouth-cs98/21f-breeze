@@ -32,17 +32,19 @@ func configureOneSignal() {
 }
 
 
+@available(iOS 15.0, *)
 @main
 struct BreezeApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+    @State var appsToTrackHaveBeenSelected = false
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        
     }
-    
     
     public init() {
         configureAmplify()
