@@ -18,6 +18,17 @@
 		461E9E402717725F00E6C510 /* BreezeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */; };
 		461E9E902719464E00E6C510 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E8F2719464E00E6C510 /* GameScene.sks */; };
 		461E9E942719468900E6C510 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E932719468900E6C510 /* GameScene.swift */; };
+		9ACB05AF2726163D0074F8F0 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */; };
+		9ACB05B12726163D0074F8F0 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */; };
+		9ACB05B32726163D0074F8F0 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */; };
+		9ACB05B52726163D0074F8F0 /* AWSPinpointAnalyticsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */; };
+		9ACB05B72726163D0074F8F0 /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B62726163D0074F8F0 /* AWSPluginsCore */; };
+		9ACB05B92726163D0074F8F0 /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */; };
+		9ACB05BB2726163D0074F8F0 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05BA2726163D0074F8F0 /* Amplify */; };
+		9ACB05C3272625600074F8F0 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB05C2272625600074F8F0 /* NotificationService.swift */; };
+		9ACB05C7272625600074F8F0 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9ACB05CE272627330074F8F0 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05CD272627330074F8F0 /* OneSignal */; };
+		9ACB05D1272627840074F8F0 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05D0272627840074F8F0 /* OneSignal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +46,28 @@
 			remoteGlobalIDString = 461E9E192717725E00E6C510;
 			remoteInfo = Breeze;
 		};
+		9ACB05C5272625600074F8F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 461E9E122717725E00E6C510 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9ACB05BF272625600074F8F0;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9ACB05CB272625600074F8F0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9ACB05C7272625600074F8F0 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		461E9E1A2717725E00E6C510 /* Breeze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breeze.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +84,12 @@
 		461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		461E9E8F2719464E00E6C510 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		461E9E932719468900E6C510 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
+		9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ACB05C2272625600074F8F0 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		9ACB05C4272625600074F8F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9ACB05D22726280A0074F8F0 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +97,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ACB05B32726163D0074F8F0 /* AWSDataStorePlugin in Frameworks */,
+				9ACB05CE272627330074F8F0 /* OneSignal in Frameworks */,
+				9ACB05BB2726163D0074F8F0 /* Amplify in Frameworks */,
+				9ACB05B52726163D0074F8F0 /* AWSPinpointAnalyticsPlugin in Frameworks */,
+				9ACB05AF2726163D0074F8F0 /* AWSAPIPlugin in Frameworks */,
+				9ACB05B12726163D0074F8F0 /* AWSCognitoAuthPlugin in Frameworks */,
+				9ACB05B72726163D0074F8F0 /* AWSPluginsCore in Frameworks */,
+				9ACB05B92726163D0074F8F0 /* AWSS3StoragePlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +122,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9ACB05BD272625600074F8F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9ACB05D1272627840074F8F0 /* OneSignal in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -85,7 +139,9 @@
 				461E9E1C2717725E00E6C510 /* Breeze */,
 				461E9E322717725F00E6C510 /* BreezeTests */,
 				461E9E3C2717725F00E6C510 /* BreezeUITests */,
+				9ACB05C1272625600074F8F0 /* OneSignalNotificationServiceExtension */,
 				461E9E1B2717725E00E6C510 /* Products */,
+				9ACB05CF272627840074F8F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +151,7 @@
 				461E9E1A2717725E00E6C510 /* Breeze.app */,
 				461E9E2F2717725F00E6C510 /* BreezeTests.xctest */,
 				461E9E392717725F00E6C510 /* BreezeUITests.xctest */,
+				9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +159,8 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
+				9ACB05D3272628F30074F8F0 /* Breeze.entitlements */,
+				9A117327271E16E800D871B7 /* info.plist */,
 				461E9E932719468900E6C510 /* GameScene.swift */,
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
@@ -139,6 +198,23 @@
 			path = BreezeUITests;
 			sourceTree = "<group>";
 		};
+		9ACB05C1272625600074F8F0 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				9ACB05D22726280A0074F8F0 /* OneSignalNotificationServiceExtension.entitlements */,
+				9ACB05C2272625600074F8F0 /* NotificationService.swift */,
+				9ACB05C4272625600074F8F0 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		9ACB05CF272627840074F8F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,12 +225,24 @@
 				461E9E162717725E00E6C510 /* Sources */,
 				461E9E172717725E00E6C510 /* Frameworks */,
 				461E9E182717725E00E6C510 /* Resources */,
+				9ACB05CB272625600074F8F0 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9ACB05C6272625600074F8F0 /* PBXTargetDependency */,
 			);
 			name = Breeze;
+			packageProductDependencies = (
+				9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */,
+				9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */,
+				9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */,
+				9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */,
+				9ACB05B62726163D0074F8F0 /* AWSPluginsCore */,
+				9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */,
+				9ACB05BA2726163D0074F8F0 /* Amplify */,
+				9ACB05CD272627330074F8F0 /* OneSignal */,
+			);
 			productName = Breeze;
 			productReference = 461E9E1A2717725E00E6C510 /* Breeze.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +283,26 @@
 			productReference = 461E9E392717725F00E6C510 /* BreezeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9ACB05BF272625600074F8F0 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9ACB05C8272625600074F8F0 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				9ACB05BC272625600074F8F0 /* Sources */,
+				9ACB05BD272625600074F8F0 /* Frameworks */,
+				9ACB05BE272625600074F8F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			packageProductDependencies = (
+				9ACB05D0272627840074F8F0 /* OneSignal */,
+			);
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -216,6 +324,9 @@
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = 461E9E192717725E00E6C510;
 					};
+					9ACB05BF272625600074F8F0 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 				};
 			};
 			buildConfigurationList = 461E9E152717725E00E6C510 /* Build configuration list for PBXProject "Breeze" */;
@@ -227,6 +338,10 @@
 				Base,
 			);
 			mainGroup = 461E9E112717725E00E6C510;
+			packageReferences = (
+				9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */,
+				9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,6 +349,7 @@
 				461E9E192717725E00E6C510 /* Breeze */,
 				461E9E2E2717725F00E6C510 /* BreezeTests */,
 				461E9E382717725F00E6C510 /* BreezeUITests */,
+				9ACB05BF272625600074F8F0 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -257,6 +373,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		461E9E372717725F00E6C510 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9ACB05BE272625600074F8F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -295,6 +418,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9ACB05BC272625600074F8F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9ACB05C3272625600074F8F0 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -307,6 +438,11 @@
 			isa = PBXTargetDependency;
 			target = 461E9E192717725E00E6C510 /* Breeze */;
 			targetProxy = 461E9E3A2717725F00E6C510 /* PBXContainerItemProxy */;
+		};
+		9ACB05C6272625600074F8F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9ACB05BF272625600074F8F0 /* OneSignalNotificationServiceExtension */;
+			targetProxy = 9ACB05C5272625600074F8F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -430,16 +566,19 @@
 		461E9E442717725F00E6C510 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Breeze/Breeze.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Breeze/Preview Content\"";
+				DEVELOPMENT_TEAM = YYMA9TWGJ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Breeze/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -459,16 +598,19 @@
 		461E9E452717725F00E6C510 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Breeze/Breeze.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Breeze/Preview Content\"";
+				DEVELOPMENT_TEAM = YYMA9TWGJ5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Breeze/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -577,6 +719,60 @@
 			};
 			name = Release;
 		};
+		9ACB05C9272625600074F8F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YYMA9TWGJ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cs98.Breeze.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9ACB05CA272625600074F8F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YYMA9TWGJ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cs98.Breeze.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -616,7 +812,84 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9ACB05C8272625600074F8F0 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9ACB05C9272625600074F8F0 /* Debug */,
+				9ACB05CA272625600074F8F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = versionRange;
+				maximumVersion = 4.0.0;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSAPIPlugin;
+		};
+		9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSCognitoAuthPlugin;
+		};
+		9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSDataStorePlugin;
+		};
+		9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSPinpointAnalyticsPlugin;
+		};
+		9ACB05B62726163D0074F8F0 /* AWSPluginsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSPluginsCore;
+		};
+		9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSS3StoragePlugin;
+		};
+		9ACB05BA2726163D0074F8F0 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
+		9ACB05CD272627330074F8F0 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		9ACB05D0272627840074F8F0 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */ = {
