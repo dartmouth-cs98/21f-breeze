@@ -11,7 +11,6 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
-    //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
         
         let helloWorld = SKLabelNode(fontNamed: "Chalkduster")
