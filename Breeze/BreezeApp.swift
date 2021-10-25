@@ -7,25 +7,6 @@
 
 import OneSignal
 import SwiftUI
-import Amplify
-import AWSCognitoAuthPlugin
-import AWSAuthCore
-import AWSAPIPlugin
-import AWSDataStorePlugin
-
-func configureAmplify() {
-    let models = AmplifyModels()
-    let apiPlugin = AWSAPIPlugin(modelRegistration: models)
-    let dataStorePlugin = AWSDataStorePlugin(modelRegistration: models)
-    do {
-        try Amplify.add(plugin: apiPlugin)
-        try Amplify.add(plugin: dataStorePlugin)
-        try Amplify.configure()
-        print("Initialized Amplify");
-    } catch {
-        assert(false, "Could not initialize Amplify: \(error)")
-    }
-}
 
 func configureOneSignal() {
     
@@ -46,9 +27,6 @@ struct BreezeApp: App {
         
     }
     
-    public init() {
-        configureAmplify()
-    }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
