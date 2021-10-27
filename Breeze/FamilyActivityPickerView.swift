@@ -14,6 +14,7 @@ struct FamilyActivityPickerView: View {
   @State var selection = FamilyActivitySelection()
   @State var isPresented = false
   @State var appsToTrackHaveBeenSelected = false
+  @State var deviceMonitor: deviceActivityMonitorForTrackingScreenTime
   @Environment(\.dismiss) private var dismiss
 
   var body: some View {
@@ -30,10 +31,12 @@ struct FamilyActivityPickerView: View {
               let applications = selection.applications
               let categories = selection.categories
               let webDomains = selection.webDomains
+              deviceMonitor = deviceActivityMonitorForTrackingScreenTime(applications: applications, categories: categories, webDomains: webDomains)
           }
       }
   }
     
 }
+
 
 
