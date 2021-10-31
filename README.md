@@ -6,7 +6,7 @@ Welcome to Breeze! We are an iOS app that helps you build good habits in your so
 
 ## Architecture
 
-Breeze is an iOS app. To build, we plan to use Swift, Xcode, Apple ScreenTime API, AWS Amplify, Family Activity Picker, and Apple Spritekit.
+Breeze is an iOS app. To build, we are using a stack of Swift, Xcode, Realm DB, Apple ScreenTime API, Family Activity Picker, and Apple Spritekit.
 
 ## Setup
 
