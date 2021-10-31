@@ -18,13 +18,6 @@
 		461E9E402717725F00E6C510 /* BreezeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */; };
 		461E9E902719464E00E6C510 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E8F2719464E00E6C510 /* GameScene.sks */; };
 		461E9E942719468900E6C510 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E932719468900E6C510 /* GameScene.swift */; };
-		9ACB05AF2726163D0074F8F0 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */; };
-		9ACB05B12726163D0074F8F0 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */; };
-		9ACB05B32726163D0074F8F0 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */; };
-		9ACB05B52726163D0074F8F0 /* AWSPinpointAnalyticsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */; };
-		9ACB05B72726163D0074F8F0 /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B62726163D0074F8F0 /* AWSPluginsCore */; };
-		9ACB05B92726163D0074F8F0 /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */; };
-		9ACB05BB2726163D0074F8F0 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05BA2726163D0074F8F0 /* Amplify */; };
 		9ACB05C3272625600074F8F0 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB05C2272625600074F8F0 /* NotificationService.swift */; };
 		9ACB05C7272625600074F8F0 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9ACB05CE272627330074F8F0 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05CD272627330074F8F0 /* OneSignal */; };
@@ -97,14 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9ACB05B32726163D0074F8F0 /* AWSDataStorePlugin in Frameworks */,
 				9ACB05CE272627330074F8F0 /* OneSignal in Frameworks */,
-				9ACB05BB2726163D0074F8F0 /* Amplify in Frameworks */,
-				9ACB05B52726163D0074F8F0 /* AWSPinpointAnalyticsPlugin in Frameworks */,
-				9ACB05AF2726163D0074F8F0 /* AWSAPIPlugin in Frameworks */,
-				9ACB05B12726163D0074F8F0 /* AWSCognitoAuthPlugin in Frameworks */,
-				9ACB05B72726163D0074F8F0 /* AWSPluginsCore in Frameworks */,
-				9ACB05B92726163D0074F8F0 /* AWSS3StoragePlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,13 +220,6 @@
 			);
 			name = Breeze;
 			packageProductDependencies = (
-				9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */,
-				9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */,
-				9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */,
-				9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */,
-				9ACB05B62726163D0074F8F0 /* AWSPluginsCore */,
-				9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */,
-				9ACB05BA2726163D0074F8F0 /* Amplify */,
 				9ACB05CD272627330074F8F0 /* OneSignal */,
 			);
 			productName = Breeze;
@@ -339,7 +318,6 @@
 			);
 			mainGroup = 461E9E112717725E00E6C510;
 			packageReferences = (
-				9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */,
 				9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
@@ -824,14 +802,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
@@ -844,41 +814,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSAPIPlugin;
-		};
-		9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSCognitoAuthPlugin;
-		};
-		9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSDataStorePlugin;
-		};
-		9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPinpointAnalyticsPlugin;
-		};
-		9ACB05B62726163D0074F8F0 /* AWSPluginsCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPluginsCore;
-		};
-		9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSS3StoragePlugin;
-		};
-		9ACB05BA2726163D0074F8F0 /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = Amplify;
-		};
 		9ACB05CD272627330074F8F0 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
