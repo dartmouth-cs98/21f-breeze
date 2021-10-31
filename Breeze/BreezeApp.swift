@@ -24,7 +24,6 @@ struct BreezeApp: App {
         WindowGroup {
             ContentView()
         }
-        
     }
     
 }
