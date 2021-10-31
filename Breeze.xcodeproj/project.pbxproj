@@ -18,13 +18,13 @@
 		461E9E402717725F00E6C510 /* BreezeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */; };
 		461E9E902719464E00E6C510 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E8F2719464E00E6C510 /* GameScene.sks */; };
 		461E9E942719468900E6C510 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E932719468900E6C510 /* GameScene.swift */; };
-		9ACB05AF2726163D0074F8F0 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */; };
-		9ACB05B12726163D0074F8F0 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */; };
-		9ACB05B32726163D0074F8F0 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */; };
-		9ACB05B52726163D0074F8F0 /* AWSPinpointAnalyticsPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */; };
-		9ACB05B72726163D0074F8F0 /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B62726163D0074F8F0 /* AWSPluginsCore */; };
-		9ACB05B92726163D0074F8F0 /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */; };
-		9ACB05BB2726163D0074F8F0 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05BA2726163D0074F8F0 /* Amplify */; };
+		46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */; };
+		46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */; };
+		4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152A272F26010023C2C0 /* TapToPlayView.swift */; };
+		4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */; };
+		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
+		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
+		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
 		9ACB05C3272625600074F8F0 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB05C2272625600074F8F0 /* NotificationService.swift */; };
 		9ACB05C7272625600074F8F0 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9ACB05CE272627330074F8F0 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACB05CD272627330074F8F0 /* OneSignal */; };
@@ -84,6 +84,13 @@
 		461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		461E9E8F2719464E00E6C510 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		461E9E932719468900E6C510 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitor.swift; sourceTree = "<group>"; };
+		46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyActivityPickerView.swift; sourceTree = "<group>"; };
+		4652152A272F26010023C2C0 /* TapToPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapToPlayView.swift; sourceTree = "<group>"; };
+		4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingWhirlpoolGameScene.swift; sourceTree = "<group>"; };
+		4652152E272F260B0023C2C0 /* ExitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExitView.swift; sourceTree = "<group>"; };
+		46521530272F26150023C2C0 /* EndOfSetUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfSetUpView.swift; sourceTree = "<group>"; };
+		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05C0272625600074F8F0 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACB05C2272625600074F8F0 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -97,14 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9ACB05B32726163D0074F8F0 /* AWSDataStorePlugin in Frameworks */,
 				9ACB05CE272627330074F8F0 /* OneSignal in Frameworks */,
-				9ACB05BB2726163D0074F8F0 /* Amplify in Frameworks */,
-				9ACB05B52726163D0074F8F0 /* AWSPinpointAnalyticsPlugin in Frameworks */,
-				9ACB05AF2726163D0074F8F0 /* AWSAPIPlugin in Frameworks */,
-				9ACB05B12726163D0074F8F0 /* AWSCognitoAuthPlugin in Frameworks */,
-				9ACB05B72726163D0074F8F0 /* AWSPluginsCore in Frameworks */,
-				9ACB05B92726163D0074F8F0 /* AWSS3StoragePlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +165,13 @@
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
 				461E9E1F2717725E00E6C510 /* ContentView.swift */,
+				4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */,
+				46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */,
+				4652152A272F26010023C2C0 /* TapToPlayView.swift */,
+				4652152E272F260B0023C2C0 /* ExitView.swift */,
+				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
+				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
+				46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */,
 				461E9E212717725F00E6C510 /* Assets.xcassets */,
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
@@ -234,13 +241,6 @@
 			);
 			name = Breeze;
 			packageProductDependencies = (
-				9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */,
-				9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */,
-				9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */,
-				9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */,
-				9ACB05B62726163D0074F8F0 /* AWSPluginsCore */,
-				9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */,
-				9ACB05BA2726163D0074F8F0 /* Amplify */,
 				9ACB05CD272627330074F8F0 /* OneSignal */,
 			);
 			productName = Breeze;
@@ -339,7 +339,6 @@
 			);
 			mainGroup = 461E9E112717725E00E6C510;
 			packageReferences = (
-				9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */,
 				9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
@@ -393,11 +392,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */,
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
+				46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */,
+				46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
+				46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */,
+				46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */,
 				461E9E1E2717725E00E6C510 /* BreezeApp.swift in Sources */,
+				4652152F272F260B0023C2C0 /* ExitView.swift in Sources */,
+				4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,14 +830,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
@@ -844,41 +842,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9ACB05AE2726163D0074F8F0 /* AWSAPIPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSAPIPlugin;
-		};
-		9ACB05B02726163D0074F8F0 /* AWSCognitoAuthPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSCognitoAuthPlugin;
-		};
-		9ACB05B22726163D0074F8F0 /* AWSDataStorePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSDataStorePlugin;
-		};
-		9ACB05B42726163D0074F8F0 /* AWSPinpointAnalyticsPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPinpointAnalyticsPlugin;
-		};
-		9ACB05B62726163D0074F8F0 /* AWSPluginsCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSPluginsCore;
-		};
-		9ACB05B82726163D0074F8F0 /* AWSS3StoragePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = AWSS3StoragePlugin;
-		};
-		9ACB05BA2726163D0074F8F0 /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9ACB05AD2726163D0074F8F0 /* XCRemoteSwiftPackageReference "amplify-ios" */;
-			productName = Amplify;
-		};
 		9ACB05CD272627330074F8F0 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9ACB05CC272627330074F8F0 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
