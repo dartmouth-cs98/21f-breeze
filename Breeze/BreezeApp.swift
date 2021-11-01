@@ -5,13 +5,7 @@
 //  Created by Sabrina Jain on 10/13/21.
 //
 
-import OneSignal
 import SwiftUI
-
-func configureOneSignal() {
-    
-}
-
 
 @available(iOS 15.0, *)
 @main
@@ -25,7 +19,6 @@ struct BreezeApp: App {
             ContentView()
         }
     }
-    
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
