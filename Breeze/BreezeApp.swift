@@ -5,7 +5,6 @@
 //  Created by Sabrina Jain on 10/13/21.
 //
 
-import OneSignal
 import SwiftUI
 
 @available(iOS 15.0, *)
