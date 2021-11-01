@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 import SpriteKit
 
-
 @available(iOS 15.0, *)
 struct ContentView: View {
     
