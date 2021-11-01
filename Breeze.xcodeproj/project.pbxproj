@@ -25,6 +25,7 @@
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
+		FF04E03C273080A600E2D9D1 /* ViewModels in Resources */ = {isa = PBXBuildFile; fileRef = FF04E03B273080A600E2D9D1 /* ViewModels */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
+		FF04E03B273080A600E2D9D1 /* ViewModels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewModels; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,19 +134,14 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
+				FF04E03D273080B700E2D9D1 /* Models */,
+				FF04E03B273080A600E2D9D1 /* ViewModels */,
+				FF04E03727307FA800E2D9D1 /* Views */,
 				9ACB05D3272628F30074F8F0 /* Breeze.entitlements */,
 				9A117327271E16E800D871B7 /* info.plist */,
 				461E9E932719468900E6C510 /* GameScene.swift */,
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
-				461E9E1F2717725E00E6C510 /* ContentView.swift */,
-				4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */,
-				46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */,
-				4652152A272F26010023C2C0 /* TapToPlayView.swift */,
-				4652152E272F260B0023C2C0 /* ExitView.swift */,
-				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
-				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
-				46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */,
 				461E9E212717725F00E6C510 /* Assets.xcassets */,
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
@@ -183,6 +180,28 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF04E03727307FA800E2D9D1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				461E9E1F2717725E00E6C510 /* ContentView.swift */,
+				4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */,
+				46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */,
+				4652152A272F26010023C2C0 /* TapToPlayView.swift */,
+				4652152E272F260B0023C2C0 /* ExitView.swift */,
+				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
+				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
+				46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FF04E03D273080B700E2D9D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +315,7 @@
 			files = (
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
+				FF04E03C273080A600E2D9D1 /* ViewModels in Resources */,
 				461E9E222717725F00E6C510 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
