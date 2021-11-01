@@ -8,11 +8,6 @@
 import OneSignal
 import SwiftUI
 
-func configureOneSignal() {
-    
-}
-
-
 @available(iOS 15.0, *)
 @main
 struct BreezeApp: App {
@@ -25,7 +20,6 @@ struct BreezeApp: App {
             ContentView()
         }
     }
-    
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
