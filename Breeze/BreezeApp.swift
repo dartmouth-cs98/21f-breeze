@@ -5,13 +5,8 @@
 //  Created by Sabrina Jain on 10/13/21.
 //
 
-import OneSignal
 import SwiftUI
-
-func configureOneSignal() {
-    
-}
-
+import UserNotifications
 
 @available(iOS 15.0, *)
 @main
@@ -25,26 +20,52 @@ struct BreezeApp: App {
             ContentView()
         }
     }
-    
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    let userNotificationCenter = UNUserNotificationCenter.current()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // Remove this method to stop OneSignal Debugging
-        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
-          
-        // OneSignal initialization
-        OneSignal.initWithLaunchOptions(launchOptions)
-        OneSignal.setAppId("371443da-249d-4c97-9f96-2947aaf7a8eb")
-          
-        // promptForPushNotifications will show the native iOS notification permission prompt.
-        // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-        })
-          
-        // Set your customer userId
-        // OneSignal.setExternalUserId("userId")
+        self.requestNotificationAuthorization()
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        sendNotification()
         return true
+    }
+    
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
+            if let error = error {
+                print("Error: ", error)
+            }
+        }
+    }
+
+    func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "Test"
+        notificationContent.body = "Test body"
+        notificationContent.badge = NSNumber(value: 3)
+        
+        if let url = Bundle.main.url(forResource: "dune",
+                                    withExtension: "png") {
+            if let attachment = try? UNNotificationAttachment(identifier: "dune",
+                                                            url: url,
+                                                            options: nil) {
+                notificationContent.attachments = [attachment]
+            }
+        }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+                                                        repeats: false)
+        let request = UNNotificationRequest(identifier: "testNotification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+        
+        userNotificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
     }
 }
