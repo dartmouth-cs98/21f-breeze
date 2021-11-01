@@ -44,6 +44,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+<<<<<<< HEAD
+=======
+/* Begin PBXCopyFilesBuildPhase section */
+		9ACB05CB272625600074F8F0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+>>>>>>> b4d32e335791c995f0ce94c7afe6fbf4d913ea53
 /* Begin PBXFileReference section */
 		461E9E1A2717725E00E6C510 /* Breeze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breeze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		461E9E1D2717725E00E6C510 /* BreezeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeApp.swift; sourceTree = "<group>"; };
