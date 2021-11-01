@@ -26,6 +26,8 @@
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
 		FF04E03C273080A600E2D9D1 /* ViewModels in Resources */ = {isa = PBXBuildFile; fileRef = FF04E03B273080A600E2D9D1 /* ViewModels */; };
+		FF04E04027308ABD00E2D9D1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E03F27308ABD00E2D9D1 /* Realm */; };
+		FF04E04227308ABD00E2D9D1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E04127308ABD00E2D9D1 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF04E04227308ABD00E2D9D1 /* RealmSwift in Frameworks */,
+				FF04E04027308ABD00E2D9D1 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +226,8 @@
 			);
 			name = Breeze;
 			packageProductDependencies = (
+				FF04E03F27308ABD00E2D9D1 /* Realm */,
+				FF04E04127308ABD00E2D9D1 /* RealmSwift */,
 			);
 			productName = Breeze;
 			productReference = 461E9E1A2717725E00E6C510 /* Breeze.app */;
@@ -296,6 +302,7 @@
 			);
 			mainGroup = 461E9E112717725E00E6C510;
 			packageReferences = (
+				FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
 			projectDirPath = "";
@@ -699,6 +706,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF04E03F27308ABD00E2D9D1 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		FF04E04127308ABD00E2D9D1 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */ = {
