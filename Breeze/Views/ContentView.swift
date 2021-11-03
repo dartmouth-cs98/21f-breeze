@@ -22,6 +22,7 @@ struct ContentView: View {
     @State var familyPickerView = FamilyActivityPickerView()
     @State private var showModal = false
     
+    
     @ViewBuilder
     var body: some View {
         ZStack {
@@ -32,6 +33,7 @@ struct ContentView: View {
             }.ignoresSafeArea()
             familyPickerView
         }
+        
     }
 }
 

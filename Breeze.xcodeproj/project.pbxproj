@@ -27,6 +27,7 @@
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
 		FF04E04027308ABD00E2D9D1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E03F27308ABD00E2D9D1 /* Realm */; };
 		FF04E04227308ABD00E2D9D1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E04127308ABD00E2D9D1 /* RealmSwift */; };
+		FF28167A273332540022F820 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF281679273332540022F820 /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
+		FF281679273332540022F820 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +138,6 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
-				FF04E03D273080B700E2D9D1 /* Models */,
 				FF04E03727307FA800E2D9D1 /* Views */,
 				9ACB05D3272628F30074F8F0 /* Breeze.entitlements */,
 				9A117327271E16E800D871B7 /* info.plist */,
@@ -147,6 +148,7 @@
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
 				461E9E232717725F00E6C510 /* Preview Content */,
+				FF281679273332540022F820 /* UserSettings.swift */,
 			);
 			path = Breeze;
 			sourceTree = "<group>";
@@ -196,13 +198,6 @@
 				46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		FF04E03D273080B700E2D9D1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +343,7 @@
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
 				46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */,
 				46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */,
+				FF28167A273332540022F820 /* UserSettings.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
