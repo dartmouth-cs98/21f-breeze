@@ -27,6 +27,10 @@
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
 		FF04E04027308ABD00E2D9D1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E03F27308ABD00E2D9D1 /* Realm */; };
 		FF04E04227308ABD00E2D9D1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E04127308ABD00E2D9D1 /* RealmSwift */; };
+		FF04E0442730A02600E2D9D1 /* DeviceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF04E0432730A02600E2D9D1 /* DeviceDB.swift */; };
+		FF2816702731F1870022F820 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28166F2731F1870022F820 /* Device.swift */; };
+		FF2816722731F5BE0022F820 /* DeviceForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2816712731F5BE0022F820 /* DeviceForm.swift */; };
+		FF2816752731F80C0022F820 /* DeviceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2816742731F80C0022F820 /* DeviceStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,10 @@
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
+		FF04E0432730A02600E2D9D1 /* DeviceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDB.swift; sourceTree = "<group>"; };
+		FF28166F2731F1870022F820 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		FF2816712731F5BE0022F820 /* DeviceForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceForm.swift; sourceTree = "<group>"; };
+		FF2816742731F80C0022F820 /* DeviceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
+				FF2816732731F6CF0022F820 /* ViewModels */,
 				FF04E03D273080B700E2D9D1 /* Models */,
 				FF04E03727307FA800E2D9D1 /* Views */,
 				9ACB05D3272628F30074F8F0 /* Breeze.entitlements */,
@@ -201,8 +210,19 @@
 		FF04E03D273080B700E2D9D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FF04E0432730A02600E2D9D1 /* DeviceDB.swift */,
+				FF28166F2731F1870022F820 /* Device.swift */,
+				FF2816712731F5BE0022F820 /* DeviceForm.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FF2816732731F6CF0022F820 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FF2816742731F80C0022F820 /* DeviceStore.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,12 +364,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2816722731F5BE0022F820 /* DeviceForm.swift in Sources */,
+				FF04E0442730A02600E2D9D1 /* DeviceDB.swift in Sources */,
 				4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */,
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
 				46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */,
 				46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */,
+				FF2816702731F1870022F820 /* Device.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
+				FF2816752731F80C0022F820 /* DeviceStore.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
 				46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */,
 				46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */,
