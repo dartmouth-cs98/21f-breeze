@@ -11,7 +11,7 @@ import RealmSwift
 class DeviceForm: ObservableObject {
   @Published var points = 0
   @Published var streak = 0
-  @Published var blockedApps = []
+  @Published var blockedApps = RealmSwift.List<String>()
   @Published var timeInMinutes = 0
 
 

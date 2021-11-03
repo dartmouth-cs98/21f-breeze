@@ -12,7 +12,7 @@ struct Device: Identifiable {
   let id: Int
   let points: Int
   let streak: Int
-  let blockedApps: [String]
+  let blockedApps: RealmSwift.List<String>
   let timeInMinutes: Int
 }
 

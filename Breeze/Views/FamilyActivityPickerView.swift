@@ -16,8 +16,8 @@ struct FamilyActivityPickerView: View {
   @State var isPresented = false
   @State var appsToTrackHaveBeenSelected = false
   // @State var deviceMonitor: deviceActivityMonitorForTrackingScreenTime = nil
-  @EnvironmentObject var store: DeviceStore
-  @Environment(\.presentationMode) var presentationMode
+  //@EnvironmentObject var store: DeviceStore
+  //@Environment(\.presentationMode) var presentationMode
   //@ObservedObject var form: DeviceForm
   @Environment(\.dismiss) private var dismiss
     
@@ -32,9 +32,29 @@ struct FamilyActivityPickerView: View {
           .sheet(isPresented: $isPresented, onDismiss: dismiss.callAsFunction) {
               FamilyActivityPicker(selection: $selection)
           }.onChange(of: selection) { newSelection in
-              // let blocked: [String] = ["Eggs", "Milk"]
+              let blocked: [String] = ["Eggs", "Milk"]
               // manually add list items
-              store.create(timeInMinutes: 15)
+              // store.create(timeInMinutes: 15)
+              do {
+                let realm = try Realm()
+
+                let deviceDB = DeviceDB()
+                  
+                deviceDB.id = UUID().hashValue
+                deviceDB.points = 0
+                deviceDB.streak = 0
+                deviceDB.timeInMinutes = 15
+                for app in blocked {
+                    deviceDB.blockedApps.append(app)
+                }
+            
+                try realm.write {
+                  realm.add(deviceDB)
+                }
+              } catch let error {
+                // Handle error
+                print(error.localizedDescription)
+              }
             
               let applications = selection.applications
               let categories = selection.categories

@@ -12,10 +12,10 @@ class DeviceDB: Object {
     @objc dynamic var id = 0
     @objc dynamic var streak = 0
     @objc dynamic var points = 0
-    var blockedAppsList = RealmSwift.List<String>() // TODO: change "String" to correct data type for blocked apps in all instances
+    //var blockedAppsList = RealmSwift.List<String>() // TODO: change "String" to correct data type for blocked apps in all instances
     @objc dynamic var timeInMinutes = 0
     
-    var blockedApps: [String] { Array(blockedAppsList) } // get only
+    var blockedApps = RealmSwift.List<String>() //{ Array(blockedAppsList) } // get only
     
     override static func primaryKey() -> String? {
         return "id"
