@@ -21,6 +21,8 @@ struct FamilyActivityPickerView: View {
       ZStack {
           Color.white.ignoresSafeArea()
           VStack {
+              let points : Int = UserDefaults.standard.getPoints()
+              Text(String(points))
               Button("Present FamilyActivityPicker") {
                   isPresented = true
               }
@@ -28,6 +30,7 @@ struct FamilyActivityPickerView: View {
           .sheet(isPresented: $isPresented, onDismiss: dismiss.callAsFunction) {
               FamilyActivityPicker(selection: $selection)
           }.onChange(of: selection) { newSelection in
+              UserDefaults.standard.setPoints(value: 72)
               let applications = selection.applications
               let categories = selection.categories
               let webDomains = selection.webDomains

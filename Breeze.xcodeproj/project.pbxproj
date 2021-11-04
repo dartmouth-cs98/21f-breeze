@@ -25,9 +25,7 @@
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
-		FF04E04027308ABD00E2D9D1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E03F27308ABD00E2D9D1 /* Realm */; };
-		FF04E04227308ABD00E2D9D1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FF04E04127308ABD00E2D9D1 /* RealmSwift */; };
-		FF28167A273332540022F820 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF281679273332540022F820 /* UserSettings.swift */; };
+		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +82,7 @@
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
-		FF281679273332540022F820 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF04E04227308ABD00E2D9D1 /* RealmSwift in Frameworks */,
-				FF04E04027308ABD00E2D9D1 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +144,7 @@
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
 				461E9E232717725F00E6C510 /* Preview Content */,
-				FF281679273332540022F820 /* UserSettings.swift */,
+				FF28167B273467BF0022F820 /* UserDefaults.swift */,
 			);
 			path = Breeze;
 			sourceTree = "<group>";
@@ -218,8 +214,6 @@
 			);
 			name = Breeze;
 			packageProductDependencies = (
-				FF04E03F27308ABD00E2D9D1 /* Realm */,
-				FF04E04127308ABD00E2D9D1 /* RealmSwift */,
 			);
 			productName = Breeze;
 			productReference = 461E9E1A2717725E00E6C510 /* Breeze.app */;
@@ -294,7 +288,6 @@
 			);
 			mainGroup = 461E9E112717725E00E6C510;
 			packageReferences = (
-				FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
 			projectDirPath = "";
@@ -343,7 +336,6 @@
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
 				46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */,
 				46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */,
-				FF28167A273332540022F820 /* UserSettings.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
@@ -351,6 +343,7 @@
 				46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */,
 				461E9E1E2717725E00E6C510 /* BreezeApp.swift in Sources */,
 				4652152F272F260B0023C2C0 /* ExitView.swift in Sources */,
+				FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */,
 				4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,30 +691,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		FF04E03F27308ABD00E2D9D1 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		FF04E04127308ABD00E2D9D1 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FF04E03E27308ABD00E2D9D1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */ = {
