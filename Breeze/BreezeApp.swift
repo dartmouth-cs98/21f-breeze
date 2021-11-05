@@ -15,6 +15,7 @@ struct BreezeApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var appsToTrackHaveBeenSelected = false
+    
 
     var body: some Scene {
         WindowGroup {

@@ -4,4 +4,4 @@ xcuserdata/
 node_modules/
 .secret-*
 **.sample
-*.DS_Store
+.DS_Store
