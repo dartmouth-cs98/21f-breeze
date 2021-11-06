@@ -18,6 +18,10 @@
 		461E9E402717725F00E6C510 /* BreezeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */; };
 		461E9E902719464E00E6C510 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E8F2719464E00E6C510 /* GameScene.sks */; };
 		461E9E942719468900E6C510 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E932719468900E6C510 /* GameScene.swift */; };
+		4627C8252734C930005173E3 /* MySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8242734C930005173E3 /* MySchedule.swift */; };
+		4627C8272734C980005173E3 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
+		4627C83327359D61005173E3 /* MyDeviceActivityMonitor.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4627C82C27359D61005173E3 /* MyDeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4627C83827359DB1005173E3 /* MyDeviceActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C83727359DB1005173E3 /* MyDeviceActivityMonitor.swift */; };
 		46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */; };
 		46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */; };
 		4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152A272F26010023C2C0 /* TapToPlayView.swift */; };
@@ -43,6 +47,13 @@
 			remoteGlobalIDString = 461E9E192717725E00E6C510;
 			remoteInfo = Breeze;
 		};
+		4627C83127359D61005173E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 461E9E122717725E00E6C510 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4627C82B27359D61005173E3;
+			remoteInfo = MyDeviceActivityMonitor;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				4627C83327359D61005173E3 /* MyDeviceActivityMonitor.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +85,12 @@
 		461E9E3F2717725F00E6C510 /* BreezeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		461E9E8F2719464E00E6C510 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		461E9E932719468900E6C510 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		4627C8242734C930005173E3 /* MySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySchedule.swift; sourceTree = "<group>"; };
+		4627C8262734C980005173E3 /* MyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyModel.swift; sourceTree = "<group>"; };
+		4627C82C27359D61005173E3 /* MyDeviceActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyDeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4627C83027359D61005173E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4627C83727359DB1005173E3 /* MyDeviceActivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceActivityMonitor.swift; sourceTree = "<group>"; };
+		4627C83927361985005173E3 /* MyDeviceActivityMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyDeviceActivityMonitor.entitlements; sourceTree = "<group>"; };
 		46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitor.swift; sourceTree = "<group>"; };
 		46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyActivityPickerView.swift; sourceTree = "<group>"; };
 		4652152A272F26010023C2C0 /* TapToPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapToPlayView.swift; sourceTree = "<group>"; };
@@ -107,6 +125,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4627C82927359D61005173E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -116,6 +141,7 @@
 				461E9E1C2717725E00E6C510 /* Breeze */,
 				461E9E322717725F00E6C510 /* BreezeTests */,
 				461E9E3C2717725F00E6C510 /* BreezeUITests */,
+				4627C82D27359D61005173E3 /* MyDeviceActivityMonitor */,
 				461E9E1B2717725E00E6C510 /* Products */,
 				9ACB05CF272627840074F8F0 /* Frameworks */,
 			);
@@ -127,6 +153,7 @@
 				461E9E1A2717725E00E6C510 /* Breeze.app */,
 				461E9E2F2717725F00E6C510 /* BreezeTests.xctest */,
 				461E9E392717725F00E6C510 /* BreezeUITests.xctest */,
+				4627C82C27359D61005173E3 /* MyDeviceActivityMonitor.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +201,16 @@
 			path = BreezeUITests;
 			sourceTree = "<group>";
 		};
+		4627C82D27359D61005173E3 /* MyDeviceActivityMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				4627C83927361985005173E3 /* MyDeviceActivityMonitor.entitlements */,
+				4627C83727359DB1005173E3 /* MyDeviceActivityMonitor.swift */,
+				4627C83027359D61005173E3 /* Info.plist */,
+			);
+			path = MyDeviceActivityMonitor;
+			sourceTree = "<group>";
+		};
 		9ACB05CF272627840074F8F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +223,8 @@
 			children = (
 				461E9E1F2717725E00E6C510 /* ContentView.swift */,
 				4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */,
+				4627C8242734C930005173E3 /* MySchedule.swift */,
+				4627C8262734C980005173E3 /* MyModel.swift */,
 				46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */,
 				4652152A272F26010023C2C0 /* TapToPlayView.swift */,
 				4652152E272F260B0023C2C0 /* ExitView.swift */,
@@ -211,6 +250,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4627C83227359D61005173E3 /* PBXTargetDependency */,
 			);
 			name = Breeze;
 			packageProductDependencies = (
@@ -255,6 +295,23 @@
 			productReference = 461E9E392717725F00E6C510 /* BreezeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		4627C82B27359D61005173E3 /* MyDeviceActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4627C83427359D61005173E3 /* Build configuration list for PBXNativeTarget "MyDeviceActivityMonitor" */;
+			buildPhases = (
+				4627C82827359D61005173E3 /* Sources */,
+				4627C82927359D61005173E3 /* Frameworks */,
+				4627C82A27359D61005173E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyDeviceActivityMonitor;
+			productName = MyDeviceActivityMonitor;
+			productReference = 4627C82C27359D61005173E3 /* MyDeviceActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -276,6 +333,9 @@
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = 461E9E192717725E00E6C510;
 					};
+					4627C82B27359D61005173E3 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 				};
 			};
 			buildConfigurationList = 461E9E152717725E00E6C510 /* Build configuration list for PBXProject "Breeze" */;
@@ -296,6 +356,7 @@
 				461E9E192717725E00E6C510 /* Breeze */,
 				461E9E2E2717725F00E6C510 /* BreezeTests */,
 				461E9E382717725F00E6C510 /* BreezeUITests */,
+				4627C82B27359D61005173E3 /* MyDeviceActivityMonitor */,
 			);
 		};
 /* End PBXProject section */
@@ -325,6 +386,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4627C82A27359D61005173E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -339,11 +407,13 @@
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
+				4627C8272734C980005173E3 /* MyModel.swift in Sources */,
 				46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */,
 				46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */,
 				461E9E1E2717725E00E6C510 /* BreezeApp.swift in Sources */,
 				4652152F272F260B0023C2C0 /* ExitView.swift in Sources */,
 				FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */,
+				4627C8252734C930005173E3 /* MySchedule.swift in Sources */,
 				4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +435,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4627C82827359D61005173E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4627C83827359DB1005173E3 /* MyDeviceActivityMonitor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -377,6 +455,11 @@
 			isa = PBXTargetDependency;
 			target = 461E9E192717725E00E6C510 /* Breeze */;
 			targetProxy = 461E9E3A2717725F00E6C510 /* PBXContainerItemProxy */;
+		};
+		4627C83227359D61005173E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4627C82B27359D61005173E3 /* MyDeviceActivityMonitor */;
+			targetProxy = 4627C83127359D61005173E3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -500,6 +583,7 @@
 		461E9E442717725F00E6C510 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Breeze/Breeze.entitlements;
@@ -531,6 +615,7 @@
 		461E9E452717725F00E6C510 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Breeze/Breeze.entitlements;
@@ -651,6 +736,60 @@
 			};
 			name = Release;
 		};
+		4627C83527359D61005173E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = MyDeviceActivityMonitor/MyDeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ28K6Y7JE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyDeviceActivityMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyDeviceActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.dartmouth.breeze.MyDeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4627C83627359D61005173E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = MyDeviceActivityMonitor/MyDeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JQ28K6Y7JE;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyDeviceActivityMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyDeviceActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.dartmouth.breeze.MyDeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -686,6 +825,15 @@
 			buildConfigurations = (
 				461E9E4A2717725F00E6C510 /* Debug */,
 				461E9E4B2717725F00E6C510 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4627C83427359D61005173E3 /* Build configuration list for PBXNativeTarget "MyDeviceActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4627C83527359D61005173E3 /* Debug */,
+				4627C83627359D61005173E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
