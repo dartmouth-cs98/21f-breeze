@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 import DeviceActivity
+import FamilyControls
+import ManagedSettings
 
 // The Device Activity name is how to reference the activity from within the extension
 @available(iOS 15.0, *)
@@ -33,13 +36,19 @@ class MySchedule {
     static public func setSchedule() {
         print("Setting schedule...")
         print("Hour is: ", Calendar.current.dateComponents([.hour, .minute], from: Date()).hour!)
-
-        let events: [DeviceActivityEvent.Name: DeviceActivityEvent] = [
-            .discouraged: DeviceActivityEvent(
-                applications: MyModel.shared.selectionToDiscourage.applicationTokens,
+        
+        var events: [DeviceActivityEvent.Name: DeviceActivityEvent] = [:]
+        
+        for application in MyModel.shared.selectionToDiscourage.applicationTokens {
+            var indivApplicationTokenSet = Set<ApplicationToken>()
+            //will abort if application token is nil
+            indivApplicationTokenSet.insert(application)
+            let newEvent = DeviceActivityEvent(
+                applications: indivApplicationTokenSet,
                 threshold: DateComponents(minute: 5)
             )
-        ]
+            events[.discouraged] = newEvent
+        }
         
         let center = DeviceActivityCenter()
         do {
