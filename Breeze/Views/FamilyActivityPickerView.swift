@@ -28,12 +28,11 @@ struct FamilyActivityPickerView: View {
                   UserDefaults.standard.setPoints(value: 90)
                   print(UserDefaults.standard.getPoints())
                   isPresented = true
-              }
-          }
-          .sheet(isPresented: $isPresented, onDismiss: dismiss.callAsFunction) {
-              FamilyActivityPicker(selection: $model.selectionToDiscourage)
-          }.onChange(of: model.selectionToDiscourage) { newSelection in
-              model.saveApplications(applications: model.selectionToDiscourage.applications)
+              }.familyActivityPicker(isPresented: $isPresented, selection: $selection)
+                  .onChange(of: selection) { newSelection in
+                      model.selectionToDiscourage = newSelection
+                      model.saveApplications(applications: model.selectionToDiscourage.applications)
+                  }
           }
       }
   }
