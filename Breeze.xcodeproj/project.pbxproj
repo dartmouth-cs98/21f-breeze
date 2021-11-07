@@ -29,11 +29,7 @@
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
-		A1495EC827359086009DA6B1 /* boat.png in Resources */ = {isa = PBXBuildFile; fileRef = A1495EC727359086009DA6B1 /* boat.png */; };
-		A1495ECA273591B2009DA6B1 /* whirlpool.png in Resources */ = {isa = PBXBuildFile; fileRef = A1495EC9273591B2009DA6B1 /* whirlpool.png */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
-		A1EE9DAB2736D06F000C39C6 /* dock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1EE9DAA2736D06F000C39C6 /* dock.jpg */; };
-		A1EE9DAD2736D31F000C39C6 /* dock2.png in Resources */ = {isa = PBXBuildFile; fileRef = A1EE9DAC2736D31F000C39C6 /* dock2.png */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,11 +101,7 @@
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
-		A1495EC727359086009DA6B1 /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boat.png; path = ../../../../../Downloads/boat.png; sourceTree = "<group>"; };
-		A1495EC9273591B2009DA6B1 /* whirlpool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whirlpool.png; path = ../../../../../Downloads/whirlpool.png; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
-		A1EE9DAA2736D06F000C39C6 /* dock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = dock.jpg; path = ../../../../../Downloads/dock.jpg; sourceTree = "<group>"; };
-		A1EE9DAC2736D31F000C39C6 /* dock2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dock2.png; path = ../../../../dock2.png; sourceTree = "<group>"; };
 		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,8 +163,6 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
-				A1495EC627359054009DA6B1 /* Assets */,
-				FF04E03D273080B700E2D9D1 /* Models */,
 				FF04E03727307FA800E2D9D1 /* Views */,
 				9ACB05D3272628F30074F8F0 /* Breeze.entitlements */,
 				9A117327271E16E800D871B7 /* info.plist */,
@@ -229,17 +219,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A1495EC627359054009DA6B1 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				A1EE9DAC2736D31F000C39C6 /* dock2.png */,
-				A1EE9DAA2736D06F000C39C6 /* dock.jpg */,
-				A1495EC9273591B2009DA6B1 /* whirlpool.png */,
-				A1495EC727359086009DA6B1 /* boat.png */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		FF04E03727307FA800E2D9D1 /* Views */ = {
@@ -390,12 +369,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1EE9DAD2736D31F000C39C6 /* dock2.png in Resources */,
-				A1495ECA273591B2009DA6B1 /* whirlpool.png in Resources */,
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
-				A1495EC827359086009DA6B1 /* boat.png in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
-				A1EE9DAB2736D06F000C39C6 /* dock.jpg in Resources */,
 				461E9E222717725F00E6C510 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
