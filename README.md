@@ -10,7 +10,7 @@ Breeze is an iOS app. To build, we are using a stack of Swift, Xcode, Realm DB, 
 
 ## Setup
 
-For now, open up the project in XCode and hit play.
+For now testing either happens on Mac iOS simulators (pressing play in XCode) or attaching a usb-c to lighting cable to the mac and iPhone and building straight to an iPhone. TestFlight will be coming soon, currently blocked by Apple. 
 
 ## Deployment
 
