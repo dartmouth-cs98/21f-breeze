@@ -21,17 +21,20 @@ struct ContentView: View {
     
     @State var familyPickerView = FamilyActivityPickerView()
     @State private var showModal = false
+    @EnvironmentObject var model: MyModel
+    
     
     @ViewBuilder
     var body: some View {
         ZStack {
-            familyPickerView
+            familyPickerView   
             GeometryReader { gp in
                 SpriteView(scene: scene)
                     .frame(width: gp.size.width, height: gp.size.height)
             }.ignoresSafeArea()
             
         }
+        
     }
 }
 
@@ -39,5 +42,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(MyModel())
     }
 }
