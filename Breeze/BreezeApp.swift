@@ -10,6 +10,7 @@ import UserNotifications
 import FamilyControls
 
 @available(iOS 15.0, *)
+
 @main
 struct BreezeApp: App {
     let persistenceController = PersistenceController.shared
