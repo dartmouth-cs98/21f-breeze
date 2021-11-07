@@ -9,7 +9,7 @@ import CoreMotion
 
 class GameScene: SKScene {
     let boat = SKSpriteNode(imageNamed: "boat")
-    var dock = SKSpriteNode(imageNamed: "dock2")
+    var dock = SKSpriteNode(imageNamed: "dock")
     
     private let motionManager = CMMotionManager()
 
