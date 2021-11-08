@@ -24,17 +24,17 @@ class MyDeviceActivityMonitor: DeviceActivityMonitor {
     override func intervalDidEnd(for activity: DeviceActivityName) {
         print("intervalDidEnd")
         super.intervalDidEnd(for: activity)
-        sendNotification()
     }
 
-    override func eventDidReachThreshold(_ event:DeviceActivityEvent.Name,activity:DeviceActivityName){
+    override func eventDidReachThreshold(_ event:DeviceActivityEvent.Name, activity:DeviceActivityName){
         print("eventDidReachThreshold")
         super.eventDidReachThreshold(event, activity: activity)
+        sendNotification(activity: activity)
     }
     
-    func sendNotification() {
+    func sendNotification(activity: DeviceActivityName) {
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "You've hit your time limit!"
+        notificationContent.title = "You've hit your time limit on " + activity.rawValue
         notificationContent.body = "Click to play a game in Breeze, and earn a reward"
         notificationContent.badge = NSNumber(value: 3)
         
