@@ -15,6 +15,7 @@ class StartingWhirlpoolGameScene: SKScene {
     let boat = SKSpriteNode(imageNamed: "boat")
     var background = SKSpriteNode(imageNamed: "whirlpool")
     
+    
     private let motionManager = CMMotionManager()
 
     
@@ -23,7 +24,9 @@ class StartingWhirlpoolGameScene: SKScene {
         motionManager.startAccelerometerUpdates()
         
         //background
-        self.backgroundColor = SKColor.blue
+        self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
+
+        background.size = CGSize(width: 400, height: 400)
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         background.removeFromParent()
         addChild(background)
