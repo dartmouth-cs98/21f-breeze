@@ -11,14 +11,12 @@ class GameScene: SKScene {
     
     var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
-    var levelTimerLabel = SKLabelNode(fontNamed: "ArialMT")
-
-    var levelTimerValue: Int = 10 {
-        didSet {
-            levelTimerLabel.text = "Time left: \(levelTimerValue)"
-        }
-    }
     
+    var timer: Timer?
+    var runCount = 0
+    var countdownStart = 5
+    
+    var levelTimerLabel = SKLabelNode(fontNamed: "ArialMT")
     
     private let motionManager = CMMotionManager()
 
@@ -60,30 +58,38 @@ class GameScene: SKScene {
         levelTimerLabel.fontColor = SKColor.black
         levelTimerLabel.fontSize = 40
         levelTimerLabel.position = CGPoint(x: frame.midX, y: frame.midY)
-        levelTimerLabel.text = "Time left: \(levelTimerValue)"
+        levelTimerLabel.text = "Level Starts In: \(countdownStart)"
         self.addChild(levelTimerLabel)
         
-        let wait = SKAction.wait(forDuration: 0.5)
-        let block = SKAction.run(_:)({
-               [unowned self] in
-
-               if self.levelTimerValue > 0{
-                   self.levelTimerValue -= 1
-                   print("working")
-               }else{
-                   self.removeAction(forKey: "countdown")
-               }
-           })
-           let sequence = SKAction.sequence([wait,block])
-
-        run(SKAction.repeatForever(sequence), withKey: "countdown")
+        pauseScene()
         
-//        pauseScene()
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        
+        
     }
     
+    @objc func fireTimer() {
+        updateTimerLabel(count: runCount)
+        runCount += 1
+        
+        if runCount == countdownStart + 1 {
+            levelTimerLabel.removeFromParent()
+            timer?.invalidate()
+            unpauseScene()
+        }
+    }
+    
+    func updateTimerLabel(count: Int){
+        let timeLeft = countdownStart - count
+        levelTimerLabel.text = "Level Starts In: \(timeLeft)"
+    }
     
     func pauseScene(){
         scene?.physicsWorld.speed = 0
+    }
+    
+    func unpauseScene(){
+        scene?.physicsWorld.speed = 1
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -91,7 +97,5 @@ class GameScene: SKScene {
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
         }
-        
-        if action(forKey: "countdown") != nil {removeAction(forKey: "countdown")}
     }
 }
