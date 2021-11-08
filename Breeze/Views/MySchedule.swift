@@ -39,18 +39,18 @@ class MySchedule {
         print("Hour is: ", Calendar.current.dateComponents([.hour, .minute], from: Date()).hour!)
         
         var activities: [DeviceActivityName: DeviceActivityEvent.Name] = [:]
-        //var events: [DeviceActivityEvent.Name: DeviceActivityEvent] = [:]
+        var events: [DeviceActivityEvent.Name: DeviceActivityEvent] = [:]
         
         
         for applicationToken in MyModel().retrieveSelection().applicationTokens {
             var indivApplicationTokenSet = Set<ApplicationToken>()
             //will abort if application token is nil
             indivApplicationTokenSet.insert(applicationToken)
-            let events = [.discouraged: DeviceActivityEvent(
+            events[.discouraged] = DeviceActivityEvent(
                 applications: indivApplicationTokenSet,
                 categories: Set<ActivityCategoryToken>(),
                 webDomains: Set<WebDomainToken>(),
-                threshold: DateComponents(second: 5))]
+                threshold: DateComponents(second: 5))
             
             
             // See below to try to figure out how to indivdualize app tracking
