@@ -38,12 +38,24 @@ class MyModel: ObservableObject {
     }
     
     func saveApplications(applications:[Application]) {
+        /*
         let archivedObject = archiveApplications(applications: applications)
         defaults?.set(archivedObject, forKey: "applications")
         defaults?.synchronize()
         let listOfRetrieved: [Application] = retrieveApplications() ?? []
         //print(listOfRetrieved.count)
+         */
+        //defaults.set(try? PropertyListEncoder().encode(applications), forKey:"songs")
         print("Saved! Yay!")
+    }
+    
+    func saveSelection () {
+        defaults?.set(try? PropertyListEncoder().encode(selectionToDiscourage), forKey:"selection")
+        if let data = defaults?.value(forKey:"selection") as? Data {
+            let selection2 = try? PropertyListDecoder().decode(FamilyActivitySelection.self, from: data)
+            print(selection2?.applications.count ?? 0)
+        }
+        
     }
     
     func retrieveApplications() -> [Application]? {

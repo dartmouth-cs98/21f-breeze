@@ -35,7 +35,7 @@ struct FamilyActivityPickerView: View {
                       print(selection.applicationTokens.shuffled().count)
                       print(newSelection.applications.shuffled().count)
                       print(model.selectionToDiscourage.applications.shuffled().count)
-                      model.saveApplications(applications: model.selectionToDiscourage.applications.shuffled())
+                      model.saveSelection()
                   }
           }
       }
