@@ -27,12 +27,12 @@ struct ContentView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
-              
+            familyPickerView
             GeometryReader { gp in
                 SpriteView(scene: scene)
                     .frame(width: gp.size.width, height: gp.size.height)
             }.ignoresSafeArea()
-            familyPickerView 
+             
         }
         
     }
