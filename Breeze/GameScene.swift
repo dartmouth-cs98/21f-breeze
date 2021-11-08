@@ -5,90 +5,97 @@
 //
 import SpriteKit
 import GameplayKit
+import CoreMotion
 
 class GameScene: SKScene {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    var boat = SKSpriteNode(imageNamed: "boat")
+    var dock = SKSpriteNode(imageNamed: "dock")
+    
+    var timer: Timer?
+    var runCount = 0
+    var countdownStart = 5
+    
+    var levelTimerLabel = SKLabelNode(fontNamed: "ArialMT")
+    
+    private let motionManager = CMMotionManager()
+
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
+        motionManager.startAccelerometerUpdates()
         
-        let helloWorld = SKLabelNode(fontNamed: "Chalkduster")
-        helloWorld.text = "Hello World!"
-        helloWorld.fontSize = 30
-        helloWorld.fontColor = SKColor.green
-        helloWorld.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(helloWorld)
+
+        //background
+        self.backgroundColor = SKColor.white
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
-        }
+        // game scene physics
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        // boat node attributes
+        boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
+        boat.size = CGSize(width: 100, height: 120)
+        boat.removeFromParent()
+        self.addChild(boat)
         
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
-        }
-    }
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
+        //boat physics
+        boat.physicsBody = SKPhysicsBody(circleOfRadius: boat.size.width / 2)
+        boat.physicsBody?.allowsRotation = false
+        boat.physicsBody?.restitution = 0.5
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        //dock node attributes
+        dock.position = CGPoint(x: frame.midX - 58, y: frame.minY)
+        dock.size = CGSize(width: 100, height: 300)
+        self.addChild(dock)
+                      
+        //dock physics
+        dock.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: dock.size.width - 60, height: dock.size.height))
+        dock.physicsBody?.allowsRotation = false
+        dock.physicsBody?.restitution = 0.5
+        dock.physicsBody?.isDynamic = false
+        
+        //level timer
+        levelTimerLabel.fontColor = SKColor.black
+        levelTimerLabel.fontSize = 40
+        levelTimerLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        levelTimerLabel.text = "Level Starts In: \(countdownStart)"
+        self.addChild(levelTimerLabel)
+        
+        pauseScene()
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        
+        
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+    @objc func fireTimer() {
+        updateTimerLabel(count: runCount)
+        runCount += 1
+        
+        if runCount == countdownStart + 1 {
+            levelTimerLabel.removeFromParent()
+            timer?.invalidate()
+            unpauseScene()
+        }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    func updateTimerLabel(count: Int){
+        let timeLeft = countdownStart - count
+        levelTimerLabel.text = "Level Starts In: \(timeLeft)"
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+    func pauseScene(){
+        scene?.physicsWorld.speed = 0
     }
     
+    func unpauseScene(){
+        scene?.physicsWorld.speed = 1
+    }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+
+        if let accelerometerData = motionManager.accelerometerData {
+            physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
+        }
     }
 }

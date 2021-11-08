@@ -30,6 +30,7 @@ struct FamilyActivityPickerView: View {
     @State var selection = FamilyActivitySelection()
     @State var isPresented = false
     @State var appsToTrackHaveBeenSelected = false
+    @EnvironmentObject var model: MyModel
     // @State var deviceMonitor: deviceActivityMonitorForTrackingScreenTime = nil
     @Environment(\.dismiss) private var dismiss
     
@@ -54,10 +55,9 @@ struct FamilyActivityPickerView: View {
                 .sheet(isPresented: $isPresented, onDismiss: didDismiss) {
                     FamilyActivityPicker(selection: $selection)
                 }.onChange(of: selection) { newSelection in
-                    let applications = selection.applications
-                    let categories = selection.categories
-                    let webDomains = selection.webDomains
-                    var deviceMonitor = deviceActivityMonitorForTrackingScreenTime(applications: applications, categories: categories, webDomains: webDomains)
+                     model.selectionToDiscourage = newSelection
+                     model.saveSelection()
+                     MySchedule.setSchedule()
                 }
             }
         }

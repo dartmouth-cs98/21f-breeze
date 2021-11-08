@@ -14,24 +14,27 @@ import SpriteKit
 struct ContentView: View {
     
     var scene: SKScene {
-        let scene = GameScene()
+        let scene = StartingWhirlpoolGameScene()
         scene.scaleMode = .resizeFill
         return scene
     }
     
     @State var familyPickerView = FamilyActivityPickerView()
     @State private var showModal = false
+    @EnvironmentObject var model: MyModel
+    
     
     @ViewBuilder
     var body: some View {
         ZStack {
-            
+            familyPickerView
             GeometryReader { gp in
                 SpriteView(scene: scene)
                     .frame(width: gp.size.width, height: gp.size.height)
             }.ignoresSafeArea()
-            familyPickerView
+             
         }
+        
     }
 }
 
@@ -39,5 +42,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(MyModel())
     }
 }
