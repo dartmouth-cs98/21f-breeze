@@ -44,7 +44,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                         print("Error for Family Controls: \(error)")
                     }
         }
-        MySchedule.setSchedule()
+        
         
         return true
     }
