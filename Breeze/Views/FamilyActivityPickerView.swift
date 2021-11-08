@@ -31,7 +31,11 @@ struct FamilyActivityPickerView: View {
               }.familyActivityPicker(isPresented: $isPresented, selection: $selection)
                   .onChange(of: selection) { newSelection in
                       model.selectionToDiscourage = newSelection
-                      model.saveApplications(applications: model.selectionToDiscourage.applications)
+                      print(selection.applications.shuffled().count)
+                      print(selection.applicationTokens.shuffled().count)
+                      print(newSelection.applications.shuffled().count)
+                      print(model.selectionToDiscourage.applications.shuffled().count)
+                      model.saveApplications(applications: model.selectionToDiscourage.applications.shuffled())
                   }
           }
       }

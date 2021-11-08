@@ -29,6 +29,7 @@
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
+		46FC0D03273895D4002D14F9 /* ApplicationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FC0D02273895D4002D14F9 /* ApplicationList.swift */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		4652152E272F260B0023C2C0 /* ExitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExitView.swift; sourceTree = "<group>"; };
 		46521530272F26150023C2C0 /* EndOfSetUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfSetUpView.swift; sourceTree = "<group>"; };
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
+		46FC0D02273895D4002D14F9 /* ApplicationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationList.swift; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9ACB05D3272628F30074F8F0 /* Breeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */,
 				4627C8242734C930005173E3 /* MySchedule.swift */,
 				4627C8262734C980005173E3 /* MyModel.swift */,
+				46FC0D02273895D4002D14F9 /* ApplicationList.swift */,
 				46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */,
 				4652152A272F26010023C2C0 /* TapToPlayView.swift */,
 				4652152E272F260B0023C2C0 /* ExitView.swift */,
@@ -418,6 +421,7 @@
 				4652152F272F260B0023C2C0 /* ExitView.swift in Sources */,
 				FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */,
 				4627C8252734C930005173E3 /* MySchedule.swift in Sources */,
+				46FC0D03273895D4002D14F9 /* ApplicationList.swift in Sources */,
 				4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

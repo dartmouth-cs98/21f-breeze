@@ -28,4 +28,5 @@ class MyDeviceActivityMonitor: DeviceActivityMonitor {
         print("eventDidReachThreshold")
         super.eventDidReachThreshold(event, activity: activity)
     }
+    
 }
