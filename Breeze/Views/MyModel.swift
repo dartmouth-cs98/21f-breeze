@@ -26,53 +26,16 @@ class MyModel: ObservableObject {
         return _MyModel
     }
     
-    func archiveApplications(applications:[Application]) -> Data? {
-        do {
-            let archivedObject = try NSKeyedArchiver.archivedData(withRootObject: applications as NSArray, requiringSecureCoding: false)
-            print("Archived!")
-            return archivedObject
-        } catch {
-            print(error)
-        }
-        return nil
-    }
-    
-    func saveApplications(applications:[Application]) {
-        /*
-        let archivedObject = archiveApplications(applications: applications)
-        defaults?.set(archivedObject, forKey: "applications")
-        defaults?.synchronize()
-        let listOfRetrieved: [Application] = retrieveApplications() ?? []
-        //print(listOfRetrieved.count)
-         */
-        //defaults.set(try? PropertyListEncoder().encode(applications), forKey:"songs")
-        print("Saved! Yay!")
-    }
-    
     func saveSelection () {
         defaults?.set(try? PropertyListEncoder().encode(selectionToDiscourage), forKey:"selection")
-        if let data = defaults?.value(forKey:"selection") as? Data {
-            let selection2 = try? PropertyListDecoder().decode(FamilyActivitySelection.self, from: data)
-            print(selection2?.applications.count ?? 0)
-        }
-        
     }
     
-    func retrieveApplications() -> [Application]? {
-        guard
-            let unarchivedObject = defaults?.object(forKey: "applications") as? Data
-        else {
-            return nil
+    func retrieveSelection () -> FamilyActivitySelection {
+        if let data = defaults?.value(forKey:"selection") as? Data {
+            let selection = (try? PropertyListDecoder().decode(FamilyActivitySelection.self, from: data))!
+            return selection
         }
-        print("Unarchived!")
-        do {
-            guard let array = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(unarchivedObject) as? [Application] else {
-                fatalError("loadApplications - Can't get Array")
-            }
-            return array
-        } catch {
-            fatalError("loadApplications - Can't encode data: \(error)")
-        }
+        return FamilyActivitySelection()
     }
     
 }
