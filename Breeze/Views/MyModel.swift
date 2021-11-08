@@ -11,7 +11,7 @@ import ManagedSettings
 
 @available(iOS 15.0, *)
 private let _MyModel = MyModel()
-let defaults = UserDefaults.init(suiteName: "group.BreezeTakeABreak")
+let defaults = UserDefaults.init(suiteName: "JQ28K6Y7JE.group.BreezeTakeABreak")
 
 @available(iOS 15.0, *)
 class MyModel: ObservableObject {
@@ -26,9 +26,16 @@ class MyModel: ObservableObject {
         return _MyModel
     }
     
-    func saveApplications(applications: Set<Application>) {
-        defaults?.set(applications, forKey: "applications")
-        print("Saved! Yay!")
+    func saveSelection () {
+        defaults?.set(try? PropertyListEncoder().encode(selectionToDiscourage), forKey:"selection")
+    }
+    
+    func retrieveSelection () -> FamilyActivitySelection {
+        if let data = defaults?.value(forKey:"selection") as? Data {
+            let selection = (try? PropertyListDecoder().decode(FamilyActivitySelection.self, from: data))!
+            return selection
+        }
+        return FamilyActivitySelection()
     }
     
 }

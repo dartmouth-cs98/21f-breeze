@@ -31,7 +31,8 @@ struct FamilyActivityPickerView: View {
               }.familyActivityPicker(isPresented: $isPresented, selection: $selection)
                   .onChange(of: selection) { newSelection in
                       model.selectionToDiscourage = newSelection
-                      model.saveApplications(applications: model.selectionToDiscourage.applications)
+                      model.saveSelection()
+                      MySchedule.setSchedule()
                   }
           }
       }
