@@ -32,6 +32,7 @@ struct FamilyActivityPickerView: View {
                   .onChange(of: selection) { newSelection in
                       model.selectionToDiscourage = newSelection
                       model.saveSelection()
+                      MySchedule.setSchedule()
                   }
           }
       }

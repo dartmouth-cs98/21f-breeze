@@ -22,13 +22,13 @@
 		4627C8272734C980005173E3 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
 		4627C83327359D61005173E3 /* MyDeviceActivityMonitor.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4627C82C27359D61005173E3 /* MyDeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4627C83827359DB1005173E3 /* MyDeviceActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C83727359DB1005173E3 /* MyDeviceActivityMonitor.swift */; };
-		46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */; };
 		46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */; };
 		4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152A272F26010023C2C0 /* TapToPlayView.swift */; };
 		4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */; };
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
+		46FC0D062738E2AD002D14F9 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
@@ -92,7 +92,6 @@
 		4627C83027359D61005173E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4627C83727359DB1005173E3 /* MyDeviceActivityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceActivityMonitor.swift; sourceTree = "<group>"; };
 		4627C83927361985005173E3 /* MyDeviceActivityMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyDeviceActivityMonitor.entitlements; sourceTree = "<group>"; };
-		46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitor.swift; sourceTree = "<group>"; };
 		46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyActivityPickerView.swift; sourceTree = "<group>"; };
 		4652152A272F26010023C2C0 /* TapToPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapToPlayView.swift; sourceTree = "<group>"; };
 		4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingWhirlpoolGameScene.swift; sourceTree = "<group>"; };
@@ -233,7 +232,6 @@
 				4652152E272F260B0023C2C0 /* ExitView.swift */,
 				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
 				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
-				46521526272F25F00023C2C0 /* DeviceActivityMonitor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,7 +403,6 @@
 			files = (
 				4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */,
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
-				46521527272F25F00023C2C0 /* DeviceActivityMonitor.swift in Sources */,
 				46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */,
@@ -444,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4627C83827359DB1005173E3 /* MyDeviceActivityMonitor.swift in Sources */,
+				46FC0D062738E2AD002D14F9 /* MyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
