@@ -12,7 +12,7 @@ import CoreMotion
 
 class StartingWhirlpoolGameScene: SKScene {
     
-    let boat = SKSpriteNode(imageNamed: "boat")
+    let boat = SKSpriteNode(imageNamed: "Boat")
     var background = SKSpriteNode(imageNamed: "whirlpool")
     
     
