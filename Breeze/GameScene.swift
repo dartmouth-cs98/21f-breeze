@@ -16,7 +16,7 @@ class GameScene: SKScene {
     var runCount = 0
     var countdownStart = 5
     
-    var levelTimerLabel = SKLabelNode(fontNamed: "ArialMT")
+    var levelTimerLabel = SKLabelNode(fontNamed: "Baloo2-Bold")
     
     private let motionManager = CMMotionManager()
 
