@@ -38,7 +38,6 @@ extension UserDefaults{
         return integer(forKey: UserDefaultsKeys.timeInMinutes.rawValue)
     }
     
-    // needs to be initialized as false upon first app open
     func setSetupBool(value: Bool) {
         set(value, forKey: UserDefaultsKeys.setup.rawValue)
     }
