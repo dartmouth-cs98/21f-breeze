@@ -28,6 +28,11 @@
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46521533272F262C0023C2C0 /* TimeLimitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */; };
+		46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */; };
+		46F6460B273C150700A27DC3 /* Baloo2-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */; };
+		46F6460C273C150700A27DC3 /* Baloo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64607273C150700A27DC3 /* Baloo2-SemiBold.ttf */; };
+		46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */; };
+		46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */; };
 		46FC0D062738E2AD002D14F9 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
@@ -98,6 +103,11 @@
 		4652152E272F260B0023C2C0 /* ExitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExitView.swift; sourceTree = "<group>"; };
 		46521530272F26150023C2C0 /* EndOfSetUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfSetUpView.swift; sourceTree = "<group>"; };
 		46521532272F262C0023C2C0 /* TimeLimitSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLimitSettingsView.swift; sourceTree = "<group>"; };
+		46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Regular.ttf"; sourceTree = "<group>"; };
+		46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-ExtraBold.ttf"; sourceTree = "<group>"; };
+		46F64607273C150700A27DC3 /* Baloo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-SemiBold.ttf"; sourceTree = "<group>"; };
+		46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Medium.ttf"; sourceTree = "<group>"; };
+		46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Bold.ttf"; sourceTree = "<group>"; };
 		46FC0D082739C78B002D14F9 /* Breeze.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
@@ -162,6 +172,7 @@
 		461E9E1C2717725E00E6C510 /* Breeze */ = {
 			isa = PBXGroup;
 			children = (
+				46F64604273C14F000A27DC3 /* Resources */,
 				FF04E03727307FA800E2D9D1 /* Views */,
 				9A117327271E16E800D871B7 /* info.plist */,
 				461E9E932719468900E6C510 /* GameScene.swift */,
@@ -211,6 +222,18 @@
 				4627C83027359D61005173E3 /* Info.plist */,
 			);
 			path = MyDeviceActivityMonitor;
+			sourceTree = "<group>";
+		};
+		46F64604273C14F000A27DC3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */,
+				46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */,
+				46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */,
+				46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */,
+				46F64607273C150700A27DC3 /* Baloo2-SemiBold.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		9ACB05CF272627840074F8F0 /* Frameworks */ = {
@@ -367,9 +390,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */,
+				46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */,
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
+				46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
 				461E9E222717725F00E6C510 /* Assets.xcassets in Resources */,
+				46F6460C273C150700A27DC3 /* Baloo2-SemiBold.ttf in Resources */,
+				46F6460B273C150700A27DC3 /* Baloo2-ExtraBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
