@@ -9,7 +9,7 @@ import CoreMotion
 
 class GameScene: SKScene {
     
-    var boat = SKSpriteNode(imageNamed: "Boat")
+    var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
     
     var timer: Timer?
