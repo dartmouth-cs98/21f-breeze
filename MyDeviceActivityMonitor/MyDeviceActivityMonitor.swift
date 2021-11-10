@@ -14,13 +14,14 @@ import FamilyControls
 
 class MyDeviceActivityMonitor: DeviceActivityMonitor {
     
-    let applications = UserDefaults(suiteName: "group.BreezeTakeABreak")?.object(forKey: "applications")
+    
+    // let applications = UserDefaults(suiteName: "group.BreezeTakeABreak")?.object(forKey: "applications")
     let userNotificationCenter = UNUserNotificationCenter.current()
-    let selection : FamilyActivitySelection = MyModel().retrieveSelection()
+    // let selection : FamilyActivitySelection = MyModel().retrieveSelection()
     
     override func intervalDidStart(for activity: DeviceActivityName) {
         print("intervalDidStart")
-        print(activity.rawValue)
+        //print(activity.rawValue)
         super.intervalDidStart(for: activity)
     }
 
@@ -33,9 +34,8 @@ class MyDeviceActivityMonitor: DeviceActivityMonitor {
         print("eventDidReachThreshold")
         super.eventDidReachThreshold(event, activity: activity)
         sendNotification(activity: activity)
-        NSLog("%@", event.rawValue)
-        NSLog("This event reached its threshold: %@", activity.rawValue)
-        
+        //NSLog("%@", event.rawValue)
+        //NSLog("This event reached its threshold: %@", activity.rawValue)
     }
     
     override func eventWillReachThresholdWarning(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {

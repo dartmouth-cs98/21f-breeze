@@ -21,6 +21,7 @@ extension DeviceActivityName {
 extension DeviceActivityEvent.Name {
     static let discouraged = Self("discouraged")
     
+    
 }
 
 // The Device Activity schedule represents the time bounds in which my extension will monitor for activity
@@ -31,44 +32,39 @@ let schedule = DeviceActivitySchedule(
     repeats: true
 )
 
+
 @available(iOS 15.0, *)
 class MySchedule {
     
+        
     static public func setSchedule() {
         print("Setting schedule...")
         print("Hour is: ", Calendar.current.dateComponents([.hour, .minute], from: Date()).hour!)
         
-        var activities: [DeviceActivityName: DeviceActivityEvent.Name] = [:]
         var events: [DeviceActivityEvent.Name: DeviceActivityEvent] = [:]
+        let model = MyModel()
+        
+        //let applicationTokens = MyModel().retrieveSelection().applicationTokens
+        events[.discouraged] =
+        DeviceActivityEvent(
+            applications: model.retrieveSelection().applicationTokens,
+            categories: model.retrieveSelection().categoryTokens,
+            webDomains: model.retrieveSelection().webDomainTokens,
+                threshold: DateComponents(minute: 1)
+            )
         
         
-        for applicationToken in MyModel().retrieveSelection().applicationTokens {
-            var indivApplicationTokenSet = Set<ApplicationToken>()
-            //will abort if application token is nil
-            indivApplicationTokenSet.insert(applicationToken)
-            events[.discouraged] = DeviceActivityEvent(
-                applications: indivApplicationTokenSet,
-                categories: Set<ActivityCategoryToken>(),
-                webDomains: Set<WebDomainToken>(),
-                threshold: DateComponents(second: 5))
-            
-            
-            // See below to try to figure out how to indivdualize app tracking
-            /*
-            print(newEvent.includesAllActivity)
-            let uniqueApplicationString: String = applicationToken.hashValue.description
-            print(uniqueApplicationString)
-            let newName = DeviceActivityEvent.Name.init(rawValue: uniqueApplicationString)
-            let newActivity = DeviceActivityName.init(rawValue: uniqueApplicationString)
-            events[(.getTheEvent(uniqueEventName: uniqueApplicationString) ?? .discouraged)] = newEvent
-            activities[newActivity] = newName
-             */
-        }
+        
+        
         
         print(events.count)
+        print(events.description)
+        //print(events[.discouraged]?.applications)
+        print(events.keys)
         
         let center = DeviceActivityCenter()
         do {
+            center.stopMonitoring()
             print("Try to start monitoring...")
             /*for activity in activities.keys {
                 let nameOfEvent = activities[activity]
@@ -77,7 +73,6 @@ class MySchedule {
                 placeholderDict[nameOfEvent!] = event
              */
             try center.startMonitoring(.daily, during: schedule, events: events)
-            
             
         } catch {
             print("Error monitoring schedule: ", error)
