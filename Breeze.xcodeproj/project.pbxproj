@@ -36,6 +36,7 @@
 		46FC0D062738E2AD002D14F9 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
+		FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167D273B69710022F820 /* TimeSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
 		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		FF28167D273B69710022F820 /* TimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				4652152E272F260B0023C2C0 /* ExitView.swift */,
 				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
 				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
+				FF28167D273B69710022F820 /* TimeSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 			files = (
 				4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */,
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
+				FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */,
 				46521529272F25F90023C2C0 /* FamilyActivityPickerView.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */,
