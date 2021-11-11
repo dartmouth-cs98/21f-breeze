@@ -60,8 +60,7 @@ struct FamilyActivityPickerView: View {
                         .font(Font.custom("Baloo2-Regular", size:20))
                         .multilineTextAlignment(.center)
                         .padding()
-                    Button("Set time limit", action: setIsPresentedTrue)
-                        .font(Font.custom("Baloo2-Regular", size:20))
+                    Button("Set time limit", action: {UserDefaults.standard.set(false, forKey: "didLaunchBefore")})
                         .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                         .foregroundColor(Color.black)
                         .padding()
@@ -78,7 +77,7 @@ struct FamilyActivityPickerView: View {
     func didDismiss() {
         print("func called")
         appsToTrackHaveBeenSelected = true
-        dismiss()
+        //dismiss()
     }
 }
 
