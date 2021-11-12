@@ -20,6 +20,7 @@ struct ContentView: View {
     }
     
     @State var familyPickerView = FamilyActivityPickerView()
+    @State var tapToPlayView = TapToPlayView()
     @State private var showModal = false
     @EnvironmentObject var model: MyModel
     
@@ -27,12 +28,10 @@ struct ContentView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
+            
+            Color.white
+            tapToPlayView
             familyPickerView
-            GeometryReader { gp in
-                SpriteView(scene: scene)
-                    .frame(width: gp.size.width, height: gp.size.height)
-            }.ignoresSafeArea()
-             
         }
         
     }
