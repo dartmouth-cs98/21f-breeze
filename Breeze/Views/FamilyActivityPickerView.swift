@@ -14,7 +14,8 @@ struct FamilyActivityPickerView: View {
     @State var selection = FamilyActivitySelection()
     @State var familyActivityPickerIsPresenting = false
     @State var appsToTrackHaveBeenSelected = false
-    @State private var timeSelectionIsPresenting = false
+    //@State private var timeSelectionIsPresenting = false
+    
     @EnvironmentObject var model: MyModel
     // @State var deviceMonitor: deviceActivityMonitorForTrackingScreenTime = nil
     @Environment(\.dismiss) private var dismiss
@@ -51,26 +52,7 @@ struct FamilyActivityPickerView: View {
         
         // second screen after the user selects which apps to track
         else {
-            ZStack {
-                Color.white.ignoresSafeArea()
-                VStack {
-                    Text("Welcome to Breeze.")
-                        .font(Font.custom("Baloo2-Regular", size:20))
-                        .padding()
-                    Text("Continue set up by setting a time limit, after which Breeze will notify you when you use your selected apps.")
-                        .font(Font.custom("Baloo2-Regular", size:20))
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    Button("Set time limit", action: {timeSelectionIsPresenting.toggle()})
-                        .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-                        .foregroundColor(Color.black)
-                        .padding()
-                }
-                .buttonStyle(.bordered)
-            }.fullScreenCover(isPresented: $timeSelectionIsPresenting,
-                              onDismiss: didDismissTimeSelectionView) {
-                TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
-            }
+            TimeLimitInstructionsView()
         }
     }
     
@@ -79,13 +61,10 @@ struct FamilyActivityPickerView: View {
     }
     
     func didDismissFamilyActivityPickerView() {
-        print("func called")
         appsToTrackHaveBeenSelected = true
-        //dismiss()
     }
     
     func didDismissTimeSelectionView() {
-        print("dismissed")
         UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
     }
 }

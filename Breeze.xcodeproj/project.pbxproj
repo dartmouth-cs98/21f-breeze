@@ -32,6 +32,7 @@
 		46F6460C273C150700A27DC3 /* Baloo2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64607273C150700A27DC3 /* Baloo2-SemiBold.ttf */; };
 		46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */; };
 		46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */; };
+		46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */; };
 		46FC0D062738E2AD002D14F9 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
@@ -107,6 +108,7 @@
 		46F64607273C150700A27DC3 /* Baloo2-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-SemiBold.ttf"; sourceTree = "<group>"; };
 		46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Medium.ttf"; sourceTree = "<group>"; };
 		46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Bold.ttf"; sourceTree = "<group>"; };
+		46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLimitInstructionsView.swift; sourceTree = "<group>"; };
 		46FC0D082739C78B002D14F9 /* Breeze.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				4652152E272F260B0023C2C0 /* ExitView.swift */,
 				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
 				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
+				46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */,
 				FF28167D273B69710022F820 /* TimeSelectionView.swift */,
 			);
 			path = Views;
@@ -437,6 +440,7 @@
 				A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
+				46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */,
 				4627C8272734C980005173E3 /* MyModel.swift in Sources */,
 				46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */,
 				461E9E1E2717725E00E6C510 /* BreezeApp.swift in Sources */,

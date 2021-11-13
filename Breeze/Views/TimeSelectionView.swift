@@ -19,8 +19,9 @@ struct TimeSelectionView: View {
     var body: some View {
        Color.white.ignoresSafeArea()
        VStack {
+        
          Text("Breeze will interrupt you on you selected apps after:")
-               .multilineTextAlignment(.center)
+               //.multilineTextAlignment(.center)
                .font(Font.custom("Baloo2-Regular", size:20))
          Picker(selection: $selectedIndex, label: Text("Select an interval")) {
              ForEach(0 ..< frameworks.count) {
@@ -31,9 +32,10 @@ struct TimeSelectionView: View {
              Text("Confirm").font(Font.custom("Baloo2-Regular", size:20))
             .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
             .foregroundColor(Color.black)
-            .padding()
+            
          }.buttonStyle(.bordered)
-       }
+        Spacer()
+       }.edgesIgnoringSafeArea(.all)
     }
     
     func selectTime() {
@@ -45,3 +47,12 @@ struct TimeSelectionView: View {
     }
     
  }
+
+/*
+@available(iOS 15.0, *)
+struct TimeSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        TimeSelectionView()
+    }
+}
+*/
