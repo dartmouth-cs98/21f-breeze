@@ -11,6 +11,8 @@ import SwiftUI
 
 @available(iOS 15.0, *)
 struct TimeSelectionView: View {
+    
+    @Binding var timeSelectionIsPresenting: Bool
     var frameworks = ["15 minutes", "30 minutes", "45 minutes", "1 hour", "1 hour 15 minutes", "1 hour 30 minutes"]
     @State private var selectedIndex:Int = 0
 
@@ -39,5 +41,7 @@ struct TimeSelectionView: View {
         let minutes = (selectedIndex + 1) * 15
         UserDefaults.standard.setTime(value: minutes)
         UserDefaults.standard.setSetupBool(value: true)
+        timeSelectionIsPresenting.toggle()
     }
+    
  }

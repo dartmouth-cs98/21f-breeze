@@ -12,8 +12,9 @@ import FamilyControls
 @available(iOS 15.0, *)
 struct FamilyActivityPickerView: View {
     @State var selection = FamilyActivitySelection()
-    @State var isPresented = false
+    @State var familyActivityPickerIsPresenting = false
     @State var appsToTrackHaveBeenSelected = false
+    @State private var timeSelectionIsPresenting = false
     @EnvironmentObject var model: MyModel
     // @State var deviceMonitor: deviceActivityMonitorForTrackingScreenTime = nil
     @Environment(\.dismiss) private var dismiss
@@ -38,7 +39,7 @@ struct FamilyActivityPickerView: View {
                         .padding()
                 }
                 .buttonStyle(.bordered)
-                .sheet(isPresented: $isPresented, onDismiss: didDismiss) {
+                .sheet(isPresented: $familyActivityPickerIsPresenting, onDismiss: didDismissFamilyActivityPickerView) {
                     FamilyActivityPicker(selection: $selection)
                 }.onChange(of: selection) { newSelection in
                      model.selectionToDiscourage = newSelection
@@ -60,24 +61,32 @@ struct FamilyActivityPickerView: View {
                         .font(Font.custom("Baloo2-Regular", size:20))
                         .multilineTextAlignment(.center)
                         .padding()
-                    Button("Set time limit", action: {UserDefaults.standard.set(false, forKey: "didLaunchBefore")})
+                    Button("Set time limit", action: {timeSelectionIsPresenting.toggle()})
                         .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                         .foregroundColor(Color.black)
                         .padding()
                 }
                 .buttonStyle(.bordered)
+            }.fullScreenCover(isPresented: $timeSelectionIsPresenting,
+                              onDismiss: didDismissTimeSelectionView) {
+                TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
             }
         }
     }
     
     func setIsPresentedTrue() {
-        isPresented = true
+        familyActivityPickerIsPresenting = true
     }
     
-    func didDismiss() {
+    func didDismissFamilyActivityPickerView() {
         print("func called")
         appsToTrackHaveBeenSelected = true
         //dismiss()
+    }
+    
+    func didDismissTimeSelectionView() {
+        print("dismissed")
+        UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
     }
 }
 

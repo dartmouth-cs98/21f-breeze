@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct EndOfSetUpView: View {
     var body: some View {
         Color.white.ignoresSafeArea()
@@ -23,10 +24,15 @@ struct EndOfSetUpView: View {
                 .font(Font.custom("Baloo2-Regular", size:20))
                 .multilineTextAlignment(.center)
                 .padding()
-        }
+            Button("Exit Set Up", action: {UserDefaults.standard.set(false, forKey: "hasntExitedEndOfSetUpView")})
+                .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                .foregroundColor(Color.black)
+            Spacer()
+        }.buttonStyle(.bordered)
     }
 }
 
+@available(iOS 15.0, *)
 struct EndOfSetUpView_Previews: PreviewProvider {
     static var previews: some View {
         EndOfSetUpView()

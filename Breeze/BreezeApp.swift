@@ -13,6 +13,9 @@ import FamilyControls
 
 @main
 struct BreezeApp: App {
+    
+    @AppStorage("hasntFinishedSetup") var hasntFinishedSetup: Bool = true
+    @AppStorage("hasntExitedEndOfSetUpView") var hasntExitedEndOfSetUpView: Bool = true
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var appsToTrackHaveBeenSelected = false
@@ -20,10 +23,20 @@ struct BreezeApp: App {
     
 
     var body: some Scene {
+        
         WindowGroup {
-            ContentView()
-                .environmentObject(model)
+              if hasntExitedEndOfSetUpView {
+                  if hasntFinishedSetup {
+                      FamilyActivityPickerView().environmentObject(model)
+                  } else {
+                      EndOfSetUpView()
+                  }
+                
+              } else {
+                ContentView().environmentObject(model)
+              }
         }
+        
     }
 }
 
