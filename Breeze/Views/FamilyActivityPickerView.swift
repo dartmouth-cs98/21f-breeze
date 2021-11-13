@@ -12,8 +12,10 @@ import FamilyControls
 @available(iOS 15.0, *)
 struct FamilyActivityPickerView: View {
     @State var selection = FamilyActivitySelection()
-    @State var isPresented = false
+    @State var familyActivityPickerIsPresenting = false
     @State var appsToTrackHaveBeenSelected = false
+    //@State private var timeSelectionIsPresenting = false
+    
     @EnvironmentObject var model: MyModel
     // @State var deviceMonitor: deviceActivityMonitorForTrackingScreenTime = nil
     @Environment(\.dismiss) private var dismiss
@@ -38,7 +40,7 @@ struct FamilyActivityPickerView: View {
                         .padding()
                 }
                 .buttonStyle(.bordered)
-                .sheet(isPresented: $isPresented, onDismiss: didDismiss) {
+                .sheet(isPresented: $familyActivityPickerIsPresenting, onDismiss: didDismissFamilyActivityPickerView) {
                     FamilyActivityPicker(selection: $selection)
                 }.onChange(of: selection) { newSelection in
                      model.selectionToDiscourage = newSelection
@@ -50,34 +52,20 @@ struct FamilyActivityPickerView: View {
         
         // second screen after the user selects which apps to track
         else {
-            ZStack {
-                Color.white.ignoresSafeArea()
-                VStack {
-                    Text("Welcome to Breeze.")
-                        .font(Font.custom("Baloo2-Regular", size:20))
-                        .padding()
-                    Text("Continue set up by setting a time limit, after which Breeze will notify you when you use your selected apps.")
-                        .font(Font.custom("Baloo2-Regular", size:20))
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    Button("Set time limit", action: {UserDefaults.standard.set(false, forKey: "didLaunchBefore")})
-                        .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-                        .foregroundColor(Color.black)
-                        .padding()
-                }
-                .buttonStyle(.bordered)
-            }
+            TimeLimitInstructionsView()
         }
     }
     
     func setIsPresentedTrue() {
-        isPresented = true
+        familyActivityPickerIsPresenting = true
     }
     
-    func didDismiss() {
-        print("func called")
+    func didDismissFamilyActivityPickerView() {
         appsToTrackHaveBeenSelected = true
-        //dismiss()
+    }
+    
+    func didDismissTimeSelectionView() {
+        UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
     }
 }
 

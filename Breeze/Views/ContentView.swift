@@ -13,13 +13,7 @@ import SpriteKit
 @available(iOS 15.0, *)
 struct ContentView: View {
     
-    var scene: SKScene {
-        let scene = StartingWhirlpoolGameScene()
-        scene.scaleMode = .resizeFill
-        return scene
-    }
-    
-    @State var familyPickerView = FamilyActivityPickerView()
+    @State var tapToPlayView = TapToPlayView()
     @State private var showModal = false
     @EnvironmentObject var model: MyModel
     
@@ -27,14 +21,9 @@ struct ContentView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
-            familyPickerView
-            GeometryReader { gp in
-                SpriteView(scene: scene)
-                    .frame(width: gp.size.width, height: gp.size.height)
-            }.ignoresSafeArea()
-             
+            Color.white
+            tapToPlayView
         }
-        
     }
 }
 
