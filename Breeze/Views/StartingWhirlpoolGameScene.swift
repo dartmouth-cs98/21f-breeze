@@ -12,9 +12,9 @@ import CoreMotion
 
 class StartingWhirlpoolGameScene: SKScene {
     
-    let boat = SKSpriteNode(imageNamed: "Boat")
+    let boat = SKSpriteNode(imageNamed: "boat")
     var background = SKSpriteNode(imageNamed: "whirlpool")
-    
+
     
     private let motionManager = CMMotionManager()
 
@@ -23,6 +23,8 @@ class StartingWhirlpoolGameScene: SKScene {
     override func didMove(to view: SKView) {
         motionManager.startAccelerometerUpdates()
         
+       
+
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
 
