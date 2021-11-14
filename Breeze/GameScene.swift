@@ -11,6 +11,8 @@ class GameScene: SKScene {
     
     var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
+    var starfield:SKEmitterNode!
+
     
     var timer: Timer?
     var runCount = 0
@@ -25,11 +27,17 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         motionManager.startAccelerometerUpdates()
         
+        starfield = SKEmitterNode(fileNamed: "Starfield")
+        starfield.position = CGPoint(x: 0, y: 1472)
+        starfield.advanceSimulationTime(10)
+        self.addChild(starfield)
+        
+        starfield.zPosition = -1
 
         //background
-        self.backgroundColor = SKColor.white
-        
+        self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         // game scene physics
+        
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         // boat node attributes
@@ -90,6 +98,13 @@ class GameScene: SKScene {
     
     func unpauseScene(){
         scene?.physicsWorld.speed = 1
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: frame.midX, y: frame.midY))
+        path.addLine(to: CGPoint(x: frame.midX, y: -1000))
+        let move = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 110)
+        dock.yScale = -1
+        dock.xScale = -1
+        dock.run(move)
     }
     
     override func update(_ currentTime: TimeInterval) {
