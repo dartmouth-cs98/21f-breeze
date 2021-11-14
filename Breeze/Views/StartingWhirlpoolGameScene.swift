@@ -9,11 +9,12 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-
 class StartingWhirlpoolGameScene: SKScene {
     
     let boat = SKSpriteNode(imageNamed: "boat")
-    var background = SKSpriteNode(imageNamed: "whirlpool")
+    var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
+    var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
+    var backgroundlrg = SKSpriteNode(imageNamed: "whirlpool")
 
     
     private let motionManager = CMMotionManager()
@@ -28,16 +29,31 @@ class StartingWhirlpoolGameScene: SKScene {
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
 
-        background.size = CGSize(width: 400, height: 400)
-        background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-        background.removeFromParent()
-        addChild(background)
+        backgroundlrg.size = CGSize(width: 700, height: 700)
+        backgroundlrg.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        let op_rotateAction = SKAction.rotate(byAngle: .pi / -2, duration: 10)
+        backgroundlrg.run(SKAction.repeatForever(op_rotateAction))
+        backgroundlrg.removeFromParent()
+        addChild(backgroundlrg)
+        
+        backgroundmed.size = CGSize(width: 500, height: 500)
+        backgroundmed.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        let rotateAction = SKAction.rotate(byAngle: .pi / 2, duration: 10)
+        backgroundmed.run(SKAction.repeatForever(rotateAction))
+        backgroundmed.removeFromParent()
+        addChild(backgroundmed)
+        
+        backgroundsm.size = CGSize(width: 300, height: 300)
+        backgroundsm.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        backgroundsm.run(SKAction.repeatForever(op_rotateAction))
+        backgroundsm.removeFromParent()
+        addChild(backgroundsm)
         
         // game scene physics
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         // boat node
-        boat.position = CGPoint(x: 60, y: 60)
+        boat.position = CGPoint(x: frame.size.width, y: 60)
         boat.size = CGSize(width: 70, height: 90)
         boat.removeFromParent()
         self.addChild(boat)
@@ -60,7 +76,8 @@ class StartingWhirlpoolGameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         let x = boat.position.x
         let y = boat.position.y
-        if (x > 200 && x < 220 && y > 440 && y < 455){
+        let rad = 15
+        if (x > (frame.size.width / 2) - CGFloat(rad) && x < (frame.size.width / 2) + CGFloat(rad) && y > (frame.size.height / 2) - CGFloat(rad) && y < (frame.size.height / 2) + CGFloat(rad)){
             swap()
         }
         if let accelerometerData = motionManager.accelerometerData {
