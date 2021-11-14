@@ -53,7 +53,7 @@ class StartingWhirlpoolGameScene: SKScene {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         // boat node
-        boat.position = CGPoint(x: frame.size.width, y: 60)
+        boat.position = CGPoint(x: frame.size.width / 2, y: 60)
         boat.size = CGSize(width: 70, height: 90)
         boat.removeFromParent()
         self.addChild(boat)
