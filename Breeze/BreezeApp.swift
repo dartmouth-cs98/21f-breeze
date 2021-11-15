@@ -20,7 +20,6 @@ struct BreezeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var appsToTrackHaveBeenSelected = false
     @StateObject var model = MyModel.shared
-    
 
     var body: some Scene {
         
@@ -44,6 +43,7 @@ struct BreezeApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        UserDefaults.standard.setNumClicks(value: UserDefaults.standard.getNumClicks() + 1)
         self.requestNotificationAuthorization()
         UIApplication.shared.applicationIconBadgeNumber = 0
         

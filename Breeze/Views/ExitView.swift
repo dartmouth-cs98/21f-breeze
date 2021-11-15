@@ -30,12 +30,10 @@ struct ExitView: View {
     }
     
     func goToTapToPlay () {
-        UserDefaults.standard.setPoints(value: 1)
-        print(UserDefaults.standard.getPoints())
+        UserDefaults.standard.setPoints(value: UserDefaults.standard.getPoints() + 5)
         UserDefaults.standard.synchronize()
         UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
         exitViewIsPresenting.toggle()
-        print("Pressed!")
     }
 }
 
