@@ -277,6 +277,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 scene?.view?.isPaused = true
                 timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireEndSceneTimer), userInfo: nil, repeats: true)
             }
+        } else {
+            if boat.position.y >= frame.maxY * 0.7 {
+                boat.position.y = frame.maxY * 0.7 - 1
+            }
         }
         
         if let accelerometerData = motionManager.accelerometerData {
