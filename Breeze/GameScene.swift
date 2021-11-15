@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //obstacle variables (feel free to change these)
     var seconds_between_obstacle = 3
-    var num_obstacles = 10
+    var num_obstacles = 3
     var obstacle_speed = 150
     var gap_size = 20
     
@@ -44,6 +44,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacleTimer: Timer?
     var end_level_count = 0
     var beach_is_rendered = false
+    
+    //end scene timer
+    var endSceneTimer: Timer?
+    var end_scene_delay = 0
+    
     
     var levelTimerLabel = SKLabelNode(fontNamed: "Baloo2-Bold")
     
@@ -139,14 +144,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             renderLevelEnd()
         }
         seconds_elapsed += 1
-        
-        
-        if end_level_count == (end_delay_seconds + 2) {
-            if (scene?.view?.isPaused == false) {
-                UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
-            }
-        }
     }
+    
+
     
     func updateTimerLabel(count: Int){
         let timeLeft = countdownStart - count
@@ -189,11 +189,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //prep end of level stuff
         beach_is_rendered = true
         starfield.isPaused = true
-        
-        
-        
-        
-        
        // UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
         //UserDefaults.standard.setGameStatus(value: true)
         
@@ -255,6 +250,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //print(contact.contactPoint)
     }
     
+    @objc func fireEndSceneTimer(){
+        let end_delay = 3
+        if end_scene_delay == end_delay {
+            endScene()
+        }
+        end_scene_delay += 1
+    }
+    
+    func endScene(){
+//        if (scene?.view?.isPaused == false) {
+            UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+//        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
         
@@ -265,7 +274,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if beach_is_rendered {
             if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
-                  pauseScene()
+                scene?.view?.isPaused = true
+                timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireEndSceneTimer), userInfo: nil, repeats: true)
             }
         }
         
