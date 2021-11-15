@@ -17,7 +17,9 @@ struct ContentView: View {
     @State private var showModal = false
     @EnvironmentObject var model: MyModel
     
-    
+    func viewDidLoad() {
+        
+    }
     @ViewBuilder
     var body: some View {
         ZStack {
