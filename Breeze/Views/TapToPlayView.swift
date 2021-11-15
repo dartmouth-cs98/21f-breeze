@@ -32,7 +32,7 @@ struct TapToPlayView: View {
             VStack {
                 Text("Way to go! Here's an update on your healthier habits.").font(Font.custom("Baloo2-Regular", size:30)).multilineTextAlignment(.center).padding()
                 VStack (spacing: 0, content: {
-                    Text("BreezeBucks:  \(userPoints)").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
+                    Text("BreezeBucks:  \( UserDefaults.standard.getPoints())").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
                     Divider()
                     Text("Streak:  \(userStreak) days").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
                     Divider()
