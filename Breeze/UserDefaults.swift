@@ -54,6 +54,7 @@ extension UserDefaults{
     
     func isEnded() -> Bool {
         return bool(forKey: UserDefaultsKeys.endedGame.rawValue)
+    }
 
     // example usage:
     // UserDefaults.standard.setPoints(value: 90)
