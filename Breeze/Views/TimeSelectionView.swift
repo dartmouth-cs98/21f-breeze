@@ -18,24 +18,25 @@ struct TimeSelectionView: View {
 
     var body: some View {
        Color.white.ignoresSafeArea()
-       VStack {
-        
-         Text("Breeze will interrupt you on you selected apps after:")
-               //.multilineTextAlignment(.center)
-               .font(Font.custom("Baloo2-Regular", size:20))
-         Picker(selection: $selectedIndex, label: Text("Select an interval")) {
-             ForEach(0 ..< frameworks.count) {
-                Text(self.frameworks[$0]).font(Font.custom("Baloo2-Regular", size:20))
+        ZStack {
+           VStack (alignment: .center) {
+             Text("Breeze will interrupt you on you selected apps after:")
+                   .font(Font.custom("Baloo2-Regular", size:20))
+             Picker(selection: $selectedIndex, label: Text("Select an interval")) {
+                 ForEach(0 ..< frameworks.count) {
+                    Text(self.frameworks[$0]).font(Font.custom("Baloo2-Regular", size:20))
+                 }
              }
-         }
-         Button(action: selectTime) {
-             Text("Confirm").font(Font.custom("Baloo2-Regular", size:20))
-            .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-            .foregroundColor(Color.black)
+             Button("Confirm", action: selectTime)
+                .font(Font.custom("Baloo2-Regular", size:20))
+                .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                .foregroundColor(Color.black)
+                .padding()
+            Spacer()
+           }.edgesIgnoringSafeArea(.all)
+                .buttonStyle(.bordered)
             
-         }.buttonStyle(.bordered)
-        Spacer()
-       }.edgesIgnoringSafeArea(.all)
+        }
     }
     
     func selectTime() {
