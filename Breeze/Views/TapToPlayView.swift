@@ -11,6 +11,8 @@ import SpriteKit
 struct TapToPlayView: View {
     
     @State private var isPresenting = false
+    @AppStorage("hasntFinishedGame") var hasntFinishedGame: Bool = true
+    //UserDefaults.standard.set(true, forKey: "hasntEnded")
     var scene: SKScene {
         let scene = StartingWhirlpoolGameScene()
         scene.scaleMode = .resizeFill
@@ -23,6 +25,7 @@ struct TapToPlayView: View {
                 // attribution to Alfredo Hernandez for the icon
                 Button(action: {
                     withAnimation {
+                        UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
                         isPresenting.toggle()
                     }
                 }, label: {
@@ -40,13 +43,18 @@ struct TapToPlayView: View {
                     .font(Font.custom("Baloo2-Bold", size:20))
                     .padding()
             }
-
           if isPresenting {
             ZStack(alignment: .center) {
-                GeometryReader { gp in
-                    SpriteView(scene: scene)
-                        .frame(width: gp.size.width, height: gp.size.height)
-                }.ignoresSafeArea()
+                if (hasntFinishedGame) {
+                    GeometryReader { gp in
+                        SpriteView(scene: scene)
+                            .frame(width: gp.size.width, height: gp.size.height)
+                    }.ignoresSafeArea()
+                } else {
+                    ExitView(exitViewIsPresenting: $isPresenting)
+                }
+                
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.blue)

@@ -9,6 +9,7 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    
     var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
     var beach = SKSpriteNode(imageNamed: "beach")
@@ -34,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //obstacle variables (feel free to change these)
     var seconds_between_obstacle = 3
-    var num_obstacles = 2
+    var num_obstacles = 10
     var obstacle_speed = 150
     var gap_size = 20
     
@@ -120,6 +121,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func fireObstacleTimer() {
+        //print(seconds_elapsed)
+        //print(end_level_count)
         let end_delay_seconds = 10
 
         //release obstacles at an interval while num_obstacles hasn't been reached
@@ -138,6 +141,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             renderLevelEnd()
         }
         seconds_elapsed += 1
+        
+        if end_level_count == (end_delay_seconds + 2) {
+            UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        }
     }
     
     func updateTimerLabel(count: Int){
@@ -181,6 +188,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //prep end of level stuff
         beach_is_rendered = true
         starfield.isPaused = true
+        
+        
+        
+        
+        
+       // UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        //UserDefaults.standard.setGameStatus(value: true)
+        
     }
     
     func renderObstacle(){
@@ -229,16 +244,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(right_obstacle)
         left_obstacle.run(moveLeft)
         right_obstacle.run(moveRight)
+        
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print(contact.bodyA)
-        print(contact.bodyB)
-        print(contact.contactPoint)
+        //print(contact.bodyA)
+        //print(contact.bodyB)
+        //print(contact.contactPoint)
     }
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
+        
+        if (y < frame.minY) {
+            scene?.view?.isPaused = true
+        }
+        
         if beach_is_rendered {
             if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
                   pauseScene()
@@ -249,4 +271,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
         }
     }
+    
 }

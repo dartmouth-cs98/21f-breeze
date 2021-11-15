@@ -12,7 +12,6 @@ import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
     
-    @Binding var isPresenting: Bool
     let boat = SKSpriteNode(imageNamed: "boat")
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
@@ -23,10 +22,6 @@ class StartingWhirlpoolGameScene: SKScene {
     var timeTilTransition = 3
 
     private let motionManager = CMMotionManager()
-    
-    init(_ isPresenting: Binding<Bool>) {
-        self.isPresenting = isPresenting
-    }
 
 
     
@@ -92,7 +87,10 @@ class StartingWhirlpoolGameScene: SKScene {
         let gameScene = GameScene(fileNamed: "GameScene")
         let transition = SKTransition.fade(withDuration: 1.0)
         gameScene?.scaleMode = .aspectFill
+        
+        
         scene?.view?.presentScene(gameScene!, transition: transition)
+        
     }
     
     @objc func fireTimer() {

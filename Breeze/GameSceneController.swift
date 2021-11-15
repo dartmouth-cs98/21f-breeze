@@ -4,6 +4,7 @@ import SpriteKit
 
 class GameViewController: UIViewController
 {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,4 +17,5 @@ class GameViewController: UIViewController
         scene.scaleMode = .resizeFill
         skView.presentScene(scene)
     }
+    
 }
