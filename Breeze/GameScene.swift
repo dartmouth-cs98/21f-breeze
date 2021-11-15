@@ -140,8 +140,6 @@ class GameScene: SKScene {
         path.move(to: CGPoint(x: frame.midX, y: frame.midY))
         path.addLine(to: CGPoint(x: frame.midX, y: -1000))
         let move = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, speed: 110)
-//        dock.yScale = -1
-//        dock.xScale = -1
         dock.run(move)
         
         //begin timer that tracks obstacles
