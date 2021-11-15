@@ -11,8 +11,6 @@ import CoreMotion
 import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
-    
-    @Binding var isPresenting: Bool
     let boat = SKSpriteNode(imageNamed: "boat")
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
@@ -23,12 +21,6 @@ class StartingWhirlpoolGameScene: SKScene {
     var timeTilTransition = 3
 
     private let motionManager = CMMotionManager()
-    
-    init(_ isPresenting: Binding<Bool>) {
-        self.isPresenting = isPresenting
-    }
-
-
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
