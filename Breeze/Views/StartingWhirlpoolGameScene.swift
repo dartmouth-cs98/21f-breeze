@@ -11,7 +11,7 @@ import CoreMotion
 import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
-    
+
     let boat = SKSpriteNode(imageNamed: "boat")
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
@@ -23,8 +23,6 @@ class StartingWhirlpoolGameScene: SKScene {
 
     private let motionManager = CMMotionManager()
 
-
-    
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
         motionManager.startAccelerometerUpdates()
