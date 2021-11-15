@@ -64,7 +64,7 @@ class GameScene: SKScene {
         //boat physics
         boat.physicsBody = SKPhysicsBody(circleOfRadius: boat.size.width / 2)
         boat.physicsBody?.allowsRotation = false
-        boat.physicsBody?.restitution = 0.5
+        boat.physicsBody?.restitution = 0
         
         //dock node attributes
         dock.position = CGPoint(x: frame.midX - 58, y: frame.minY)
@@ -187,6 +187,12 @@ class GameScene: SKScene {
         right_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         right_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         
+        right_obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width:  Int(frame.width) / 2, height: 20))
+        right_obstacle.physicsBody?.isDynamic = false
+        
+        left_obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: left_rect_width, height: 20))
+        left_obstacle.physicsBody?.isDynamic = false
+        
         //create barrier paths
         let leftObstaclePath = UIBezierPath()
         leftObstaclePath.move(to: CGPoint(x: 100, y: 700))
@@ -199,8 +205,8 @@ class GameScene: SKScene {
         let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         //start barriers
-        addChild(left_obstacle)
-        addChild(right_obstacle)
+        self.addChild(left_obstacle)
+        self.addChild(right_obstacle)
         left_obstacle.run(moveLeft)
         right_obstacle.run(moveRight)
     }
