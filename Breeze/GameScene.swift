@@ -101,7 +101,7 @@ class GameScene: SKScene {
     }
     
     @objc func fireObstacleTimer() {
-        let end_delay_seconds = 4
+        let end_delay_seconds = 10
 
         if obstacleCount < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
             obstacleCount += 1
@@ -136,13 +136,11 @@ class GameScene: SKScene {
         dock.xScale = -1
         dock.run(move)
         
-        
         obstacleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireObstacleTimer), userInfo: nil, repeats: true)
     }
     
     func renderLevelEnd(){
         //instantiate beach
-//        beach.position = CGPoint(x: frame.midX, y: frame.maxY + 20)
         beach.size = CGSize(width: frame.width, height: 200)
         beach.zPosition = -1
         self.addChild(beach)
@@ -155,6 +153,7 @@ class GameScene: SKScene {
         
         beach.run(beachMove)
         beach_is_rendered = true
+        starfield.isPaused = true
     }
     
     func renderObstacle(){
@@ -163,6 +162,7 @@ class GameScene: SKScene {
         let left_rect_width = (275 + gap_center - (gap_size / 2))
         let right_rect_start = (gap_center + (gap_size / 2))
         
+        //instantiate barriers
         let left_rect_shape = CGRect(x: -420, y: 0, width: left_rect_width, height: 20)
         let right_rect_shape = CGRect(x: right_rect_start, y: 0, width: Int(frame.width) / 2, height: 20)
         
@@ -179,7 +179,7 @@ class GameScene: SKScene {
         right_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         right_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         
-        
+        //create barrier paths
         let leftObstaclePath = UIBezierPath()
         leftObstaclePath.move(to: CGPoint(x: 100, y: 700))
         leftObstaclePath.addLine(to: CGPoint(x: 100, y: frame.minY - 30))
@@ -190,6 +190,7 @@ class GameScene: SKScene {
         rightObstaclePath.addLine(to: CGPoint(x: 200, y: frame.minY - 30))
         let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(obstacle_speed))
         
+        //start barriers
         addChild(left_obstacle)
         addChild(right_obstacle)
         left_obstacle.run(moveLeft)
@@ -197,7 +198,19 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-//        print(boat.position)
+        print(boat.position)
+        print(frame.maxY)
+        print(frame.minY)
+//        print(frame.size.height)
+//        let x = boat.position.x
+        let y = boat.position.y
+        if beach_is_rendered {
+//            let rad = CGFloat(15)
+            if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
+                  pauseScene()
+            }
+        }
+        
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
         }
