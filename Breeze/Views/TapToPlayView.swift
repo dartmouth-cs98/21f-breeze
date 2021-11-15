@@ -8,10 +8,12 @@
 import SwiftUI
 import SpriteKit
 
+@available(iOS 15.0, *)
 struct TapToPlayView: View {
     
     @State private var isPresenting = false
     @AppStorage("hasntFinishedGame") var hasntFinishedGame: Bool = true
+    @AppStorage("hasntLostGame") var hasntLostGame: Bool = true
     @State private var userPoints = UserDefaults.standard.getPoints()
     @State private var userStreak =
     UserDefaults.standard.getStreak()
@@ -40,6 +42,7 @@ struct TapToPlayView: View {
                 // attribution to Alfredo Hernandez for the icon
                 Button(action: {
                     withAnimation {
+                        UserDefaults.standard.set(true, forKey: "hasntLostGame")
                         UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
                         isPresenting.toggle()
                     }
@@ -63,10 +66,14 @@ struct TapToPlayView: View {
           if isPresenting {
             ZStack(alignment: .center) {
                 if (hasntFinishedGame) {
-                    GeometryReader { gp in
-                        SpriteView(scene: scene)
-                            .frame(width: gp.size.width, height: gp.size.height)
-                    }.ignoresSafeArea()
+                    if (hasntLostGame) {
+                        GeometryReader { gp in
+                            SpriteView(scene: scene)
+                                .frame(width: gp.size.width, height: gp.size.height)
+                        }.ignoresSafeArea()
+                    } else {
+                        LosingExitView(losingExitViewIsPresenting: $isPresenting)
+                    }
                 } else {
                     ExitView(exitViewIsPresenting: $isPresenting)
                 }
@@ -82,8 +89,3 @@ struct TapToPlayView: View {
     }
 }
 
-struct TapToPlayView_Previews: PreviewProvider {
-    static var previews: some View {
-        TapToPlayView()
-    }
-}

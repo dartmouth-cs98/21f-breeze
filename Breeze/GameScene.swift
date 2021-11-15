@@ -9,7 +9,6 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    
     var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
     var beach = SKSpriteNode(imageNamed: "beach")
@@ -49,7 +48,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var levelTimerLabel = SKLabelNode(fontNamed: "Baloo2-Bold")
     
     private let motionManager = CMMotionManager()
-
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
@@ -142,8 +140,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         seconds_elapsed += 1
         
+        
         if end_level_count == (end_delay_seconds + 2) {
-            UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+            if (scene?.view?.isPaused == false) {
+                UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+            }
         }
     }
     
@@ -259,6 +260,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (y < frame.minY) {
             scene?.view?.isPaused = true
+            UserDefaults.standard.set(false, forKey: "hasntLostGame")
         }
         
         if beach_is_rendered {
