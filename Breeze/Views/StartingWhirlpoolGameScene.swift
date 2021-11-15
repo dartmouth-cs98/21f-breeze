@@ -8,19 +8,26 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
+import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
     
+    @Binding var isPresenting: Bool
     let boat = SKSpriteNode(imageNamed: "boat")
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundlrg = SKSpriteNode(imageNamed: "whirlpool")
+    
     var timer: Timer?
     var secondsElapsed = 0
     var timeTilTransition = 3
 
-    
     private let motionManager = CMMotionManager()
+    
+    init(_ isPresenting: Binding<Bool>) {
+        self.isPresenting = isPresenting
+    }
+
 
     
     //triggered if something changed when you render the screen

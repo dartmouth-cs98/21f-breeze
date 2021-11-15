@@ -14,6 +14,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var beach = SKSpriteNode(imageNamed: "beach")
     var starfield:SKEmitterNode!
 
+    // Category bitmask values
+    let backgroundCategory: UInt32 = 0b0000
+    let boatCategory: UInt32 = 0b0001 // 1
+    let obstacleCategory: UInt32  = 0b0010 // 2
+    let goalCategory: UInt32  = 0b0100 // 4
+    
+    // Interaction bitmask values
+    let boatInteraction: UInt32 = 0b0001 // 1 , interaction w/boat
+    let obstacleInteraction: UInt32 = 0b0010 // 2 , interaction w/obstacle
+    let goalInteraction: UInt32 = 0b0100 // 4 , interaction w/goal
+    let boatObstacleInteraction: UInt32 = 0b0010 // 3 , interaction w/ boat and/or obstacle
+    let boatGoalInteraction: UInt32 = 0b0101 // 5 , interaction w/ boat and/or goal
+    let boatObstacleGoalInteraction: UInt32 = 0b0111 //7 , iteraction w/ obstacle, boat and/or goal
     
     var timer: Timer?
     var runCount = 0
@@ -56,6 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // game scene physics
         
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        //]self.physicsBody?.categoryBitMask = backgroundCategory
         
         // boat node attributes
         boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
@@ -67,6 +81,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         boat.physicsBody = SKPhysicsBody(circleOfRadius: boat.size.width / 2)
         boat.physicsBody?.allowsRotation = false
         boat.physicsBody?.restitution = 0
+        boat.physicsBody?.categoryBitMask = boatCategory
+        boat.physicsBody?.contactTestBitMask = boatObstacleInteraction
         
         //dock node attributes
         dock.position = CGPoint(x: frame.midX - 58, y: frame.minY)
@@ -191,10 +207,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         right_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: right_rect_shape)
         right_obstacle.physicsBody?.isDynamic = false
-        
+        right_obstacle.physicsBody?.categoryBitMask = obstacleCategory
         
         left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
         left_obstacle.physicsBody?.isDynamic = false
+        left_obstacle.physicsBody?.categoryBitMask = obstacleCategory
         
         //create barrier paths
         let leftObstaclePath = UIBezierPath()
@@ -212,6 +229,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(right_obstacle)
         left_obstacle.run(moveLeft)
         right_obstacle.run(moveRight)
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        print(contact.bodyA)
+        print(contact.bodyB)
+        print(contact.contactPoint)
     }
     
     override func update(_ currentTime: TimeInterval) {
