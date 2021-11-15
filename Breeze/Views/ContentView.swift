@@ -21,7 +21,7 @@ struct ContentView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
-            Color.white
+            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             tapToPlayView
         }
     }
