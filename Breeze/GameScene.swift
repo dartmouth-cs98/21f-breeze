@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //obstacle variables (feel free to change these)
     var seconds_between_obstacle = 3
-    var num_obstacles = 3
+    var num_obstacles = 6
     var obstacle_speed = 150
     var gap_size = 20
     

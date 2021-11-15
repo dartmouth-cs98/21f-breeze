@@ -20,7 +20,7 @@ struct ExitView: View {
                     .font(Font.custom("Baloo2-Bold", size:20)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
-                 Button("Collect Your Point!", action: goToTapToPlay)
+                 Button("Collect Your Points!", action: goToTapToPlay)
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
@@ -32,7 +32,7 @@ struct ExitView: View {
         }
     
     func goToTapToPlay () {
-        UserDefaults.standard.setPoints(value: UserDefaults.standard.getPoints() + 5)
+        UserDefaults.standard.setPoints(value: 5)
         UserDefaults.standard.synchronize()
         UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
         exitViewIsPresenting.toggle()
