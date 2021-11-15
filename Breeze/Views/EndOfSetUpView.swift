@@ -10,8 +10,8 @@ import SwiftUI
 @available(iOS 15.0, *)
 struct EndOfSetUpView: View {
     var body: some View {
-        Color.white.ignoresSafeArea()
-        //ZStack {
+        ZStack {
+            Color.white.ignoresSafeArea()
             VStack (alignment: .center) {
                 Text("Thank you for configuring Breeze. We will notify you when you reach your time limit on apps you asked us to monitor.")
                     .font(Font.custom("Baloo2-Regular", size:20))
@@ -28,9 +28,8 @@ struct EndOfSetUpView: View {
                 Button("Exit Set Up", action: {UserDefaults.standard.set(false, forKey: "hasntExitedEndOfSetUpView")})
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
-                //Spacer()
             }.buttonStyle(.bordered)
-        //}
+        }
     }
 }
 
