@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //obstacle variables (feel free to change these)
     var seconds_between_obstacle = 3
-    var num_obstacles = 2
+    var num_obstacles = 3
     var obstacle_speed = 150
     var gap_size = 20
     
@@ -45,10 +45,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var end_level_count = 0
     var beach_is_rendered = false
     
+    //end scene timer
+    var endSceneTimer: Timer?
+    var end_scene_delay = 0
+    
+    
     var levelTimerLabel = SKLabelNode(fontNamed: "Baloo2-Bold")
     
     private let motionManager = CMMotionManager()
-
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
@@ -120,6 +124,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func fireObstacleTimer() {
+        //print(seconds_elapsed)
+        //print(end_level_count)
         let end_delay_seconds = 10
 
         //release obstacles at an interval while num_obstacles hasn't been reached
@@ -139,6 +145,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         seconds_elapsed += 1
     }
+    
+
     
     func updateTimerLabel(count: Int){
         let timeLeft = countdownStart - count
@@ -181,6 +189,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //prep end of level stuff
         beach_is_rendered = true
         starfield.isPaused = true
+       // UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        //UserDefaults.standard.setGameStatus(value: true)
+        
     }
     
     func renderObstacle(){
@@ -229,19 +240,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(right_obstacle)
         left_obstacle.run(moveLeft)
         right_obstacle.run(moveRight)
+        
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print(contact.bodyA)
-        print(contact.bodyB)
-        print(contact.contactPoint)
+        //print(contact.bodyA)
+        //print(contact.bodyB)
+        //print(contact.contactPoint)
+    }
+    
+    @objc func fireEndSceneTimer(){
+        let end_delay = 3
+        if end_scene_delay == end_delay {
+            endScene()
+        }
+        end_scene_delay += 1
+    }
+    
+    func endScene(){
+//        if (scene?.view?.isPaused == false) {
+            UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+//        }
     }
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
+        
+        if (y < frame.minY) {
+            scene?.view?.isPaused = true
+            UserDefaults.standard.set(false, forKey: "hasntLostGame")
+        }
+        
         if beach_is_rendered {
             if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
-                  pauseScene()
+                scene?.view?.isPaused = true
+                timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireEndSceneTimer), userInfo: nil, repeats: true)
+            }
+        } else {
+            if boat.position.y >= frame.maxY * 0.7 {
+                boat.position.y = frame.maxY * 0.7 - 1
             }
         }
         
@@ -249,4 +287,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
         }
     }
+    
 }

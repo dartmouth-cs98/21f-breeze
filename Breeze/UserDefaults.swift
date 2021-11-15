@@ -13,7 +13,9 @@ extension UserDefaults{
     // example usage:
     // UserDefaults.standard.setPoints(value: 90)
     func setPoints(value: Int) {
-        set(value, forKey: UserDefaultsKeys.points.rawValue)
+        var currPoints: Int = integer(forKey: UserDefaultsKeys.points.rawValue)
+        currPoints += value
+        set(currPoints, forKey: UserDefaultsKeys.points.rawValue)
     }
 
     // example usage:
@@ -46,6 +48,14 @@ extension UserDefaults{
         return bool(forKey: UserDefaultsKeys.setup.rawValue)
     }
     
+    func setGameStatus(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.endedGame.rawValue)
+    }
+    
+    func isEnded() -> Bool {
+        return bool(forKey: UserDefaultsKeys.endedGame.rawValue)
+    }
+
     // example usage:
     // UserDefaults.standard.setPoints(value: 90)
     func setNumClicks(value: Int) {
@@ -56,6 +66,7 @@ extension UserDefaults{
     // UserDefaults.standard.getPoints()
     func getNumClicks()-> Int {
         return integer(forKey: UserDefaultsKeys.numClicks.rawValue)
+
     }
 }
 
@@ -63,6 +74,7 @@ enum UserDefaultsKeys : String {
     case points
     case streak
     case timeInMinutes
+    case endedGame
     case setup
     case numClicks
 }

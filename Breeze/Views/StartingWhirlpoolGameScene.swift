@@ -11,6 +11,7 @@ import CoreMotion
 import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
+
     let boat = SKSpriteNode(imageNamed: "boat")
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
@@ -21,7 +22,7 @@ class StartingWhirlpoolGameScene: SKScene {
     var timeTilTransition = 3
 
     private let motionManager = CMMotionManager()
-    
+
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
         motionManager.startAccelerometerUpdates()
@@ -84,7 +85,10 @@ class StartingWhirlpoolGameScene: SKScene {
         let gameScene = GameScene(fileNamed: "GameScene")
         let transition = SKTransition.fade(withDuration: 1.0)
         gameScene?.scaleMode = .aspectFill
+        
+        
         scene?.view?.presentScene(gameScene!, transition: transition)
+        
     }
     
     @objc func fireTimer() {
