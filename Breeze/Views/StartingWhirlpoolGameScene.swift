@@ -15,6 +15,9 @@ class StartingWhirlpoolGameScene: SKScene {
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
     var backgroundlrg = SKSpriteNode(imageNamed: "whirlpool")
+    var timer: Timer?
+    var secondsElapsed = 0
+    var timeTilTransition = 3
 
     
     private let motionManager = CMMotionManager()
@@ -24,7 +27,6 @@ class StartingWhirlpoolGameScene: SKScene {
     override func didMove(to view: SKView) {
         motionManager.startAccelerometerUpdates()
         
-       
 
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
@@ -49,6 +51,20 @@ class StartingWhirlpoolGameScene: SKScene {
         backgroundsm.removeFromParent()
         addChild(backgroundsm)
         
+        let instructions1 = SKLabelNode(fontNamed: "Baloo 2")
+        instructions1.text = "Tilt your phone forward to move the"
+        instructions1.fontSize = 20
+        instructions1.fontColor = SKColor.black
+        instructions1.position = CGPoint(x: frame.midX, y: frame.height - frame.height * 0.20 + 20)
+        addChild(instructions1)
+        
+        let instructions2 = SKLabelNode(fontNamed: "Baloo 2")
+        instructions2.text = "boat into the center of the whirlpool."
+        instructions2.fontSize = 20
+        instructions2.fontColor = SKColor.black
+        instructions2.position = CGPoint(x: frame.midX, y: frame.height - frame.height * 0.2)
+        addChild(instructions2)
+        
         // game scene physics
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
@@ -68,17 +84,44 @@ class StartingWhirlpoolGameScene: SKScene {
     
     func swap() {
         let gameScene = GameScene(fileNamed: "GameScene")
-        let transition = SKTransition.fade(withDuration: 2.0)
+        let transition = SKTransition.fade(withDuration: 1.0)
         gameScene?.scaleMode = .aspectFill
         scene?.view?.presentScene(gameScene!, transition: transition)
+    }
+    
+    @objc func fireTimer() {
+        
+        secondsElapsed += 1
+        
+        if secondsElapsed == timeTilTransition + 1 {
+            swap()
+        }
+    }
+    
+    func boatInCenter() {
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        
+        scene?.physicsWorld.speed = 0
+        
+        let rotateActionFast = SKAction.rotate(byAngle: .pi / 4, duration: 5)
+        let op_rotateActionFast = SKAction.rotate(byAngle: .pi / -4, duration: 5)
+        
+        backgroundmed.run(rotateActionFast)
+        backgroundlrg.run(op_rotateActionFast)
+        backgroundsm.run(op_rotateActionFast)
+        
+        boat.run(rotateActionFast)
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
         let x = boat.position.x
         let y = boat.position.y
-        let rad = 15
-        if (x > (frame.size.width / 2) - CGFloat(rad) && x < (frame.size.width / 2) + CGFloat(rad) && y > (frame.size.height / 2) - CGFloat(rad) && y < (frame.size.height / 2) + CGFloat(rad)){
-            swap()
+        let rad = CGFloat(15)
+        if (x > (frame.size.width / 2) - rad && x < (frame.size.width / 2) + rad && y > (frame.size.height / 2) - rad && y < (frame.size.height / 2) + rad){
+            boatInCenter()
+            //swap()
         }
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
