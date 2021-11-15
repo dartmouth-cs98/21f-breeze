@@ -139,9 +139,7 @@ class GameScene: SKScene {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: frame.midX, y: frame.midY))
         path.addLine(to: CGPoint(x: frame.midX, y: -1000))
-        let move = SKAction.follow(path.cgPath, asOffset: true, orientToPath: true, speed: 110)
-        dock.yScale = -1
-        dock.xScale = -1
+        let move = SKAction.follow(path.cgPath, asOffset: true, orientToPath: false, speed: 110)
         dock.run(move)
         
         //begin timer that tracks obstacles
