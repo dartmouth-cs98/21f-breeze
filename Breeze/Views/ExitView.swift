@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ExitView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Thanks for playing, enjoy your day!")
+                .font(Font.custom("Baloo2-Bold", size:20))
+                .multilineTextAlignment(.center)
+                .padding()
+        }
     }
 }
 
