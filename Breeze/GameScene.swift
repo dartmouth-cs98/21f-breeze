@@ -7,7 +7,7 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
@@ -39,7 +39,9 @@ class GameScene: SKScene {
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
+        
         motionManager.startAccelerometerUpdates()
+        physicsWorld.contactDelegate = self
         
         starfield = SKEmitterNode(fileNamed: "Starfield")
         starfield.position = CGPoint(x: 0, y: 1472)
@@ -187,22 +189,23 @@ class GameScene: SKScene {
         right_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         right_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         
-        right_obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width:  Int(frame.width) / 2, height: 20))
+        right_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: right_rect_shape)
         right_obstacle.physicsBody?.isDynamic = false
         
-        left_obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: left_rect_width, height: 20))
+        
+        left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
         left_obstacle.physicsBody?.isDynamic = false
         
         //create barrier paths
         let leftObstaclePath = UIBezierPath()
         leftObstaclePath.move(to: CGPoint(x: 100, y: 700))
         leftObstaclePath.addLine(to: CGPoint(x: 100, y: frame.minY - 30))
-        let moveLeft = SKAction.follow(leftObstaclePath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(obstacle_speed))
+        let moveLeft = SKAction.follow(leftObstaclePath.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         let rightObstaclePath = UIBezierPath()
         rightObstaclePath.move(to: CGPoint(x: 200, y: 700))
         rightObstaclePath.addLine(to: CGPoint(x: 200, y: frame.minY - 30))
-        let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(obstacle_speed))
+        let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         //start barriers
         self.addChild(left_obstacle)
