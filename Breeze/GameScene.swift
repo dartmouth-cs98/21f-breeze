@@ -26,7 +26,7 @@ class GameScene: SKScene {
     var gap_size = 20
     
     //Don't touch these obstacle variables plz
-    var obstacleCount = 0
+    var obstacle_count = 0
     var seconds_elapsed = 0
     var obstacleTimer: Timer?
     var end_level_count = 0
@@ -93,6 +93,7 @@ class GameScene: SKScene {
         updateTimerLabel(count: runCount)
         runCount += 1
         
+        //When start-of-level timer is over, remove it and resume scene
         if runCount == countdownStart + 1 {
             levelTimerLabel.removeFromParent()
             timer?.invalidate()
@@ -103,17 +104,21 @@ class GameScene: SKScene {
     @objc func fireObstacleTimer() {
         let end_delay_seconds = 10
 
-        if obstacleCount < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
-            obstacleCount += 1
+        //release obstacles at an interval while num_obstacles hasn't been reached
+        if obstacle_count < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
+            obstacle_count += 1
             renderObstacle()
         }
-        if obstacleCount == num_obstacles {
+        
+        //instantiate end-of-level timer for beach
+        if obstacle_count == num_obstacles {
             end_level_count += 1
         }
+        
+        //render beach
         if end_level_count == end_delay_seconds {
             renderLevelEnd()
         }
-            
         seconds_elapsed += 1
     }
     
@@ -127,7 +132,10 @@ class GameScene: SKScene {
     }
     
     func unpauseScene(){
+        //allow stuff to move again
         scene?.physicsWorld.speed = 1
+        
+        //move dock away
         let path = UIBezierPath()
         path.move(to: CGPoint(x: frame.midX, y: frame.midY))
         path.addLine(to: CGPoint(x: frame.midX, y: -1000))
@@ -136,6 +144,7 @@ class GameScene: SKScene {
         dock.xScale = -1
         dock.run(move)
         
+        //begin timer that tracks obstacles
         obstacleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireObstacleTimer), userInfo: nil, repeats: true)
     }
     
@@ -150,8 +159,10 @@ class GameScene: SKScene {
         beachPath.move(to: CGPoint(x: frame.midX, y: frame.maxY + 20))
         beachPath.addLine(to: CGPoint(x: frame.midX, y: frame.maxY - 70))
         let beachMove = SKAction.follow(beachPath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(80))
-        
+    
         beach.run(beachMove)
+        
+        //prep end of level stuff
         beach_is_rendered = true
         starfield.isPaused = true
     }
@@ -165,7 +176,6 @@ class GameScene: SKScene {
         //instantiate barriers
         let left_rect_shape = CGRect(x: -420, y: 0, width: left_rect_width, height: 20)
         let right_rect_shape = CGRect(x: right_rect_start, y: 0, width: Int(frame.width) / 2, height: 20)
-        
         
         let left_rect = UIBezierPath(rect: left_rect_shape)
         let right_rect = UIBezierPath(rect: right_rect_shape)
@@ -198,14 +208,8 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        print(boat.position)
-        print(frame.maxY)
-        print(frame.minY)
-//        print(frame.size.height)
-//        let x = boat.position.x
         let y = boat.position.y
         if beach_is_rendered {
-//            let rad = CGFloat(15)
             if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
                   pauseScene()
             }
