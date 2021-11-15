@@ -75,5 +75,6 @@ enum UserDefaultsKeys : String {
     case streak
     case timeInMinutes
     case endedGame
+    case setup
     case numClicks
 }
