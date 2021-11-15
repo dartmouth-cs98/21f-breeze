@@ -11,6 +11,7 @@ class GameScene: SKScene {
     
     var boat = SKSpriteNode(imageNamed: "boat")
     var dock = SKSpriteNode(imageNamed: "dock")
+    var beach = SKSpriteNode(imageNamed: "beach")
     var starfield:SKEmitterNode!
 
     
@@ -19,16 +20,17 @@ class GameScene: SKScene {
     var countdownStart = 3
     
     //obstacle variables (feel free to change these)
-    var seconds_between_obstacle = 1
-    var num_obstacles = 50
-    var obstacle_speed = 170
+    var seconds_between_obstacle = 3
+    var num_obstacles = 2
+    var obstacle_speed = 150
     var gap_size = 20
     
     //Don't touch these obstacle variables plz
     var obstacleCount = 0
     var seconds_elapsed = 0
     var obstacleTimer: Timer?
-
+    var end_level_count = 0
+    var beach_is_rendered = false
     
     var levelTimerLabel = SKLabelNode(fontNamed: "Baloo2-Bold")
     
@@ -42,9 +44,10 @@ class GameScene: SKScene {
         starfield = SKEmitterNode(fileNamed: "Starfield")
         starfield.position = CGPoint(x: 0, y: 1472)
         starfield.advanceSimulationTime(10)
+    
         self.addChild(starfield)
         
-        starfield.zPosition = -1
+        starfield.particleZPosition = -2
 
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
@@ -98,10 +101,19 @@ class GameScene: SKScene {
     }
     
     @objc func fireObstacleTimer() {
-        if obstacleCount <= num_obstacles + 1 && seconds_elapsed % seconds_between_obstacle == 0 {
+        let end_delay_seconds = 4
+
+        if obstacleCount < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
             obstacleCount += 1
             renderObstacle()
         }
+        if obstacleCount == num_obstacles {
+            end_level_count += 1
+        }
+        if end_level_count == end_delay_seconds {
+            renderLevelEnd()
+        }
+            
         seconds_elapsed += 1
     }
     
@@ -124,14 +136,30 @@ class GameScene: SKScene {
         dock.xScale = -1
         dock.run(move)
         
+        
         obstacleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireObstacleTimer), userInfo: nil, repeats: true)
+    }
+    
+    func renderLevelEnd(){
+        //instantiate beach
+//        beach.position = CGPoint(x: frame.midX, y: frame.maxY + 20)
+        beach.size = CGSize(width: frame.width, height: 200)
+        beach.zPosition = -1
+        self.addChild(beach)
+        
+        //beach movement
+        let beachPath = UIBezierPath()
+        beachPath.move(to: CGPoint(x: frame.midX, y: frame.maxY + 20))
+        beachPath.addLine(to: CGPoint(x: frame.midX, y: frame.maxY - 70))
+        let beachMove = SKAction.follow(beachPath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(80))
+        
+        beach.run(beachMove)
+        beach_is_rendered = true
     }
     
     func renderObstacle(){
         //pick gap
-//        let gap_center = Int.random(in: 0..<200) - 100
         let gap_center = Int.random(in: -250..<250)
-//        print(better_gap_center)
         let left_rect_width = (275 + gap_center - (gap_size / 2))
         let right_rect_start = (gap_center + (gap_size / 2))
         
@@ -154,12 +182,12 @@ class GameScene: SKScene {
         
         let leftObstaclePath = UIBezierPath()
         leftObstaclePath.move(to: CGPoint(x: 100, y: 700))
-        leftObstaclePath.addLine(to: CGPoint(x: 100, y: frame.minY))
+        leftObstaclePath.addLine(to: CGPoint(x: 100, y: frame.minY - 30))
         let moveLeft = SKAction.follow(leftObstaclePath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         let rightObstaclePath = UIBezierPath()
         rightObstaclePath.move(to: CGPoint(x: 200, y: 700))
-        rightObstaclePath.addLine(to: CGPoint(x: 200, y: frame.minY))
+        rightObstaclePath.addLine(to: CGPoint(x: 200, y: frame.minY - 30))
         let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         addChild(left_obstacle)
