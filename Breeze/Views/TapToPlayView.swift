@@ -65,6 +65,7 @@ struct TapToPlayView: View {
             }
           if isPresenting {
             ZStack(alignment: .center) {
+                Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
                 if (hasntFinishedGame) {
                     if (hasntLostGame) {
                         GeometryReader { gp in

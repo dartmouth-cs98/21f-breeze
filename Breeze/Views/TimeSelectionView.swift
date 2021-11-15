@@ -17,7 +17,7 @@ struct TimeSelectionView: View {
 
     var body: some View {
         ZStack {
-           Color.white.ignoresSafeArea()
+           Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
            VStack {
              Text("Breeze will interrupt you on you selected apps after:")
                    .font(Font.custom("Baloo2-Regular", size:20))

@@ -11,7 +11,7 @@ import SwiftUI
 struct EndOfSetUpView: View {
     var body: some View {
         ZStack {
-            Color.white.ignoresSafeArea()
+            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack (alignment: .center) {
                 Text("Thank you for configuring Breeze. We will notify you when you reach your time limit on apps you asked us to monitor.")
                     .font(Font.custom("Baloo2-Regular", size:20))
