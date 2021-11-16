@@ -85,10 +85,7 @@ class StartingWhirlpoolGameScene: SKScene {
         let gameScene = GameScene(fileNamed: "GameScene")
         let transition = SKTransition.fade(withDuration: 1.0)
         gameScene?.scaleMode = .aspectFill
-        
-        
         scene?.view?.presentScene(gameScene!, transition: transition)
-        
     }
     
     @objc func fireTimer() {
