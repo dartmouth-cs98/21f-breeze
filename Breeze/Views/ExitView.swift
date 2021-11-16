@@ -34,11 +34,13 @@ struct ExitView: View {
     
     func goToTapToPlay () {
         UserDefaults.standard.setPoints(value: 5)
-        if (UserDefaults.standard.getLastDatePlayed() >= 1) {
+        if (UserDefaults.standard.getDaysFromLastPlay() <= 1) {
             UserDefaults.standard.setLastDatePlayedToToday()
             if (UserDefaults.standard.getDaysFromLastPlay() == 1) {
                 UserDefaults.standard.setStreak(value: UserDefaults.standard.getStreak() + 1)
             }
+        } else {
+            UserDefaults.standard.setStreak(value: 0)
         }
         UserDefaults.standard.synchronize()
         UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
