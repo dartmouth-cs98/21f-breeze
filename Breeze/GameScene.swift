@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //obstacle variables (feel free to change these)
     var seconds_between_obstacle = 3
-    var num_obstacles = 2
+    var num_obstacles = 5
     var obstacle_speed = 150
     var gap_size = 20
     
@@ -56,7 +56,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
-//        scene?.scaleMode = .resizeFill
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
         
@@ -271,17 +270,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
-        let left_edge = -280
-        print(boat.position)
-        
+
         if (y < frame.minY) {
             scene?.view?.isPaused = true
             UserDefaults.standard.set(false, forKey: "hasntLostGame")
         }
-//        if boat.position.x < CGFloat(left_edge) {
-//            boat.position.x = CGFloat(left_edge + 5)
-//        }
-        
         if beach_is_rendered {
             if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
                 scene?.view?.isPaused = true
