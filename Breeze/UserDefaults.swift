@@ -55,7 +55,20 @@ extension UserDefaults{
     func isEnded() -> Bool {
         return bool(forKey: UserDefaultsKeys.endedGame.rawValue)
     }
-
+    
+    func setLastDatePlayedToToday() {
+        set(Date().timeIntervalSince1970, forKey: UserDefaultsKeys.lastDatePlayed.rawValue)
+    }
+    
+    func getDaysFromLastPlay() -> Int {
+        let calender = Calendar.current
+        let date1 = calender.startOfDay(for: Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastDatePlayed.rawValue)))
+        let date2 = calender.startOfDay(for: Date())
+        let components = calender.dateComponents([.day], from: date1, to: date2)
+        return components.day ?? 0
+        
+    }
+    
     // example usage:
     // UserDefaults.standard.setPoints(value: 90)
     func setNumClicks(value: Int) {
@@ -77,4 +90,5 @@ enum UserDefaultsKeys : String {
     case endedGame
     case setup
     case numClicks
+    case lastDatePlayed
 }
