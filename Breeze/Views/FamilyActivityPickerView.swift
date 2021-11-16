@@ -52,8 +52,10 @@ struct FamilyActivityPickerView: View {
         
         // second screen after the user selects which apps to track
         else {
-            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
-            TimeLimitInstructionsView()
+            ZStack {
+                Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
+                TimeLimitInstructionsView()
+            }
         }
     }
     
