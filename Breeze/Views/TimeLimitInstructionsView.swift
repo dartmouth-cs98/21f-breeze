@@ -14,9 +14,7 @@ struct TimeLimitInstructionsView: View {
     var body: some View {
         
         ZStack {
-            Color.white.ignoresSafeArea()
             VStack {
-                Spacer()
                 Text("Welcome to Breeze.")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .padding()

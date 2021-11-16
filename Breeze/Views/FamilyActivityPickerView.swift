@@ -24,7 +24,7 @@ struct FamilyActivityPickerView: View {
         // first screen before the user selects which apps to track
         if (!appsToTrackHaveBeenSelected) {
             ZStack {
-                Color.white.ignoresSafeArea()
+                Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
                 VStack {
                     Text("Welcome to Breeze.")
                         .font(Font.custom("Baloo2-Regular", size:20))
@@ -52,6 +52,7 @@ struct FamilyActivityPickerView: View {
         
         // second screen after the user selects which apps to track
         else {
+            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             TimeLimitInstructionsView()
         }
     }
