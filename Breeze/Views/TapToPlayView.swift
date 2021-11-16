@@ -64,8 +64,9 @@ struct TapToPlayView: View {
                 ).padding()
                 Button("Go back to setup", action: {restartSetup()})
                     .font(Font.custom("Baloo2-Regular", size:30))
-                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
                     .foregroundColor(Color.black)
+                    .cornerRadius(6)
                     .buttonStyle(.bordered)
             }
           if isPresenting {

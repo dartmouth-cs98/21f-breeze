@@ -26,8 +26,10 @@ struct EndOfSetUpView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Exit Set Up", action: {UserDefaults.standard.set(false, forKey: "hasntExitedEndOfSetUpView")})
-                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
                     .foregroundColor(Color.black)
+                    .cornerRadius(6)
+                    .padding()
             }.buttonStyle(.bordered)
         }
     }

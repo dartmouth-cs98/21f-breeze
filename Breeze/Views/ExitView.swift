@@ -20,10 +20,11 @@ struct ExitView: View {
                     .font(Font.custom("Baloo2-Bold", size:20)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
-                 Button("Collect Your Points!", action: goToTapToPlay)
+                 Button("Collect Your BreezeBucks!", action: goToTapToPlay)
                     .font(Font.custom("Baloo2-Regular", size:20))
-                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
                     .foregroundColor(Color.black)
+                    .cornerRadius(6)
                     .padding()
 
                 }
