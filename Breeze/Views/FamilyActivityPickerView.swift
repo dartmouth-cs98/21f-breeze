@@ -13,7 +13,7 @@ import FamilyControls
 struct FamilyActivityPickerView: View {
     @State var selection = FamilyActivitySelection()
     @State var familyActivityPickerIsPresenting = false
-    @State var appsToTrackHaveBeenSelected = false
+    @AppStorage("appsToTrackHaveBeenSelected") var appsToTrackHaveBeenSelected: Bool = false
     //@State private var timeSelectionIsPresenting = false
     
     @EnvironmentObject var model: MyModel
