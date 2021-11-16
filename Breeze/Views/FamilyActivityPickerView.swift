@@ -35,11 +35,11 @@ struct FamilyActivityPickerView: View {
                         .padding()
                     Button("Select Apps", action: setIsPresentedTrue)
                         .font(Font.custom("Baloo2-Regular", size:20))
-                        .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                        .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
                         .foregroundColor(Color.black)
+                        .cornerRadius(6)
                         .padding()
-                }
-                .buttonStyle(.bordered)
+                }.buttonStyle(.bordered)
                 .sheet(isPresented: $familyActivityPickerIsPresenting, onDismiss: didDismissFamilyActivityPickerView) {
                     FamilyActivityPicker(selection: $selection)
                 }.onChange(of: selection) { newSelection in
