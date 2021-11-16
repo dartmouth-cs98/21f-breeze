@@ -62,6 +62,11 @@ struct TapToPlayView: View {
                         
                     }.frame(width: 300, height: 150)}
                 ).padding()
+                Button("Go back to setup", action: {restartSetup()})
+                    .font(Font.custom("Baloo2-Regular", size:30))
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .foregroundColor(Color.black)
+                    .buttonStyle(.bordered)
             }
           if isPresenting {
             ZStack(alignment: .center) {
@@ -87,6 +92,14 @@ struct TapToPlayView: View {
             .transition(.asymmetric(insertion: .opacity, removal: .scale))
             }
         }
+    }
+    
+    func restartSetup() {
+        
+        UserDefaults.standard.set(false, forKey: "appsToTrackHaveBeenSelected")
+        UserDefaults.standard.set(true, forKey: "hasntExitedEndOfSetUpView")
+        UserDefaults.standard.set(true, forKey: "hasntFinishedSetup")
+        
     }
 }
 
