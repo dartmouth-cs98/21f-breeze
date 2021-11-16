@@ -108,13 +108,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseScene()
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-        
-        // 1
-        let borderBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        // 2
-        borderBody.friction = 0
-        // 3
-        self.physicsBody = borderBody
     }
     
     @objc func fireTimer() {
