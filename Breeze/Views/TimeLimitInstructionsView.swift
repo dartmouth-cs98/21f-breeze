@@ -10,7 +10,6 @@ import SwiftUI
 @available(iOS 15.0, *)
 struct TimeLimitInstructionsView: View {
     @State private var timeSelectionIsPresenting = false
-    
     var body: some View {
         ZStack {
             Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
@@ -19,7 +18,15 @@ struct TimeLimitInstructionsView: View {
                 Text("Welcome to Breeze.")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .padding()
-                Text("To begin, set a time limit, after which Breeze will notify you to take a break")
+                Text("We can help you reduce your screen time using positive reinforcement!")
+                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("To begin, set a time limit, after which Breeze will notify you to take a break.")
+                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("After you’ve hit your limit, we will invite you to play a short game to change your headspace and divert your attention to a more mindful place.")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .multilineTextAlignment(.center)
                     .padding()

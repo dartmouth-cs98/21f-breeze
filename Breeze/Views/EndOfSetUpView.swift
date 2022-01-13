@@ -4,11 +4,12 @@
 //
 //  Created by Sabrina Jain on 10/24/21.
 //
-
+import Foundation
 import SwiftUI
 
 @available(iOS 15.0, *)
 struct EndOfSetUpView: View {
+    @Binding var endViewIsPresenting: Bool
     var body: some View {
         ZStack {
             Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
@@ -35,9 +36,9 @@ struct EndOfSetUpView: View {
     }
 }
 
-@available(iOS 15.0, *)
-struct EndOfSetUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        EndOfSetUpView()
-    }
-}
+//@available(iOS 15.0, *)
+//struct EndOfSetUpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EndOfSetUpView()
+//    }
+//}

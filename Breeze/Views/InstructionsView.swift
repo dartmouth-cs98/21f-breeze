@@ -9,12 +9,43 @@ import SwiftUI
 
 @available(iOS 15.0, *)
 struct InstructionsView: View {
+    @State private var endViewIsPresenting = false
     var body: some View {
         ZStack {
-            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
+            //Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack (alignment: .center) {
-                Text("temp")
-            }
+                Spacer()
+                Text("When you receive a push notification you can:")
+                    .font(Font.custom("Baloo2-Bold", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("•  Accept the notification to play the game, make progress and explorew new islands!")
+                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("•  Deny the notification.")
+                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Text("•  Press and hold the notification to let us know whether you are doing work or slacking off.")
+                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .padding(.bottom, 50)
+                Text("The more often you accept the notification, the farther your boat will sail!")
+                    .font(Font.custom("Baloo2-Bold", size:20))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Button("Next", action: {endViewIsPresenting.toggle()})
+                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+                    .foregroundColor(Color.black)
+                    .cornerRadius(6)
+                    .padding()
+                Spacer()
+            }.buttonStyle(.bordered)
+        }.fullScreenCover(isPresented: $endViewIsPresenting) {
+            EndOfSetUpView(endViewIsPresenting: self.$endViewIsPresenting)
+            
         }
     }
 }

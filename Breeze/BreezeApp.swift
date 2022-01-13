@@ -29,7 +29,7 @@ struct BreezeApp: App {
                       TimeLimitInstructionsView()
 //                      FamilyActivityPickerView().environmentObject(model)
                   } else {
-                      EndOfSetUpView()
+                      InstructionsView()
                   }
                 
               } else {
