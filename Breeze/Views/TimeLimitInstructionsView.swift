@@ -13,12 +13,13 @@ struct TimeLimitInstructionsView: View {
     
     var body: some View {
         ZStack {
+            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack {
                 Spacer()
                 Text("Welcome to Breeze.")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .padding()
-                Text("Continue set up by setting a time limit, after which Breeze will notify you when you use your selected apps.")
+                Text("To begin, set a time limit, after which Breeze will notify you to take a break")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .multilineTextAlignment(.center)
                     .padding()

@@ -19,7 +19,7 @@ struct TimeSelectionView: View {
         ZStack {
            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
            VStack {
-             Text("Breeze will interrupt you on you selected apps after:")
+             Text("Breeze will notify you every...")
                    .font(Font.custom("Baloo2-Regular", size:20))
                    .multilineTextAlignment(.center)
              Picker(selection: $selectedIndex, label: Text("Select an interval")) {

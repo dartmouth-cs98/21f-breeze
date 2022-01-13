@@ -26,7 +26,8 @@ struct BreezeApp: App {
         WindowGroup {
               if hasntExitedEndOfSetUpView {
                   if hasntFinishedSetup {
-                      FamilyActivityPickerView().environmentObject(model)
+                      TimeLimitInstructionsView()
+//                      FamilyActivityPickerView().environmentObject(model)
                   } else {
                       EndOfSetUpView()
                   }

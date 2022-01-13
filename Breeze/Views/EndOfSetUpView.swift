@@ -13,7 +13,7 @@ struct EndOfSetUpView: View {
         ZStack {
             Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack (alignment: .center) {
-                Text("Thank you for configuring Breeze. We will notify you when you reach your time limit on apps you asked us to monitor.")
+                Text("Thank you for configuring Breeze. We will notify you when you reach your time limit.")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .multilineTextAlignment(.center)
                     .padding()
