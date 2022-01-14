@@ -9,8 +9,8 @@ import Foundation
 
 
 public struct Notification: Codable {
-    private(set) public var id: String;
-    private(set) public var time: Date;
+    var id: String;
+    var time: Date;
 
     public init(id: String){
         self.id = id
