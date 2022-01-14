@@ -81,6 +81,52 @@ extension UserDefaults{
         return integer(forKey: UserDefaultsKeys.numClicks.rawValue)
 
     }
+    
+    func getPreviousProtectedDataStatus()-> Bool {
+        return bool(forKey: UserDefaultsKeys.previousProtectedDataStatus.rawValue)
+    }
+
+    func setPreviousProtectedDataStatus(value: Bool){
+        set(value, forKey: UserDefaultsKeys.previousProtectedDataStatus.rawValue)
+    }
+    
+    func getMinutesElapsedFromLastTimeProtectedDataStatusChecked()-> Int {
+        let calender = Calendar.current
+        
+        let date1 = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
+        let date2 = Date()
+        let components = calender.dateComponents([.minute], from: date1, to: date2)
+        return components.minute ?? 0
+    }
+
+    func setLastTimeProtectedDataStatusChecked(){
+        set(Date().timeIntervalSince1970, forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue)
+    }
+    
+    func getCurrentPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+    }
+    
+    func addIntervalToCurrentPhoneUsage() {
+        let minutesElapsed = getMinutesElapsedFromLastTimeProtectedDataStatusChecked()
+        let currentPhoneUsage = getCurrentPhoneUsage()
+        set((currentPhoneUsage + minutesElapsed), forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+    }
+    
+    func resetCurrentPhoneUsage() {
+        set(0, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+    }
+    
+    func isAboveTimeLimit() -> Bool {
+        let currentPhoneUsage = getCurrentPhoneUsage()
+        let timeLimit = getTime()
+        if (currentPhoneUsage >= timeLimit) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
 
 enum UserDefaultsKeys : String {
@@ -91,4 +137,7 @@ enum UserDefaultsKeys : String {
     case setup
     case numClicks
     case lastDatePlayed
+    case previousProtectedDataStatus
+    case lastTimeProtectedDataStatusChecked
+    case currentPhoneUsage
 }

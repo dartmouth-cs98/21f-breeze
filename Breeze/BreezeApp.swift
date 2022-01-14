@@ -8,6 +8,7 @@
 import SwiftUI
 import UserNotifications
 import FamilyControls
+import BackgroundTasks
 
 @available(iOS 15.0, *)
 
@@ -20,6 +21,7 @@ struct BreezeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var appsToTrackHaveBeenSelected = false
     @StateObject var model = MyModel.shared
+    
 
     var body: some Scene {
         
@@ -42,19 +44,18 @@ struct BreezeApp: App {
 @available(iOS 15.0, *)
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let backgroundTaskID = "com.breeze.CheckPhoneUsage"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) ->
         Bool {
         // set this class as the notification delegate
         userNotificationCenter.delegate = self
-        
-        //change later: adjusting progress if they clicked on notification
-        UserDefaults.standard.setNumClicks(value: UserDefaults.standard.getNumClicks() + 1)
-        
+                    
         //request authorization to use notifications
         self.requestNotificationAuthorization()
 
         UIApplication.shared.applicationIconBadgeNumber = 0
+        UIApplication.shared.registerForRemoteNotifications()
         
         // Will fail with an error code of 2 on simulator since not signed into iCloud w/child's account
         AuthorizationCenter.shared.requestAuthorization { result in
@@ -66,8 +67,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                         print("Error for Family Controls: \(error)")
                     }
         }
-        
-        sendNotification()
         return true
     }
     
@@ -75,6 +74,19 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("Test: \(response.notification.request.identifier)")
         print("Action taken: \(response.actionIdentifier)")
         completionHandler()
+    }
+        
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+      let token = deviceToken.reduce("") { $0 + String(format: "%02.2hhx", $1) }
+      print("registered for notifications", token)
+    }
+
+    
+    func application(_ application: UIApplication,
+    didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        checkPhoneUsage()
+        completionHandler(.noData) // Attempting to trick system into prioritizing app as much as possible
     }
     
     func requestNotificationAuthorization() {
@@ -131,6 +143,23 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             if let error = error {
                 print("Notification Error: ", error)
             }
+        }
+    }
+        
+    func checkPhoneUsage() {
+        if UIApplication.shared.isProtectedDataAvailable {
+            if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
+                UserDefaults.standard.addIntervalToCurrentPhoneUsage()
+            } else {
+                UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
+            }
+            if (UserDefaults.standard.isAboveTimeLimit()) {
+                // send push notification to user
+                sendNotification()
+                UserDefaults.standard.resetCurrentPhoneUsage()
+            }
+        } else {
+            UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         }
     }
 }
