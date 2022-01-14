@@ -12,7 +12,6 @@ struct InstructionsView: View {
     @State private var endViewIsPresenting = false
     var body: some View {
         ZStack {
-            //Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack (alignment: .center) {
                 Spacer()
                 Text("When you receive a push notification you can:")
@@ -37,7 +36,7 @@ struct InstructionsView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Next", action: {endViewIsPresenting.toggle()})
-                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
                     .padding()

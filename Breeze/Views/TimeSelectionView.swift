@@ -17,7 +17,6 @@ struct TimeSelectionView: View {
 
     var body: some View {
         ZStack {
-           Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
            VStack {
              Text("Breeze will notify you every...")
                    .font(Font.custom("Baloo2-Regular", size:20))
@@ -29,7 +28,7 @@ struct TimeSelectionView: View {
              }
              Button("Confirm", action: selectTime)
                 .font(Font.custom("Baloo2-Regular", size:20))
-                .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+                .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                 .foregroundColor(Color.black)
                 .cornerRadius(6)
                 .padding()

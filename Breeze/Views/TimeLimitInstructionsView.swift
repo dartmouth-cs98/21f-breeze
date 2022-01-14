@@ -12,7 +12,6 @@ struct TimeLimitInstructionsView: View {
     @State private var timeSelectionIsPresenting = false
     var body: some View {
         ZStack {
-            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack {
                 Spacer()
                 Text("Welcome to Breeze.")
@@ -31,7 +30,7 @@ struct TimeLimitInstructionsView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Set time limit", action: {timeSelectionIsPresenting.toggle()})
-                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
                     .padding()
