@@ -43,8 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let offscreen_buffer = 100
     
     //obstacle variables (feel free to change these)
-    var seconds_between_obstacle = 2
-    var num_obstacles = 10
+    var seconds_between_obstacle = 5
+    var num_obstacles = 1
     var obstacle_speed = 150
     
     //Don't touch these obstacle variables plz
@@ -203,8 +203,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func renderObstacle(){
-//        renderBasicWall()
-        renderBasicWall()
+        renderMultiLevelWall()
+        //        renderBasicWall()
         print("render")
     }
     
@@ -222,7 +222,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //location of middle of gap, random int between left edge of screen and right edge
         let gap_center = Int.random(in: gap_left_possible_bound..<gap_right_possible_bound)
-        print("gap center:", gap_center)
         
         //actual left and right side of gap
         let gap_left = gap_center - (gap_size / 2)
@@ -231,12 +230,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //rect width = length from offscreen buffer to edge of gap
         let left_rect_width = gap_left - (left_edge - offscreen_buffer)
         let left_rect_start = left_edge - offscreen_buffer
-        print("left rectangle:", left_rect_start, " to ", left_rect_width + left_rect_start)
 
-        
         let right_rect_width = (right_edge + offscreen_buffer) - gap_right
         let right_rect_start = gap_right
-        print("right rectangle:", right_rect_start, " to ", right_rect_width + right_rect_start)
 
         
         
@@ -253,7 +249,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         left_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         left_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         
-        right_obstacle.fillColor = UIColor(red: 145/255, green: 0/255, blue: 133/255, alpha: 1)
+        right_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         right_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         
         left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
@@ -268,12 +264,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        create barrier paths
         let path_buffer = 100
         let leftObstaclePath = UIBezierPath()
-        leftObstaclePath.move(to: CGPoint(x: 0, y: top_edge + path_buffer))
-        leftObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge))
+        leftObstaclePath.move(to: CGPoint(x: 0, y: top_edge))
+        leftObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer * 2))
         let moveLeft = SKAction.follow(leftObstaclePath.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
 
         let rightObstaclePath = UIBezierPath()
-        rightObstaclePath.move(to: CGPoint(x: 0, y: top_edge + path_buffer * 2))
+        rightObstaclePath.move(to: CGPoint(x: 0, y: top_edge))
         rightObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer * 2))
         let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
@@ -285,12 +281,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func renderMultiLevelWall(){
-        let GAP_BETWEEN_WALLS = 400
+        //help obstacles go fully ofscreen
+        let path_buffer = 300
+
+        //wall dimensions
+        let gap_between_walls = 400
+        
+        let horizontal_rect_width = 400
+        let horizontal_rect_height = 20
+        
+        let vertical_rect_width = 20
+        let vertical_rect_height = 200
+
 //        let rightExit = Bool.random()
         
         //TOP HORIZONTAL OBSTACLE
-        let top_horizontal_rect_width = 400
-        let top_horizontal_rect_shape = CGRect(x: -420, y: GAP_BETWEEN_WALLS, width: top_horizontal_rect_width, height: 20)
+        let top_horizontal_rect_shape = CGRect(x: left_edge, y: gap_between_walls, width: horizontal_rect_width, height: horizontal_rect_height)
         let top_horizontal_rect = UIBezierPath(rect: top_horizontal_rect_shape)
         let top_horizontal_obstacle = SKShapeNode(path: top_horizontal_rect.cgPath)
         
@@ -302,13 +308,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         top_horizontal_obstacle.physicsBody?.categoryBitMask = obstacleCategory
         
         let top_horizontal_path = UIBezierPath()
-        top_horizontal_path.move(to: CGPoint(x: 100, y: 700))
-        top_horizontal_path.addLine(to: CGPoint(x: 100, y: frame.minY - 400))
+        top_horizontal_path.move(to: CGPoint(x: 0, y: top_edge + path_buffer ))
+        top_horizontal_path.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer * 2))
         let move_top_horizontal = SKAction.follow(top_horizontal_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         //TOP VERTICAL OBSTACLE
-        let top_vertical_rect_height = 200
-        let top_vertical_rect_shape = CGRect(x: -20, y: -(top_vertical_rect_height) + 20 + GAP_BETWEEN_WALLS, width: 20, height: top_vertical_rect_height)
+        let top_vertical_rect_shape = CGRect(x: left_edge + horizontal_rect_width, y: -vertical_rect_height + horizontal_rect_height + gap_between_walls, width: vertical_rect_width, height: vertical_rect_height)
         let top_vertical_rect = UIBezierPath(rect: top_vertical_rect_shape)
         let top_vertical_obstacle = SKShapeNode(path: top_vertical_rect.cgPath)
         
@@ -320,47 +325,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         top_vertical_obstacle.physicsBody?.categoryBitMask = obstacleCategory
         
         let top_vertical_path = UIBezierPath()
-        top_vertical_path.move(to: CGPoint(x: 100, y: 700))
-        top_vertical_path.addLine(to: CGPoint(x: 100, y: frame.minY - 400))
+        top_vertical_path.move(to: CGPoint(x: 0, y: top_edge + path_buffer))
+        top_vertical_path.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer * 2))
         let move_top_vertical = SKAction.follow(top_vertical_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         
         //BOTTOM HORIZONTAL OBSTACLE
-        let bottom_horizontal_rect_width = 400
-        let bottom_horizontal_rect_shape = CGRect(x: -150, y: 0, width: bottom_horizontal_rect_width, height: 20)
+        let bottom_rect_start = right_edge - horizontal_rect_width
+        let bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width, height: horizontal_rect_height)
         let bottom_horizontal_rect = UIBezierPath(rect: bottom_horizontal_rect_shape)
         let bottom_horizontal_obstacle = SKShapeNode(path: bottom_horizontal_rect.cgPath)
-        
+
         bottom_horizontal_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         bottom_horizontal_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-     
+
         bottom_horizontal_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_horizontal_rect_shape)
         bottom_horizontal_obstacle.physicsBody?.isDynamic = false
         bottom_horizontal_obstacle.physicsBody?.categoryBitMask = obstacleCategory
-        
+
         let bottom_horizontal_path = UIBezierPath()
-        bottom_horizontal_path.move(to: CGPoint(x: 100, y: 700))
-        bottom_horizontal_path.addLine(to: CGPoint(x: 100, y: frame.minY - 200))
+        bottom_horizontal_path.move(to: CGPoint(x: 0, y: top_edge + path_buffer))
+        bottom_horizontal_path.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer))
         let move_bottom_horizontal = SKAction.follow(bottom_horizontal_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
-        
+
         //BOTTOM VERTICAL OBSTACLE
-        let bottom_vertical_rect_height = 200
-        let bottom_vertical_rect_shape = CGRect(x: -150, y: 0, width: 20, height: bottom_vertical_rect_height)
+        let bottom_vertical_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: vertical_rect_width, height: vertical_rect_height)
         let bottom_vertical_rect = UIBezierPath(rect: bottom_vertical_rect_shape)
         let bottom_vertical_obstacle = SKShapeNode(path: bottom_vertical_rect.cgPath)
-        
+
         bottom_vertical_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         bottom_vertical_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-     
+
         bottom_vertical_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_vertical_rect_shape)
         bottom_vertical_obstacle.physicsBody?.isDynamic = false
         bottom_vertical_obstacle.physicsBody?.categoryBitMask = obstacleCategory
-        
+
         let bottom_vertical_path = UIBezierPath()
-        bottom_vertical_path.move(to: CGPoint(x: 100, y: 700))
-        bottom_vertical_path.addLine(to: CGPoint(x: 100, y: frame.minY - 400))
+        bottom_vertical_path.move(to: CGPoint(x: 0, y: top_edge + path_buffer))
+        bottom_vertical_path.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer))
         let move_bottom_vertical = SKAction.follow(bottom_vertical_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
-        
+
         
         //ADD OBSTACLES
         self.addChild(top_horizontal_obstacle)
@@ -371,10 +375,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(bottom_horizontal_obstacle)
         bottom_horizontal_obstacle.run(move_bottom_horizontal)
-        
+
         self.addChild(bottom_vertical_obstacle)
         bottom_vertical_obstacle.run(move_bottom_vertical)
-        
+//
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
