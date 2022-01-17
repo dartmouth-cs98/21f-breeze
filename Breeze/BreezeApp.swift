@@ -98,7 +98,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    func sendNotification(interval: Int) {
+    func sendNotification() {
         // Define the custom actions.
         let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
               title: "Accept",
