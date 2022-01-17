@@ -9,6 +9,8 @@ import SwiftUI
 import UserNotifications
 import FamilyControls
 import BackgroundTasks
+import Firebase
+import UIKit
 
 @available(iOS 15.0, *)
 
@@ -48,6 +50,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) ->
         Bool {
+            
+        FirebaseApp.configure()
         // set this class as the notification delegate
         userNotificationCenter.delegate = self
                     
