@@ -44,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //obstacle variables (feel free to change these)
     var seconds_between_obstacle = 5
-    var num_obstacles = 1
+    var num_obstacles = 4
     var obstacle_speed = 150
     
     //Don't touch these obstacle variables plz
@@ -293,10 +293,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let vertical_rect_width = 20
         let vertical_rect_height = 200
 
-//        let rightExit = Bool.random()
+        //left or right exiting wall
+        let leftExit = Bool.random()
+        
         
         //TOP HORIZONTAL OBSTACLE
-        let top_horizontal_rect_shape = CGRect(x: left_edge, y: gap_between_walls, width: horizontal_rect_width, height: horizontal_rect_height)
+        var top_horizontal_rect_shape = CGRect(x: left_edge, y: gap_between_walls, width: horizontal_rect_width, height: horizontal_rect_height)
+        if leftExit {
+            top_horizontal_rect_shape = CGRect(x: right_edge - horizontal_rect_width, y: gap_between_walls, width: horizontal_rect_width, height: horizontal_rect_height)
+        }
         let top_horizontal_rect = UIBezierPath(rect: top_horizontal_rect_shape)
         let top_horizontal_obstacle = SKShapeNode(path: top_horizontal_rect.cgPath)
         
@@ -313,7 +318,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let move_top_horizontal = SKAction.follow(top_horizontal_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         //TOP VERTICAL OBSTACLE
-        let top_vertical_rect_shape = CGRect(x: left_edge + horizontal_rect_width, y: -vertical_rect_height + horizontal_rect_height + gap_between_walls, width: vertical_rect_width, height: vertical_rect_height)
+        var top_vertical_rect_shape = CGRect(x: left_edge + horizontal_rect_width, y: -vertical_rect_height + horizontal_rect_height + gap_between_walls, width: vertical_rect_width, height: vertical_rect_height)
+        if leftExit {
+            top_vertical_rect_shape = CGRect(x: right_edge - horizontal_rect_width, y: -vertical_rect_height + horizontal_rect_height + gap_between_walls, width: vertical_rect_width, height: vertical_rect_height)
+        }
         let top_vertical_rect = UIBezierPath(rect: top_vertical_rect_shape)
         let top_vertical_obstacle = SKShapeNode(path: top_vertical_rect.cgPath)
         
@@ -331,8 +339,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //BOTTOM HORIZONTAL OBSTACLE
-        let bottom_rect_start = right_edge - horizontal_rect_width
-        let bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width, height: horizontal_rect_height)
+        var bottom_rect_start = right_edge - horizontal_rect_width
+        var bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width, height: horizontal_rect_height)
+        if leftExit {
+            bottom_rect_start = left_edge
+            bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width, height: horizontal_rect_height)
+        }
+        
         let bottom_horizontal_rect = UIBezierPath(rect: bottom_horizontal_rect_shape)
         let bottom_horizontal_obstacle = SKShapeNode(path: bottom_horizontal_rect.cgPath)
 
@@ -349,7 +362,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let move_bottom_horizontal = SKAction.follow(bottom_horizontal_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
 
         //BOTTOM VERTICAL OBSTACLE
-        let bottom_vertical_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: vertical_rect_width, height: vertical_rect_height)
+        var bottom_vertical_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: vertical_rect_width, height: vertical_rect_height)
+        if leftExit{
+            bottom_vertical_rect_shape = CGRect(x: left_edge + horizontal_rect_width, y: 0, width: vertical_rect_width, height: vertical_rect_height)
+        }
         let bottom_vertical_rect = UIBezierPath(rect: bottom_vertical_rect_shape)
         let bottom_vertical_obstacle = SKShapeNode(path: bottom_vertical_rect.cgPath)
 
