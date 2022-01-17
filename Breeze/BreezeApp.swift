@@ -98,7 +98,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    func sendNotification() {
+    func sendNotification(interval: Int) {
         // Define the custom actions.
         let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
               title: "Accept",
@@ -109,7 +109,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         // Define the notification type
         let meetingInviteCategory =
-              UNNotificationCategory(identifier: "MEETING_INVITATION",
+              UNNotificationCategory(identifier: "OVER_TIME_LIMIT",
               actions: [acceptAction, declineAction],
               intentIdentifiers: [],
               hiddenPreviewsBodyPlaceholder: "",
@@ -119,10 +119,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         self.userNotificationCenter.setNotificationCategories([meetingInviteCategory])
 
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "You've hit your time limit on BAD_APP"
-        notificationContent.body = "Click to play a game in Breeze, and earn a reward"
+        notificationContent.title = "You've gone over " + String(UserDefaults.standard.getTime()) + "minutes."
+        notificationContent.body = "Click to take a break with Breeze"
         notificationContent.badge = NSNumber(value: 1)
-        notificationContent.categoryIdentifier = "MEETING_INVITATION"
+        notificationContent.categoryIdentifier = "OVER_TIME_LIMIT"
         
         if let url = Bundle.main.url(forResource: "dune",
                                      withExtension: "png") {
@@ -154,7 +154,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
             }
             if (UserDefaults.standard.isAboveTimeLimit()) {
-                // send push notification to user
+                // send local notification to user
                 sendNotification()
                 UserDefaults.standard.resetCurrentPhoneUsage()
             }
