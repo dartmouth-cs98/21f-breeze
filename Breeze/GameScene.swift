@@ -269,12 +269,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let path_buffer = 100
         let leftObstaclePath = UIBezierPath()
         leftObstaclePath.move(to: CGPoint(x: 0, y: top_edge + path_buffer))
-        leftObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer))
+        leftObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge))
         let moveLeft = SKAction.follow(leftObstaclePath.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
 
         let rightObstaclePath = UIBezierPath()
-        rightObstaclePath.move(to: CGPoint(x: 0, y: top_edge + path_buffer))
-        rightObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer))
+        rightObstaclePath.move(to: CGPoint(x: 0, y: top_edge + path_buffer * 2))
+        rightObstaclePath.addLine(to: CGPoint(x: 0, y: bottom_edge - path_buffer * 2))
         let moveRight = SKAction.follow(rightObstaclePath.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
         
         //start barriers
