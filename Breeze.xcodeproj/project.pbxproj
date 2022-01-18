@@ -49,6 +49,7 @@
 		46FC0D062738E2AD002D14F9 /* MyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4627C8262734C980005173E3 /* MyModel.swift */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
+		A8C3C77D279717F20027D8F9 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3C77C279717F20027D8F9 /* InstructionsView.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 		FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167D273B69710022F820 /* TimeSelectionView.swift */; };
 /* End PBXBuildFile section */
@@ -129,6 +130,7 @@
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A14061412741C4BA006110CF /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
+		A8C3C77C279717F20027D8F9 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FF28167D273B69710022F820 /* TimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,6 +288,7 @@
 				46521528272F25F90023C2C0 /* FamilyActivityPickerView.swift */,
 				46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */,
 				FF28167D273B69710022F820 /* TimeSelectionView.swift */,
+				A8C3C77C279717F20027D8F9 /* InstructionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
+				A8C3C77D279717F20027D8F9 /* InstructionsView.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
 				46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */,
 				4627C8272734C980005173E3 /* MyModel.swift in Sources */,

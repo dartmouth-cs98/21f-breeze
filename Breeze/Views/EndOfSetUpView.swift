@@ -1,19 +1,13 @@
-//
-//  EndOfSetUpScreen.swift
-//  Breeze
-//
-//  Created by Sabrina Jain on 10/24/21.
-//
-
+import Foundation
 import SwiftUI
 
 @available(iOS 15.0, *)
 struct EndOfSetUpView: View {
+    @Binding var endViewIsPresenting: Bool
     var body: some View {
         ZStack {
-            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             VStack (alignment: .center) {
-                Text("Thank you for configuring Breeze. We will notify you when you reach your time limit on apps you asked us to monitor.")
+                Text("Thank you for configuring Breeze. We will notify you when you reach your time limit.")
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .multilineTextAlignment(.center)
                     .padding()
@@ -26,7 +20,7 @@ struct EndOfSetUpView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Exit Set Up", action: {UserDefaults.standard.set(false, forKey: "hasntExitedEndOfSetUpView")})
-                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
                     .padding()
@@ -35,9 +29,9 @@ struct EndOfSetUpView: View {
     }
 }
 
-@available(iOS 15.0, *)
-struct EndOfSetUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        EndOfSetUpView()
-    }
-}
+//@available(iOS 15.0, *)
+//struct EndOfSetUpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EndOfSetUpView()
+//    }
+//}
