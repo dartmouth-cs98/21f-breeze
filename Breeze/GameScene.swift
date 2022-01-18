@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(boat)
         
         //boat physics
-        boat.physicsBody = SKPhysicsBody(circleOfRadius: boat.size.width / 2)
+        boat.physicsBody = SKPhysicsBody(texture: boat.texture!, size: boat.size)
         boat.physicsBody?.allowsRotation = false
         boat.physicsBody?.restitution = 0
         boat.physicsBody?.categoryBitMask = boatCategory
