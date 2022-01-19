@@ -7,38 +7,33 @@
 
 
 import SwiftUI
-
+@available(iOS 15.0, *)
 struct LosingExitView: View {
     
     @Binding var losingExitViewIsPresenting: Bool
     
     var body: some View {
         ZStack {
-            Color.init(UIColor(named: "LaunchScreenBackground")!)
             VStack {
                 Text("Uh-oh! Looks like you misnavigated...")
-                    .font(Font.custom("Baloo2-Bold", size:20)).foregroundColor(Color.black)
+                    .font(Font.custom("Baloo2-Regular", size:20)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
                 Text("Want to try again?")
-                    .font(Font.custom("Baloo2-Bold", size:20)).foregroundColor(Color.black)
+                    .font(Font.custom("Baloo2-Regular", size:20)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
-                Button(action: tryAgain) {
-                    Text("Yes please!").font(Font.custom("Baloo2-Regular", size:20))
-                   .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
-                   .foregroundColor(Color.black)
-                   .cornerRadius(6)
-                   .padding()
-                }
-                Button(action: goToTapToPlay) {
-                    Text("No, Please Take Me Home").font(Font.custom("Baloo2-Regular", size:20))
-                   .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-                   .foregroundColor(Color.black)
-                   .cornerRadius(6)
-                   .padding()
-                }
-            }
+                Button("Yes please!", action: {tryAgain()})
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .foregroundColor(Color.black)
+                    .cornerRadius(6)
+                    .padding()
+                Button("No thanks. Take me home.", action: {goToTapToPlay()})
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .foregroundColor(Color.black)
+                    .cornerRadius(6)
+                    .padding()
+            }.buttonStyle(.bordered)
         }
     }
     
