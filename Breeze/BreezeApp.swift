@@ -44,9 +44,10 @@ struct BreezeApp: App {
 }
 
 @available(iOS 15.0, *)
-class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
     let backgroundTaskID = "com.breeze.CheckPhoneUsage"
+    let gcmMessageIDKey = "gcm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) ->
         Bool {
@@ -57,9 +58,27 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                     
         //request authorization to use notifications
         self.requestNotificationAuthorization()
+            
+        if #available(iOS 10.0, *) {
+          // For iOS 10 display notification (sent via APNS)
+          UNUserNotificationCenter.current().delegate = self
 
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { _, _ in }
+          )
+        } else {
+          let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+            
         UIApplication.shared.applicationIconBadgeNumber = 0
         UIApplication.shared.registerForRemoteNotifications()
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
+
         
         // Will fail with an error code of 2 on simulator since not signed into iCloud w/child's account
         AuthorizationCenter.shared.requestAuthorization { result in
@@ -74,23 +93,58 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         return true
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("Test: \(response.notification.request.identifier)")
-        print("Action taken: \(response.actionIdentifier)")
-        completionHandler()
-    }
-        
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
       let token = deviceToken.reduce("") { $0 + String(format: "%02.2hhx", $1) }
       print("registered for notifications", token)
     }
 
     
-    func application(_ application: UIApplication,
-    didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+    func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+        print("Received notification - Next will check phone usage")
         checkPhoneUsage()
-        completionHandler(.noData) // Attempting to trick system into prioritizing app as much as possible
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        if let value = userInfo["some-key"] as? String {
+               print(value) // output: "some-value"
+        }
+        print(userInfo)
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+      print("Firebase registration token: \(String(describing: fcmToken))")
+
+      let dataDict: [String: String] = ["token": fcmToken ?? ""]
+      NotificationCenter.default.post(
+        name: Notification.Name("FCMToken"),
+        object: nil,
+        userInfo: dataDict
+      )
+        
+      // TODO: If necessary send token to application server.
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                  willPresent notification: UNNotification,
+                                  withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
+                                    -> Void) {
+        let userInfo = notification.request.content.userInfo
+        print("In")
+        print(userInfo)
+        completionHandler([])
+      }
+
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+        print("In")
+        completionHandler()
+
     }
     
     func requestNotificationAuthorization() {
@@ -151,18 +205,23 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
         
     func checkPhoneUsage() {
+        print("Checking phone usage")
         if UIApplication.shared.isProtectedDataAvailable {
+            print("Protected data is available")
             if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
+                print("Protected data was previously available - adding this time interval to total phone usage")
                 UserDefaults.standard.addIntervalToCurrentPhoneUsage()
             } else {
+                print("Protected data was not previously available - user started using their phone during this time interval")
                 UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
             }
             if (UserDefaults.standard.isAboveTimeLimit()) {
-                // send local notification to user
+                print("User is above their chosen time limit, sending a notification to play Breeze")
                 sendNotification()
                 UserDefaults.standard.resetCurrentPhoneUsage()
             }
         } else {
+            print("Protected data is not available")
             UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         }
     }
