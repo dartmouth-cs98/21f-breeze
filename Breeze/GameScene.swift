@@ -8,14 +8,13 @@ import GameplayKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    var DEV_MODE = true
-    
-    var boat = SKSpriteNode(imageNamed: "boat")
-    var dock = SKSpriteNode(imageNamed: "dock")
-    var beach = SKSpriteNode(imageNamed: "beach")
+        
+    //instantiate sprites
+    var boat = SKSpriteNode(imageNamed: "boat2")
+    var dock = SKSpriteNode(imageNamed: "dock2")
+    var beach = SKSpriteNode(imageNamed: "beach2")
     var starfield:SKEmitterNode!
-
+    
     // Category bitmask values
     let backgroundCategory: UInt32 = 0b0000
     let boatCategory: UInt32 = 0b0001 // 1
@@ -43,8 +42,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let offscreen_buffer = 100
     
     //obstacle variables (feel free to change these)
-    var seconds_between_obstacle = 5
-    var num_obstacles = 4
+    var seconds_between_obstacle = 2
+    var num_obstacles = 3
     var obstacle_speed = 150
     
     //Don't touch these obstacle variables plz
@@ -58,13 +57,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var endSceneTimer: Timer?
     var end_scene_delay = 0
     
-    
     var levelTimerLabel = SKLabelNode(fontNamed: "Baloo2-Bold")
     
     private let motionManager = CMMotionManager()
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
+        view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
         
@@ -85,7 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // boat node attributes
         boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
-        boat.size = CGSize(width: 100, height: 120)
+        boat.size = CGSize(width: 70, height: 120)
         boat.removeFromParent()
         self.addChild(boat)
         
@@ -180,32 +179,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obstacleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireObstacleTimer), userInfo: nil, repeats: true)
     }
     
-    func renderLevelEnd(){
-        //instantiate beach
-        beach.size = CGSize(width: frame.width, height: 200)
-        beach.zPosition = -1
-        self.addChild(beach)
-        
-        //beach movement
-        let beachPath = UIBezierPath()
-        beachPath.move(to: CGPoint(x: frame.midX, y: frame.maxY + 20))
-        beachPath.addLine(to: CGPoint(x: frame.midX, y: frame.maxY - 70))
-        let beachMove = SKAction.follow(beachPath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(80))
-    
-        beach.run(beachMove)
-        
-        //prep end of level stuff
-        beach_is_rendered = true
-        starfield.isPaused = true
-       // UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
-        //UserDefaults.standard.setGameStatus(value: true)
-        
+    func renderObstacle(){
+//        renderWallPng()
+        renderBasicWall()
     }
     
-    func renderObstacle(){
-        renderMultiLevelWall()
-        //        renderBasicWall()
-        print("render")
+    func renderWallPng(){
+        let wall = SKSpriteNode(imageNamed: "rockwall")
+        wall.position = CGPoint(x: frame.midX, y: frame.midY)
+        wall.size = CGSize(width: 800, height: 100)
+        self.addChild(wall)
+        
+        wall.physicsBody = SKPhysicsBody(rectangleOf: wall.frame.size)
+        wall.physicsBody?.isDynamic = false
+        wall.physicsBody?.categoryBitMask = obstacleCategory
     }
     
     func renderBasicWall(){
@@ -397,10 +384,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //
     }
     
-    func didBegin(_ contact: SKPhysicsContact) {
-        //print(contact.bodyA)
-        //print(contact.bodyB)
-        //print(contact.contactPoint)
+    func renderLevelEnd(){
+        //instantiate beach
+        beach.size = CGSize(width: frame.width, height: 200)
+        beach.zPosition = -1
+        self.addChild(beach)
+        
+        //beach movement
+        let beachPath = UIBezierPath()
+        beachPath.move(to: CGPoint(x: frame.midX, y: frame.maxY + 20))
+        beachPath.addLine(to: CGPoint(x: frame.midX, y: frame.maxY - 70))
+        let beachMove = SKAction.follow(beachPath.cgPath, asOffset: true, orientToPath: false, speed: CGFloat(80))
+    
+        beach.run(beachMove)
+        
+        //prep end of level stuff
+        beach_is_rendered = true
+        starfield.isPaused = true
     }
     
     @objc func fireEndSceneTimer(){
