@@ -22,7 +22,8 @@ struct TapToPlayView: View {
     
 
     var scene: SKScene {
-        let scene = StartingWhirlpoolGameScene()
+        let scene = MapGameScene() 
+        /* let scene = StartingWhirlpoolGameScene() */
         scene.scaleMode = .resizeFill
         return scene
     }
