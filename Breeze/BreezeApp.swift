@@ -52,31 +52,35 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) ->
         Bool {
             
-        FirebaseApp.configure()
         // set this class as the notification delegate
         userNotificationCenter.delegate = self
+        FirebaseApp.configure()
                     
         //request authorization to use notifications
         self.requestNotificationAuthorization()
             
-        if #available(iOS 10.0, *) {
+            
           // For iOS 10 display notification (sent via APNS)
-          UNUserNotificationCenter.current().delegate = self
-
-          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-          UNUserNotificationCenter.current().requestAuthorization(
+        UNUserNotificationCenter.current().delegate = self
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
             completionHandler: { _, _ in }
-          )
-        } else {
-          let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-          application.registerUserNotificationSettings(settings)
-        }
+        )
             
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        UIApplication.shared.registerForRemoteNotifications()
+            
+        print("1")
+        
+        application.applicationIconBadgeNumber = 0
         application.registerForRemoteNotifications()
+        
+        UIApplication.shared.registerForRemoteNotifications()
+        
+        print("2")
+            
+            print(UIApplication.shared.isRegisteredForRemoteNotifications)
+            
         Messaging.messaging().delegate = self
 
         
@@ -94,9 +98,21 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-      let token = deviceToken.reduce("") { $0 + String(format: "%02.2hhx", $1) }
-      print("registered for notifications", token)
+        print("called")
+      let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+      let token = tokenParts.joined()
+        Messaging.messaging().apnsToken = deviceToken;
+
+      print("Device Token: \(token)")
     }
+    
+    func application(
+      _ application: UIApplication,
+      didFailToRegisterForRemoteNotificationsWithError error: Error
+    ) {
+      print("Failed to register: \(error)")
+    }
+
 
     
     func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],
