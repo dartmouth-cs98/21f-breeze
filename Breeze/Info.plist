@@ -4,7 +4,7 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.breeze.CheckPhoneUsage</string>
+		<string>edu.dartmouth.breeze.CheckPhoneUsage</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

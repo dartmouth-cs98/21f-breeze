@@ -11,6 +11,7 @@ import FamilyControls
 import BackgroundTasks
 import Firebase
 import UIKit
+import Foundation
 
 @available(iOS 15.0, *)
 
@@ -59,8 +60,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         //request authorization to use notifications
         self.requestNotificationAuthorization()
             
-            
-          // For iOS 10 display notification (sent via APNS)
+        // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -68,22 +68,24 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             options: authOptions,
             completionHandler: { _, _ in }
         )
-            
-            
-        print("1")
         
         application.applicationIconBadgeNumber = 0
         application.registerForRemoteNotifications()
-        
         UIApplication.shared.registerForRemoteNotifications()
-        
-        print("2")
-            
-            print(UIApplication.shared.isRegisteredForRemoteNotifications)
+
+        if (UIApplication.shared.isRegisteredForRemoteNotifications) {
+            print("This application on this device is registered for remote notifications")
+        } else {
+            print("This application on this device is NOT registered for remote notifications")
+        }
             
         Messaging.messaging().delegate = self
-
+            
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "edu.dartmouth.breeze.CheckPhoneUsage", using: nil) { task in
+            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+        }
         
+        // TODO: Remove Family Controls
         // Will fail with an error code of 2 on simulator since not signed into iCloud w/child's account
         AuthorizationCenter.shared.requestAuthorization { result in
                     // The request can either result in success or failure
@@ -112,8 +114,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     ) {
       print("Failed to register: \(error)")
     }
-
-
     
     func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -152,7 +152,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("In")
         print(userInfo)
         completionHandler([])
-      }
+    }
 
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -160,8 +160,49 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print(userInfo)
         print("In")
         completionHandler()
-
     }
+    
+    func scheduleAppRefresh() {
+       let request = BGAppRefreshTaskRequest(identifier: "edu.dartmouth.breeze.CheckPhoneUsage")
+       // Fetch no earlier than 15 minutes from now.
+       request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
+        
+            
+       do {
+          try BGTaskScheduler.shared.submit(request)
+       } catch {
+          print("Could not schedule app refresh: \(error)")
+       }
+    }
+    
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        
+        let checkPhoneUsageOperation = BlockOperation {
+            self.checkPhoneUsage()
+        }
+        
+        // Provide the background task with an expiration handler that cancels the operation.
+        task.expirationHandler = {
+            // After all operations are cancelled, the completion block below is called to set the task to complete.
+            queue.cancelAllOperations()
+        }
+
+       // Inform the system that the background task is complete
+       // when the operation completes.
+        checkPhoneUsageOperation.completionBlock = {
+            let success = true
+            if success {
+                print("Background task ran and finished")
+            }
+            task.setTaskCompleted(success: success)
+        }
+
+       // Start the operation.
+        queue.addOperation(checkPhoneUsageOperation)
+     }
     
     func requestNotificationAuthorization() {
         let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
