@@ -15,7 +15,6 @@ struct ContentView: View {
     
     @State var tapToPlayView = TapToPlayView()
     @State private var showModal = false
-    @EnvironmentObject var model: MyModel
     
     func viewDidLoad() {
         
@@ -33,6 +32,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(MyModel())
     }
 }
