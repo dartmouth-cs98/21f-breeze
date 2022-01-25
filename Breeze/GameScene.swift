@@ -42,16 +42,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let offscreen_buffer = 100
     
     //obstacle variables (feel free to change these)
+    var difficulty = 2
     var seconds_between_obstacle = 2
-    var num_obstacles = 3
+    var num_obstacles = 8
     var obstacle_speed = 150
+    var gap_size = 150
     
     //Don't touch these obstacle variables plz
+    var obstacles: Array<String> = []
     var obstacle_count = 0
+    var multilevel_obstacle_buffer = 2
     var seconds_elapsed = 0
     var obstacleTimer: Timer?
     var end_level_count = 0
     var beach_is_rendered = false
+        
     
     //end scene timer
     var endSceneTimer: Timer?
@@ -106,6 +111,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dock.physicsBody?.restitution = 0.5
         dock.physicsBody?.isDynamic = false
         
+        //set the difficulty
+        setDifficulty()
+        
+        //create obstacle array
+        obstacles = createObstacleArray()
+        
         //level timer
         levelTimerLabel.fontColor = SKColor.black
         levelTimerLabel.fontSize = 40
@@ -116,6 +127,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseScene()
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+    }
+    
+    func setDifficulty() {
+        print("set")
+        if difficulty == 1 {
+            seconds_between_obstacle = 2
+            obstacle_speed = 100
+            gap_size = 150
+        } else if difficulty == 2 {
+            seconds_between_obstacle = 2
+            obstacle_speed = 150
+            gap_size = 130
+        } else if difficulty == 3 {
+            seconds_between_obstacle = 1
+            obstacle_speed = 175
+            gap_size = 110
+        } else if difficulty == 4 {
+            seconds_between_obstacle = 1
+            obstacle_speed = 200
+            gap_size = 90
+        }
     }
     
     @objc func fireTimer() {
@@ -137,8 +169,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         //release obstacles at an interval while num_obstacles hasn't been reached
         if obstacle_count < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
-            obstacle_count += 1
-            renderObstacle()
+            let old_count = obstacle_count
+            obstacle_count = renderObstacle(count: old_count)
+            print(obstacle_count)
         }
         
         //instantiate end-of-level timer for beach
@@ -152,7 +185,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         seconds_elapsed += 1
     }
-    
 
     
     func updateTimerLabel(count: Int){
@@ -179,9 +211,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obstacleTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireObstacleTimer), userInfo: nil, repeats: true)
     }
     
-    func renderObstacle(){
-//        renderWallPng()
-        renderBasicWall()
+    func createObstacleArray() -> Array<String> {
+        let obstacles: [String] = ["basic", "multilevel"]
+        var obstacleArray: [String] = []
+        var obstacles_left = num_obstacles
+        while obstacles_left > 0 {
+            let selected = obstacles.randomElement()!
+            obstacleArray.append(selected)
+            obstacles_left -= 1
+            
+            if selected == "multilevel"{
+                obstacleArray.append("BLANK")
+                obstacleArray.append("BLANK")
+                num_obstacles += multilevel_obstacle_buffer
+            }
+        }
+        return obstacleArray
+    }
+    
+    func renderObstacle(count: Int) -> Int{
+        let curr = obstacles[count]
+        if curr == "basic"{
+            renderBasicWall()
+        } else if curr == "multilevel"{
+            renderMultiLevelWall()
+        }
+        return count + 1
     }
     
     func renderWallPng(){
@@ -197,7 +252,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func renderBasicWall(){
         //gap between walls
-        let gap_size = 150
         
         //height of walls
         let obstacle_height = 20
