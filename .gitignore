@@ -5,3 +5,5 @@ node_modules/
 .secret-*
 **.sample
 .DS_Store
+Breeze/.DS_Store
+
