@@ -11,6 +11,7 @@ import BackgroundTasks
 import Firebase
 import UIKit
 import Foundation
+import CoreLocation
 
 @available(iOS 15.0, *)
 
@@ -42,8 +43,9 @@ struct BreezeApp: App {
 }
 
 @available(iOS 15.0, *)
-class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate, CLLocationManagerDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let locationManager = CLLocationManager()
     let backgroundTaskID = "com.breeze.CheckPhoneUsage"
     let gcmMessageIDKey = "gcm.message_id"
 
@@ -56,6 +58,16 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                     
         //request authorization to use notifications
         self.requestNotificationAuthorization()
+            
+        // request authorization to track updates
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = 45
+        locationManager.distanceFilter = 100
+        locationManager.startMonitoringSignificantLocationChanges()
+        
+
             
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
@@ -267,5 +279,21 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             print("Protected data is not available")
             UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         }
+        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
     }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        checkPhoneUsage()
+    }
+    
+    func locationManager(_ manager: CLLocationManager,  didFailWithError error: Error) {
+        print(error.localizedDescription)
+        locationManager.stopMonitoringVisits()
+        return
+
+    }
+    
+    
 }
+

@@ -90,13 +90,13 @@ extension UserDefaults{
         set(value, forKey: UserDefaultsKeys.previousProtectedDataStatus.rawValue)
     }
     
-    func getMinutesElapsedFromLastTimeProtectedDataStatusChecked()-> Int {
+    func getSecondsElapsedFromLastTimeProtectedDataStatusChecked()-> Int {
         let calender = Calendar.current
         
         let date1 = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
         let date2 = Date()
-        let components = calender.dateComponents([.minute], from: date1, to: date2)
-        return components.minute ?? 0
+        let components = calender.dateComponents([.second], from: date1, to: date2)
+        return components.second ?? 0
     }
 
     func setLastTimeProtectedDataStatusChecked(){
@@ -108,19 +108,26 @@ extension UserDefaults{
     }
     
     func addIntervalToCurrentPhoneUsage() {
-        let minutesElapsed = getMinutesElapsedFromLastTimeProtectedDataStatusChecked()
+        let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
+        print("Seconds elapsed since last check: " + String(secondsElapsed))
         let currentPhoneUsage = getCurrentPhoneUsage()
-        set((currentPhoneUsage + minutesElapsed), forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+        set((currentPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
     }
     
     func resetCurrentPhoneUsage() {
         set(0, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+        print("reset")
+        print(getCurrentPhoneUsage())
     }
     
     func isAboveTimeLimit() -> Bool {
         let currentPhoneUsage = getCurrentPhoneUsage()
+        print("Current phone usage (in seconds): " + String(currentPhoneUsage))
+        print("Current phone usage (in seconds): " + String(currentPhoneUsage/60))
+        
         let timeLimit = getTime()
-        if (currentPhoneUsage >= timeLimit) {
+        print("Time limit: " + String(timeLimit))
+        if ((currentPhoneUsage/60) >= timeLimit && timeLimit > 0) {
             return true
         } else {
             return false

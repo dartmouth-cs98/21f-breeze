@@ -17,6 +17,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchScreen</key>
@@ -28,5 +29,9 @@
 		<key>UIImageRespectsSafeAreaInsets</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>XXXXX</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>XXXX</string>
 </dict>
 </plist>
