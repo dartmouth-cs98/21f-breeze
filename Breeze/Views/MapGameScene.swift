@@ -33,7 +33,7 @@ class MapGameScene: SKScene {
         
         // map reset if necessary (comment out until needed)
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-        //UserDefaults.standard.resetMap()
+        UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
@@ -111,7 +111,7 @@ class MapGameScene: SKScene {
         
         island5.size = CGSize(width: island_size, height: island_size)
         island5.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80)
-        island5.name = "isalnd5"
+        island5.name = "island5"
         island5.removeFromParent()
         addChild(island5)
         island5label = SKLabelNode(fontNamed: "Baloo 2")
