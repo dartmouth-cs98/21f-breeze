@@ -7,7 +7,6 @@
 
 import SwiftUI
 import UserNotifications
-import FamilyControls
 import BackgroundTasks
 import Firebase
 import UIKit
@@ -22,9 +21,7 @@ struct BreezeApp: App {
     @AppStorage("hasntExitedEndOfSetUpView") var hasntExitedEndOfSetUpView: Bool = true
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @State var appsToTrackHaveBeenSelected = false
-    @StateObject var model = MyModel.shared
-    
+
 
     var body: some Scene {
         
@@ -37,7 +34,7 @@ struct BreezeApp: App {
                   }
                 
               } else {
-                ContentView().environmentObject(model)
+                ContentView()
               }
         }
         
@@ -85,17 +82,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
         }
         
-        // TODO: Remove Family Controls
-        // Will fail with an error code of 2 on simulator since not signed into iCloud w/child's account
-        AuthorizationCenter.shared.requestAuthorization { result in
-                    // The request can either result in success or failure
-                    switch result {
-                    case .success():
-                        break
-                    case .failure(let error):
-                        print("Error for Family Controls: \(error)")
-                    }
-        }
         return true
     }
     
