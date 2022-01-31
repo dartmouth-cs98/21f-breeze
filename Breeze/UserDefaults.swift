@@ -134,6 +134,73 @@ extension UserDefaults{
         }
     }
     
+    func islandLevelUp(value: Int) {
+        if (value == 1) {
+            var currLevel: Int = integer(forKey: UserDefaultsKeys.island1.rawValue)
+            if currLevel < 5 {
+                currLevel += 1
+            }
+            set(currLevel, forKey: UserDefaultsKeys.island1.rawValue)
+        }
+        else if (value == 2) {
+            var currLevel: Int = integer(forKey: UserDefaultsKeys.island2.rawValue)
+            if currLevel < 5 {
+                currLevel += 1
+            }
+            set(currLevel, forKey: UserDefaultsKeys.island2.rawValue)
+        }
+        else if (value == 3) {
+            var currLevel: Int = integer(forKey: UserDefaultsKeys.island3.rawValue)
+            if currLevel < 5 {
+                currLevel += 1
+            }
+            set(currLevel, forKey: UserDefaultsKeys.island3.rawValue)
+        }
+        else if (value == 4) {
+            var currLevel: Int = integer(forKey: UserDefaultsKeys.island4.rawValue)
+            if currLevel < 5 {
+                currLevel += 1
+            }
+            set(currLevel, forKey: UserDefaultsKeys.island4.rawValue)
+        }
+        else if (value == 5) {
+            var currLevel: Int = integer(forKey: UserDefaultsKeys.island5.rawValue)
+            if currLevel < 5 {
+                currLevel += 1
+            }
+            set(currLevel, forKey: UserDefaultsKeys.island5.rawValue)
+        }
+    }
+    
+    func islandGetLevel(value: Int) -> Int {
+        if (value == 1) {
+            return integer(forKey: UserDefaultsKeys.island1.rawValue)
+        }
+        else if (value == 2) {
+            return integer(forKey: UserDefaultsKeys.island2.rawValue)
+        }
+        else if (value == 3) {
+            return integer(forKey: UserDefaultsKeys.island3.rawValue)
+        }
+        else if (value == 4) {
+            return integer(forKey: UserDefaultsKeys.island4.rawValue)
+        }
+        else if (value == 5) {
+            return integer(forKey: UserDefaultsKeys.island5.rawValue)
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func resetMap() {
+        set(1, forKey: UserDefaultsKeys.island1.rawValue)
+        set(1, forKey: UserDefaultsKeys.island2.rawValue)
+        set(1, forKey: UserDefaultsKeys.island3.rawValue)
+        set(1, forKey: UserDefaultsKeys.island4.rawValue)
+        set(1, forKey: UserDefaultsKeys.island5.rawValue)
+    }
+    
 }
 
 enum UserDefaultsKeys : String {
@@ -147,4 +214,10 @@ enum UserDefaultsKeys : String {
     case previousProtectedDataStatus
     case lastTimeProtectedDataStatusChecked
     case currentPhoneUsage
+    case island1
+    case island2
+    case island3
+    case island4
+    case island5
+    
 }
