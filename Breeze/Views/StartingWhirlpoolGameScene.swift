@@ -12,10 +12,10 @@ import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
 
-    let boat = SKSpriteNode(imageNamed: "boat")
-    var backgroundsm = SKSpriteNode(imageNamed: "whirlpool")
-    var backgroundmed = SKSpriteNode(imageNamed: "whirlpool")
-    var backgroundlrg = SKSpriteNode(imageNamed: "whirlpool")
+    let boat = SKSpriteNode(imageNamed: "boat2")
+    var backgroundsm = SKSpriteNode(imageNamed: "whirlpool2")
+    var backgroundmed = SKSpriteNode(imageNamed: "whirlpool2")
+    var backgroundlrg = SKSpriteNode(imageNamed: "whirlpool2")
     
     var timer: Timer?
     var secondsElapsed = 0
@@ -28,7 +28,7 @@ class StartingWhirlpoolGameScene: SKScene {
         motionManager.startAccelerometerUpdates()
         
         //background
-        self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
+        self.backgroundColor = UIColor(red: 142/255, green: 193/255, blue: 255/255, alpha: 1)
 
         backgroundlrg.size = CGSize(width: 700, height: 700)
         backgroundlrg.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
@@ -69,7 +69,7 @@ class StartingWhirlpoolGameScene: SKScene {
         
         // boat node
         boat.position = CGPoint(x: frame.size.width / 2, y: 60)
-        boat.size = CGSize(width: 70, height: 90)
+        boat.size = CGSize(width: 70 * 0.5, height: 120 * 0.5)
         boat.removeFromParent()
         self.addChild(boat)
         
