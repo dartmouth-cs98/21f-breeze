@@ -44,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //obstacle variables (feel free to change these)
     var difficulty = 2
     var seconds_between_obstacle = 2
-    var num_obstacles = 8
+    var num_obstacles = 10
     var obstacle_speed = 150
     var gap_size = 150
     
@@ -127,6 +127,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseScene()
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        
+//        let texture = SKTexture(imageNamed: "berg1")
+//        let renderedTexture = view.texture(from: SKSpriteNode(texture: texture))!
+//        addBerg(renderedTexture)
     }
     
     func setDifficulty() {
@@ -212,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createObstacleArray() -> Array<String> {
-        let obstacles: [String] = ["basic", "multilevel"]
+        let obstacles: [String] = ["basic", "multilevel", "berg"]
         var obstacleArray: [String] = []
         var obstacles_left = num_obstacles
         while obstacles_left > 0 {
@@ -235,8 +239,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             renderBasicWall()
         } else if curr == "multilevel"{
             renderMultiLevelWall()
+        } else if curr == "berg" {
+            renderBerg()
         }
         return count + 1
+    }
+
+    
+    func renderBerg(){
+        let berg = SKSpriteNode(imageNamed: "berg1")
+        berg.size = CGSize(width: 200, height: 200)
+
+        berg.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 100))
+
+        berg.physicsBody?.categoryBitMask = obstacleCategory
+        berg.physicsBody?.isDynamic = false
+        berg.physicsBody?.contactTestBitMask = boatObstacleInteraction
+
+        //pick berg path
+        let side = Bool.random()
+        let left_point = Int.random(in: left_edge - 50..<left_edge + 50)
+        let right_point = Int.random(in: right_edge - 50..<right_edge + 50)
+        
+        //swap if other side
+        var start_point = left_point
+        var end_point = right_point
+        if  !(side) {
+            start_point = right_point
+            end_point = left_point
+        }
+
+        let path_buffer = 100
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: start_point, y: top_edge + path_buffer * 2))
+        path.addLine(to: CGPoint(x: end_point, y: bottom_edge - path_buffer * 2))
+        let move = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
+    
+        self.addChild(berg)
+        berg.run(move)
     }
     
     func renderWallPng(){
