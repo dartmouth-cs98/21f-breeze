@@ -13,16 +13,7 @@ import SwiftUI
 class MapGameScene: SKScene {
     var mapTrail = SKSpriteNode(imageNamed: "map dots.png")
 
-    // all this data restarts when app is closed -- how to store? (user defaults)
-    // maybe change back to SKSpriteNode once all of these values are determined via user defaults
     var island_size = CGFloat(125)
-    /*
-    var island1 = Island(iNamed: "sandisland", islandName: "island1")
-    var island2 = Island(iNamed: "ice island", islandName: "island2")
-    var island3 = Island(iNamed: "sun island", islandName: "island3")
-    var island4 = Island(iNamed: "city island", islandName: "island4")
-    var island5 = Island(iNamed: "lighthouse island", islandName: "island5")
-     */
     var island1 = SKSpriteNode(imageNamed: "sandisland")
     var island2 = SKSpriteNode(imageNamed: "ice island")
     var island3 = SKSpriteNode(imageNamed: "sun island")
