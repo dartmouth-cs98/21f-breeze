@@ -11,15 +11,24 @@ import GameplayKit
 import SwiftUI
 
 class MapGameScene: SKScene {
+    var mapTrail = SKSpriteNode(imageNamed: "map dots.png")
 
     // all this data restarts when app is closed -- how to store? (user defaults)
+    // maybe change back to SKSpriteNode once all of these values are determined via user defaults
     var island_size = CGFloat(125)
-    var island1 = Island(iNamed: "_island", islandName: "island1")
-    var island2 = Island(iNamed: "_berg", islandName: "island2")
-    var island3 = Island(iNamed: "_sunset", islandName: "island3")
-    var island4 = Island(iNamed: "_city", islandName: "island4")
-    var island5 = Island(iNamed: "_lighthouse", islandName: "island5")
-    
+    /*
+    var island1 = Island(iNamed: "sandisland", islandName: "island1")
+    var island2 = Island(iNamed: "ice island", islandName: "island2")
+    var island3 = Island(iNamed: "sun island", islandName: "island3")
+    var island4 = Island(iNamed: "city island", islandName: "island4")
+    var island5 = Island(iNamed: "lighthouse island", islandName: "island5")
+     */
+    var island1 = SKSpriteNode(imageNamed: "sandisland")
+    var island2 = SKSpriteNode(imageNamed: "ice island")
+    var island3 = SKSpriteNode(imageNamed: "sun island")
+    var island4 = SKSpriteNode(imageNamed: "city island")
+    var island5 = SKSpriteNode(imageNamed: "lighthouse island")
+
     var island1label = SKLabelNode()
     var island2label = SKLabelNode()
     var island3label = SKLabelNode()
@@ -31,96 +40,100 @@ class MapGameScene: SKScene {
 
     override func didMove(to view: SKView) {
         
+        // map reset if necessary (comment out until needed)
+        // sets all islands back to lvl 1 (thus "locking" islands 2-5)
+        //UserDefaults.standard.resetMap()
+        
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
+        mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
+        mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        addChild(mapTrail)
 
         island1.size = CGSize(width: island_size, height: island_size)
         island1.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20)
-        island1.name = island1.islandName
+        island1.name = "island1"
         island1.removeFromParent()
         addChild(island1)
         island1label = SKLabelNode(fontNamed: "Baloo 2")
         // island1 always starts unlocked
-        island1.locked = false
-        if island1.locked == false {
-            island1label.text = "Level: " + String(island1.level) + "/5"
-        } else {
-            island1label.text = "Island Locked"
-            island1.color = .black
-            island1.colorBlendFactor = 1
-        }
+        island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
         island1label.fontSize = 10
         island1label.fontColor = SKColor.black
-        island1label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20 + island_size*0.6)
+        island1label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20 - island_size*0.5)
         addChild(island1label)
 
         
         island2.size = CGSize(width: island_size, height: island_size)
         island2.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.35)
-        island2.name = island2.islandName
+        island2.name = "island2"
         island2.removeFromParent()
         addChild(island2)
         island2label = SKLabelNode(fontNamed: "Baloo 2")
-        if island2.locked == false {
-            island2label.text = "Level: " + String(island2.level) + "/5"
+        if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
+            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+            island2.alpha = 1
         } else {
             island2label.text = "Island Locked"
             island2.alpha = 0.4
         }
         island2label.fontSize = 10
         island2label.fontColor = SKColor.black
-        island2label.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.35 + island_size*0.6)
+        island2label.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.35 - island_size*0.5)
         addChild(island2label)
         
         island3.size = CGSize(width: island_size, height: island_size)
         island3.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.50)
-        island3.name = island3.islandName
+        island3.name = "island3"
         island3.removeFromParent()
         addChild(island3)
         island3label = SKLabelNode(fontNamed: "Baloo 2")
-        if island3.locked == false {
-            island3label.text = "Level: " + String(island3.level) + "/5"
+        if UserDefaults.standard.islandGetLevel(value: 2) >= 5 {
+            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
+            island3.alpha = 1
         } else {
             island3label.text = "Island Locked"
             island3.alpha = 0.4
         }
         island3label.fontSize = 10
         island3label.fontColor = SKColor.black
-        island3label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.50 + island_size*0.6)
+        island3label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.50 - island_size*0.5)
         addChild(island3label)
         
         island4.size = CGSize(width: island_size, height: island_size)
         island4.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.65)
-        island4.name = island4.islandName
+        island4.name = "island4"
         island4.removeFromParent()
         addChild(island4)
         island4label = SKLabelNode(fontNamed: "Baloo 2")
-        if island4.locked == false {
-            island4label.text = "Level: " + String(island4.level) + "/5"
+        if UserDefaults.standard.islandGetLevel(value: 3) >= 5 {
+            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
+            island4.alpha = 1
         } else {
             island4label.text = "Island Locked"
             island4.alpha = 0.4
         }
         island4label.fontSize = 10
         island4label.fontColor = SKColor.black
-        island4label.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.65 + island_size*0.6)
+        island4label.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.65 - island_size*0.5)
         addChild(island4label)
         
         island5.size = CGSize(width: island_size, height: island_size)
         island5.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80)
-        island5.name = island5.islandName
+        island5.name = "isalnd5"
         island5.removeFromParent()
         addChild(island5)
         island5label = SKLabelNode(fontNamed: "Baloo 2")
-        if island5.locked == false {
-            island5label.text = "Level: " + String(island5.level) + "/5"
+        if UserDefaults.standard.islandGetLevel(value: 4) >= 5 {
+            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
+            island5.alpha = 1
         } else {
             island5label.text = "Island Locked"
             island5.alpha = 0.4
         }
         island5label.fontSize = 10
         island5label.fontColor = SKColor.black
-        island5label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80 + island_size*0.6)
+        island5label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80 - island_size*0.5)
         addChild(island5label)
         
         boat.position = CGPoint(x: frame.size.width * 0.2 + 30, y: frame.minY + 30)
@@ -134,11 +147,11 @@ class MapGameScene: SKScene {
         
         let instructions1 = SKLabelNode(fontNamed: "Baloo 2")
         instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
-        instructions1.fontSize = 20
+        instructions1.fontSize = 15
         instructions1.fontColor = SKColor.black
-        instructions1.position = CGPoint(x: frame.size.width * 0.30, y: frame.size.height * 0.75)
+        instructions1.position = CGPoint(x: frame.size.width * 0.30, y: frame.size.height * 0.80)
         instructions1.lineBreakMode = NSLineBreakMode.byWordWrapping
-        instructions1.numberOfLines = 5
+        instructions1.numberOfLines = 4
         instructions1.preferredMaxLayoutWidth = frame.size.width * 0.5
         addChild(instructions1)
     
@@ -152,89 +165,78 @@ class MapGameScene: SKScene {
                 for node in touchedNode {
                     if node.name == "island1" {
                         // no locked check because island1 always starts unlocked
-                        island1.level+=1
-                        if island1.level >= 5 {
+                        UserDefaults.standard.islandLevelUp(value: 1)
+                        if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
                             // what happens here? user can still play the island?
                             // randomized new levels?
-                            island2.locked = false
                             island1label.text = "Level: 5/5"
-                            island2label.text = "Level: " + String(island2.level) + "/5"
+                            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
                             island2.alpha = 1
                             break
                         }
-                        island1label.text = "Level: " + String(island1.level) + "/5"
+                        island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                     }
                     
                     if node.name == "island2" {
-                        if island2.locked == true {
+                        if UserDefaults.standard.islandGetLevel(value: 1) < 5 {
                             shakeSprite(layer: island2, duration: 0.5)
-                            print("island locked")
                             break
                         }
-                        island2.level+=1
-                        if island2.level >= 5 {
-                            // what happens here? user can still play the island?
-                            // randomized new levels?
-                            island3.locked = false
+                        UserDefaults.standard.islandLevelUp(value: 2)
+                        if UserDefaults.standard.islandGetLevel(value: 2) >= 5 {
                             island2label.text = "Level: 5/5"
-                            island3label.text = "Level: " + String(island3.level) + "/5"
+                            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
                             island3.alpha = 1
                             break
                         }
-                        island2label.text = "Level: " + String(island2.level) + "/5"
+                        island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
                     }
                     
                     if node.name == "island3" {
-                        if island3.locked == true {
+                        if UserDefaults.standard.islandGetLevel(value: 2) < 5 {
                             shakeSprite(layer: island3, duration: 0.5)
-                            print("island locked")
                             break
                         }
-                        island3.level+=1
-                        if island3.level >= 5 {
-                            island4.locked = false
+                        UserDefaults.standard.islandLevelUp(value: 3)
+                        if UserDefaults.standard.islandGetLevel(value: 3) >= 5 {
                             island3label.text = "Level: 5/5"
-                            island4label.text = "Level: " + String(island4.level) + "/5"
+                            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
                             island4.alpha = 1
                             break
                         }
-                        island3label.text = "Level: " + String(island3.level) + "/5"
+                        island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
 
                     }
                     
                     if node.name == "island4" {
-                        if island4.locked == true {
+                        if UserDefaults.standard.islandGetLevel(value: 3) < 5 {
                             shakeSprite(layer: island4, duration: 0.5)
-                            print("island locked")
                             break
                         }
-                        island4.level+=1
-                        if island4.level >= 5 {
-                            island5.locked = false
+                        UserDefaults.standard.islandLevelUp(value: 4)
+                        if  UserDefaults.standard.islandGetLevel(value: 4) >= 5 {
                             island4label.text = "Level: 5/5"
-                            island5label.text = "Level: " + String(island5.level) + "/5"
+                            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
                             island5.alpha = 1
                             break
                         }
-                        island4label.text = "Level: " + String(island4.level) + "/5"
+                        island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
                     }
                     
                     if node.name == "island5" {
-                        if island5.locked == true {
+                        if UserDefaults.standard.islandGetLevel(value: 4) < 5 {
                             shakeSprite(layer: island5, duration: 0.5)
-                            print("island locked")
                             break
                         }
-                        island5.level+=1
-                        if island5.level >= 5 {
+                        UserDefaults.standard.islandLevelUp(value: 5)
+                        if UserDefaults.standard.islandGetLevel(value: 5) >= 5 {
                             // commented out bc currerntly nothing to unlock after island5
-                            //island5.locked = false
                             //island5label.text = "Level: " + String(island5.level) + "/5"
                             //island5.alpha = 1
                             island5label.text = "Level: 5/5"
                             break
                         }
-                        island5label.text = "Level: " + String(island5.level) + "/5"
+                        island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
                     }
                 }
             }

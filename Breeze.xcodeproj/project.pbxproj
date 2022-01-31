@@ -54,6 +54,7 @@
 		A8C3C77D279717F20027D8F9 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3C77C279717F20027D8F9 /* InstructionsView.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 		FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167D273B69710022F820 /* TimeSelectionView.swift */; };
+		FFA2155927A46D1A00DE9889 /* MapGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA2155827A46D1A00DE9889 /* MapGameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		A8C3C77C279717F20027D8F9 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FF28167D273B69710022F820 /* TimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionView.swift; sourceTree = "<group>"; };
+		FFA2155827A46D1A00DE9889 /* MapGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +283,7 @@
 		FF04E03727307FA800E2D9D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FFA2155827A46D1A00DE9889 /* MapGameScene.swift */,
 				461E9E1F2717725E00E6C510 /* ContentView.swift */,
 				4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */,
 				4627C8242734C930005173E3 /* MySchedule.swift */,
@@ -484,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */,
+				FFA2155927A46D1A00DE9889 /* MapGameScene.swift in Sources */,
 				A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */,
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
 				FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */,
