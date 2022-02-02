@@ -29,6 +29,8 @@ class MapGameScene: SKScene {
     var boat = SKSpriteNode(imageNamed: "boat2")
     var dock = SKSpriteNode(imageNamed: "dock2")
 
+    let boat_speed = 100
+    
     override func didMove(to view: SKView) {
         
         // map reset if necessary (comment out until needed)
@@ -48,7 +50,10 @@ class MapGameScene: SKScene {
         addChild(island1)
         island1label = SKLabelNode(fontNamed: "Baloo 2")
         // island1 always starts unlocked
-        island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+        island1label.text = "Island Open"
+        if UserDefaults.standard.islandGetLevel(value: 1) > 1 {
+            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+        }
         island1label.fontSize = 10
         island1label.fontColor = SKColor.black
         island1label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20 - island_size*0.5)
@@ -157,81 +162,130 @@ class MapGameScene: SKScene {
                     if node.name == "island1" {
                         // no locked check because island1 always starts unlocked
                         UserDefaults.standard.islandLevelUp(value: 1)
-                        if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
+                        if UserDefaults.standard.islandGetLevel(value: 1) == 1 {
+                            //move boat
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+                            moveSprite(pointA: dock.position, pointB: island1.position)
+                        }
+                        else if UserDefaults.standard.islandGetLevel(value: 1) == 5 {
                             // what happens here? user can still play the island?
                             // randomized new levels?
                             island1label.text = "Level: 5/5"
-                            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
-                            island2.alpha = 1
-                            break
+                            if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
+                                island2label.text = "Island Open"
+                                island2.alpha = 1
+                            }
+                        } else {
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                         }
-                        island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                     }
                     
                     if node.name == "island2" {
                         if UserDefaults.standard.islandGetLevel(value: 1) < 5 {
                             shakeSprite(layer: island2, duration: 0.5)
-                            break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 2)
-                        if UserDefaults.standard.islandGetLevel(value: 2) >= 5 {
-                            island2label.text = "Level: 5/5"
-                            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
-                            island3.alpha = 1
-                            break
+                        else {
+                            UserDefaults.standard.islandLevelUp(value: 2)
+                             if UserDefaults.standard.islandGetLevel(value: 2) == 1 {
+                            //move boat
+                            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+                            moveSprite(pointA: island1.position, pointB: island2.position)
+                             }
+                            else if  UserDefaults.standard.islandGetLevel(value: 2) == 5 {
+                                    island2label.text = "Level: 5/5"
+                                    if UserDefaults.standard.islandGetLevel(value: 3) == 0 {
+                                        island3label.text = "Island Open"
+                                        island3.alpha = 1
+                                    }
+                                    break
+                                }
+                            else{
+                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+                            }
                         }
-                        island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
                     }
                     
                     if node.name == "island3" {
                         if UserDefaults.standard.islandGetLevel(value: 2) < 5 {
                             shakeSprite(layer: island3, duration: 0.5)
-                            break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 3)
-                        if UserDefaults.standard.islandGetLevel(value: 3) >= 5 {
-                            island3label.text = "Level: 5/5"
-                            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
-                            island4.alpha = 1
-                            break
+                        else {
+                            UserDefaults.standard.islandLevelUp(value: 3)
+                             if UserDefaults.standard.islandGetLevel(value: 3) == 1 {
+                            //move boat
+                            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
+                            moveSprite(pointA: island2.position, pointB: island3.position)
+                             }
+                            else if  UserDefaults.standard.islandGetLevel(value: 3) == 5 {
+                                    island3label.text = "Level: 5/5"
+                                    if UserDefaults.standard.islandGetLevel(value: 4) == 0 {
+                                        island4label.text = "Island Open"
+                                        island4.alpha = 1
+                                    }
+                                    break
+                                }
+                            else{
+                                island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
+                            }
                         }
-                        island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
-
                     }
                     
                     if node.name == "island4" {
                         if UserDefaults.standard.islandGetLevel(value: 3) < 5 {
                             shakeSprite(layer: island4, duration: 0.5)
-                            break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 4)
-                        if  UserDefaults.standard.islandGetLevel(value: 4) >= 5 {
-                            island4label.text = "Level: 5/5"
-                            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
-                            island5.alpha = 1
-                            break
+                        else {
+                            UserDefaults.standard.islandLevelUp(value: 4)
+                             if UserDefaults.standard.islandGetLevel(value: 4) == 1 {
+                            //move boat
+                            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
+                            moveSprite(pointA: island3.position, pointB: island4.position)
+                             }
+                            else if  UserDefaults.standard.islandGetLevel(value: 4) == 5 {
+                                    island4label.text = "Level: 5/5"
+                                    if UserDefaults.standard.islandGetLevel(value: 5) == 0 {
+                                        island5label.text = "Island Open"
+                                        island5.alpha = 1
+                                    }
+                                    break
+                                }
+                            else{
+                                island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
+                            }
                         }
-                        island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
                     }
                     
                     if node.name == "island5" {
                         if UserDefaults.standard.islandGetLevel(value: 4) < 5 {
                             shakeSprite(layer: island5, duration: 0.5)
-                            break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 5)
-                        if UserDefaults.standard.islandGetLevel(value: 5) >= 5 {
-                            // commented out bc currerntly nothing to unlock after island5
-                            //island5label.text = "Level: " + String(island5.level) + "/5"
-                            //island5.alpha = 1
-                            island5label.text = "Level: 5/5"
-                            break
+                        else {
+                            UserDefaults.standard.islandLevelUp(value: 5)
+                            if UserDefaults.standard.islandGetLevel(value: 5) == 1 {
+                            //move boat
+                            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
+                            moveSprite(pointA: island4.position, pointB: island5.position)
+                             }
+                            else if  UserDefaults.standard.islandGetLevel(value: 5) == 5 {
+                                    island5label.text = "Level: 5/5"
+                                }
+                            else {
+                                island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
+                            }
                         }
-                        island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
                     }
                 }
             }
         }
+    
+    func moveSprite(pointA: CGPoint, pointB: CGPoint){
+        print("in sprite movement")
+        let path = UIBezierPath()
+        path.move(to: pointA)
+        path.addLine(to: pointB)
+        let move = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(boat_speed))
+        boat.run(move)
+    }
     
     // shake function by Ged2323 https://gist.github.com/mihailt/d793236f31f0b8f8722e
     func shakeSprite(layer:SKSpriteNode, duration:Float) {
