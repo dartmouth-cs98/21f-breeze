@@ -27,7 +27,7 @@ class MapGameScene: SKScene {
     var island5label = SKLabelNode()
     
     var boat = SKSpriteNode(imageNamed: "boat2")
-    var dock = SKSpriteNode(imageNamed: "dock2")
+    var mapDock = SKSpriteNode(imageNamed: "dock2")
 
     let boat_speed = 100
     
@@ -35,12 +35,13 @@ class MapGameScene: SKScene {
         
         // map reset if necessary (comment out until needed)
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-        UserDefaults.standard.resetMap()
+        // UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
         mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        mapTrail.removeFromParent()
         addChild(mapTrail)
 
         island1.size = CGSize(width: island_size, height: island_size)
@@ -137,9 +138,10 @@ class MapGameScene: SKScene {
         boat.removeFromParent()
         self.addChild(boat)
         
-        dock.position = CGPoint(x: frame.size.width * 0.2 , y: frame.minY)
-        dock.size = CGSize(width: 100 * 0.5, height: 300 * 0.5)
-        self.addChild(dock)
+        mapDock.position = CGPoint(x: frame.size.width * 0.2 , y: frame.minY)
+        mapDock.size = CGSize(width: 100 * 0.5, height: 300 * 0.5)
+        mapDock.removeFromParent()
+        self.addChild(mapDock)
         
         let instructions1 = SKLabelNode(fontNamed: "Baloo 2")
         instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
@@ -160,7 +162,6 @@ class MapGameScene: SKScene {
                 let touchedNode = self.nodes(at: location)
                 for node in touchedNode {
                     if node.name == "island1" {
-                        // no locked check because island1 always starts unlocked
                         UserDefaults.standard.islandLevelUp(value: 1)
                         if UserDefaults.standard.islandGetLevel(value: 1) == 1 {
                             //move boat
@@ -168,8 +169,6 @@ class MapGameScene: SKScene {
                             moveSprite(pointA: dock.position, pointB: island1.position)
                         }
                         else if UserDefaults.standard.islandGetLevel(value: 1) == 5 {
-                            // what happens here? user can still play the island?
-                            // randomized new levels?
                             island1label.text = "Level: 5/5"
                             if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
                                 island2label.text = "Island Open"
@@ -178,6 +177,8 @@ class MapGameScene: SKScene {
                         } else {
                             island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                         }
+                        UserDefaults.standard.setCurrentIsland(value: 1)
+                        startGame()
                     }
                     
                     if node.name == "island2" {
@@ -186,11 +187,11 @@ class MapGameScene: SKScene {
                         }
                         else {
                             UserDefaults.standard.islandLevelUp(value: 2)
-                             if UserDefaults.standard.islandGetLevel(value: 2) == 1 {
-                            //move boat
-                            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
-                            moveSprite(pointA: island1.position, pointB: island2.position)
-                             }
+                            if UserDefaults.standard.islandGetLevel(value: 2) == 1 {
+                                //move boat
+                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+                                moveSprite(pointA: island1.position, pointB: island2.position)
+                            }
                             else if  UserDefaults.standard.islandGetLevel(value: 2) == 5 {
                                     island2label.text = "Level: 5/5"
                                     if UserDefaults.standard.islandGetLevel(value: 3) == 0 {
@@ -202,6 +203,8 @@ class MapGameScene: SKScene {
                             else{
                                 island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
                             }
+                            UserDefaults.standard.setCurrentIsland(value: 2)
+                            startGame()
                         }
                     }
                     
@@ -227,6 +230,8 @@ class MapGameScene: SKScene {
                             else{
                                 island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
                             }
+                            UserDefaults.standard.setCurrentIsland(value: 3)
+                            startGame()
                         }
                     }
                     
@@ -252,6 +257,8 @@ class MapGameScene: SKScene {
                             else{
                                 island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
                             }
+                            UserDefaults.standard.setCurrentIsland(value: 4)
+                            startGame()
                         }
                     }
                     
@@ -272,6 +279,8 @@ class MapGameScene: SKScene {
                             else {
                                 island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
                             }
+                            UserDefaults.standard.setCurrentIsland(value: 5)
+                            startGame()
                         }
                     }
                 }
@@ -311,11 +320,11 @@ class MapGameScene: SKScene {
             layer.run(actionSeq)
         }
     
-    func swap() {
-        let gameScene = GameScene(fileNamed: "GameScene")
+    func startGame() {
         let transition = SKTransition.fade(withDuration: 1.0)
-        gameScene?.scaleMode = .aspectFill
-        scene?.view?.presentScene(gameScene!, transition: transition)
+        let whirlpool = StartingWhirlpoolGameScene(size: self.size)
+        whirlpool.scaleMode = SKSceneScaleMode.aspectFill
+        self.view?.presentScene(whirlpool, transition:transition)
     }
     
 }

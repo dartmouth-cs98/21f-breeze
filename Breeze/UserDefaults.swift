@@ -107,6 +107,15 @@ extension UserDefaults{
         return integer(forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
     }
     
+    //
+    func setCurrentIsland(value: Int){
+        set(value, forKey: UserDefaultsKeys.currentIsland.rawValue)
+    }
+    
+    func getCurrentIsland() -> Int {
+        return integer(forKey: UserDefaultsKeys.currentIsland.rawValue)
+    }
+    //
     func addIntervalToCurrentPhoneUsage() {
         let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
         print("Seconds elapsed since last check: " + String(secondsElapsed))
@@ -219,5 +228,5 @@ enum UserDefaultsKeys : String {
     case island3
     case island4
     case island5
-    
+    case currentIsland
 }

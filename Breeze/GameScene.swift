@@ -68,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
+        
         view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
@@ -85,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // game scene physics
         
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        //]self.physicsBody?.categoryBitMask = backgroundCategory
+        //self.physicsBody?.categoryBitMask = backgroundCategory
         
         // boat node attributes
         boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
@@ -103,6 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //dock node attributes
         dock.position = CGPoint(x: frame.midX - 58, y: frame.minY)
         dock.size = CGSize(width: 100, height: 300)
+        dock.removeFromParent()
         self.addChild(dock)
                       
         //dock physics
@@ -507,11 +509,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func endScene(){
         UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        // only "level up" once user has finished the level
+        let island = UserDefaults.standard.getCurrentIsland()
+        UserDefaults.standard.islandLevelUp(value: island)
     }
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
-//        print(boat.position)
 
         if (y < frame.minY) {
             scene?.view?.isPaused = true
