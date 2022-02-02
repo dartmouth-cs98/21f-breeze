@@ -16,13 +16,13 @@ struct TimeSelectionView: View {
         ZStack {
            VStack {
                Text("Breeze will notify you every...")
-                   .font(Font.custom("Baloo2-Regular", size:20))
+                   .font(.body)
                    .multilineTextAlignment(.center)
                DurationPickerView(time: $startTime, changeTriggered: $timeSelected)
                // if user has touched the durationPicker twice (work around to apple's bug)
                if (timeSelected) {
                    Button("Confirm", action: selectTime)
-                       .font(Font.custom("Baloo2-Regular", size:20))
+                       .font(.body)
                        .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                        .foregroundColor(Color.black)
                        .cornerRadius(6)
@@ -31,7 +31,7 @@ struct TimeSelectionView: View {
                // otherwise, unclickable button
                else {
                    Button("Confirm", action: {})
-                       .font(Font.custom("Baloo2-Regular", size:20))
+                       .font(.body)
                        .background(Color.init(UIColor(red: 196/255, green: 196/255, blue: 196/255, alpha: 1)))
                        .foregroundColor(Color.black)
                        .cornerRadius(6)
