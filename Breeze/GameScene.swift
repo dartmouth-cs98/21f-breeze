@@ -8,8 +8,6 @@ import GameplayKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    var currentIsland = UserDefaults.standard.getCurrentIsland()
         
     //instantiate sprites
     var boat = SKSpriteNode(imageNamed: "boat2")
@@ -70,8 +68,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
-       
-        print(currentIsland)  // testing
         
         view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
@@ -90,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // game scene physics
         
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        //]self.physicsBody?.categoryBitMask = backgroundCategory
+        //self.physicsBody?.categoryBitMask = backgroundCategory
         
         // boat node attributes
         boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
