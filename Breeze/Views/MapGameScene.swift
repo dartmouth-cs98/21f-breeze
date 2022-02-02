@@ -160,17 +160,13 @@ class MapGameScene: SKScene {
                         // no locked check because island1 always starts unlocked
                         //UserDefaults.standard.islandLevelUp(value: 1)
                         if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
-                            // what happens here? user can still play the island?
-                            // randomized new levels?
                             island1label.text = "Level: 5/5"
+                            // this light might be problematic -- necesary to do evry time island1 level > 5 ?
                             island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
                             island2.alpha = 1
-                            break
+                        } else {
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                         }
-                        island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
-                        // need to brainstorm / discuss this functionality -- we want to be able to play a level
-                        // even if 5/5 levels played ?
-                        // maybe inverse the if statements
                         UserDefaults.standard.setCurrentIsland(value: 1)
                         startGame()
                     }
@@ -188,6 +184,8 @@ class MapGameScene: SKScene {
                             break
                         }
                         island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+                        UserDefaults.standard.setCurrentIsland(value: 1)
+                        startGame()
                     }
                     
                     if node.name == "island3" {
@@ -203,6 +201,8 @@ class MapGameScene: SKScene {
                             break
                         }
                         island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
+                        UserDefaults.standard.setCurrentIsland(value: 1)
+                        startGame()
 
                     }
                     
@@ -219,6 +219,8 @@ class MapGameScene: SKScene {
                             break
                         }
                         island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
+                        UserDefaults.standard.setCurrentIsland(value: 1)
+                        startGame()
                     }
                     
                     if node.name == "island5" {
@@ -235,6 +237,8 @@ class MapGameScene: SKScene {
                             break
                         }
                         island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
+                        UserDefaults.standard.setCurrentIsland(value: 1)
+                        startGame()
                     }
                 }
             }
