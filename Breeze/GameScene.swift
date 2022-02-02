@@ -8,6 +8,8 @@ import GameplayKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    var currentIsland = UserDefaults.standard.getCurrentIsland()
         
     //instantiate sprites
     var boat = SKSpriteNode(imageNamed: "boat2")
@@ -68,6 +70,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
+       
+        print(currentIsland)  // testing
+        
         view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
@@ -103,6 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //dock node attributes
         dock.position = CGPoint(x: frame.midX - 58, y: frame.minY)
         dock.size = CGSize(width: 100, height: 300)
+        dock.removeFromParent()
         self.addChild(dock)
                       
         //dock physics
@@ -507,6 +513,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func endScene(){
         UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        let island = UserDefaults.standard.getCurrentIsland()
+        UserDefaults.standard.islandLevelUp(value: island)
+        print("leveled up island number " + String(island))
     }
     
     override func update(_ currentTime: TimeInterval) {

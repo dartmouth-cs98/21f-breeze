@@ -39,6 +39,7 @@ class MapGameScene: SKScene {
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
         mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        mapTrail.removeFromParent()
         addChild(mapTrail)
 
         island1.size = CGSize(width: island_size, height: island_size)
@@ -134,6 +135,7 @@ class MapGameScene: SKScene {
         
         dock.position = CGPoint(x: frame.size.width * 0.2 , y: frame.minY)
         dock.size = CGSize(width: 100 * 0.5, height: 300 * 0.5)
+        dock.removeFromParent()
         self.addChild(dock)
         
         let instructions1 = SKLabelNode(fontNamed: "Baloo 2")
@@ -156,7 +158,7 @@ class MapGameScene: SKScene {
                 for node in touchedNode {
                     if node.name == "island1" {
                         // no locked check because island1 always starts unlocked
-                        UserDefaults.standard.islandLevelUp(value: 1)
+                        //UserDefaults.standard.islandLevelUp(value: 1)
                         if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
                             // what happens here? user can still play the island?
                             // randomized new levels?
@@ -166,6 +168,10 @@ class MapGameScene: SKScene {
                             break
                         }
                         island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+                        // need to brainstorm / discuss this functionality -- we want to be able to play a level
+                        // even if 5/5 levels played ?
+                        UserDefaults.standard.setCurrentIsland(value: 1)
+                        swap()
                     }
                     
                     if node.name == "island2" {
@@ -173,7 +179,7 @@ class MapGameScene: SKScene {
                             shakeSprite(layer: island2, duration: 0.5)
                             break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 2)
+                        //UserDefaults.standard.islandLevelUp(value: 2)
                         if UserDefaults.standard.islandGetLevel(value: 2) >= 5 {
                             island2label.text = "Level: 5/5"
                             island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
@@ -188,7 +194,7 @@ class MapGameScene: SKScene {
                             shakeSprite(layer: island3, duration: 0.5)
                             break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 3)
+                        //UserDefaults.standard.islandLevelUp(value: 3)
                         if UserDefaults.standard.islandGetLevel(value: 3) >= 5 {
                             island3label.text = "Level: 5/5"
                             island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
@@ -204,7 +210,7 @@ class MapGameScene: SKScene {
                             shakeSprite(layer: island4, duration: 0.5)
                             break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 4)
+                        //UserDefaults.standard.islandLevelUp(value: 4)
                         if  UserDefaults.standard.islandGetLevel(value: 4) >= 5 {
                             island4label.text = "Level: 5/5"
                             island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
@@ -219,7 +225,7 @@ class MapGameScene: SKScene {
                             shakeSprite(layer: island5, duration: 0.5)
                             break
                         }
-                        UserDefaults.standard.islandLevelUp(value: 5)
+                        //UserDefaults.standard.islandLevelUp(value: 5)
                         if UserDefaults.standard.islandGetLevel(value: 5) >= 5 {
                             // commented out bc currerntly nothing to unlock after island5
                             //island5label.text = "Level: " + String(island5.level) + "/5"
@@ -258,10 +264,10 @@ class MapGameScene: SKScene {
         }
     
     func swap() {
-        let gameScene = GameScene(fileNamed: "GameScene")
         let transition = SKTransition.fade(withDuration: 1.0)
-        gameScene?.scaleMode = .aspectFill
-        scene?.view?.presentScene(gameScene!, transition: transition)
+        let whirlpool = StartingWhirlpoolGameScene(size: self.size)
+        whirlpool.scaleMode = SKSceneScaleMode.aspectFill
+        self.view?.presentScene(whirlpool, transition:transition)
     }
     
 }
