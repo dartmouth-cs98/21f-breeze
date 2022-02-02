@@ -172,7 +172,7 @@ class MapGameScene: SKScene {
                         // even if 5/5 levels played ?
                         // maybe inverse the if statements
                         UserDefaults.standard.setCurrentIsland(value: 1)
-                        swap()
+                        startGame()
                     }
                     
                     if node.name == "island2" {
@@ -264,7 +264,7 @@ class MapGameScene: SKScene {
             layer.run(actionSeq)
         }
     
-    func swap() {
+    func startGame() {
         let transition = SKTransition.fade(withDuration: 1.0)
         let whirlpool = StartingWhirlpoolGameScene(size: self.size)
         whirlpool.scaleMode = SKSceneScaleMode.aspectFill
