@@ -11,6 +11,7 @@ import UIKit
 
 struct DurationPickerView: UIViewRepresentable {
     @Binding var time: Time
+    @Binding var changeTriggered: Bool;
 
     func makeCoordinator() -> DurationPickerView.Coordinator {
         Coordinator(self)
@@ -36,6 +37,7 @@ struct DurationPickerView: UIViewRepresentable {
         }
 
         @objc func onDateChanged(sender: UIDatePicker) {
+            durationPicker.changeTriggered = true;
             let calendar = Calendar.current
             let date = sender.date
             durationPicker.time = Time(hours: calendar.component(.hour, from: date), minutes: calendar.component(.minute, from: date), seconds: calendar.component(.second, from: date))
