@@ -513,14 +513,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func endScene(){
         UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        // only "level up" once user has finished the level
         let island = UserDefaults.standard.getCurrentIsland()
         UserDefaults.standard.islandLevelUp(value: island)
-        print("leveled up island number " + String(island))
     }
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
-//        print(boat.position)
 
         if (y < frame.minY) {
             scene?.view?.isPaused = true

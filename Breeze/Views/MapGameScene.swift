@@ -27,13 +27,13 @@ class MapGameScene: SKScene {
     var island5label = SKLabelNode()
     
     var boat = SKSpriteNode(imageNamed: "boat2")
-    var dock = SKSpriteNode(imageNamed: "dock2")
+    var mapDock = SKSpriteNode(imageNamed: "dock2")
 
     override func didMove(to view: SKView) {
         
         // map reset if necessary (comment out until needed)
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-        UserDefaults.standard.resetMap()
+        // UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
@@ -133,10 +133,10 @@ class MapGameScene: SKScene {
         boat.removeFromParent()
         self.addChild(boat)
         
-        dock.position = CGPoint(x: frame.size.width * 0.2 , y: frame.minY)
-        dock.size = CGSize(width: 100 * 0.5, height: 300 * 0.5)
-        dock.removeFromParent()
-        self.addChild(dock)
+        mapDock.position = CGPoint(x: frame.size.width * 0.2 , y: frame.minY)
+        mapDock.size = CGSize(width: 100 * 0.5, height: 300 * 0.5)
+        mapDock.removeFromParent()
+        self.addChild(mapDock)
         
         let instructions1 = SKLabelNode(fontNamed: "Baloo 2")
         instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
@@ -170,6 +170,7 @@ class MapGameScene: SKScene {
                         island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                         // need to brainstorm / discuss this functionality -- we want to be able to play a level
                         // even if 5/5 levels played ?
+                        // maybe inverse the if statements
                         UserDefaults.standard.setCurrentIsland(value: 1)
                         swap()
                     }
