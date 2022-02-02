@@ -203,11 +203,11 @@ extension UserDefaults{
     }
     
     func resetMap() {
-        set(1, forKey: UserDefaultsKeys.island1.rawValue)
-        set(1, forKey: UserDefaultsKeys.island2.rawValue)
-        set(1, forKey: UserDefaultsKeys.island3.rawValue)
-        set(1, forKey: UserDefaultsKeys.island4.rawValue)
-        set(1, forKey: UserDefaultsKeys.island5.rawValue)
+        set(0, forKey: UserDefaultsKeys.island1.rawValue)
+        set(0, forKey: UserDefaultsKeys.island2.rawValue)
+        set(0, forKey: UserDefaultsKeys.island3.rawValue)
+        set(0, forKey: UserDefaultsKeys.island4.rawValue)
+        set(0, forKey: UserDefaultsKeys.island5.rawValue)
     }
     
 }
