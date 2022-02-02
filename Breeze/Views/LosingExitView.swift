@@ -14,13 +14,14 @@ struct LosingExitView: View {
     
     var body: some View {
         ZStack {
+            Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack {
                 Text("Uh-oh! Looks like you misnavigated...")
-                    .font(Font.custom("Baloo2-Regular", size:20)).foregroundColor(Color.black)
+                    .font(.body)
                     .multilineTextAlignment(.center)
                     .padding()
                 Text("Want to try again?")
-                    .font(Font.custom("Baloo2-Regular", size:20)).foregroundColor(Color.black)
+                    .font(.body)
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Yes please!", action: {tryAgain()})

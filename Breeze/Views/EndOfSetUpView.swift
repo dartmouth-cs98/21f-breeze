@@ -8,15 +8,15 @@ struct EndOfSetUpView: View {
         ZStack {
             VStack (alignment: .center) {
                 Text("Thank you for configuring Breeze. We will notify you when you reach your time limit.")
-                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .font(.body)
                     .multilineTextAlignment(.center)
                     .padding()
                 Text("For now, feel free to close the app.")
-                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .font(.body)
                     .multilineTextAlignment(.center)
                     .padding()
                 Text("We can't wait to take a break with you soon!")
-                    .font(Font.custom("Baloo2-Regular", size:20))
+                    .font(.body)
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Exit Set Up", action: {UserDefaults.standard.set(false, forKey: "hasntExitedEndOfSetUpView")})
