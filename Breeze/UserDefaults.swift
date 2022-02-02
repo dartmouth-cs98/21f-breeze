@@ -208,6 +208,7 @@ extension UserDefaults{
         set(0, forKey: UserDefaultsKeys.island3.rawValue)
         set(0, forKey: UserDefaultsKeys.island4.rawValue)
         set(0, forKey: UserDefaultsKeys.island5.rawValue)
+        set(0, forKey: UserDefaultsKeys.currentIsland.rawValue)
     }
     
 }

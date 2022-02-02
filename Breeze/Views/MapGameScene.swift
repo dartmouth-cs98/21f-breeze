@@ -35,8 +35,7 @@ class MapGameScene: SKScene {
         
         // map reset if necessary (comment out until needed)
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-        // UserDefaults.standard.resetMap()
-        
+//        
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
@@ -67,7 +66,7 @@ class MapGameScene: SKScene {
         island2.removeFromParent()
         addChild(island2)
         island2label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
+        if UserDefaults.standard.islandGetLevel(value: 1) > 5 {
             island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
             island2.alpha = 1
         } else {
@@ -85,7 +84,7 @@ class MapGameScene: SKScene {
         island3.removeFromParent()
         addChild(island3)
         island3label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 2) >= 5 {
+        if UserDefaults.standard.islandGetLevel(value: 2) > 5 {
             island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
             island3.alpha = 1
         } else {
@@ -103,7 +102,7 @@ class MapGameScene: SKScene {
         island4.removeFromParent()
         addChild(island4)
         island4label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 3) >= 5 {
+        if UserDefaults.standard.islandGetLevel(value: 3) > 5 {
             island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
             island4.alpha = 1
         } else {
@@ -121,7 +120,7 @@ class MapGameScene: SKScene {
         island5.removeFromParent()
         addChild(island5)
         island5label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 4) >= 5 {
+        if UserDefaults.standard.islandGetLevel(value: 4) > 5 {
             island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
             island5.alpha = 1
         } else {
@@ -133,7 +132,10 @@ class MapGameScene: SKScene {
         island5label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80 - island_size*0.5)
         addChild(island5label)
         
-        boat.position = CGPoint(x: frame.size.width * 0.2 + 30, y: frame.minY + 30)
+        let islandPositions = [CGPoint(x: frame.size.width * 0.2 + 30,  y: frame.minY + 30), island1.position, island2.position, island3.position, island4.position, island5.position]
+        
+//        boat.position = CGPoint(x: frame.size.width * 0.2 + 30, y: frame.minY + 30)
+        boat.position = islandPositions[UserDefaults.standard.getCurrentIsland()]
         boat.size = CGSize(width: 70 * 0.5, height: 120 * 0.5)
         boat.removeFromParent()
         self.addChild(boat)
@@ -162,13 +164,14 @@ class MapGameScene: SKScene {
                 let touchedNode = self.nodes(at: location)
                 for node in touchedNode {
                     if node.name == "island1" {
-                        UserDefaults.standard.islandLevelUp(value: 1)
-                        if UserDefaults.standard.islandGetLevel(value: 1) == 1 {
+                        if UserDefaults.standard.islandGetLevel(value: 1) == 0 {
                             //move boat
+                            UserDefaults.standard.islandLevelUp(value: 1)
                             island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
-                            moveSprite(pointA: dock.position, pointB: island1.position)
+                            moveSprite(pointA: mapDock.position, pointB: island1.position)
+                            break
                         }
-                        else if UserDefaults.standard.islandGetLevel(value: 1) == 5 {
+                        else if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
                             island1label.text = "Level: 5/5"
                             if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
                                 island2label.text = "Island Open"
