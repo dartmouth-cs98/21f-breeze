@@ -12,6 +12,7 @@ import Firebase
 import UIKit
 import Foundation
 import CoreLocation
+import OSLog
 
 @available(iOS 15.0, *)
 
@@ -91,6 +92,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         Messaging.messaging().delegate = self
             
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "edu.dartmouth.breeze.CheckPhoneUsage", using: nil) { task in
+            task.setTaskCompleted(success: true)
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
         }
         
@@ -161,20 +163,25 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func scheduleAppRefresh() {
-       let request = BGAppRefreshTaskRequest(identifier: "edu.dartmouth.breeze.CheckPhoneUsage")
-       // Fetch no earlier than 15 minutes from now.
-       request.earliestBeginDate = Date(timeIntervalSinceNow: 15 * 60)
-        
-            
-       do {
-          try BGTaskScheduler.shared.submit(request)
-       } catch {
-          print("Could not schedule app refresh: \(error)")
-       }
+        let request = BGAppRefreshTaskRequest(identifier: "edu.dartmouth.breeze.CheckPhoneUsage")
+
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 0) // Refresh after 5 minutes.
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("Could not schedule app refresh task \(error.localizedDescription)")
+        }
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("App did enter background")
+        self.scheduleAppRefresh()
     }
     
     func handleAppRefresh(task: BGAppRefreshTask) {
         
+        print("Handling app refresh")
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         
