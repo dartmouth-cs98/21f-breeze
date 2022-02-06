@@ -14,6 +14,16 @@
       "filename" : "beach-2.png",
       "idiom" : "universal",
       "scale" : "3x"
+    },
+    {
+      "filename" : "sand beach (1).png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "sand beach (1)-1.png",
+      "idiom" : "ipad",
+      "scale" : "2x"
     }
   ],
   "info" : {
