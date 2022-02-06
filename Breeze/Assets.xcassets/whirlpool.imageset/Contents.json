@@ -14,6 +14,16 @@
       "filename" : "whirlpool-2.png",
       "idiom" : "universal",
       "scale" : "3x"
+    },
+    {
+      "filename" : "whirlpool-3.png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "whirlpool-4.png",
+      "idiom" : "ipad",
+      "scale" : "2x"
     }
   ],
   "info" : {
