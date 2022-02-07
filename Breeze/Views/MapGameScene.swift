@@ -31,9 +31,12 @@ class MapGameScene: SKScene {
 
     let boat_speed = 100
     
+    let num_levels = 2
+    
     override func didMove(to view: SKView) {
         
         // map reset if necessary (comment out until needed)
+//        UserDefaults.standard.resetMap()
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
         UserDefaults.standard.resetMap()
         
@@ -52,8 +55,10 @@ class MapGameScene: SKScene {
         island1label = SKLabelNode(fontNamed: "Baloo 2")
         // island1 always starts unlocked
         island1label.text = "Island Open"
-        if UserDefaults.standard.islandGetLevel(value: 1) > 1 {
-            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+        if (UserDefaults.standard.islandGetLevel(value: 1) >= 1 && UserDefaults.standard.islandGetLevel(value: 1) <= num_levels) {
+            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/ \(num_levels)"
+        } else if UserDefaults.standard.islandGetLevel(value: 1) > num_levels {
+            island1label.text = "Level: " + "\(num_levels) " + "/ \(num_levels)"
         }
         island1label.fontSize = 10
         island1label.fontColor = SKColor.black
@@ -67,12 +72,18 @@ class MapGameScene: SKScene {
         island2.removeFromParent()
         addChild(island2)
         island2label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 1) > 5 {
-            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+        island2label.text = "Island Locked"
+        island2.alpha = 0.4
+        if UserDefaults.standard.islandGetLevel(value: 2) == 0 && UserDefaults.standard.islandGetLevel(value: 1) > num_levels {
+            island2label.text = "Island Open"
             island2.alpha = 1
-        } else {
-            island2label.text = "Island Locked"
-            island2.alpha = 0.4
+        } else if (UserDefaults.standard.islandGetLevel(value: 2) >= 1 && UserDefaults.standard.islandGetLevel(value: 2) <= num_levels) {
+            island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/ \(num_levels)"
+            island2.alpha = 1
+
+        } else if UserDefaults.standard.islandGetLevel(value: 2) > num_levels {
+            island2label.text = "Level: " + "\(num_levels) " + "/ \(num_levels)"
+            island2.alpha = 1
         }
         island2label.fontSize = 10
         island2label.fontColor = SKColor.black
@@ -85,12 +96,18 @@ class MapGameScene: SKScene {
         island3.removeFromParent()
         addChild(island3)
         island3label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 2) > 5 {
-            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
+        island3label.text = "Island Locked"
+        island3.alpha = 0.4
+        
+        if UserDefaults.standard.islandGetLevel(value: 3) == 0 && UserDefaults.standard.islandGetLevel(value: 2) > num_levels {
+            island3label.text = "Island Open"
             island3.alpha = 1
-        } else {
-            island3label.text = "Island Locked"
-            island3.alpha = 0.4
+        } else if (UserDefaults.standard.islandGetLevel(value: 3) >= 1 && UserDefaults.standard.islandGetLevel(value: 3) <= num_levels) {
+            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/ \(num_levels)"
+            island3.alpha = 1
+        } else if UserDefaults.standard.islandGetLevel(value: 3) > num_levels {
+            island3label.text = "Level: " + "\(num_levels) " + "/ \(num_levels)"
+            island3.alpha = 1
         }
         island3label.fontSize = 10
         island3label.fontColor = SKColor.black
@@ -103,11 +120,17 @@ class MapGameScene: SKScene {
         island4.removeFromParent()
         addChild(island4)
         island4label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 3) > 5 {
-            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
+        island4label.text = "Island Locked"
+        island4.alpha = 0.4
+        if UserDefaults.standard.islandGetLevel(value: 4) == 0 && UserDefaults.standard.islandGetLevel(value: 3) > num_levels {
+            island4label.text = "Island Open"
             island4.alpha = 1
-        } else {
-            island4label.text = "Island Locked"
+        } else if (UserDefaults.standard.islandGetLevel(value: 4) >= 1 && UserDefaults.standard.islandGetLevel(value: 4) <= num_levels) {
+            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/ \(num_levels)"
+            island4.alpha = 0.4
+
+        } else if UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
+            island4label.text = "Level: " + "\(num_levels) " + "/ \(num_levels)"
             island4.alpha = 0.4
         }
         island4label.fontSize = 10
@@ -121,12 +144,19 @@ class MapGameScene: SKScene {
         island5.removeFromParent()
         addChild(island5)
         island5label = SKLabelNode(fontNamed: "Baloo 2")
-        if UserDefaults.standard.islandGetLevel(value: 4) > 5 {
-            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
+        island5label.text = "Island Locked"
+        island5.alpha = 0.4
+        if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
+            island5label.text = "Island Open"
             island5.alpha = 1
-        } else {
-            island5label.text = "Island Locked"
-            island5.alpha = 0.4
+        } else if (UserDefaults.standard.islandGetLevel(value: 5) >= 1 && UserDefaults.standard.islandGetLevel(value: 5) <= num_levels) {
+            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/ \(num_levels)"
+            island5.alpha = 1
+
+        } else if UserDefaults.standard.islandGetLevel(value: 5) > num_levels {
+            island5label.text = "Level: " + "\(num_levels) " + "/ \(num_levels)"
+            island5.alpha = 1
+
         }
         island5label.fontSize = 10
         island5label.fontColor = SKColor.black
@@ -155,7 +185,6 @@ class MapGameScene: SKScene {
         instructions1.numberOfLines = 4
         instructions1.preferredMaxLayoutWidth = frame.size.width * 0.5
         addChild(instructions1)
-    
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -168,123 +197,108 @@ class MapGameScene: SKScene {
                         if UserDefaults.standard.islandGetLevel(value: 1) == 0 {
                             // 78move boat
                             UserDefaults.standard.islandLevelUp(value: 1)
-                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/ \(num_levels)"
                             moveSprite(pointA: mapDock.position, pointB: island1.position)
                             break
                         }
-                        else if UserDefaults.standard.islandGetLevel(value: 1) >= 5 {
-                            island1label.text = "Level: 5/5"
-                            if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
-                                island2label.text = "Island Open"
-                                island2.alpha = 1
-                            }
+                        else if UserDefaults.standard.islandGetLevel(value: 1) >= num_levels {
+                            island1label.text = "Level: \(num_levels) / \(num_levels)"
                         } else {
-                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/ \(num_levels)"
                         }
                         UserDefaults.standard.setCurrentIsland(value: 1)
                         startGame()
                     }
                     
                     if node.name == "island2" {
-                        if UserDefaults.standard.islandGetLevel(value: 1) < 5 {
+                        if UserDefaults.standard.islandGetLevel(value: 1) < num_levels {
                             shakeSprite(layer: island2, duration: 0.5)
                         }
                         else {
-                            UserDefaults.standard.islandLevelUp(value: 2)
-                            if UserDefaults.standard.islandGetLevel(value: 2) == 1 {
+                            if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
                                 //move boat
-                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+                                UserDefaults.standard.islandLevelUp(value: 2)
+                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/ \(num_levels)"
                                 moveSprite(pointA: island1.position, pointB: island2.position)
                             }
-                            else if  UserDefaults.standard.islandGetLevel(value: 2) == 5 {
-                                    island2label.text = "Level: 5/5"
-                                    if UserDefaults.standard.islandGetLevel(value: 3) == 0 {
-                                        island3label.text = "Island Open"
-                                        island3.alpha = 1
-                                    }
-                                    break
-                                }
                             else{
-                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/5"
+                                if UserDefaults.standard.islandGetLevel(value: 2) == num_levels {
+                                        island2label.text = "Level: \(num_levels) / \(num_levels)"
+                                } else {
+                                    island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/ \(num_levels)"
+                                }
+                                UserDefaults.standard.setCurrentIsland(value: 2)
+                                startGame()
                             }
-                            UserDefaults.standard.setCurrentIsland(value: 2)
-                            startGame()
                         }
                     }
                     
                     if node.name == "island3" {
-                        if UserDefaults.standard.islandGetLevel(value: 2) < 5 {
+                        if UserDefaults.standard.islandGetLevel(value: 2) < num_levels {
                             shakeSprite(layer: island3, duration: 0.5)
                         }
                         else {
-                            UserDefaults.standard.islandLevelUp(value: 3)
-                             if UserDefaults.standard.islandGetLevel(value: 3) == 1 {
-                            //move boat
-                            island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
-                            moveSprite(pointA: island2.position, pointB: island3.position)
-                             }
-                            else if  UserDefaults.standard.islandGetLevel(value: 3) == 5 {
-                                    island3label.text = "Level: 5/5"
-                                    if UserDefaults.standard.islandGetLevel(value: 4) == 0 {
-                                        island4label.text = "Island Open"
-                                        island4.alpha = 1
-                                    }
-                                    break
-                                }
-                            else{
-                                island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/5"
+                            if UserDefaults.standard.islandGetLevel(value: 3) == 0 {
+                                //move boat
+                                UserDefaults.standard.islandLevelUp(value: 3)
+                                island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/ \(num_levels)"
+                                moveSprite(pointA: island2.position, pointB: island3.position)
                             }
-                            UserDefaults.standard.setCurrentIsland(value: 3)
-                            startGame()
+                            else{
+                                if UserDefaults.standard.islandGetLevel(value: 3) == num_levels {
+                                        island3label.text = "Level: \(num_levels) / \(num_levels)"
+                                } else {
+                                    island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/ \(num_levels)"
+                                }
+                                UserDefaults.standard.setCurrentIsland(value: 3)
+                                startGame()
+                            }
                         }
                     }
                     
                     if node.name == "island4" {
-                        if UserDefaults.standard.islandGetLevel(value: 3) < 5 {
+                        if UserDefaults.standard.islandGetLevel(value: 3) < num_levels {
                             shakeSprite(layer: island4, duration: 0.5)
                         }
                         else {
-                            UserDefaults.standard.islandLevelUp(value: 4)
-                             if UserDefaults.standard.islandGetLevel(value: 4) == 1 {
-                            //move boat
-                            island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
-                            moveSprite(pointA: island3.position, pointB: island4.position)
-                             }
-                            else if  UserDefaults.standard.islandGetLevel(value: 4) == 5 {
-                                    island4label.text = "Level: 5/5"
-                                    if UserDefaults.standard.islandGetLevel(value: 5) == 0 {
-                                        island5label.text = "Island Open"
-                                        island5.alpha = 1
-                                    }
-                                    break
-                                }
-                            else{
-                                island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/5"
+                            if UserDefaults.standard.islandGetLevel(value: 4) == 0 {
+                                //move boat
+                                UserDefaults.standard.islandLevelUp(value: 4)
+                                island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/ \(num_levels)"
+                                moveSprite(pointA: island3.position, pointB: island4.position)
                             }
-                            UserDefaults.standard.setCurrentIsland(value: 4)
-                            startGame()
+                            else{
+                                if UserDefaults.standard.islandGetLevel(value: 4) == num_levels {
+                                        island4label.text = "Level: \(num_levels) / \(num_levels)"
+                                } else {
+                                    island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/ \(num_levels)"
+                                }
+                                UserDefaults.standard.setCurrentIsland(value: 4)
+                                startGame()
+                            }
                         }
                     }
                     
                     if node.name == "island5" {
-                        if UserDefaults.standard.islandGetLevel(value: 4) < 5 {
+                        if UserDefaults.standard.islandGetLevel(value: 4) < num_levels {
                             shakeSprite(layer: island5, duration: 0.5)
                         }
                         else {
-                            UserDefaults.standard.islandLevelUp(value: 5)
-                            if UserDefaults.standard.islandGetLevel(value: 5) == 1 {
-                            //move boat
-                            island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
-                            moveSprite(pointA: island4.position, pointB: island5.position)
-                             }
-                            else if  UserDefaults.standard.islandGetLevel(value: 5) == 5 {
-                                    island5label.text = "Level: 5/5"
-                                }
-                            else {
-                                island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/5"
+                            if UserDefaults.standard.islandGetLevel(value: 5) == 0 {
+                                //move boat
+                                UserDefaults.standard.islandLevelUp(value: 5)
+                                island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/ \(num_levels)"
+                                moveSprite(pointA: island4.position, pointB: island5.position)
                             }
-                            UserDefaults.standard.setCurrentIsland(value: 5)
-                            startGame()
+                            else{
+                                if UserDefaults.standard.islandGetLevel(value: 5) == num_levels {
+                                        island5label.text = "Level: \(num_levels) / \(num_levels)"
+                                } else {
+                                    island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/ \(num_levels)"
+                                }
+                                UserDefaults.standard.setCurrentIsland(value: 5)
+                                startGame()
+                            }
                         }
                     }
                 }
