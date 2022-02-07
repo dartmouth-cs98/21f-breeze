@@ -67,7 +67,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         locationManager.desiredAccuracy = 45
         locationManager.distanceFilter = 100
         locationManager.startMonitoringSignificantLocationChanges()
-        
+        locationManager.startMonitoringVisits()
+        locationManager.pausesLocationUpdatesAutomatically
 
             
         // For iOS 10 display notification (sent via APNS)
@@ -91,6 +92,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             
         Messaging.messaging().delegate = self
             
+        
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "edu.dartmouth.breeze.CheckPhoneUsage", using: nil) { task in
             task.setTaskCompleted(success: true)
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
@@ -163,19 +165,20 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func scheduleAppRefresh() {
-        let request = BGAppRefreshTaskRequest(identifier: "edu.dartmouth.breeze.CheckPhoneUsage")
-
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 0) // Refresh after 5 minutes.
-
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        } catch {
-            print("Could not schedule app refresh task \(error.localizedDescription)")
-        }
+       let request = BGAppRefreshTaskRequest(identifier: "edu.dartmouth.breeze.CheckPhoneUsage")
+       // Fetch no earlier than 15 minutes from now.
+       request.earliestBeginDate = Date(timeIntervalSinceNow: 0)
+            
+       do {
+          try BGTaskScheduler.shared.submit(request)
+       } catch {
+          print("Could not schedule app refresh: \(error)")
+       }
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("App did enter background")
+        // track / reset did accept notification
         self.scheduleAppRefresh()
     }
     
@@ -291,6 +294,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        checkPhoneUsage()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didVisit visits: [CLVisit]) {
         checkPhoneUsage()
     }
     
