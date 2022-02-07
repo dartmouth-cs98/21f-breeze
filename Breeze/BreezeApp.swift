@@ -5,6 +5,11 @@
 //  Created by Sabrina Jain on 10/13/21.
 //
 
+/* 
+* Sathvi: overall, awesome job with naming functions and variables! even though i don't really know swift, but i can understand what each funciton is doing based on their names!
+* also, nice amount of commenting -- not too many or too few!
+*/
+
 import SwiftUI
 import UserNotifications
 import BackgroundTasks
@@ -67,7 +72,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         locationManager.distanceFilter = 100
         locationManager.startMonitoringSignificantLocationChanges()
         
-
+        // this is very nitpicky but could remove some extra white space here
             
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
@@ -139,7 +144,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         userInfo: dataDict
       )
         
-      // TODO: If necessary send token to application server.
+      // TODO: If necessary send token to application server.  // could remove this if done
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -211,6 +216,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
+    // love the commenting and separation of code into blocks here, makes it super easy to understand!
     func sendNotification() {
         // Define the custom actions.
         let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
@@ -258,7 +264,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
     }
-        
+
+    // if-else statements are helpful to understand the logic here, nice!
     func checkPhoneUsage() {
         print("Checking phone usage")
         if UIApplication.shared.isProtectedDataAvailable {

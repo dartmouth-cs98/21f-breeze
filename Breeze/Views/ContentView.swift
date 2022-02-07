@@ -20,7 +20,7 @@ struct ContentView: View {
         
     }
     @ViewBuilder
-    var body: some View {
+    var body: some View {  // Sathvi: maybe a comment here would make this more clear, not entirely sure what this does
         ZStack {
             Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             tapToPlayView

@@ -5,6 +5,10 @@
 //  Created by Laurel Dernbach on 11/4/21.
 //
 
+/* 
+* Sathvi: nice that user defaults and related functions are centralized here!
+*/
+
 import Foundation
 
 // getters and setters for stander UserDefaults data

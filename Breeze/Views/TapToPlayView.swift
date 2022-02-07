@@ -16,9 +16,9 @@ struct TapToPlayView: View {
     @AppStorage("hasntLostGame") var hasntLostGame: Bool = true
     @State private var userPoints = UserDefaults.standard.getPoints()
     @State private var userStreak =
-    UserDefaults.standard.getStreak()
+    UserDefaults.standard.getStreak() // could move this to the previous line, but not sure if this is a convention in Swift
     @State private var numClicks =
-    UserDefaults.standard.getNumClicks()
+    UserDefaults.standard.getNumClicks() // same as above, could maybe move this to the previous line
     
 
     var scene: SKScene {
@@ -70,7 +70,7 @@ struct TapToPlayView: View {
                     .cornerRadius(6)
                     .buttonStyle(.bordered)
             }
-          if isPresenting {
+          if isPresenting {  // Sathvi: this was pretty easy to understand, nice job with the variable/state names!
             ZStack(alignment: .center) {
                 Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
                 if (hasntFinishedGame) {
