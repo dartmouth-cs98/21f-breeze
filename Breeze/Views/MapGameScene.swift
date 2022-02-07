@@ -35,7 +35,8 @@ class MapGameScene: SKScene {
         
         // map reset if necessary (comment out until needed)
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-//        
+        UserDefaults.standard.resetMap()
+        
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
@@ -165,7 +166,7 @@ class MapGameScene: SKScene {
                 for node in touchedNode {
                     if node.name == "island1" {
                         if UserDefaults.standard.islandGetLevel(value: 1) == 0 {
-                            //move boat
+                            // 78move boat
                             UserDefaults.standard.islandLevelUp(value: 1)
                             island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/5"
                             moveSprite(pointA: mapDock.position, pointB: island1.position)
