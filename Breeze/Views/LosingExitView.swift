@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-@available(iOS 15.0, *)
 struct LosingExitView: View {
     
     @Binding var losingExitViewIsPresenting: Bool
@@ -25,16 +24,16 @@ struct LosingExitView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Yes please!", action: {tryAgain()})
+                    .padding()
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
-                    .padding()
                 Button("No thanks. Take me home.", action: {goToTapToPlay()})
+                    .padding()
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
-                    .padding()
-            }.buttonStyle(.bordered)
+            }
         }
     }
     

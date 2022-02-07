@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct InstructionsView: View {
     @State private var endViewIsPresenting = false
     var body: some View {
@@ -36,12 +35,12 @@ struct InstructionsView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Next", action: {endViewIsPresenting.toggle()})
+                    .padding()
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
-                    .padding()
                 Spacer()
-            }.buttonStyle(.bordered)
+            }
         }.fullScreenCover(isPresented: $endViewIsPresenting) {
             EndOfSetUpView(endViewIsPresenting: self.$endViewIsPresenting)
 
