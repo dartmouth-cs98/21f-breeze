@@ -4,7 +4,6 @@
 //  Created by Sabrina Jain on 11/13/21.
 //
 import SwiftUI
-@available(iOS 15.0, *)
 struct TimeLimitInstructionsView: View {
     @State private var timeSelectionIsPresenting = false
     var body: some View {
@@ -28,12 +27,12 @@ struct TimeLimitInstructionsView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Set time limit", action: {timeSelectionIsPresenting.toggle()})
+                    .padding()
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
-                    .padding()
                 Spacer()
-            }.buttonStyle(.bordered)
+            }
         }.fullScreenCover(isPresented: $timeSelectionIsPresenting,
                           onDismiss: didDismissTimeSelectionView) {
             TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)

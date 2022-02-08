@@ -6,7 +6,6 @@
 //
 import Foundation
 import SwiftUI
-@available(iOS 15.0, *)
 struct TimeSelectionView: View {
     @Binding var timeSelectionIsPresenting: Bool
     @State private var startTime = Time(hours:0, minutes:0, seconds:0)
@@ -22,22 +21,22 @@ struct TimeSelectionView: View {
                // if user has touched the durationPicker twice (work around to apple's bug)
                if (timeSelected) {
                    Button("Confirm", action: selectTime)
+                       .padding()
                        .font(.body)
                        .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                        .foregroundColor(Color.black)
                        .cornerRadius(6)
-                       .padding()
                }
                // otherwise, unclickable button
                else {
                    Button("Confirm", action: {})
+                       .padding()
                        .font(.body)
                        .background(Color.init(UIColor(red: 196/255, green: 196/255, blue: 196/255, alpha: 1)))
                        .foregroundColor(Color.black)
                        .cornerRadius(6)
-                       .padding()
                }
-           }.buttonStyle(.bordered)
+           }
         }
     }
     
