@@ -250,6 +250,8 @@ extension UserDefaults{
             eachDayArray.append([prevDayOfWeek, currDayUsage])
             set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
             set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+            
+            //TO-DO: SEND DAY SCREENTIME VIA SENDGRID AS WELL
             //END USER TESTING
             
             let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)

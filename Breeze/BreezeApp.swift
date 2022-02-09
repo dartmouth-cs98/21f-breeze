@@ -159,6 +159,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print(userInfo)
         print("In")
         completionHandler()
+        //TO-DO: HANDLE NOTIFICATION CLICKS - tap, snooze, decline, and (maybe) adjust Breeze settings button. And, add statistics for this.
     }
     
     func scheduleAppRefresh() {
@@ -233,7 +234,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         self.userNotificationCenter.setNotificationCategories([meetingInviteCategory])
 
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "You've gone over " + String(UserDefaults.standard.getTime()) + "minutes."
+        notificationContent.title = "You've gone over " + String(UserDefaults.standard.getTime()) + " minutes."
         notificationContent.body = "Click to take a break with Breeze"
         notificationContent.badge = NSNumber(value: 1)
         notificationContent.categoryIdentifier = "OVER_TIME_LIMIT"
@@ -258,6 +259,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 print("Notification Error: ", error)
             }
         }
+        UserDefaults.standard.addNotificationSent() //add this to stats
     }
         
     func checkPhoneUsage() {
