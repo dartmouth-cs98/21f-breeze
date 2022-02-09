@@ -12,6 +12,7 @@ import Firebase
 import UIKit
 import Foundation
 import CoreLocation
+import OSLog
 
 @available(iOS 15.0, *)
 
@@ -48,6 +49,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     let locationManager = CLLocationManager()
     let backgroundTaskID = "com.breeze.CheckPhoneUsage"
     let gcmMessageIDKey = "gcm.message_id"
+    let logger = Logger.init()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) ->
         Bool {
@@ -287,6 +289,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        logger.error("Location update check")
+        checkPhoneUsage()
+    }
+    
+    func locationManager(_ manager: CLLocationManager,
+                         didVisit visit: CLVisit) {
+        logger.error("Visit check")
         checkPhoneUsage()
     }
     
