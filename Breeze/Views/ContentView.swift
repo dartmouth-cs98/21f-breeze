@@ -15,7 +15,6 @@ struct ContentView: View {
     
     @State var tapToPlayView = TapToPlayView()
     @State private var showModal = false
-    @State var profileView = ProfileView()
     
     func viewDidLoad() {
         
@@ -24,8 +23,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
-            profileView
-            //tapToPlayView
+            tapToPlayView
         }
     }
 }

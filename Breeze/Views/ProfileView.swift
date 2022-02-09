@@ -26,7 +26,18 @@ struct ProfileView: View {
                 Text("Your Breeze Journey")
                     .font(.title).underline()
                     .multilineTextAlignment(.center)
-                
+                VStack {
+                    Text("You've accepted")
+                        .font(.body)
+                    Text("temp")
+                        .font(.headline)
+                        .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                        .padding()
+                    Text("notifications in a row")
+                        .font(.body)
+                }
+                    .padding()
+                    .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
                 // TO DO: statistics with userDefaults stuff and outlined
                 // TO DO: button to view statistics
             }
@@ -55,10 +66,6 @@ struct ProfileView: View {
         currTime = UserDefaults.standard.getTime()
     }
 }
-
-// TO DO:
-// - to dos that are in there
-// - the testing view statistics button
 
 //@available(iOS 15.0, *)
 //struct EndOfSetUpView_Previews: PreviewProvider {

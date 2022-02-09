@@ -42,7 +42,6 @@ struct TimeSelectionView: View {
     
     func selectTime() {
         let timeInMinutes = startTime.hours*60 + startTime.minutes
-        print("select time getting called")
         UserDefaults.standard.setTime(value: timeInMinutes)
         UserDefaults.standard.setSetupBool(value: true)
         timeSelectionIsPresenting.toggle()
