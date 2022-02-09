@@ -8,11 +8,16 @@ import GameplayKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-        
+    //instantiate island
+    let currentIsland = UserDefaults.standard.getCurrentIsland();
+    let islands = [Islands.island1, Islands.island2]
+    lazy var island = islands[currentIsland - 1] //piece of shit fucking shit ass fucking lazy ass var
+    
+    
     //instantiate sprites
-    var boat = SKSpriteNode(imageNamed: "boat2")
-    var dock = SKSpriteNode(imageNamed: "dock2")
-    var beach = SKSpriteNode(imageNamed: "beach2")
+    lazy var boat = SKSpriteNode(imageNamed: island.boat)
+    lazy var dock = SKSpriteNode(imageNamed: island.dock)
+    lazy var beach = SKSpriteNode(imageNamed: island.beach)
     var starfield:SKEmitterNode!
     
     // Category bitmask values
@@ -66,8 +71,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private let motionManager = CMMotionManager()
     
+//    func setIslandNumber() {
+//        switch islandNumber{
+//        case 2:
+//            island = Islands.island1
+//        default:
+//            island = Islands.island1
+//        }
+//    }
+    
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
+//        setIslandNumber()
         
         view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
@@ -82,7 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starfield.particleZPosition = -2
 
         //background
-        self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
+        print("island: ", island)
+        self.backgroundColor = island.backgroundColor
         // game scene physics
         
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
@@ -293,7 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func renderBasicWall(){
-        //gap between walls
+        let islandColor = island.wallColor
         
         //height of walls
         let obstacle_height = 20
@@ -329,11 +345,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let left_obstacle = SKShapeNode(path: left_rect.cgPath)
         let right_obstacle = SKShapeNode(path: right_rect.cgPath)
 
-        left_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-        left_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         
-        right_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-        right_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
+        left_obstacle.fillColor = islandColor
+        left_obstacle.strokeColor = islandColor
+        
+        right_obstacle.fillColor = islandColor
+        right_obstacle.strokeColor = islandColor
         
         left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
         left_obstacle.physicsBody?.isDynamic = false
