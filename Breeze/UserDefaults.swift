@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SendGrid
 
 // getters and setters for stander UserDefaults data
 extension UserDefaults{
@@ -249,18 +250,40 @@ extension UserDefaults{
             var eachDayArray = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
             eachDayArray.append([prevDayOfWeek, currDayUsage])
             set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
-            set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+            sendUserDataToBreeze()
             
-            //TO-DO: SEND DAY SCREENTIME VIA SENDGRID AS WELL
+            set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) //Now reset current day phone usage
             //END USER TESTING
-            
-            let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
-            
+                        
             if (currDayOfWeek == 1) { //Sunday: roll over statistics
+                let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
                 set(currWeekUsage, forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
                 set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
                 rollOverNotifications()
             }
+        }
+    }
+    
+    //Sendgrid API call to output data
+    func sendUserDataToBreeze() {
+        let session = Session()
+        let SG_KEY="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"
+        session.authentication = Authentication.apiKey(SG_KEY)
+        
+        // Send a basic example
+        let personalization = Personalization(recipients: "test@example.com")
+        let plainText = Content(contentType: ContentType.plainText, value: "User spent " + string(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) + )
+        let htmlText = Content(contentType: ContentType.htmlText, value: "<h1>Hello World</h1>")
+        let email = Email(
+            personalizations: [personalization],
+            from: "foo@bar.com",
+            content: [plainText, htmlText],
+            subject: "Hello World"
+        )
+        do {
+            try Session.shared.send(request: email)
+        } catch {
+            print(error)
         }
     }
     

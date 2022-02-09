@@ -103,7 +103,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("called")
       let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
       let token = tokenParts.joined()
-        Messaging.messaging().apnsToken = deviceToken;
+        Messaging.messaging().apnsToken = deviceToken
 
       print("Device Token: \(token)")
     }

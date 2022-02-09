@@ -101,6 +101,15 @@
         }
       },
       {
+        "package": "SendGrid",
+        "repositoryURL": "https://github.com/scottkawai/sendgrid-swift",
+        "state": {
+          "branch": null,
+          "revision": "74934cafe4f9d202ee223113e56f0ad300754d14",
+          "version": "2.2.1"
+        }
+      },
+      {
         "package": "SwiftProtobuf",
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
