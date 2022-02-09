@@ -262,7 +262,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
     func checkPhoneUsage() {
         print("Checking phone usage and updating statistics")
-        UserDefaults.standard.checkDayRollover
+        UserDefaults.standard.checkDayRollover()
         if UIApplication.shared.isProtectedDataAvailable {
             print("Protected data is available")
             if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
