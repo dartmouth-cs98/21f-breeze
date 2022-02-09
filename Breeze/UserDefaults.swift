@@ -301,7 +301,7 @@ extension UserDefaults{
         let currNotificationSnoozes = getCurrNotificationSnoozes()
         set(currNotificationSnoozes + 1, forKey: UserDefaultsKeys.notificationsSnoozedCurrWeek.rawValue)
     }
-
+    
     func rollOverNotifications() {
         let currNotificationSends = getCurrNotificationSends()
         let currNotificationClicks = getCurrNotificationClicks()
@@ -323,6 +323,45 @@ extension UserDefaults{
         print("hour: " + String(hourOfDay)) //HOW TO GET THIS TO MILITARY TIME
         return Double((dayOfWeek-1 + (hourOfDay / 24)) / 7)
     }
+    
+    func getVisitUpdates () -> Int {
+        return integer(forKey: UserDefaultsKeys.visitUpdates.rawValue)
+    }
+    
+    func getLocationUpdates () -> Int {
+        return integer(forKey: UserDefaultsKeys.locationUpdates.rawValue)
+    }
+    
+    func getFetchUpdates () -> Int {
+        return integer(forKey: UserDefaultsKeys.fetchUpdates.rawValue)
+    }
+    
+    func getUpdateTimes () -> [Any]? {
+        return array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
+    }
+    
+    func addVisitUpdate () {
+        let visitUpdates = getVisitUpdates()
+        set(visitUpdates + 1, forKey: UserDefaultsKeys.visitUpdates.rawValue)
+    }
+
+    func addUpdateTime () {
+        var updateTimesArray = array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
+        updateTimesArray.append([Date().description])
+        set(updateTimesArray, forKey: UserDefaultsKeys.updateTimes.rawValue)
+    }
+    
+    func addLocationUpdate () {
+        let locationUpdates = getLocationUpdates()
+        set(locationUpdates + 1, forKey: UserDefaultsKeys.locationUpdates.rawValue)
+    }
+    
+    func addFetchUpdate () {
+        let fetchUpdates = getFetchUpdates()
+        set(fetchUpdates + 1, forKey: UserDefaultsKeys.fetchUpdates.rawValue)
+    }
+    
+    
 }
 
 enum UserDefaultsKeys : String {
@@ -353,6 +392,10 @@ enum UserDefaultsKeys : String {
     case notificationsClickedCurrWeek
     case notificationsSentCurrWeek
     case notificationsSnoozedCurrWeek
+    case updateTimes
+    case visitUpdates
+    case locationUpdates
+    case fetchUpdates
     
     //ONLY FOR TESTING! DELETE LATER
     case eachDayPhoneUsage //This variable will be displayed in a view that can be accessed from settings page for user testers - just in case Sendgrid doesn't work...
