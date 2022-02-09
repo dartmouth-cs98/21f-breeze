@@ -61,10 +61,10 @@ extension UserDefaults{
     }
     
     func getDaysFromLastPlay() -> Int {
-        let calender = Calendar.current
-        let date1 = calender.startOfDay(for: Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastDatePlayed.rawValue)))
-        let date2 = calender.startOfDay(for: Date())
-        let components = calender.dateComponents([.day], from: date1, to: date2)
+        let calendar = Calendar.current
+        let date1 = calendar.startOfDay(for: Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastDatePlayed.rawValue)))
+        let date2 = calendar.startOfDay(for: Date())
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
         return components.day ?? 0
         
     }
@@ -107,6 +107,18 @@ extension UserDefaults{
         return integer(forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
     }
     
+    func getCurrentWeekPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+    }
+    
+    func getPreviousWeekPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
+    }
+    
+    func getCurrentDayPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+    }
+    
     //
     func setCurrentIsland(value: Int){
         set(value, forKey: UserDefaultsKeys.currentIsland.rawValue)
@@ -119,8 +131,14 @@ extension UserDefaults{
     func addIntervalToCurrentPhoneUsage() {
         let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
         print("Seconds elapsed since last check: " + String(secondsElapsed))
+        
         let currentPhoneUsage = getCurrentPhoneUsage()
+        let currDayPhoneUsage = getCurrentDayPhoneUsage()
+        let currWeekPhoneUsage = getCurrentWeekPhoneUsage()
+        
         set((currentPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+        set((currDayPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+        set((currWeekPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
     }
     
     func resetCurrentPhoneUsage() {
@@ -211,6 +229,100 @@ extension UserDefaults{
         set(0, forKey: UserDefaultsKeys.currentIsland.rawValue)
     }
     
+    func checkDayRollover() {
+        // if lastTimeProtectedDataStatusChecked is previous day, then store previous day's time and send to Sendgrid??
+        let calendar = Calendar.current
+        let prevDate = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
+        let prevComponents = calendar.dateComponents([.weekday], from: prevDate)
+        let prevDayOfWeek = prevComponents.weekday
+        
+        let currDate = Date()
+        let currComponents = calendar.dateComponents([.weekday], from: currDate)
+        let currDayOfWeek = currComponents.weekday
+        
+        //If it is a new day, then reset the current phone usage and add it to statistics and send to Sendgrid
+        if (prevDayOfWeek != currDayOfWeek) {
+            resetCurrentPhoneUsage()
+            
+            //THIS VARIABLE IS JUST FOR USER TESTING - remove afterwards
+            let currDayUsage = getCurrentDayPhoneUsage()
+            var eachDayArray = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
+            eachDayArray.append([prevDayOfWeek, currDayUsage])
+            set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
+            set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+            
+            //TO-DO: SEND DAY SCREENTIME VIA SENDGRID AS WELL
+            //END USER TESTING
+            
+            let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+            
+            if (currDayOfWeek == 1) { //Sunday: roll over statistics
+                set(currWeekUsage, forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
+                set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+                rollOverNotifications()
+            }
+        }
+    }
+    
+    func getCurrNotificationSends() -> Int {
+        return integer(forKey: UserDefaultsKeys.notificationsSentCurrWeek.rawValue)
+    }
+    
+    func getCurrNotificationClicks() -> Int {
+        return integer(forKey: UserDefaultsKeys.notificationsClickedCurrWeek.rawValue)
+    }
+    
+    func getCurrNotificationSnoozes() -> Int {
+        return integer(forKey: UserDefaultsKeys.notificationsSnoozedCurrWeek.rawValue)
+    }
+    
+    func getLastWeekNotificationSends() -> Int {
+        return integer(forKey: UserDefaultsKeys.notificationsSentLastWeek.rawValue)
+    }
+    
+    func getLastWeekNotificationClicks() -> Int {
+        return integer(forKey: UserDefaultsKeys.notificationsClickedLastWeek.rawValue)
+    }
+    
+    func getLastWeekNotificationSnoozes() -> Int {
+        return integer(forKey: UserDefaultsKeys.notificationsSnoozedLastWeek.rawValue)
+    }
+    
+    func addNotificationSent() {
+        let currNotificationSends = getCurrNotificationSends()
+        set(currNotificationSends + 1, forKey: UserDefaultsKeys.notificationsSentCurrWeek.rawValue)
+    }
+    func addNotificationClick() {
+        let currNotificationClicks = getCurrNotificationClicks()
+        set(currNotificationClicks + 1, forKey: UserDefaultsKeys.notificationsClickedCurrWeek.rawValue)
+    }
+    
+    func addNotificationSnooze() {
+        let currNotificationSnoozes = getCurrNotificationSnoozes()
+        set(currNotificationSnoozes + 1, forKey: UserDefaultsKeys.notificationsSnoozedCurrWeek.rawValue)
+    }
+
+    func rollOverNotifications() {
+        let currNotificationSends = getCurrNotificationSends()
+        let currNotificationClicks = getCurrNotificationClicks()
+        let currNotificationSnoozes = getCurrNotificationSnoozes()
+        
+        set(currNotificationSends, forKey: UserDefaultsKeys.notificationsSentLastWeek.rawValue)
+        set(currNotificationClicks, forKey: UserDefaultsKeys.notificationsClickedLastWeek.rawValue)
+        set(currNotificationSnoozes, forKey: UserDefaultsKeys.notificationsSnoozedLastWeek.rawValue)
+    }
+    
+    func getProportionWeekSpent() -> Double {
+        //Current Date
+        let calendar = Calendar.current
+        let currDate = Date()
+        let dayComponents = calendar.dateComponents([.weekday], from: currDate)
+        let dayOfWeek = Int(dayComponents.weekday ?? 1)
+        let hourOfDay = calendar.component(.hour, from: currDate)
+        print("day: " + String(dayOfWeek))
+        print("hour: " + String(hourOfDay)) //HOW TO GET THIS TO MILITARY TIME
+        return Double((dayOfWeek-1 + (hourOfDay / 24)) / 7)
+    }
 }
 
 enum UserDefaultsKeys : String {
@@ -230,4 +342,19 @@ enum UserDefaultsKeys : String {
     case island4
     case island5
     case currentIsland
+    
+    //Statistics page
+    case prevWeekPhoneUsage
+    case currWeekPhoneUsage
+    case lastUpdatedPhoneUsage
+    case notificationsClickedLastWeek
+    case notificationsSentLastWeek
+    case notificationsSnoozedLastWeek
+    case notificationsClickedCurrWeek
+    case notificationsSentCurrWeek
+    case notificationsSnoozedCurrWeek
+    
+    //ONLY FOR TESTING! DELETE LATER
+    case eachDayPhoneUsage //This variable will be displayed in a view that can be accessed from settings page for user testers - just in case Sendgrid doesn't work...
+    case currDayPhoneUsage
 }

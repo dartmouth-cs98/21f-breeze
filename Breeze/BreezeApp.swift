@@ -153,11 +153,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
 
     
+    //NOTIFICATION CLICKED
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
         print("In")
         completionHandler()
+        //TO-DO: HANDLE NOTIFICATION CLICKS - tap, snooze, decline, and (maybe) adjust Breeze settings button. And, add statistics for this.
     }
     
     func scheduleAppRefresh() {
@@ -232,7 +234,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         self.userNotificationCenter.setNotificationCategories([meetingInviteCategory])
 
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "You've gone over " + String(UserDefaults.standard.getTime()) + "minutes."
+        notificationContent.title = "You've gone over " + String(UserDefaults.standard.getTime()) + " minutes."
         notificationContent.body = "Click to take a break with Breeze"
         notificationContent.badge = NSNumber(value: 1)
         notificationContent.categoryIdentifier = "OVER_TIME_LIMIT"
@@ -257,10 +259,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 print("Notification Error: ", error)
             }
         }
+        UserDefaults.standard.addNotificationSent() //add this to stats
     }
         
     func checkPhoneUsage() {
-        print("Checking phone usage")
+        print("Checking phone usage and updating statistics")
+        UserDefaults.standard.checkDayRollover()
         if UIApplication.shared.isProtectedDataAvailable {
             print("Protected data is available")
             if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
@@ -282,7 +286,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
     }
     
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         checkPhoneUsage()
     }
@@ -291,9 +294,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print(error.localizedDescription)
         locationManager.stopMonitoringVisits()
         return
-
     }
-    
-    
 }
 
