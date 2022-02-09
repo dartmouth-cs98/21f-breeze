@@ -153,6 +153,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
 
     
+    //NOTIFICATION CLICKED
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
@@ -260,7 +261,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
         
     func checkPhoneUsage() {
-        print("Checking phone usage")
+        print("Checking phone usage and updating statistics")
+        UserDefaults.standard.checkDayRollover
         if UIApplication.shared.isProtectedDataAvailable {
             print("Protected data is available")
             if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
@@ -282,7 +284,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
     }
     
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         checkPhoneUsage()
     }
@@ -291,9 +292,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print(error.localizedDescription)
         locationManager.stopMonitoringVisits()
         return
-
     }
-    
-    
 }
 

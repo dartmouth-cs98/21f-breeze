@@ -107,6 +107,18 @@ extension UserDefaults{
         return integer(forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
     }
     
+    func getCurrentWeekPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+    }
+    
+    func getPreviousWeekPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
+    }
+    
+    func getCurrentDayPhoneUsage() -> Int {
+        return integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+    }
+    
     //
     func setCurrentIsland(value: Int){
         set(value, forKey: UserDefaultsKeys.currentIsland.rawValue)
@@ -119,8 +131,14 @@ extension UserDefaults{
     func addIntervalToCurrentPhoneUsage() {
         let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
         print("Seconds elapsed since last check: " + String(secondsElapsed))
+        
         let currentPhoneUsage = getCurrentPhoneUsage()
+        let currDayPhoneUsage = getCurrentDayPhoneUsage()
+        let currWeekPhoneUsage = getCurrentWeekPhoneUsage()
+        
         set((currentPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+        set((currDayPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+        set((currWeekPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
     }
     
     func resetCurrentPhoneUsage() {
@@ -211,6 +229,39 @@ extension UserDefaults{
         set(0, forKey: UserDefaultsKeys.currentIsland.rawValue)
     }
     
+    func checkDayRollover() {
+        // if lastTimeProtectedDataStatusChecked is previous day, then store previous day's time and send to Sendgrid??
+        let calendar = Calendar.current
+        let prevDate = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
+        let prevComponents = calendar.dateComponents([.weekday], from: prevDate)
+        let prevDayOfWeek = prevComponents.weekday
+        
+        let currDate = Date()
+        let currComponents = calendar.dateComponents([.weekday], from: currDate)
+        let currDayOfWeek = currComponents.weekday
+        
+        //If it is a new day, then reset the current phone usage and add it to statistics
+        if (prevDayOfWeek != currDayOfWeek) {
+            resetCurrentPhoneUsage()
+            
+            //THIS VARIABLE IS JUST FOR USER TESTING - remove afterwards
+            let currDayUsage = getCurrentDayPhoneUsage()
+            var eachDayArray = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
+            eachDayArray.append([prevDayOfWeek, currDayUsage])
+            set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
+            set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+            //END USER TESTING
+            
+            
+            
+            let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+            
+            if (currDayOfWeek == 1) {
+                set(currWeekUsage, forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
+                set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+            }
+        }
+    }
 }
 
 enum UserDefaultsKeys : String {
@@ -230,4 +281,12 @@ enum UserDefaultsKeys : String {
     case island4
     case island5
     case currentIsland
+    
+    case prevWeekPhoneUsage
+    case currWeekPhoneUsage
+    case currDayPhoneUsage
+    case lastUpdatedPhoneUsage
+    
+    //ONLY FOR TESTING! DELETE LATER
+    case eachDayPhoneUsage
 }
