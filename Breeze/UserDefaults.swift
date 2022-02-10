@@ -361,6 +361,15 @@ extension UserDefaults{
         set(fetchUpdates + 1, forKey: UserDefaultsKeys.fetchUpdates.rawValue)
     }
     
+    func printUpdateTimes () {
+        print("Update Times")
+        let updateTimes = getUpdateTimes() ?? []
+        for time in updateTimes {
+          print(time)
+        }
+        print("End of Update Times")
+    }
+    
     
 }
 
