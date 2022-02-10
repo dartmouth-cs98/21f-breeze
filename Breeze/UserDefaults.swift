@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import OSLog
 
 // getters and setters for stander UserDefaults data
 extension UserDefaults{
-
+    
+    var log: Logger {
+            return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UserDefaults")
+    }
+    
     // example usage:
     // UserDefaults.standard.setPoints(value: 90)
     func setPoints(value: Int) {
@@ -149,11 +154,12 @@ extension UserDefaults{
     
     func isAboveTimeLimit() -> Bool {
         let currentPhoneUsage = getCurrentPhoneUsage()
-        print("Current phone usage (in seconds): " + String(currentPhoneUsage))
-        print("Current phone usage (in seconds): " + String(currentPhoneUsage/60))
+        log.notice("Current phone usage (in seconds): \(currentPhoneUsage)")
+        log.notice("Current phone usage (in minutes): \(currentPhoneUsage/60)")
         
         let timeLimit = getTime()
-        print("Time limit: " + String(timeLimit))
+        log.notice("Time limit: \(timeLimit)")
+        
         if ((currentPhoneUsage/60) >= timeLimit && timeLimit > 0) {
             return true
         } else {
