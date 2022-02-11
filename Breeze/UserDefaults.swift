@@ -8,28 +8,17 @@
 import Foundation
 
 // getters and setters for stander UserDefaults data
-extension UserDefaults{
-
-    // example usage:
-    // UserDefaults.standard.setPoints(value: 90)
-    func setPoints(value: Int) {
-        var currPoints: Int = integer(forKey: UserDefaultsKeys.points.rawValue)
-        currPoints += value
-        set(currPoints, forKey: UserDefaultsKeys.points.rawValue)
-    }
-
-    // example usage:
-    // UserDefaults.standard.getPoints()
-    func getPoints()-> Int {
-        return integer(forKey: UserDefaultsKeys.points.rawValue)
-    }
-
-    func setStreak(value: Int){
-        set(value, forKey: UserDefaultsKeys.streak.rawValue)
+extension UserDefaults {
+    func incrementStreak(){
+        set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
     }
 
     func getStreak() -> Int{
         return integer(forKey: UserDefaultsKeys.streak.rawValue)
+    }
+    
+    func resetStreak() {
+        set(0, forKey: UserDefaultsKeys.streak.rawValue)
     }
     
     func setTime(value: Int){
@@ -323,10 +312,17 @@ extension UserDefaults{
         print("hour: " + String(hourOfDay)) //HOW TO GET THIS TO MILITARY TIME
         return Double((dayOfWeek-1 + (hourOfDay / 24)) / 7)
     }
+    
+    func existsOutstandingNotification() -> Bool {
+        return bool(forKey: UserDefaultsKeys.notificationSent.rawValue)
+    }
+    
+    func setExistsOutstandingNotification(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.notificationSent.rawValue)
+    }
 }
 
 enum UserDefaultsKeys : String {
-    case points
     case streak
     case timeInMinutes
     case endedGame
@@ -353,6 +349,7 @@ enum UserDefaultsKeys : String {
     case notificationsClickedCurrWeek
     case notificationsSentCurrWeek
     case notificationsSnoozedCurrWeek
+    case notificationSent
     
     //ONLY FOR TESTING! DELETE LATER
     case eachDayPhoneUsage //This variable will be displayed in a view that can be accessed from settings page for user testers - just in case Sendgrid doesn't work...

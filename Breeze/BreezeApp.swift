@@ -162,6 +162,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("In")
         completionHandler()
         //TO-DO: HANDLE NOTIFICATION CLICKS - tap, snooze, decline, and (maybe) adjust Breeze settings button. And, add statistics for this.
+        UserDefaults.standard.setExistsOutstandingNotification(value: false)
+        UserDefaults.standard.incrementStreak()
     }
     
     func scheduleAppRefresh() {
@@ -262,6 +264,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
         UserDefaults.standard.addNotificationSent() //add this to stats
+        
+        if (UserDefaults.standard.existsOutstandingNotification()) {
+            UserDefaults.standard.resetStreak()
+        }
+        else {
+            UserDefaults.standard.setExistsOutstandingNotification(value: true)
+        }
     }
         
     func checkPhoneUsage() {
