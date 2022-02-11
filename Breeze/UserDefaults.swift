@@ -6,11 +6,38 @@
 //
 
 import Foundation
+import OSLog
 
 // getters and setters for stander UserDefaults data
 extension UserDefaults {
     func incrementStreak(){
         set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
+    }
+    
+    var log: Logger {
+        return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UserDefaults")
+    }
+    
+    var usageUpdatesLog: Logger {
+        return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UsageUpdates")
+    }
+    
+    var gameLog: Logger {
+        return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UsageUpdates")
+    }
+    
+    // example usage:
+    // UserDefaults.standard.setPoints(value: 90)
+    func setPoints(value: Int) {
+        var currPoints: Int = integer(forKey: UserDefaultsKeys.points.rawValue)
+        currPoints += value
+        set(currPoints, forKey: UserDefaultsKeys.points.rawValue)
+    }
+
+    // example usage:
+    // UserDefaults.standard.getPoints()
+    func getPoints()-> Int {
+        return integer(forKey: UserDefaultsKeys.points.rawValue)
     }
 
     func getStreak() -> Int{
@@ -81,7 +108,6 @@ extension UserDefaults {
     
     func getSecondsElapsedFromLastTimeProtectedDataStatusChecked()-> Int {
         let calender = Calendar.current
-        
         let date1 = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
         let date2 = Date()
         let components = calender.dateComponents([.second], from: date1, to: date2)
@@ -119,7 +145,7 @@ extension UserDefaults {
     //
     func addIntervalToCurrentPhoneUsage() {
         let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
-        print("Seconds elapsed since last check: " + String(secondsElapsed))
+        usageUpdatesLog.notice("Seconds elapsed since last check: \(secondsElapsed)")
         
         let currentPhoneUsage = getCurrentPhoneUsage()
         let currDayPhoneUsage = getCurrentDayPhoneUsage()
@@ -132,17 +158,18 @@ extension UserDefaults {
     
     func resetCurrentPhoneUsage() {
         set(0, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
-        print("reset")
+        usageUpdatesLog.notice("Reseting current phone usage")
         print(getCurrentPhoneUsage())
     }
     
     func isAboveTimeLimit() -> Bool {
         let currentPhoneUsage = getCurrentPhoneUsage()
-        print("Current phone usage (in seconds): " + String(currentPhoneUsage))
-        print("Current phone usage (in seconds): " + String(currentPhoneUsage/60))
+        usageUpdatesLog.notice("Current phone usage (in seconds): \(currentPhoneUsage)")
+        usageUpdatesLog.notice("Current phone usage (in minutes): \(currentPhoneUsage/60)")
         
         let timeLimit = getTime()
-        print("Time limit: " + String(timeLimit))
+        usageUpdatesLog.notice("Time limit: \(timeLimit)")
+        
         if ((currentPhoneUsage/60) >= timeLimit && timeLimit > 0) {
             return true
         } else {
@@ -152,9 +179,11 @@ extension UserDefaults {
     
     func islandLevelUp(value: Int) {
         if (value == 1) {
+            
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island1.rawValue)
             if currLevel < 5 {
                 currLevel += 1
+                log.notice("Leveling up for Island One to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island1.rawValue)
         }
@@ -162,6 +191,7 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island2.rawValue)
             if currLevel < 5 {
                 currLevel += 1
+                log.notice("Leveling up for Island Two to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island2.rawValue)
         }
@@ -169,6 +199,7 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island3.rawValue)
             if currLevel < 5 {
                 currLevel += 1
+                log.notice("Leveling up for Island Three to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island3.rawValue)
         }
@@ -176,6 +207,7 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island4.rawValue)
             if currLevel < 5 {
                 currLevel += 1
+                log.notice("Leveling up for Island Four to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island4.rawValue)
         }
@@ -183,6 +215,7 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island5.rawValue)
             if currLevel < 5 {
                 currLevel += 1
+                log.notice("Leveling up for Island Five to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island5.rawValue)
         }
@@ -210,6 +243,7 @@ extension UserDefaults {
     }
     
     func resetMap() {
+        log.notice("Resetting map")
         set(0, forKey: UserDefaultsKeys.island1.rawValue)
         set(0, forKey: UserDefaultsKeys.island2.rawValue)
         set(0, forKey: UserDefaultsKeys.island3.rawValue)
@@ -219,6 +253,7 @@ extension UserDefaults {
     }
     
     func checkDayRollover() {
+        
         // if lastTimeProtectedDataStatusChecked is previous day, then store previous day's time and send to Sendgrid??
         let calendar = Calendar.current
         let prevDate = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
@@ -231,10 +266,12 @@ extension UserDefaults {
         
         //If it is a new day, then reset the current phone usage and add it to statistics and send to Sendgrid
         if (prevDayOfWeek != currDayOfWeek) {
+            usageUpdatesLog.notice("The date has changed since phone usage was last checked - Reseting current phone usage")
             resetCurrentPhoneUsage()
             
             //THIS VARIABLE IS JUST FOR USER TESTING - remove afterwards
             let currDayUsage = getCurrentDayPhoneUsage()
+            usageUpdatesLog.notice("Phone usage for previous day: \(currDayUsage)")
             var eachDayArray = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
             eachDayArray.append([prevDayOfWeek, currDayUsage])
             set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
@@ -244,8 +281,10 @@ extension UserDefaults {
             //END USER TESTING
             
             let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
+            usageUpdatesLog.notice("Phone usage for current week: \(currWeekUsage)")
             
             if (currDayOfWeek == 1) { //Sunday: roll over statistics
+                usageUpdatesLog.notice("It's Sunday! Rolling over weekly usage statistics: \(currWeekUsage)")
                 set(currWeekUsage, forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
                 set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
                 rollOverNotifications()
@@ -290,8 +329,9 @@ extension UserDefaults {
         let currNotificationSnoozes = getCurrNotificationSnoozes()
         set(currNotificationSnoozes + 1, forKey: UserDefaultsKeys.notificationsSnoozedCurrWeek.rawValue)
     }
-
+    
     func rollOverNotifications() {
+        usageUpdatesLog.notice("Rolling over notification sends/clicks/snoozes statistics to last week")
         let currNotificationSends = getCurrNotificationSends()
         let currNotificationClicks = getCurrNotificationClicks()
         let currNotificationSnoozes = getCurrNotificationSnoozes()
@@ -308,8 +348,8 @@ extension UserDefaults {
         let dayComponents = calendar.dateComponents([.weekday], from: currDate)
         let dayOfWeek = Int(dayComponents.weekday ?? 1)
         let hourOfDay = calendar.component(.hour, from: currDate)
-        print("day: " + String(dayOfWeek))
-        print("hour: " + String(hourOfDay)) //HOW TO GET THIS TO MILITARY TIME
+        log.notice("day: \(dayOfWeek)")
+        log.notice("hour: \(hourOfDay)") //HOW TO GET THIS TO MILITARY TIME
         return Double((dayOfWeek-1 + (hourOfDay / 24)) / 7)
     }
     
@@ -319,6 +359,52 @@ extension UserDefaults {
     
     func setExistsOutstandingNotification(value: Bool) {
         set(value, forKey: UserDefaultsKeys.notificationSent.rawValue)
+    }
+  
+    func getVisitUpdates () -> Int {
+        return integer(forKey: UserDefaultsKeys.visitUpdates.rawValue)
+    }
+    
+    func getLocationUpdates () -> Int {
+        return integer(forKey: UserDefaultsKeys.locationUpdates.rawValue)
+    }
+    
+    func getFetchUpdates () -> Int {
+        return integer(forKey: UserDefaultsKeys.fetchUpdates.rawValue)
+    }
+    
+    func getUpdateTimes () -> [Any]? {
+        return array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
+    }
+    
+    func addVisitUpdate () {
+        let visitUpdates = getVisitUpdates()
+        set(visitUpdates + 1, forKey: UserDefaultsKeys.visitUpdates.rawValue)
+    }
+
+    func addUpdateTime () {
+        var updateTimesArray = array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
+        updateTimesArray.append([Date().description])
+        set(updateTimesArray, forKey: UserDefaultsKeys.updateTimes.rawValue)
+    }
+    
+    func addLocationUpdate () {
+        let locationUpdates = getLocationUpdates()
+        set(locationUpdates + 1, forKey: UserDefaultsKeys.locationUpdates.rawValue)
+    }
+    
+    func addFetchUpdate () {
+        let fetchUpdates = getFetchUpdates()
+        set(fetchUpdates + 1, forKey: UserDefaultsKeys.fetchUpdates.rawValue)
+    }
+    
+    func printUpdateTimes () {
+        usageUpdatesLog.notice("Update Times")
+        let updateTimes = getUpdateTimes() ?? []
+        for time in updateTimes {
+            usageUpdatesLog.notice("\(String(describing: time))")
+        }
+        usageUpdatesLog.notice("End of Update Times")
     }
 }
 
@@ -350,6 +436,11 @@ enum UserDefaultsKeys : String {
     case notificationsSentCurrWeek
     case notificationsSnoozedCurrWeek
     case notificationSent
+  
+    case updateTimes
+    case visitUpdates
+    case locationUpdates
+    case fetchUpdates
     
     //ONLY FOR TESTING! DELETE LATER
     case eachDayPhoneUsage //This variable will be displayed in a view that can be accessed from settings page for user testers - just in case Sendgrid doesn't work...

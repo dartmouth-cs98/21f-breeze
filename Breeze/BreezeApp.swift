@@ -13,6 +13,7 @@ import UIKit
 import Foundation
 import CoreLocation
 import OSLog
+import os
 
 @available(iOS 15.0, *)
 
@@ -23,7 +24,7 @@ struct BreezeApp: App {
     @AppStorage("hasntExitedEndOfSetUpView") var hasntExitedEndOfSetUpView: Bool = true
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    
 
     var body: some Scene {
         
@@ -49,7 +50,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     let locationManager = CLLocationManager()
     let backgroundTaskID = "com.breeze.CheckPhoneUsage"
     let gcmMessageIDKey = "gcm.message_id"
-    let logger = Logger.init()
+    let log = Logger.init(subsystem: "edu.dartmouth.Breeze", category: "AppDelegate")
+    let usageUpdatesLog = Logger.init(subsystem: "edu.dartmouth.Breeze", category: "UsageUpdates")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) ->
         Bool {
@@ -67,10 +69,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = 45
         locationManager.distanceFilter = 100
+        locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startMonitoringVisits()
         
-
-            
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
         
@@ -85,9 +87,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         UIApplication.shared.registerForRemoteNotifications()
 
         if (UIApplication.shared.isRegisteredForRemoteNotifications) {
-            print("This application on this device is registered for remote notifications")
+            log.notice("This application on this device is registered for remote notifications")
         } else {
-            print("This application on this device is NOT registered for remote notifications")
+            log.notice("This application on this device is NOT registered for remote notifications")
         }
             
         Messaging.messaging().delegate = self
@@ -100,46 +102,49 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("called")
-      let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-      let token = tokenParts.joined()
         Messaging.messaging().apnsToken = deviceToken;
-
-      print("Device Token: \(token)")
     }
     
-    func application(
-      _ application: UIApplication,
-      didFailToRegisterForRemoteNotificationsWithError error: Error
-    ) {
-      print("Failed to register: \(error)")
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        log.error("Failed to register: \(String(describing: error))")
     }
     
     func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
-        print("Received notification - Next will check phone usage")
+        log.notice("Received notification - Next will check phone usage")
         checkPhoneUsage()
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            log.notice("Message ID: \(String(describing: messageID))")
         }
         
         if let value = userInfo["some-key"] as? String {
                print(value) // output: "some-value"
         }
-        print(userInfo)
+        log.notice("\(String(describing: userInfo))")
         completionHandler(UIBackgroundFetchResult.newData)
     }
     
+    func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+        log.notice("Phone is locking")
+        checkPhoneUsageBeforeLocking()
+    }
+    
+    func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+        log.notice("Phone is unlocking")
+        UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
+        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+    }
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-      print("Firebase registration token: \(String(describing: fcmToken))")
+        log.notice("Firebase registration token: \(String(describing: fcmToken))")
 
-      let dataDict: [String: String] = ["token": fcmToken ?? ""]
-      NotificationCenter.default.post(
-        name: Notification.Name("FCMToken"),
-        object: nil,
-        userInfo: dataDict
-      )
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
         
       // TODO: If necessary send token to application server.
     }
@@ -149,8 +154,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                                   withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
                                     -> Void) {
         let userInfo = notification.request.content.userInfo
-        print("In")
-        print(userInfo)
+        log.notice("\(String(describing: userInfo))")
         completionHandler([])
     }
 
@@ -158,8 +162,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     //NOTIFICATION CLICKED
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
-        print("In")
+        log.notice("\(String(describing: userInfo))")
         completionHandler()
         //TO-DO: HANDLE NOTIFICATION CLICKS - tap, snooze, decline, and (maybe) adjust Breeze settings button. And, add statistics for this.
         UserDefaults.standard.setExistsOutstandingNotification(value: false)
@@ -175,7 +178,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
        do {
           try BGTaskScheduler.shared.submit(request)
        } catch {
-          print("Could not schedule app refresh: \(error)")
+           usageUpdatesLog.error("Could not schedule app refresh: \(String(describing: error))")
        }
     }
     
@@ -199,7 +202,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         checkPhoneUsageOperation.completionBlock = {
             let success = true
             if success {
-                print("Background task ran and finished")
+                self.usageUpdatesLog.notice("Background task ran and finished")
             }
             task.setTaskCompleted(success: success)
         }
@@ -212,7 +215,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
         self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
             if let error = error {
-                print("Error: ", error)
+                self.log.error("Error: \(String(describing: error))")
             }
         }
     }
@@ -260,7 +263,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         self.userNotificationCenter.add(request) { (error) in
             if let error = error {
-                print("Notification Error: ", error)
+                self.log.error("Notification error: \(String(describing: error))")
             }
         }
         UserDefaults.standard.addNotificationSent() //add this to stats
@@ -274,44 +277,72 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
         
     func checkPhoneUsage() {
-        print("Checking phone usage and updating statistics")
+        usageUpdatesLog.notice("Checking phone usage and updating statistics")
         UserDefaults.standard.checkDayRollover()
         if UIApplication.shared.isProtectedDataAvailable {
-            print("Protected data is available")
+            usageUpdatesLog.notice("Protected data is available")
             if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
-                print("Protected data was previously available - adding this time interval to total phone usage")
+                usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
                 UserDefaults.standard.addIntervalToCurrentPhoneUsage()
             } else {
-                print("Protected data was not previously available - user started using their phone during this time interval")
+                usageUpdatesLog.notice("Protected data was not previously available - user started using their phone during this time interval")
                 UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
             }
             if (UserDefaults.standard.isAboveTimeLimit()) {
-                print("User is above their chosen time limit, sending a notification to play Breeze")
+                usageUpdatesLog.notice("User is above their chosen time limit, sending a notification to play Breeze")
                 sendNotification()
                 UserDefaults.standard.resetCurrentPhoneUsage()
             }
         } else {
-            print("Protected data is not available")
+            usageUpdatesLog.notice("Protected data is not available")
             UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         }
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
     }
     
+    func checkPhoneUsageBeforeLocking() {
+        usageUpdatesLog.notice("Checking phone usage before locking and updating statistics")
+        UserDefaults.standard.checkDayRollover()
+
+        if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
+            usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
+            UserDefaults.standard.addIntervalToCurrentPhoneUsage()
+        } else {
+            usageUpdatesLog.notice("Protected data was not previously available - time interval not captured")
+        }
+        if (UserDefaults.standard.isAboveTimeLimit()) {
+            usageUpdatesLog.notice("User is above their chosen time limit, sending a notification to play Breeze")
+            sendNotification()
+            UserDefaults.standard.resetCurrentPhoneUsage()
+        }
+        UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
+        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        logger.error("Location update check")
+        usageUpdatesLog.notice("Location update check")
         checkPhoneUsage()
     }
     
     func locationManager(_ manager: CLLocationManager,
                          didVisit visit: CLVisit) {
-        logger.error("Visit check")
+        usageUpdatesLog.notice("Visit check")
         checkPhoneUsage()
     }
     
     func locationManager(_ manager: CLLocationManager,  didFailWithError error: Error) {
-        print(error.localizedDescription)
+        usageUpdatesLog.notice("Location manager error: \(error.localizedDescription)")
         locationManager.stopMonitoringVisits()
         return
     }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        log.notice("Will resign active")
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        log.notice("Will become active")
+    }
+    
 }
 
