@@ -10,10 +10,6 @@ import OSLog
 
 // getters and setters for stander UserDefaults data
 extension UserDefaults {
-    func incrementStreak(){
-        set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
-    }
-    
     var log: Logger {
         return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UserDefaults")
     }
@@ -40,6 +36,10 @@ extension UserDefaults {
         return integer(forKey: UserDefaultsKeys.points.rawValue)
     }
 
+    func incrementStreak(){
+        set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
+    }
+    
     func getStreak() -> Int{
         return integer(forKey: UserDefaultsKeys.streak.rawValue)
     }
