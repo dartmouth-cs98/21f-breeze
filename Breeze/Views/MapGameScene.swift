@@ -9,8 +9,12 @@ import Foundation
 import SpriteKit
 import GameplayKit
 import SwiftUI
+import OSLog
 
 class MapGameScene: SKScene {
+    
+    let gameLog = Logger.init(subsystem: "edu.dartmouth.breeze", category: "GameLog")
+    
     var mapTrail = SKSpriteNode(imageNamed: "map dots.png")
 
     var island_size = CGFloat(125)
@@ -306,7 +310,7 @@ class MapGameScene: SKScene {
         }
     
     func moveSprite(pointA: CGPoint, pointB: CGPoint){
-        print("in sprite movement")
+        gameLog.notice("in sprite movement")
         let path = UIBezierPath()
         path.move(to: pointA)
         path.addLine(to: pointB)
