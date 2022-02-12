@@ -1,8 +1,8 @@
 //
-//  TimeSelectionView.swift
+//  LocationAuthorizationView.swift
 //  Breeze
 //
-//  Created by Laurel Dernbach on 11/9/21.
+//  Created by Sabrina Jain on 2/12/22
 //
 import Foundation
 import SwiftUI
@@ -10,21 +10,42 @@ struct LocationAuthorizationView: View {
     
     // @Binding var locationAuthorizationIsPresenting: Bool
     @State private var locationSelected = false;
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some View {
         ZStack {
            VStack {
                Text("One more thing: ")
-                   .font(.body)
+                   .font(.body).bold()
                    .multilineTextAlignment(.center)
-                   .padding(.bottom, 5)
-                   .foregroundColor(Color.black)
+                   .padding(.bottom, 10)
                Text("In order to track your screen time, Breeze needs to use location updates to keep running in the background")
                    .font(.body)
                    .multilineTextAlignment(.center)
-                   .padding(.horizontal, 50)
+                   .padding(.horizontal, 50).padding(.bottom, 20)
                    .lineSpacing(5)
-                   .foregroundColor(Color.black)
+               Divider()
+               Text("After hitting  **`OK`**  you will be prompted,\n please select: \n`Allow While Using App`")
+                   .font(.body)
+                   .multilineTextAlignment(.center)
+                   .padding(.horizontal, 40)
+                   .padding(.top, 20)
+                   .padding(.bottom, 10)
+                   .lineSpacing(5)
+               //Divider().padding(.vertical, 5)
+               Text("You will also be prompted again \n**AFTER**  you close Breeze,\nplease select:\n`Change to Always Allow`")
+                   .font(.body)
+                   .multilineTextAlignment(.center)
+                   .padding(.horizontal, 60)
+                   .padding(.bottom, 20)
+                   .padding(.top, 10)
+                   .lineSpacing(5)
+               Divider()
+               Text("**Breeze WILL NOT work correctly if you don't follow these instructions!**")
+                   .font(.body)
+                   .multilineTextAlignment(.center)
+                   .padding(.horizontal, 30).padding(.bottom, 20).padding(.top, 25)
+                   .lineSpacing(5)
                Button("OK", action: authorizeLocationUpdates)
                    .padding()
                    .font(.body)
@@ -37,6 +58,9 @@ struct LocationAuthorizationView: View {
     }
     
     func authorizeLocationUpdates() {
+
+        appDelegate.locationManager.requestAlwaysAuthorization()
+        UserDefaults.standard.set(false, forKey: "hasntBeenPromptedForLocationAuthorization")
         
     }
     
