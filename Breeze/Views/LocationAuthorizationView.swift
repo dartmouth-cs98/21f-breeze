@@ -32,7 +32,7 @@ struct LocationAuthorizationView: View {
                    .padding(.top, 20)
                    .padding(.bottom, 10)
                    .lineSpacing(5)
-               //Divider().padding(.vertical, 5)
+               Divider().padding(.horizontal, 120)
                Text("You will also be prompted again \n**AFTER**  you close Breeze,\nplease select:\n`Change to Always Allow`")
                    .font(.body)
                    .multilineTextAlignment(.center)
@@ -58,12 +58,9 @@ struct LocationAuthorizationView: View {
     }
     
     func authorizeLocationUpdates() {
-
-        appDelegate.locationManager.requestAlwaysAuthorization()
         UserDefaults.standard.set(false, forKey: "hasntBeenPromptedForLocationAuthorization")
-        
+        appDelegate.locationManager.requestAlwaysAuthorization()
     }
-    
  }
 
 struct LocationAuthorizationView_Previews: PreviewProvider {

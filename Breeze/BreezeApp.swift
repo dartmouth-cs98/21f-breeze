@@ -68,7 +68,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         FirebaseApp.configure()
                     
         //request authorization to use notifications
-        self.requestNotificationAuthorization()
+        //self.requestNotificationAuthorization()
             
         // request authorization to track updates
         locationManager.delegate = self
@@ -84,10 +84,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         UNUserNotificationCenter.current().delegate = self
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in }
-        )
+            
         
         application.applicationIconBadgeNumber = 0
         application.registerForRemoteNotifications()
