@@ -22,18 +22,25 @@ struct BreezeApp: App {
     
     @AppStorage("hasntFinishedSetup") var hasntFinishedSetup: Bool = true
     @AppStorage("hasntExitedEndOfSetUpView") var hasntExitedEndOfSetUpView: Bool = true
+    @AppStorage("hasntBeenPromptedForLocationAuthorization") var hasntBeenPromptedForLocationAuthorization: Bool = true
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
 
     var body: some Scene {
         
+        
         WindowGroup {
               if hasntExitedEndOfSetUpView {
                   if hasntFinishedSetup {
                       TimeLimitInstructionsView()
                   } else {
-                      InstructionsView()
+                      if hasntBeenPromptedForLocationAuthorization {
+                          LocationAuthorizationView()
+                      } else {
+                          InstructionsView()
+                      }
+                      
                   }
                 
               } else {
@@ -44,7 +51,7 @@ struct BreezeApp: App {
     }
 }
 
-@available(iOS 15.0, *)
+
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate, CLLocationManagerDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
     let locationManager = CLLocationManager()
@@ -61,11 +68,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         FirebaseApp.configure()
                     
         //request authorization to use notifications
-        self.requestNotificationAuthorization()
+        //self.requestNotificationAuthorization()
             
         // request authorization to track updates
         locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        // locationManager.requestAlwaysAuthorization()
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = 45
         locationManager.distanceFilter = 100
@@ -77,10 +84,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         UNUserNotificationCenter.current().delegate = self
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in }
-        )
+            
         
         application.applicationIconBadgeNumber = 0
         application.registerForRemoteNotifications()
@@ -325,6 +329,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         usageUpdatesLog.notice("Location manager error: \(error.localizedDescription)")
         locationManager.stopMonitoringVisits()
         return
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.desiredAccuracy = 45
+        locationManager.distanceFilter = 100
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.startMonitoringVisits()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

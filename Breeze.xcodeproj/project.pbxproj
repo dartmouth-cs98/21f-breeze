@@ -33,6 +33,7 @@
 		4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */; };
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
+		46B28C4F27B794B500F7F0D7 /* LocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B28C4E27B794B500F7F0D7 /* LocationAuthorizationView.swift */; };
 		46E67A682742CA3300A347AA /* LosingExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E67A672742CA3300A347AA /* LosingExitView.swift */; };
 		46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */; };
 		46F6460B273C150700A27DC3 /* Baloo2-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */; };
@@ -101,6 +102,7 @@
 		4652152C272F26040023C2C0 /* StartingWhirlpoolGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingWhirlpoolGameScene.swift; sourceTree = "<group>"; };
 		4652152E272F260B0023C2C0 /* ExitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExitView.swift; sourceTree = "<group>"; };
 		46521530272F26150023C2C0 /* EndOfSetUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfSetUpView.swift; sourceTree = "<group>"; };
+		46B28C4E27B794B500F7F0D7 /* LocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationView.swift; sourceTree = "<group>"; };
 		46E67A672742CA3300A347AA /* LosingExitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosingExitView.swift; sourceTree = "<group>"; };
 		46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Regular.ttf"; sourceTree = "<group>"; };
 		46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				46521530272F26150023C2C0 /* EndOfSetUpView.swift */,
 				46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */,
 				FF28167D273B69710022F820 /* TimeSelectionView.swift */,
+				46B28C4E27B794B500F7F0D7 /* LocationAuthorizationView.swift */,
 				A8C3C77C279717F20027D8F9 /* InstructionsView.swift */,
 				A87EDDCA27986AA9008D6DD3 /* Time.swift */,
 				A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */,
@@ -422,6 +425,7 @@
 				FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */,
 				461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */,
 				A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */,
+				46B28C4F27B794B500F7F0D7 /* LocationAuthorizationView.swift in Sources */,
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				A8C3C77D279717F20027D8F9 /* InstructionsView.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,

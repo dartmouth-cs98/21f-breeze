@@ -10,6 +10,7 @@ struct TimeSelectionView: View {
     @Binding var timeSelectionIsPresenting: Bool
     @State private var startTime = Time(hours:0, minutes:0, seconds:0)
     @State private var timeSelected = false;
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some View {
         ZStack {
@@ -45,6 +46,7 @@ struct TimeSelectionView: View {
         UserDefaults.standard.setTime(value: timeInMinutes)
         UserDefaults.standard.setSetupBool(value: true)
         timeSelectionIsPresenting.toggle()
+        appDelegate.requestNotificationAuthorization()
     }
     
  }
