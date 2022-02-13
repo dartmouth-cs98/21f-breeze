@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct EndOfSetUpView: View {
     @Binding var endViewIsPresenting: Bool
     var body: some View {
@@ -20,11 +19,11 @@ struct EndOfSetUpView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Exit Set Up", action: {UserDefaults.standard.set(false, forKey: "hasntExitedEndOfSetUpView")})
+                    .padding()
                     .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
-                    .padding()
-            }.buttonStyle(.bordered)
+            }
         }
     }
 }

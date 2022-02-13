@@ -37,6 +37,7 @@ struct DurationPickerView: UIViewRepresentable {
         }
 
         @objc func onDateChanged(sender: UIDatePicker) {
+            
             durationPicker.changeTriggered = true;
             let calendar = Calendar.current
             let date = sender.date

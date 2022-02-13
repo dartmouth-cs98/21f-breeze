@@ -1,19 +1,29 @@
 {
   "images" : [
     {
-      "filename" : "dock2.png",
+      "filename" : "dock.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "dock2-1.png",
+      "filename" : "dock-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "dock2-2.png",
+      "filename" : "dock-2.png",
       "idiom" : "universal",
       "scale" : "3x"
+    },
+    {
+      "filename" : "dock (1).png",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "dock (1)-1.png",
+      "idiom" : "ipad",
+      "scale" : "2x"
     }
   ],
   "info" : {

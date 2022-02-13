@@ -12,7 +12,7 @@ import SwiftUI
 
 class StartingWhirlpoolGameScene: SKScene {
 
-    let boat = SKSpriteNode(imageNamed: "boat2")
+    let boat = SKSpriteNode(imageNamed: "boat")
     var backgroundsm = SKSpriteNode(imageNamed: "whirlpool2")
     var backgroundmed = SKSpriteNode(imageNamed: "whirlpool2")
     var backgroundlrg = SKSpriteNode(imageNamed: "whirlpool2")
