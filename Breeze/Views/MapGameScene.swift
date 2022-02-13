@@ -184,6 +184,16 @@ class MapGameScene: SKScene {
         instructions1.lineBreakMode = NSLineBreakMode.byWordWrapping
         instructions1.numberOfLines = 4
         instructions1.preferredMaxLayoutWidth = frame.size.width * 0.5
+        
+        //USER TESTING CODE (DELETE LATER)
+        if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map. TESTING ID: " + uuid
+        }
+        else {
+            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
+        }
+        //USER TESTINC CODE FINISH
+        
         addChild(instructions1)
     }
     

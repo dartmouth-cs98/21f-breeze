@@ -7,6 +7,7 @@
 
 import Foundation
 import SendGrid
+import SwiftUI
 
 // getters and setters for stander UserDefaults data
 extension UserDefaults{
@@ -231,6 +232,7 @@ extension UserDefaults{
     }
     
     func checkDayRollover() {
+        sendUserDataToBreeze()
         // if lastTimeProtectedDataStatusChecked is previous day, then store previous day's time and send to Sendgrid??
         let calendar = Calendar.current
         let prevDate = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
@@ -266,18 +268,17 @@ extension UserDefaults{
     
     //Sendgrid API call to output data
     func sendUserDataToBreeze() {
-        let session = Session()
         let SG_KEY="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"
-        session.authentication = Authentication.apiKey(SG_KEY)
+        Session.shared.authentication = Authentication.apiKey(SG_KEY)
         
         // Send a basic example
         let personalization = Personalization(recipients: "jrweingart@gmail.com")
-        let plainText = Content(contentType: ContentType.plainText, value: "User spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
-        let htmlText = Content(contentType: ContentType.htmlText, value: "<h1>Hello World</h1>")
+        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        let plainText = Content(contentType: ContentType.plainText, value: "User " + uuid + " spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
         let email = Email(
             personalizations: [personalization],
             from: "jrweingart@gmail.com",
-            content: [plainText, htmlText],
+            content: [plainText],
             subject: "Hello from Breeze"
         )
         do {
