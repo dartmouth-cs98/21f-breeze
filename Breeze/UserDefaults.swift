@@ -271,14 +271,14 @@ extension UserDefaults{
         session.authentication = Authentication.apiKey(SG_KEY)
         
         // Send a basic example
-        let personalization = Personalization(recipients: "test@example.com")
-        let plainText = Content(contentType: ContentType.plainText, value: "User spent " + string(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) + )
+        let personalization = Personalization(recipients: "jrweingart@gmail.com")
+        let plainText = Content(contentType: ContentType.plainText, value: "User spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
         let htmlText = Content(contentType: ContentType.htmlText, value: "<h1>Hello World</h1>")
         let email = Email(
             personalizations: [personalization],
-            from: "foo@bar.com",
+            from: "jrweingart@gmail.com",
             content: [plainText, htmlText],
-            subject: "Hello World"
+            subject: "Hello from Breeze"
         )
         do {
             try Session.shared.send(request: email)
