@@ -24,20 +24,6 @@ extension UserDefaults {
         return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UsageUpdates")
     }
     
-    // example usage:
-    // UserDefaults.standard.setPoints(value: 90)
-    func setPoints(value: Int) {
-        var currPoints: Int = integer(forKey: UserDefaultsKeys.points.rawValue)
-        currPoints += value
-        set(currPoints, forKey: UserDefaultsKeys.points.rawValue)
-    }
-
-    // example usage:
-    // UserDefaults.standard.getPoints()
-    func getPoints()-> Int {
-        return integer(forKey: UserDefaultsKeys.points.rawValue)
-    }
-
     func incrementStreak(){
         set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
     }

@@ -14,7 +14,6 @@ struct TapToPlayView: View {
     @State private var isPresenting = false
     @AppStorage("hasntFinishedGame") var hasntFinishedGame: Bool = true
     @AppStorage("hasntLostGame") var hasntLostGame: Bool = true
-    @State private var userPoints = UserDefaults.standard.getPoints()
     @State private var userStreak =
     UserDefaults.standard.getStreak()
     @State private var numClicks =
@@ -33,7 +32,6 @@ struct TapToPlayView: View {
             VStack {
                 Text("Way to go! Here's an update on your healthier habits.").font(Font.custom("Baloo2-Regular", size:30)).multilineTextAlignment(.center).padding()
                 VStack (spacing: 0, content: {
-                    Text("BreezeBucks:  \( UserDefaults.standard.getPoints())").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
                     Divider()
                     Text("Streak:  \(userStreak) days").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
                     Divider()

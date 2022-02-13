@@ -34,6 +34,12 @@
 		4652152F272F260B0023C2C0 /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4652152E272F260B0023C2C0 /* ExitView.swift */; };
 		46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46521530272F26150023C2C0 /* EndOfSetUpView.swift */; };
 		46B28C4F27B794B500F7F0D7 /* LocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B28C4E27B794B500F7F0D7 /* LocationAuthorizationView.swift */; };
+		46B28C5327B9B72600F7F0D7 /* Island.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B28C5227B9B72500F7F0D7 /* Island.swift */; };
+		46B28C5427B9B72600F7F0D7 /* Island.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B28C5227B9B72500F7F0D7 /* Island.swift */; };
+		46B28C5527B9B72600F7F0D7 /* Island.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B28C5227B9B72500F7F0D7 /* Island.swift */; };
+		46B28C5727B9B80A00F7F0D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46B28C5627B9B80A00F7F0D7 /* Assets.xcassets */; };
+		46B28C5827B9B80A00F7F0D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46B28C5627B9B80A00F7F0D7 /* Assets.xcassets */; };
+		46B28C5927B9B80A00F7F0D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46B28C5627B9B80A00F7F0D7 /* Assets.xcassets */; };
 		46E67A682742CA3300A347AA /* LosingExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E67A672742CA3300A347AA /* LosingExitView.swift */; };
 		46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */; };
 		46F6460B273C150700A27DC3 /* Baloo2-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */; };
@@ -104,6 +110,8 @@
 		4652152E272F260B0023C2C0 /* ExitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExitView.swift; sourceTree = "<group>"; };
 		46521530272F26150023C2C0 /* EndOfSetUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfSetUpView.swift; sourceTree = "<group>"; };
 		46B28C4E27B794B500F7F0D7 /* LocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationView.swift; sourceTree = "<group>"; };
+		46B28C5227B9B72500F7F0D7 /* Island.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Island.swift; sourceTree = "<group>"; };
+		46B28C5627B9B80A00F7F0D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46E67A672742CA3300A347AA /* LosingExitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosingExitView.swift; sourceTree = "<group>"; };
 		46F64605273C150700A27DC3 /* Baloo2-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-Regular.ttf"; sourceTree = "<group>"; };
 		46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo2-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -187,12 +195,14 @@
 				FF04E03727307FA800E2D9D1 /* Views */,
 				9A117327271E16E800D871B7 /* info.plist */,
 				461E9E932719468900E6C510 /* GameScene.swift */,
+				46B28C5227B9B72500F7F0D7 /* Island.swift */,
 				A1495ECB2735929B009DA6B1 /* GameSceneController.swift */,
 				46FC0D082739C78B002D14F9 /* Breeze.entitlements */,
 				A14061412741C4BA006110CF /* Starfield.sks */,
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
 				461E9E212717725F00E6C510 /* Assets.xcassets */,
+				46B28C5627B9B80A00F7F0D7 /* Assets.xcassets */,
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
 				461E9E232717725F00E6C510 /* Preview Content */,
@@ -388,6 +398,7 @@
 			files = (
 				46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */,
 				46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */,
+				46B28C5727B9B80A00F7F0D7 /* Assets.xcassets in Resources */,
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
 				46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
@@ -403,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B28C5827B9B80A00F7F0D7 /* Assets.xcassets in Resources */,
 				4608969D27961E94005828BF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B28C5927B9B80A00F7F0D7 /* Assets.xcassets in Resources */,
 				4608969E27961E94005828BF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +452,7 @@
 				A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */,
 				4652152F272F260B0023C2C0 /* ExitView.swift in Sources */,
 				FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */,
+				46B28C5327B9B72600F7F0D7 /* Island.swift in Sources */,
 				A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */,
 				46E67A682742CA3300A347AA /* LosingExitView.swift in Sources */,
 				4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */,
@@ -449,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46B28C5427B9B72600F7F0D7 /* Island.swift in Sources */,
 				461E9E342717725F00E6C510 /* BreezeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,6 +474,7 @@
 			files = (
 				461E9E3E2717725F00E6C510 /* BreezeUITests.swift in Sources */,
 				461E9E402717725F00E6C510 /* BreezeUITestsLaunchTests.swift in Sources */,
+				46B28C5527B9B72600F7F0D7 /* Island.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
