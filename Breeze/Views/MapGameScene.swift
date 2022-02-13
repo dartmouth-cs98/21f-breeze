@@ -26,8 +26,8 @@ class MapGameScene: SKScene {
     var island4label = SKLabelNode()
     var island5label = SKLabelNode()
     
-    var boat = SKSpriteNode(imageNamed: "boat2")
-    var mapDock = SKSpriteNode(imageNamed: "dock2")
+    var boat = SKSpriteNode(imageNamed: "boat")
+    var mapDock = SKSpriteNode(imageNamed: "dock")
 
     let boat_speed = 100
     

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "sand beach.png",
+      "filename" : "beach.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "sand beach-1.png",
+      "filename" : "beach-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "sand beach-2.png",
+      "filename" : "beach-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     },

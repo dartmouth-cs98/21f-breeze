@@ -28,50 +28,67 @@ class Island {
     var boat: String
     var dock: String
     var beach: String
-    init(backColor: UIColor, obstacleColor: UIColor, boatJPG: String, dockJPG: String, beachJPG: String) {
+    var wallTexture: String
+    var obstacles: [String]
+    init(backColor: UIColor, obstacleColor: UIColor, boatJPG: String, dockJPG: String, beachJPG: String, obstacleJPGs: [String], wallTextureString: String) {
         self.backgroundColor = backColor
         self.wallColor = obstacleColor
         self.boat = boatJPG
         self.dock = dockJPG
         self.beach = beachJPG
+        self.obstacles = obstacleJPGs
+        self.wallTexture = wallTextureString
     }
 }
 
 struct Islands {
     static let island1 = Island(
-        backColor: UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1),
-        obstacleColor: UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1),
-        boatJPG: "boat2",
-        dockJPG: "dock2",
-        beachJPG: "beach2"
+        backColor: UIColor(red: 240/255, green: 10/255, blue: 218/255, alpha: 1),
+        obstacleColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+        boatJPG: "boat",
+        dockJPG: "dock",
+        beachJPG: "sand beach",
+        obstacleJPGs: ["seaweed", "starfish"],
+        wallTextureString: "tropical wall"
     )
+    
     static let island2 = Island(
         backColor: UIColor(red: 240/255, green: 10/255, blue: 218/255, alpha: 1),
         obstacleColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
         boatJPG: "boat",
         dockJPG: "dock",
-        beachJPG: "beach"
+        beachJPG: "lighthouse beach",
+        obstacleJPGs: ["rock1", "rock2"],
+        wallTextureString: "rock wall2"
+
     )
     static let island3 = Island(
-        backColor: UIColor(red: 240/255, green: 10/255, blue: 218/255, alpha: 1),
+        backColor: UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1),
         obstacleColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
         boatJPG: "boat",
         dockJPG: "dock",
-        beachJPG: "beach"
+        beachJPG: "ice beach",
+        obstacleJPGs: ["berg1", "berg 2"],
+        wallTextureString: "ice wall"
     )
     static let island4 = Island(
         backColor: UIColor(red: 240/255, green: 10/255, blue: 218/255, alpha: 1),
         obstacleColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
         boatJPG: "boat",
         dockJPG: "dock",
-        beachJPG: "beach"
+        beachJPG: "beach",
+        obstacleJPGs: ["berg1"],
+        wallTextureString: "rock wall2"
+
     )
     static let island5 = Island(
         backColor: UIColor(red: 240/255, green: 10/255, blue: 218/255, alpha: 1),
         obstacleColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
         boatJPG: "boat",
         dockJPG: "dock",
-        beachJPG: "beach"
+        beachJPG: "beach",
+        obstacleJPGs: ["berg1"],
+        wallTextureString: "rock wall2"
     )
 }
 

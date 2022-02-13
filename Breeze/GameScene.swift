@@ -145,10 +145,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseScene()
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-        
-//        let texture = SKTexture(imageNamed: "berg1")
-//        let renderedTexture = view.texture(from: SKSpriteNode(texture: texture))!
-//        addBerg(renderedTexture)
     }
     
     func setDifficulty() {
@@ -234,7 +230,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createObstacleArray() -> Array<String> {
-        let obstacles: [String] = ["basic", "multilevel", "berg"]
+//        let obstacles: [String] = ["basic", "multilevel", "object"]
+        let obstacles: [String] = ["basic", "object"]
         var obstacleArray: [String] = []
         var obstacles_left = num_obstacles
         while obstacles_left > 0 {
@@ -257,24 +254,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             renderBasicWall()
         } else if curr == "multilevel"{
             renderMultiLevelWall()
-        } else if curr == "berg" {
-            renderBerg()
+        } else if curr == "object" {
+            renderObjectObstacle()
         }
         return count + 1
     }
 
     
-    func renderBerg(){
-        let berg = SKSpriteNode(imageNamed: "berg1")
-        berg.size = CGSize(width: 200, height: 200)
+    func renderObjectObstacle(){
+        let obstacleName = island.obstacles.randomElement()
+        let obstacle = SKSpriteNode(imageNamed: obstacleName!)
+        obstacle.size = CGSize(width: 200, height: 200)
 
-        berg.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 100))
+        obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 100))
 
-        berg.physicsBody?.categoryBitMask = obstacleCategory
-        berg.physicsBody?.isDynamic = false
-        berg.physicsBody?.contactTestBitMask = boatObstacleInteraction
+        obstacle.physicsBody?.categoryBitMask = obstacleCategory
+        obstacle.physicsBody?.isDynamic = false
+        obstacle.physicsBody?.contactTestBitMask = boatObstacleInteraction
 
-        //pick berg path
+        //pick object path
         let side = Bool.random()
         let left_point = Int.random(in: left_edge - 50..<left_edge + 50)
         let right_point = Int.random(in: right_edge - 50..<right_edge + 50)
@@ -293,8 +291,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         path.addLine(to: CGPoint(x: end_point, y: bottom_edge - path_buffer * 2))
         let move = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
     
-        self.addChild(berg)
-        berg.run(move)
+        self.addChild(obstacle)
+        obstacle.run(move)
     }
     
     func renderWallPng(){
@@ -348,9 +346,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         left_obstacle.fillColor = islandColor
         left_obstacle.strokeColor = islandColor
+        left_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
+
         
         right_obstacle.fillColor = islandColor
         right_obstacle.strokeColor = islandColor
+        right_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
+
         
         left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
         left_obstacle.physicsBody?.isDynamic = false
@@ -471,7 +473,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         bottom_vertical_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
         bottom_vertical_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-
+        
         bottom_vertical_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_vertical_rect_shape)
         bottom_vertical_obstacle.physicsBody?.isDynamic = false
         bottom_vertical_obstacle.physicsBody?.categoryBitMask = obstacleCategory

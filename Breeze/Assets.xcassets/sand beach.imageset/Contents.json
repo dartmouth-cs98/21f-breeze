@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "dock2.png",
+      "filename" : "sand beach2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "dock2-1.png",
+      "filename" : "sand beach2-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "dock2-2.png",
+      "filename" : "sand beach2-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
