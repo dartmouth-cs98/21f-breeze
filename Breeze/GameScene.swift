@@ -6,8 +6,11 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
+import OSLog
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    let gameLog = Logger.init(subsystem: "edu.dartmouth.breeze", category: "GameLog")
         
     //instantiate sprites
     var boat = SKSpriteNode(imageNamed: "boat2")
@@ -136,7 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setDifficulty() {
-        print("set")
+        gameLog.notice("Setting difficulty")
         if difficulty == 1 {
             seconds_between_obstacle = 2
             obstacle_speed = 100
@@ -177,7 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if obstacle_count < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
             let old_count = obstacle_count
             obstacle_count = renderObstacle(count: old_count)
-            print(obstacle_count)
+            gameLog.notice("Obstacle count: \(self.obstacle_count)")
         }
         
         //instantiate end-of-level timer for beach
