@@ -30,8 +30,8 @@ class MapGameScene: SKScene {
     var island4label = SKLabelNode()
     var island5label = SKLabelNode()
     
-    var boat = SKSpriteNode(imageNamed: "boat2")
-    var mapDock = SKSpriteNode(imageNamed: "dock2")
+    var boat = SKSpriteNode(imageNamed: "boat")
+    var mapDock = SKSpriteNode(imageNamed: "dock")
 
     let boat_speed = 100
     
@@ -40,12 +40,12 @@ class MapGameScene: SKScene {
     override func didMove(to view: SKView) {
         
         // map reset if necessary (comment out until needed)
-//        UserDefaults.standard.resetMap()
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-        UserDefaults.standard.resetMap()
+//        UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
+        
         mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
         mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         mapTrail.removeFromParent()
@@ -201,14 +201,14 @@ class MapGameScene: SKScene {
                         if UserDefaults.standard.islandGetLevel(value: 1) == 0 {
                             // 78move boat
                             UserDefaults.standard.islandLevelUp(value: 1)
-                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/ \(num_levels)"
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + " / \(num_levels)"
                             moveSprite(pointA: mapDock.position, pointB: island1.position)
                             break
                         }
                         else if UserDefaults.standard.islandGetLevel(value: 1) >= num_levels {
                             island1label.text = "Level: \(num_levels) / \(num_levels)"
                         } else {
-                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/ \(num_levels)"
+                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + " / \(num_levels)"
                         }
                         UserDefaults.standard.setCurrentIsland(value: 1)
                         startGame()
@@ -222,14 +222,14 @@ class MapGameScene: SKScene {
                             if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
                                 //move boat
                                 UserDefaults.standard.islandLevelUp(value: 2)
-                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/ \(num_levels)"
+                                island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + " / \(num_levels)"
                                 moveSprite(pointA: island1.position, pointB: island2.position)
                             }
                             else{
                                 if UserDefaults.standard.islandGetLevel(value: 2) == num_levels {
                                         island2label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + "/ \(num_levels)"
+                                    island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 2)
                                 startGame()
@@ -245,14 +245,14 @@ class MapGameScene: SKScene {
                             if UserDefaults.standard.islandGetLevel(value: 3) == 0 {
                                 //move boat
                                 UserDefaults.standard.islandLevelUp(value: 3)
-                                island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/ \(num_levels)"
+                                island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + " / \(num_levels)"
                                 moveSprite(pointA: island2.position, pointB: island3.position)
                             }
                             else{
                                 if UserDefaults.standard.islandGetLevel(value: 3) == num_levels {
                                         island3label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + "/ \(num_levels)"
+                                    island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 3)
                                 startGame()
@@ -268,14 +268,14 @@ class MapGameScene: SKScene {
                             if UserDefaults.standard.islandGetLevel(value: 4) == 0 {
                                 //move boat
                                 UserDefaults.standard.islandLevelUp(value: 4)
-                                island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/ \(num_levels)"
+                                island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + " / \(num_levels)"
                                 moveSprite(pointA: island3.position, pointB: island4.position)
                             }
                             else{
                                 if UserDefaults.standard.islandGetLevel(value: 4) == num_levels {
                                         island4label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/ \(num_levels)"
+                                    island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 4)
                                 startGame()
@@ -291,14 +291,14 @@ class MapGameScene: SKScene {
                             if UserDefaults.standard.islandGetLevel(value: 5) == 0 {
                                 //move boat
                                 UserDefaults.standard.islandLevelUp(value: 5)
-                                island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/ \(num_levels)"
+                                island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + " / \(num_levels)"
                                 moveSprite(pointA: island4.position, pointB: island5.position)
                             }
                             else{
                                 if UserDefaults.standard.islandGetLevel(value: 5) == num_levels {
                                         island5label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + "/ \(num_levels)"
+                                    island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 5)
                                 startGame()
