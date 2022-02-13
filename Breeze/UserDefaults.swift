@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SendGrid
+import SwiftUI
 import OSLog
 
 // getters and setters for stander UserDefaults data
@@ -253,7 +255,6 @@ extension UserDefaults {
     }
     
     func checkDayRollover() {
-        
         // if lastTimeProtectedDataStatusChecked is previous day, then store previous day's time and send to Sendgrid??
         let calendar = Calendar.current
         let prevDate = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
@@ -275,10 +276,11 @@ extension UserDefaults {
             var eachDayArray = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
             eachDayArray.append([prevDayOfWeek, currDayUsage])
             set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
-            set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue)
+            sendUserDataToBreeze()
             
-            //TO-DO: SEND DAY SCREENTIME VIA SENDGRID AS WELL
+            set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) //Now reset current day phone usage
             //END USER TESTING
+
             
             let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
             usageUpdatesLog.notice("Phone usage for current week: \(currWeekUsage)")
@@ -289,6 +291,28 @@ extension UserDefaults {
                 set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
                 rollOverNotifications()
             }
+        }
+    }
+    
+    //Sendgrid API call to output data
+    func sendUserDataToBreeze() {
+        let SG_KEY="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"
+        Session.shared.authentication = Authentication.apiKey(SG_KEY)
+        
+        // Send a basic example
+        let personalization = Personalization(recipients: "jrweingart@gmail.com")
+        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        let plainText = Content(contentType: ContentType.plainText, value: "User " + uuid + " spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
+        let email = Email(
+            personalizations: [personalization],
+            from: "jrweingart@gmail.com",
+            content: [plainText],
+            subject: "Hello from Breeze"
+        )
+        do {
+            try Session.shared.send(request: email)
+        } catch {
+            print(error)
         }
     }
     

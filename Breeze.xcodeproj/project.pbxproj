@@ -41,6 +41,7 @@
 		46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */; };
 		46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */; };
 		46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */; };
+		9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 9A45A90027B4622500C4FC45 /* SendGrid */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8390C5C27B462B20042BA0F /* ProfileView.swift */; };
@@ -131,6 +132,7 @@
 				460896A6279620ED005828BF /* FirebaseFunctions in Frameworks */,
 				460896A2279620ED005828BF /* FirebaseAnalytics in Frameworks */,
 				460896AE279620ED005828BF /* FirebaseMessaging in Frameworks */,
+				9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */,
 				460896A4279620ED005828BF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				460896A8279620ED005828BF /* FirebaseFunctionsCombine-Community in Frameworks */,
 				460896AC279620ED005828BF /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -290,6 +292,7 @@
 				460896AB279620ED005828BF /* FirebaseInAppMessagingSwift-Beta */,
 				460896AD279620ED005828BF /* FirebaseMessaging */,
 				460896AF279620ED005828BF /* FirebaseRemoteConfig */,
+				9A45A90027B4622500C4FC45 /* SendGrid */,
 			);
 			productName = Breeze;
 			productReference = 461E9E1A2717725E00E6C510 /* Breeze.app */;
@@ -365,6 +368,7 @@
 			mainGroup = 461E9E112717725E00E6C510;
 			packageReferences = (
 				460896A0279620ED005828BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9A45A8FF27B4622500C4FC45 /* XCRemoteSwiftPackageReference "sendgrid-swift" */,
 			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
 			projectDirPath = "";
@@ -804,6 +808,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		9A45A8FF27B4622500C4FC45 /* XCRemoteSwiftPackageReference "sendgrid-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scottkawai/sendgrid-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -846,6 +858,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 460896A0279620ED005828BF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		9A45A90027B4622500C4FC45 /* SendGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A45A8FF27B4622500C4FC45 /* XCRemoteSwiftPackageReference "sendgrid-swift" */;
+			productName = SendGrid;
 		};
 /* End XCSwiftPackageProductDependency section */
 
