@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct ExitView: View {
     
     @Binding var exitViewIsPresenting: Bool
@@ -21,14 +20,12 @@ struct ExitView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                  Button("Collect Your BreezeBucks!", action: goToTapToPlay)
+                    .padding()
                     .font(Font.custom("Baloo2-Regular", size:20))
                     .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
-                    .padding()
-
                 }
-                    .buttonStyle(.bordered)
             }
         }
     
