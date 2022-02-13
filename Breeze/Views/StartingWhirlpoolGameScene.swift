@@ -69,7 +69,7 @@ class StartingWhirlpoolGameScene: SKScene {
         
         // boat node
         boat.position = CGPoint(x: frame.size.width / 2, y: 60)
-        boat.size = CGSize(width: 70, height: 120)
+        boat.size = CGSize(width: 70 * 0.5, height: 120 * 0.5)
         boat.removeFromParent()
         self.addChild(boat)
         
