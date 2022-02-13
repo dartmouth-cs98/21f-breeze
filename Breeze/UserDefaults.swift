@@ -9,8 +9,7 @@ import Foundation
 import OSLog
 
 // getters and setters for stander UserDefaults data
-extension UserDefaults{
-    
+extension UserDefaults {
     var log: Logger {
         return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UserDefaults")
     }
@@ -37,12 +36,16 @@ extension UserDefaults{
         return integer(forKey: UserDefaultsKeys.points.rawValue)
     }
 
-    func setStreak(value: Int){
-        set(value, forKey: UserDefaultsKeys.streak.rawValue)
+    func incrementStreak(){
+        set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
     }
-
+    
     func getStreak() -> Int{
         return integer(forKey: UserDefaultsKeys.streak.rawValue)
+    }
+    
+    func resetStreak() {
+        set(0, forKey: UserDefaultsKeys.streak.rawValue)
     }
     
     func setTime(value: Int){
@@ -350,6 +353,14 @@ extension UserDefaults{
         return Double((dayOfWeek-1 + (hourOfDay / 24)) / 7)
     }
     
+    func existsOutstandingNotification() -> Bool {
+        return bool(forKey: UserDefaultsKeys.notificationSent.rawValue)
+    }
+    
+    func setExistsOutstandingNotification(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.notificationSent.rawValue)
+    }
+  
     func getVisitUpdates () -> Int {
         return integer(forKey: UserDefaultsKeys.visitUpdates.rawValue)
     }
@@ -395,12 +406,9 @@ extension UserDefaults{
         }
         usageUpdatesLog.notice("End of Update Times")
     }
-    
-    
 }
 
 enum UserDefaultsKeys : String {
-    case points
     case streak
     case timeInMinutes
     case endedGame
@@ -427,6 +435,8 @@ enum UserDefaultsKeys : String {
     case notificationsClickedCurrWeek
     case notificationsSentCurrWeek
     case notificationsSnoozedCurrWeek
+    case notificationSent
+  
     case updateTimes
     case visitUpdates
     case locationUpdates
