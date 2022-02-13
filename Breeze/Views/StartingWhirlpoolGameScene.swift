@@ -30,21 +30,21 @@ class StartingWhirlpoolGameScene: SKScene {
         //background
         self.backgroundColor = UIColor(red: 142/255, green: 193/255, blue: 255/255, alpha: 1)
 
-        backgroundlrg.size = CGSize(width: 700, height: 700)
+        backgroundlrg.size = CGSize(width: 1200, height: 1200)
         backgroundlrg.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         let op_rotateAction = SKAction.rotate(byAngle: .pi / -2, duration: 10)
         backgroundlrg.run(SKAction.repeatForever(op_rotateAction))
         backgroundlrg.removeFromParent()
         addChild(backgroundlrg)
         
-        backgroundmed.size = CGSize(width: 500, height: 500)
+        backgroundmed.size = CGSize(width: 800, height: 800)
         backgroundmed.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         let rotateAction = SKAction.rotate(byAngle: .pi / 2, duration: 10)
         backgroundmed.run(SKAction.repeatForever(rotateAction))
         backgroundmed.removeFromParent()
         addChild(backgroundmed)
         
-        backgroundsm.size = CGSize(width: 300, height: 300)
+        backgroundsm.size = CGSize(width: 400, height: 400)
         backgroundsm.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         backgroundsm.run(SKAction.repeatForever(op_rotateAction))
         backgroundsm.removeFromParent()
