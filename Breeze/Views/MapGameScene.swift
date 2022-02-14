@@ -41,7 +41,7 @@ class MapGameScene: SKScene {
         
         // map reset if necessary (comment out until needed)
         // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-//        UserDefaults.standard.resetMap()
+        UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)

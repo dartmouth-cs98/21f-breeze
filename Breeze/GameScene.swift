@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //obstacle variables (feel free to change these)
     var difficulty = 2
     var seconds_between_obstacle = 2
-    var num_obstacles = 10
+    var num_obstacles = 0
     var obstacle_speed = 150
     var gap_size = 150
     
@@ -520,12 +520,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         end_scene_delay += 1
     }
     
+    func swap() {
+        let transition = SKTransition.fade(withDuration: 1.0)
+        gameScene?.scaleMode = .aspectFill
+        exitView?.view?.presentScene(gameScene!, transition: transition)
+    }
+    
     func endScene(){
         UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
         // only "level up" once user has finished the level
         let island = UserDefaults.standard.getCurrentIsland()
         UserDefaults.standard.islandLevelUp(value: island)
+        print("made it to end scene")
     }
+    
+    
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
