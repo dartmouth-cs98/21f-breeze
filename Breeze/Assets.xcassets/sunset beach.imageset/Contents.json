@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ice beach-3.png",
+      "filename" : "sunset beach.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ice beach-1.png",
+      "filename" : "sunset beach-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ice beach-2.png",
+      "filename" : "sunset beach-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
