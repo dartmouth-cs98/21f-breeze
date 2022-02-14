@@ -80,7 +80,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
-        
+
         application.applicationIconBadgeNumber = 0
         UIApplication.shared.registerForRemoteNotifications()
 
