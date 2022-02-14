@@ -12,19 +12,21 @@ import SpriteKit
 let screenWidth  = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 
+@available(iOS 15.0, *)
 struct ContentView: View {
-    var scene: SKScene {
-            let scene = MapGameScene()
-            scene.size = CGSize(width: screenWidth, height: screenHeight)
-            scene.scaleMode = .fill
-            return scene
-        }
+    @State var tapToPlayView = TapToPlayView()
+         @State private var showModal = false
 
-        var body: some View {
-            SpriteView(scene: scene)
-                .frame(width: screenWidth, height: screenHeight)
-                .ignoresSafeArea()
-        }
+         func viewDidLoad() {
+
+         }
+         @ViewBuilder
+         var body: some View {
+             ZStack {
+                 Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
+                 tapToPlayView
+             }
+         }
 }
 
 @available(iOS 15.0, *)
@@ -33,3 +35,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
