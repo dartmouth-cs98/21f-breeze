@@ -43,6 +43,7 @@
 		46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
+		A1C3EE9D27B9BA41009E8EE6 /* Island.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C3EE9C27B9BA41009E8EE6 /* Island.swift */; };
 		A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8390C5C27B462B20042BA0F /* ProfileView.swift */; };
 		A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCA27986AA9008D6DD3 /* Time.swift */; };
 		A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */; };
@@ -114,6 +115,7 @@
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A14061412741C4BA006110CF /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
+		A1C3EE9C27B9BA41009E8EE6 /* Island.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Island.swift; sourceTree = "<group>"; };
 		A8390C5C27B462B20042BA0F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A87EDDCA27986AA9008D6DD3 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
 				461E9E212717725F00E6C510 /* Assets.xcassets */,
+				A1C3EE9C27B9BA41009E8EE6 /* Island.swift */,
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
 				461E9E232717725F00E6C510 /* Preview Content */,
@@ -435,6 +438,7 @@
 				A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */,
 				4652152F272F260B0023C2C0 /* ExitView.swift in Sources */,
 				FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */,
+				A1C3EE9D27B9BA41009E8EE6 /* Island.swift in Sources */,
 				A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */,
 				46E67A682742CA3300A347AA /* LosingExitView.swift in Sources */,
 				4652152B272F26010023C2C0 /* TapToPlayView.swift in Sources */,

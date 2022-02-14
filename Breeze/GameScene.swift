@@ -6,16 +6,14 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
-import OSLog
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     //instantiate island
     let currentIsland = UserDefaults.standard.getCurrentIsland();
-    let islands = [Islands.island1, Islands.island2]
-    lazy var island = islands[currentIsland - 1] //piece of shit fucking shit ass fucking lazy ass var
-        
-    let gameLog = Logger.init(subsystem: "edu.dartmouth.breeze", category: "GameLog")
-        
+    let islands = [Islands.island1, Islands.island2, Islands.island3, Islands.island4, Islands.island5]
+    lazy var island = islands[currentIsland - 1]
+    
+    
     //instantiate sprites
     lazy var boat = SKSpriteNode(imageNamed: island.boat)
     lazy var dock = SKSpriteNode(imageNamed: island.dock)
@@ -86,11 +84,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
 //        setIslandNumber()
         
-        view.showsPhysics = true
+//        view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
         
         starfield = SKEmitterNode(fileNamed: "Starfield")
+        starfield.particleColor = island.particleColor
         starfield.position = CGPoint(x: 0, y: 1472)
         starfield.advanceSimulationTime(10)
     
@@ -150,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setDifficulty() {
-        gameLog.notice("Setting difficulty")
+        print("set")
         if difficulty == 1 {
             seconds_between_obstacle = 2
             obstacle_speed = 100
@@ -191,7 +190,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if obstacle_count < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
             let old_count = obstacle_count
             obstacle_count = renderObstacle(count: old_count)
-            gameLog.notice("Obstacle count: \(self.obstacle_count)")
+            print(obstacle_count)
         }
         
         //instantiate end-of-level timer for beach
@@ -233,7 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createObstacleArray() -> Array<String> {
 //        let obstacles: [String] = ["basic", "multilevel", "object"]
-        let obstacles: [String] = ["basic", "object"]
+        let obstacles: [String] = ["basic"]
         var obstacleArray: [String] = []
         var obstacles_left = num_obstacles
         while obstacles_left > 0 {
@@ -347,12 +346,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         
         left_obstacle.fillColor = islandColor
-        left_obstacle.strokeColor = islandColor
         left_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
 
         
         right_obstacle.fillColor = islandColor
-        right_obstacle.strokeColor = islandColor
         right_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
 
         
@@ -410,7 +407,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let top_horizontal_obstacle = SKShapeNode(path: top_horizontal_rect.cgPath)
         
         top_horizontal_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-        top_horizontal_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
+        top_horizontal_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
      
         top_horizontal_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: top_horizontal_rect_shape)
         top_horizontal_obstacle.physicsBody?.isDynamic = false
@@ -429,8 +426,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let top_vertical_rect = UIBezierPath(rect: top_vertical_rect_shape)
         let top_vertical_obstacle = SKShapeNode(path: top_vertical_rect.cgPath)
         
-        top_vertical_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-        top_vertical_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
+        top_vertical_obstacle.fillColor = island.wallColor
+        top_vertical_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
      
         top_vertical_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: top_vertical_rect_shape)
         top_vertical_obstacle.physicsBody?.isDynamic = false
@@ -454,7 +451,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bottom_horizontal_obstacle = SKShapeNode(path: bottom_horizontal_rect.cgPath)
 
         bottom_horizontal_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-        bottom_horizontal_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
+        bottom_horizontal_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
 
         bottom_horizontal_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_horizontal_rect_shape)
         bottom_horizontal_obstacle.physicsBody?.isDynamic = false
@@ -474,7 +471,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bottom_vertical_obstacle = SKShapeNode(path: bottom_vertical_rect.cgPath)
 
         bottom_vertical_obstacle.fillColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
-        bottom_vertical_obstacle.strokeColor = UIColor(red: 145/255, green: 142/255, blue: 133/255, alpha: 1)
+        bottom_vertical_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
         
         bottom_vertical_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_vertical_rect_shape)
         bottom_vertical_obstacle.physicsBody?.isDynamic = false
