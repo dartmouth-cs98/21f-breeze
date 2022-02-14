@@ -35,7 +35,7 @@ class MapGameScene: SKScene {
 
     let boat_speed = 100
     
-    let num_levels = 2
+    let num_levels = 1
     
     override func didMove(to view: SKView) {
         
