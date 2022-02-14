@@ -8,7 +8,6 @@
 import SwiftUI
 import UserNotifications
 import BackgroundTasks
-import Firebase
 import UIKit
 import Foundation
 import CoreLocation
@@ -52,7 +51,7 @@ struct BreezeApp: App {
 }
 
 
-class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate, CLLocationManagerDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, CLLocationManagerDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
     let locationManager = CLLocationManager()
     let backgroundTaskID = "com.breeze.CheckPhoneUsage"
@@ -65,8 +64,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             
         // set this class as the notification delegate
         userNotificationCenter.delegate = self
-        FirebaseApp.configure()
-                    
+            
         //request authorization to use notifications
         //self.requestNotificationAuthorization()
             
@@ -83,11 +81,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
         
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            
-        
         application.applicationIconBadgeNumber = 0
-        application.registerForRemoteNotifications()
         UIApplication.shared.registerForRemoteNotifications()
 
         if (UIApplication.shared.isRegisteredForRemoteNotifications) {
@@ -95,22 +89,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         } else {
             log.notice("This application on this device is NOT registered for remote notifications")
         }
-            
-        Messaging.messaging().delegate = self
-            
+
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "edu.dartmouth.breeze.CheckPhoneUsage", using: nil) { task in
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
         }
         
         return true
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken;
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        log.error("Failed to register: \(String(describing: error))")
     }
     
     func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],
@@ -138,19 +122,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         log.notice("Phone is unlocking")
         UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-    }
-    
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        log.notice("Firebase registration token: \(String(describing: fcmToken))")
-
-        let dataDict: [String: String] = ["token": fcmToken ?? ""]
-        NotificationCenter.default.post(
-            name: Notification.Name("FCMToken"),
-            object: nil,
-            userInfo: dataDict
-        )
-        
-      // TODO: If necessary send token to application server.
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
