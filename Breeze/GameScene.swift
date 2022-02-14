@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //obstacle variables (feel free to change these)
     var difficulty = 2
     var seconds_between_obstacle = 2
-    var num_obstacles = 1
+    var num_obstacles = 10
     var obstacle_speed = 150
     var gap_size = 150
     
@@ -159,7 +159,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gap_size = 150
         } else if difficulty == 2 {
             seconds_between_obstacle = 2
-            obstacle_speed = 150
+            obstacle_speed = 135
             gap_size = 130
         } else if difficulty == 3 {
             seconds_between_obstacle = 1
@@ -234,8 +234,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createObstacleArray() -> Array<String> {
-//        let obstacles: [String] = ["basic", "multilevel", "object"]
-        let obstacles: [String] = ["multilevel"]
+        let obstacles: [String] = ["basic", "multilevel", "object"]
         var obstacleArray: [String] = []
         var obstacles_left = num_obstacles
         while obstacles_left > 0 {
