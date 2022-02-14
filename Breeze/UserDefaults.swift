@@ -132,9 +132,12 @@ extension UserDefaults {
     }
     //
     func addIntervalToCurrentPhoneUsage() {
-        let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
+        var secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
         usageUpdatesLog.notice("Seconds elapsed since last check: \(secondsElapsed)")
         
+        if (secondsElapsed > 900) {
+            secondsElapsed = 900
+        }
         let currentPhoneUsage = getCurrentPhoneUsage()
         let currDayPhoneUsage = getCurrentDayPhoneUsage()
         let currWeekPhoneUsage = getCurrentWeekPhoneUsage()
