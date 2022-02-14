@@ -95,7 +95,6 @@ struct TapToPlayView: View {
     }
     
     func restartSetup() {
-        
         UserDefaults.standard.set(false, forKey: "appsToTrackHaveBeenSelected")
         UserDefaults.standard.set(true, forKey: "hasntExitedEndOfSetUpView")
         UserDefaults.standard.set(true, forKey: "hasntFinishedSetup")
