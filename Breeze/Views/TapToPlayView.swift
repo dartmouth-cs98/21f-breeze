@@ -29,15 +29,17 @@ struct TapToPlayView: View {
     
     var body: some View {
         ZStack {
+            Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack {
-                Text("Way to go! Here's an update on your healthier habits.").font(Font.custom("Baloo2-Regular", size:30)).multilineTextAlignment(.center).padding()
-                VStack (spacing: 0, content: {
-                    Divider()
-                    Text("Streak:  \(userStreak) days").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
-                    Divider()
-                    Text("Est. Time Saved:  \(numClicks) hours").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
-                    Divider()
-                }).padding()
+                // NOTE: keeping these for now so I can use for reference with profile screen
+//                Text("Way to go! Here's an update on your healthier habits.").font(Font.custom("Baloo2-Regular", size:30)).multilineTextAlignment(.center).padding()
+//                VStack (spacing: 0, content: {
+//                    Divider()
+//                    Text("Streak:  \(userStreak) days").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
+//                    Divider()
+//                    Text("Est. Time Saved:  \(numClicks) hours").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
+//                    Divider()
+//                }).padding()
                 // attribution to Alfredo Hernandez for the icon
                 Button(action: {
                     withAnimation {
@@ -48,7 +50,7 @@ struct TapToPlayView: View {
                 }, label: {
                     ZStack {
                         Ellipse().scale(0.9)
-                            .fill(Color(red: 246/255, green: 228/255, blue: 173/255)).frame(width: 300, height: 150)
+                            .fill(Color(red: 221/255, green: 247/255, blue: 246/255)).frame(width: 300, height: 150)
                         VStack(spacing: 20) {
                             Image("right-arrow")
                                 .resizable()
@@ -61,12 +63,13 @@ struct TapToPlayView: View {
                         
                     }.frame(width: 300, height: 150)}
                 ).padding()
-                Button("Go back to setup", action: {restartSetup()})
-                    .font(Font.custom("Baloo2-Regular", size:30))
-                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
-                    .foregroundColor(Color.black)
-                    .cornerRadius(6)
-                    .buttonStyle(.bordered)
+//                  NOTE: keeping these for now in case I want to easily uncomment for testing set up flow
+//                Button("Go back to setup", action: {restartSetup()})
+//                    .font(Font.custom("Baloo2-Regular", size:30))
+//                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+//                    .foregroundColor(Color.black)
+//                    .cornerRadius(6)
+//                    .buttonStyle(.bordered)
             }
           if isPresenting {
             ZStack(alignment: .center) {
