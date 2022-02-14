@@ -65,7 +65,7 @@ struct Islands {
         boatJPG: "boat",
         dockJPG: "dock",
         beachJPG: "city beach",
-        obstacleJPGs: ["gondola", "empty gondola"],
+        obstacleJPGs: ["gondola", "gondola empty"],
         wallTextureString: "city wall",
         wallTextureVertString: "city wall vert",
         partColor: UIColor(red: 228/255, green: 234/255, blue: 221/255, alpha: 1)
