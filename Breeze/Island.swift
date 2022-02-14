@@ -8,9 +8,10 @@ class Island {
     var dock: String
     var beach: String
     var wallTexture: String
+    var wallTextureVert: String
     var obstacles: [String]
     var particleColor: UIColor
-    init(backColor: UIColor, obstacleColor: UIColor, boatJPG: String, dockJPG: String, beachJPG: String, obstacleJPGs: [String], wallTextureString: String, partColor: UIColor) {
+    init(backColor: UIColor, obstacleColor: UIColor, boatJPG: String, dockJPG: String, beachJPG: String, obstacleJPGs: [String], wallTextureString: String, wallTextureVertString: String, partColor: UIColor) {
         self.backgroundColor = backColor
         self.wallColor = obstacleColor
         self.boat = boatJPG
@@ -18,6 +19,7 @@ class Island {
         self.beach = beachJPG
         self.obstacles = obstacleJPGs
         self.wallTexture = wallTextureString
+        self.wallTextureVert = wallTextureVertString
         self.particleColor = partColor
     }
 }
@@ -31,6 +33,7 @@ struct Islands {
         beachJPG: "sand beach",
         obstacleJPGs: ["seaweed", "starfish"],
         wallTextureString: "tropical wall",
+        wallTextureVertString: "tropical wall vert",
         partColor: UIColor(red: 235/255, green: 246/255, blue: 254/255, alpha: 1)
     )
     static let island2 = Island(
@@ -41,6 +44,7 @@ struct Islands {
         beachJPG: "ice beach",
         obstacleJPGs: ["berg1", "berg2"],
         wallTextureString: "ice wall",
+        wallTextureVertString: "ice wall vert",
         partColor: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
     )
     static let island3 = Island(
@@ -51,6 +55,7 @@ struct Islands {
         beachJPG: "sunset beach",
         obstacleJPGs: ["sunset orb"],
         wallTextureString: "sunset wall",
+        wallTextureVertString: "sunset wall vert",
         partColor:  UIColor(red: 245/255, green: 183/255, blue: 178/255, alpha: 1)
 
     )
@@ -62,6 +67,7 @@ struct Islands {
         beachJPG: "city beach",
         obstacleJPGs: ["gondola", "empty gondola"],
         wallTextureString: "city wall",
+        wallTextureVertString: "city wall vert",
         partColor: UIColor(red: 228/255, green: 234/255, blue: 221/255, alpha: 1)
 
     )
@@ -73,6 +79,7 @@ struct Islands {
         beachJPG: "lighthouse beach",
         obstacleJPGs: ["rock1", "rock2"],
         wallTextureString: "rock wall",
+        wallTextureVertString: "rock wall vert",
         partColor:UIColor(red: 155/255, green: 167/255, blue: 140/255, alpha: 1)
     )
 }
