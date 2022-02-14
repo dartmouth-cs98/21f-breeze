@@ -20,7 +20,6 @@
 		460896B0279620ED005828BF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 460896AF279620ED005828BF /* FirebaseRemoteConfig */; };
 		461E9E1E2717725E00E6C510 /* BreezeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E1D2717725E00E6C510 /* BreezeApp.swift */; };
 		461E9E202717725E00E6C510 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E1F2717725E00E6C510 /* ContentView.swift */; };
-		461E9E222717725F00E6C510 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E212717725F00E6C510 /* Assets.xcassets */; };
 		461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 461E9E242717725F00E6C510 /* Preview Assets.xcassets */; };
 		461E9E272717725F00E6C510 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E262717725F00E6C510 /* Persistence.swift */; };
 		461E9E2A2717725F00E6C510 /* Breeze.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */; };
@@ -94,7 +93,6 @@
 		461E9E1A2717725E00E6C510 /* Breeze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breeze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		461E9E1D2717725E00E6C510 /* BreezeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreezeApp.swift; sourceTree = "<group>"; };
 		461E9E1F2717725E00E6C510 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		461E9E212717725F00E6C510 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		461E9E242717725F00E6C510 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		461E9E262717725F00E6C510 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		461E9E292717725F00E6C510 /* Breeze.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Breeze.xcdatamodel; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 				A14061412741C4BA006110CF /* Starfield.sks */,
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
 				461E9E1D2717725E00E6C510 /* BreezeApp.swift */,
-				461E9E212717725F00E6C510 /* Assets.xcassets */,
 				46B28C5627B9B80A00F7F0D7 /* Assets.xcassets */,
 				461E9E262717725F00E6C510 /* Persistence.swift */,
 				461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */,
@@ -402,7 +399,6 @@
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
 				46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
-				461E9E222717725F00E6C510 /* Assets.xcassets in Resources */,
 				A14061422741C4BA006110CF /* Starfield.sks in Resources */,
 				4608969C27961E94005828BF /* GoogleService-Info.plist in Resources */,
 				46F6460C273C150700A27DC3 /* Baloo2-SemiBold.ttf in Resources */,

@@ -83,7 +83,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
         
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            let _: UNAuthorizationOptions = [.alert, .badge, .sound]
             
         
         application.applicationIconBadgeNumber = 0
