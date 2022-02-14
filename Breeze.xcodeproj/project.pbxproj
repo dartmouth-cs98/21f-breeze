@@ -38,7 +38,6 @@
 		9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 9A45A90027B4622500C4FC45 /* SendGrid */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
-		A155E33027BADE2700E398C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A155E32F27BADE2700E398C3 /* Assets.xcassets */; };
 		A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8390C5C27B462B20042BA0F /* ProfileView.swift */; };
 		A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCA27986AA9008D6DD3 /* Time.swift */; };
 		A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */; };
@@ -46,6 +45,7 @@
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 		FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167D273B69710022F820 /* TimeSelectionView.swift */; };
 		FFA2155927A46D1A00DE9889 /* MapGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA2155827A46D1A00DE9889 /* MapGameScene.swift */; };
+		FFA2155B27BAF36400DE9889 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFA2155A27BAF36400DE9889 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +110,6 @@
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A14061412741C4BA006110CF /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
-		A155E32F27BADE2700E398C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../21f-breeze copy/Breeze/Assets.xcassets"; sourceTree = "<group>"; };
 		A8390C5C27B462B20042BA0F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A87EDDCA27986AA9008D6DD3 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FF28167D273B69710022F820 /* TimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionView.swift; sourceTree = "<group>"; };
 		FFA2155827A46D1A00DE9889 /* MapGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapGameScene.swift; sourceTree = "<group>"; };
+		FFA2155A27BAF36400DE9889 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +177,7 @@
 				461E9E932719468900E6C510 /* GameScene.swift */,
 				46B28C5227B9B72500F7F0D7 /* Island.swift */,
 				A1495ECB2735929B009DA6B1 /* GameSceneController.swift */,
-				A155E32F27BADE2700E398C3 /* Assets.xcassets */,
+				FFA2155A27BAF36400DE9889 /* Assets.xcassets */,
 				46FC0D082739C78B002D14F9 /* Breeze.entitlements */,
 				A14061412741C4BA006110CF /* Starfield.sks */,
 				461E9E8F2719464E00E6C510 /* GameScene.sks */,
@@ -368,9 +368,9 @@
 			files = (
 				46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */,
 				46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */,
+				FFA2155B27BAF36400DE9889 /* Assets.xcassets in Resources */,
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
 				46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */,
-				A155E33027BADE2700E398C3 /* Assets.xcassets in Resources */,
 				461E9E252717725F00E6C510 /* Preview Assets.xcassets in Resources */,
 				A14061422741C4BA006110CF /* Starfield.sks in Resources */,
 				4608969C27961E94005828BF /* GoogleService-Info.plist in Resources */,
