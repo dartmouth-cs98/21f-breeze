@@ -13,16 +13,15 @@ struct ExitView: View {
     
     var body: some View {
         ZStack {
-            Color.init(UIColor(named: "LaunchScreenBackground")!)
+            Color.init(UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1))
             VStack {
                 Text("Thanks for playing, enjoy your day!")
                     .font(Font.custom("Baloo2-Bold", size:20)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
-                 Button("Collect Your BreezeBucks!", action: goToTapToPlay)
+                 Button("Take me home", action: goToTapToPlay)
                     .padding()
-                    .font(Font.custom("Baloo2-Regular", size:20))
-                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
                     .foregroundColor(Color.black)
                     .cornerRadius(6)
                 }
