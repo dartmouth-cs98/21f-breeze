@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileView: View {
     @Binding var isPresenting: Bool
     @State private var timeSelectionIsPresenting = false
+    @State private var testingDataIsPresenting = false
     @State private var currTime = UserDefaults.standard.getTime()
     @State private var notificationStreak = UserDefaults.standard.getStreak()
     @State private var currWeekScreenTime = UserDefaults.standard.getCurrentWeekPhoneUsage();
@@ -101,11 +102,22 @@ struct ProfileView: View {
                     .padding()
                     .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
                 // TO DO: button to view statistics
+                Button("FOR TESTING view statistics", action: {testingDataIsPresenting.toggle()})
+                   .padding()
+                   .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                   .foregroundColor(Color.black)
+                   .cornerRadius(6)
             }
-        }.fullScreenCover(isPresented: $timeSelectionIsPresenting,
+        }
+        // full screen cover for changing notification time
+        .fullScreenCover(isPresented: $timeSelectionIsPresenting,
                           onDismiss: didDismissTimeSelectionView) {
             TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
-            
+        }
+        // full screen cover for viewing temporary testing data
+        .fullScreenCover(isPresented: $testingDataIsPresenting,
+                          onDismiss: didDismissTimeSelectionView) {
+            TempTestingDataView(isPresenting: self.$testingDataIsPresenting)
         }
     }
     
@@ -142,6 +154,10 @@ struct ProfileView: View {
         UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
         // update the user's notification time
         currTime = UserDefaults.standard.getTime()
+    }
+    
+    func didDismissTestingDataView() {
+        
     }
 }
 
