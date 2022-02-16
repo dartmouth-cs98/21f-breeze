@@ -14,7 +14,6 @@ let screenHeight = UIScreen.main.bounds.height
 
 @available(iOS 15.0, *)
 struct ContentView: View {
-    @State var tapToPlayView = TapToPlayView()
     @State private var showModal = false
     @State private var profileViewIsPresenting = false
 
@@ -29,7 +28,7 @@ struct ContentView: View {
                 ProfileView(isPresenting: $profileViewIsPresenting)
             }
             else {
-                tapToPlayView
+                TapToPlayView(profileViewIsPresenting: $profileViewIsPresenting)
             }
         }
     }
