@@ -15,7 +15,16 @@ class GameViewController: UIViewController
         skView.showsNodeCount = false
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .resizeFill
+        scene.size = self.view.frame.size
         skView.presentScene(scene)
+    }
+    
+    override open var shouldAutorotate: Bool {
+       return false
+    }
+    
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+       return .landscape
     }
     
 }
