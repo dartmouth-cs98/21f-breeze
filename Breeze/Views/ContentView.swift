@@ -15,18 +15,24 @@ let screenHeight = UIScreen.main.bounds.height
 @available(iOS 15.0, *)
 struct ContentView: View {
     @State var tapToPlayView = TapToPlayView()
-         @State private var showModal = false
+    @State private var showModal = false
+    @State private var profileViewIsPresenting = false
 
-         func viewDidLoad() {
+    func viewDidLoad() {
 
-         }
-         @ViewBuilder
-         var body: some View {
-             ZStack {
-                 Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
-                 tapToPlayView
-             }
-         }
+    }
+    @ViewBuilder
+    var body: some View {
+        ZStack {
+            Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
+            if profileViewIsPresenting {
+                ProfileView(isPresenting: $profileViewIsPresenting)
+            }
+            else {
+                tapToPlayView
+            }
+        }
+    }
 }
 
 @available(iOS 15.0, *)
