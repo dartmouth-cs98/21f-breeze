@@ -38,6 +38,7 @@
 		9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 9A45A90027B4622500C4FC45 /* SendGrid */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
+		A18B974927BC9E0E0056B3FE /* ocean1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A18B974827BC9E0E0056B3FE /* ocean1.mp3 */; };
 		A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8390C5C27B462B20042BA0F /* ProfileView.swift */; };
 		A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCA27986AA9008D6DD3 /* Time.swift */; };
 		A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */; };
@@ -110,6 +111,7 @@
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		A14061412741C4BA006110CF /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
+		A18B974827BC9E0E0056B3FE /* ocean1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ocean1.mp3; sourceTree = "<group>"; };
 		A8390C5C27B462B20042BA0F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A87EDDCA27986AA9008D6DD3 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		46F64604273C14F000A27DC3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A18B974827BC9E0E0056B3FE /* ocean1.mp3 */,
 				46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */,
 				46F64606273C150700A27DC3 /* Baloo2-ExtraBold.ttf */,
 				46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */,
@@ -367,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */,
+				A18B974927BC9E0E0056B3FE /* ocean1.mp3 in Resources */,
 				46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */,
 				FFA2155B27BAF36400DE9889 /* Assets.xcassets in Resources */,
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,

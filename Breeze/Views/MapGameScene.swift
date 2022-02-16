@@ -46,6 +46,7 @@ class MapGameScene: SKScene {
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         
+        
         mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
         mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         mapTrail.removeFromParent()
