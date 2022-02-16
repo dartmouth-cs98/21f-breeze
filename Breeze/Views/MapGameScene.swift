@@ -46,10 +46,10 @@ class MapGameScene: SKScene {
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         
-        mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
-        mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-        mapTrail.removeFromParent()
-        addChild(mapTrail)
+//        mapTrail.size = CGSize(width: frame.size.width, height: frame.size.height)
+//        mapTrail.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+//        mapTrail.removeFromParent()
+//        addChild(mapTrail)
 
         island1.size = CGSize(width: island_size, height: island_size)
         island1.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20)
@@ -131,11 +131,11 @@ class MapGameScene: SKScene {
             island4.alpha = 1
         } else if (UserDefaults.standard.islandGetLevel(value: 4) >= 1 && UserDefaults.standard.islandGetLevel(value: 4) <= num_levels) {
             island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + "/ \(num_levels)"
-            island4.alpha = 0.4
+            island4.alpha = 1
 
         } else if UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
             island4label.text = "Level: " + "\(num_levels) " + "/ \(num_levels)"
-            island4.alpha = 0.4
+            island4.alpha = 1
         }
         island4label.fontSize = 10
         island4label.fontColor = SKColor.black
@@ -188,6 +188,13 @@ class MapGameScene: SKScene {
         instructions1.lineBreakMode = NSLineBreakMode.byWordWrapping
         instructions1.numberOfLines = 4
         instructions1.preferredMaxLayoutWidth = frame.size.width * 0.5
+        
+        dottedLine(from: mapDock.position, to: island1.position)
+        dottedLine(from: island1.position, to: island2.position)
+        dottedLine(from: island2.position, to: island3.position)
+        dottedLine(from: island3.position, to: island4.position)
+        dottedLine(from: island4.position, to: island5.position)
+        dottedLine(from: island5.position, to: CGPoint(x: frame.size.width * 0.5, y: frame.size.height))
         
         //USER TESTING CODE (DELETE LATER)
         if let uuid = UIDevice.current.identifierForVendor?.uuidString {
@@ -359,4 +366,39 @@ class MapGameScene: SKScene {
         self.view?.presentScene(whirlpool, transition:transition)
     }
     
+    // credit @abanet https://stackoverflow.com/questions/19092011/how-to-draw-a-line-in-sprite-kit
+    func drawLine(from: CGPoint, to: CGPoint) {
+        
+        
+        let square = SKShapeNode(rectOf: CGSize(width: 64, height: 64))
+        let pattern : [CGFloat] = [4.0, 4.0]
+
+        let dashed = square.path?.copy(dashingWithPhase: 1, lengths: pattern)
+        let line = SKShapeNode(path: dashed!)
+        let path = CGMutablePath()
+        path.addLines(between: [from, to])
+        line.path = path
+        line.zPosition = -1
+        line.strokeColor = .white
+        line.lineWidth = 15
+        addChild(line)
+    }
+    
+    func dottedLine(from: CGPoint, to: CGPoint) {
+        let pattern : [CGFloat] = [10.0, 10.0]
+
+        let path = CGMutablePath.init()
+
+        path.addLines(between: [from, to])
+
+        let dashedPath = path.copy(dashingWithPhase: 1, lengths: pattern)
+
+        let line = SKShapeNode(path: dashedPath)
+        line.zPosition = -1
+        line.strokeColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
+        line.lineWidth = 10
+        addChild(line)
+
+        
+    }
 }
