@@ -51,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //obstacle variables (feel free to change these)
     var difficulty = 2
     var seconds_between_obstacle = 2
-    var num_obstacles = 6
+    var num_obstacles = 8
     var obstacle_speed = 150
     var gap_size = 150
     
@@ -110,7 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // boat node attributes
         boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
-        boat.size = CGSize(width: 70, height: 120)
+        boat.size = CGSize(width: 70, height: 100)
         boat.removeFromParent()
         self.addChild(boat)
         
@@ -234,7 +234,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createObstacleArray() -> Array<String> {
-        let obstacles: [String] = ["basic", "multilevel", "object"]
+//        let obstacles: [String] = ["basic", "multilevel", "object"]
+        let obstacles: [String] = ["multilevel"]
         var obstacleArray: [String] = []
         var obstacles_left = num_obstacles
         while obstacles_left > 0 {
@@ -392,9 +393,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //TOP HORIZONTAL OBSTACLE
-        var top_horizontal_rect_shape = CGRect(x: left_edge, y: gap_between_walls, width: horizontal_rect_width, height: horizontal_rect_height)
+        var top_horizontal_rect_shape = CGRect(x: left_edge - offscreen_buffer, y: gap_between_walls, width: horizontal_rect_width + offscreen_buffer, height: horizontal_rect_height)
         if leftExit {
-            top_horizontal_rect_shape = CGRect(x: right_edge - horizontal_rect_width, y: gap_between_walls, width: horizontal_rect_width, height: horizontal_rect_height)
+            top_horizontal_rect_shape = CGRect(x: right_edge - horizontal_rect_width, y: gap_between_walls, width: horizontal_rect_width + offscreen_buffer, height: horizontal_rect_height)
         }
         let top_horizontal_rect = UIBezierPath(rect: top_horizontal_rect_shape)
         let top_horizontal_obstacle = SKShapeNode(path: top_horizontal_rect.cgPath)
@@ -434,10 +435,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //BOTTOM HORIZONTAL OBSTACLE
         var bottom_rect_start = right_edge - horizontal_rect_width
-        var bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width, height: horizontal_rect_height)
+        var bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width + offscreen_buffer, height: horizontal_rect_height)
         if leftExit {
             bottom_rect_start = left_edge
-            bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start, y: 0, width: horizontal_rect_width, height: horizontal_rect_height)
+            bottom_horizontal_rect_shape = CGRect(x: bottom_rect_start - offscreen_buffer, y: 0, width: horizontal_rect_width + offscreen_buffer, height: horizontal_rect_height)
         }
         
         let bottom_horizontal_rect = UIBezierPath(rect: bottom_horizontal_rect_shape)

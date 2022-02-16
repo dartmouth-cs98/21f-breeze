@@ -77,14 +77,13 @@ class StartingWhirlpoolGameScene: SKScene {
         boat.physicsBody = SKPhysicsBody(circleOfRadius: boat.size.width / 2)
         boat.physicsBody?.allowsRotation = false
         boat.physicsBody?.restitution = 0.5
-        
        
     }
     
     func swap() {
         let gameScene = GameScene(fileNamed: "GameScene")
         let transition = SKTransition.fade(withDuration: 1.0)
-        gameScene?.scaleMode = .aspectFill
+        gameScene?.scaleMode = .fill
         scene?.view?.presentScene(gameScene!, transition: transition)
     }
     
