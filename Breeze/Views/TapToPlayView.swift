@@ -10,7 +10,7 @@ import SpriteKit
 
 @available(iOS 15.0, *)
 struct TapToPlayView: View {
-    
+    @Binding var profileViewIsPresenting: Bool
     @State private var isPresenting = false
     @AppStorage("hasntFinishedGame") var hasntFinishedGame: Bool = true
     @AppStorage("hasntLostGame") var hasntLostGame: Bool = true
@@ -31,6 +31,25 @@ struct TapToPlayView: View {
         ZStack {
             Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack {
+                // access to profile page
+                HStack {
+                    Button(action: {
+                        withAnimation() {
+                            profileViewIsPresenting.toggle()
+                        }
+                    }, label: {
+                        // credit PNGITEM https://www.pngitem.com/middle/mJiRJh_profile-icon-png-transparent-profile-picture-icon-png/
+                        Image("profile-icon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50)
+                            .padding()
+                    })
+                    Spacer()
+                }
+                // these spacers may seem redundant, but they are keeping tap to play button roughly centered
+                Spacer()
+                Spacer()
                 // NOTE: keeping these for now so I can use for reference with profile screen
 //                Text("Way to go! Here's an update on your healthier habits.").font(Font.custom("Baloo2-Regular", size:30)).multilineTextAlignment(.center).padding()
 //                VStack (spacing: 0, content: {
@@ -63,6 +82,10 @@ struct TapToPlayView: View {
                         
                     }.frame(width: 300, height: 150)}
                 ).padding()
+                // these spacers may seem redundant, but they are keeping tap to play button roughly centered
+                Spacer()
+                Spacer()
+                Spacer()
 //                  NOTE: keeping these for now in case I want to easily uncomment for testing set up flow
 //                Button("Go back to setup", action: {restartSetup()})
 //                    .font(Font.custom("Baloo2-Regular", size:30))

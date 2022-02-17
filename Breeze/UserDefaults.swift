@@ -390,6 +390,10 @@ extension UserDefaults {
         return array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
     }
     
+    func getEachDayPhoneUsage () -> [Any]? {
+        return array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
+    }
+    
     func addVisitUpdate () {
         let visitUpdates = getVisitUpdates()
         set(visitUpdates + 1, forKey: UserDefaultsKeys.visitUpdates.rawValue)
