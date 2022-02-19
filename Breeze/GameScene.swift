@@ -86,6 +86,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
 //        setIslandNumber()
         
+        //music
+        let backgroundSound = SKAudioNode(fileNamed: "ocean1")
+        self.addChild(backgroundSound)
+        
+        
 //        view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
