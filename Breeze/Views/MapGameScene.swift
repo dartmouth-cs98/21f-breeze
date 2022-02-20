@@ -13,6 +13,13 @@ import OSLog
 
 class MapGameScene: SKScene {
     
+    //var screenWidth = screenSize.width
+    //var screenHeight = screenSize.height
+    
+    var screenSize: CGRect = UIScreen.main.bounds
+    lazy var screenWidth = screenSize.width
+    lazy var screenHeight = screenSize.height
+    
     let gameLog = Logger.init(subsystem: "edu.dartmouth.breeze", category: "GameLog")
 
     var island_size = CGFloat(125)
@@ -45,8 +52,13 @@ class MapGameScene: SKScene {
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
         
 
+        print("width: ")
+        print(screenWidth)
+        print("height: ")
+        print(screenHeight)
+        
         island1.size = CGSize(width: island_size, height: island_size)
-        island1.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20)
+        island1.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.20)
         island1.name = "island1"
         island1.removeFromParent()
         addChild(island1)
@@ -60,12 +72,12 @@ class MapGameScene: SKScene {
         }
         island1label.fontSize = 10
         island1label.fontColor = SKColor.black
-        island1label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.20 - island_size*0.5)
+        island1label.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.20 - island_size*0.5)
         addChild(island1label)
 
         
         island2.size = CGSize(width: island_size, height: island_size)
-        island2.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.35)
+        island2.position = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.35)
         island2.name = "island2"
         island2.removeFromParent()
         addChild(island2)
@@ -85,11 +97,11 @@ class MapGameScene: SKScene {
         }
         island2label.fontSize = 10
         island2label.fontColor = SKColor.black
-        island2label.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.35 - island_size*0.5)
+        island2label.position = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.35 - island_size*0.5)
         addChild(island2label)
         
         island3.size = CGSize(width: island_size, height: island_size)
-        island3.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.50)
+        island3.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.50)
         island3.name = "island3"
         island3.removeFromParent()
         addChild(island3)
@@ -109,11 +121,11 @@ class MapGameScene: SKScene {
         }
         island3label.fontSize = 10
         island3label.fontColor = SKColor.black
-        island3label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.50 - island_size*0.5)
+        island3label.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.50 - island_size*0.5)
         addChild(island3label)
         
         island4.size = CGSize(width: island_size, height: island_size)
-        island4.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.65)
+        island4.position = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.65)
         island4.name = "island4"
         island4.removeFromParent()
         addChild(island4)
@@ -133,11 +145,11 @@ class MapGameScene: SKScene {
         }
         island4label.fontSize = 10
         island4label.fontColor = SKColor.black
-        island4label.position = CGPoint(x: frame.size.width * 0.25, y: frame.size.height * 0.65 - island_size*0.5)
+        island4label.position = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.65 - island_size*0.5)
         addChild(island4label)
         
         island5.size = CGSize(width: island_size, height: island_size)
-        island5.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80)
+        island5.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.80)
         island5.name = "island5"
         island5.removeFromParent()
         addChild(island5)
@@ -158,10 +170,10 @@ class MapGameScene: SKScene {
         }
         island5label.fontSize = 10
         island5label.fontColor = SKColor.black
-        island5label.position = CGPoint(x: frame.size.width * 0.75, y: frame.size.height * 0.80 - island_size*0.5)
+        island5label.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.80 - island_size*0.5)
         addChild(island5label)
         
-        let islandPositions = [CGPoint(x: frame.size.width * 0.2 + 30,  y: frame.minY + 30), island1.position, island2.position, island3.position, island4.position, island5.position]
+        let islandPositions = [CGPoint(x: screenWidth * 0.2 + 30,  y: frame.minY + 30), island1.position, island2.position, island3.position, island4.position, island5.position]
         
 //        boat.position = CGPoint(x: frame.size.width * 0.2 + 30, y: frame.minY + 30)
         boat.position = islandPositions[UserDefaults.standard.getCurrentIsland()]
@@ -169,7 +181,7 @@ class MapGameScene: SKScene {
         boat.removeFromParent()
         self.addChild(boat)
         
-        mapDock.position = CGPoint(x: frame.size.width * 0.2 , y: frame.minY)
+        mapDock.position = CGPoint(x: screenWidth * 0.2 , y: frame.minY)
         mapDock.size = CGSize(width: 100 * 0.5, height: 300 * 0.5)
         mapDock.removeFromParent()
         self.addChild(mapDock)
@@ -178,17 +190,25 @@ class MapGameScene: SKScene {
         instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
         instructions1.fontSize = 15
         instructions1.fontColor = SKColor.black
-        instructions1.position = CGPoint(x: frame.size.width * 0.30, y: frame.size.height * 0.80)
+        instructions1.position = CGPoint(x: screenWidth * 0.30, y: screenHeight * 0.75)
         instructions1.lineBreakMode = NSLineBreakMode.byWordWrapping
         instructions1.numberOfLines = 4
-        instructions1.preferredMaxLayoutWidth = frame.size.width * 0.5
+        instructions1.preferredMaxLayoutWidth = screenWidth * 0.5
+        addChild(instructions1)
         
         dottedLine(from: mapDock.position, to: island1.position)
         dottedLine(from: island1.position, to: island2.position)
         dottedLine(from: island2.position, to: island3.position)
         dottedLine(from: island3.position, to: island4.position)
         dottedLine(from: island4.position, to: island5.position)
-        dottedLine(from: island5.position, to: CGPoint(x: frame.size.width * 0.5, y: frame.size.height))
+        dottedLine(from: island5.position, to: CGPoint(x: screenWidth * 0.5, y: screenHeight))
+        
+        let textShadow = SKShapeNode(rect: CGRect(x: screenWidth * 0.05, y: screenHeight * 0.75, width: 200, height: 125))
+        textShadow.strokeColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
+        textShadow.glowWidth = 20
+        textShadow.fillColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
+        textShadow.zPosition = -1
+        addChild(textShadow)
         
         //USER TESTING CODE (DELETE LATER)
         if let uuid = UIDevice.current.identifierForVendor?.uuidString {
@@ -197,9 +217,7 @@ class MapGameScene: SKScene {
         else {
             instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
         }
-        //USER TESTINC CODE FINISH
-        
-        addChild(instructions1)
+        //USER TESTING CODE FINISH
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -359,6 +377,7 @@ class MapGameScene: SKScene {
         whirlpool.scaleMode = SKSceneScaleMode.aspectFill
         self.view?.presentScene(whirlpool, transition:transition)
     }
+    
     
     func dottedLine(from: CGPoint, to: CGPoint) {
         let pattern : [CGFloat] = [10.0, 10.0]
