@@ -232,7 +232,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval((UserDefaults.standard.getTime() - UserDefaults.standard.getCurrentPhoneUsage())),
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())),
                                                         repeats: false)
         let request = UNNotificationRequest(identifier: "testNotification",
                                             content: notificationContent,
