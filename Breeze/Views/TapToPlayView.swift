@@ -8,7 +8,6 @@
 import SwiftUI
 import SpriteKit
 
-@available(iOS 15.0, *)
 struct TapToPlayView: View {
     
     @State private var isPresenting = false
