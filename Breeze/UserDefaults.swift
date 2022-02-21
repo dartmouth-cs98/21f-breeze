@@ -386,12 +386,9 @@ extension UserDefaults {
         return integer(forKey: UserDefaultsKeys.fetchUpdates.rawValue)
     }
     
-    func getUpdateTimes () -> [Any]? {
-        return array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
-    }
-    
-    func getEachDayPhoneUsage () -> [Any]? {
-        return array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
+    func getEachDayPhoneUsage () -> [String]? {
+        let strings: [String] = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) as? [String] ?? []
+        return strings
     }
     
     func addVisitUpdate () {
@@ -415,14 +412,6 @@ extension UserDefaults {
         set(fetchUpdates + 1, forKey: UserDefaultsKeys.fetchUpdates.rawValue)
     }
     
-    func printUpdateTimes () {
-        usageUpdatesLog.notice("Update Times")
-        let updateTimes = getUpdateTimes() ?? []
-        for time in updateTimes {
-            usageUpdatesLog.notice("\(String(describing: time))")
-        }
-        usageUpdatesLog.notice("End of Update Times")
-    }
 }
 
 enum UserDefaultsKeys : String {

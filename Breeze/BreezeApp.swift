@@ -121,9 +121,16 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         log.notice("Phone is unlocking")
+        
+        if (UserDefaults.standard.getCurrentPhoneUsage() >= UserDefaults.standard.getTime()) {
+            scheduleNotification(overTimeLimit: true) // make it for 5 seconds
+        } else {
+            scheduleNotification()
+        }
+        
         UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-        scheduleNotification()
+        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -197,7 +204,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    func scheduleNotification() {
+    func scheduleNotification(overTimeLimit: Bool = false) {
         // Define the custom actions.
         let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
               title: "Accept",
@@ -232,12 +239,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())),
-                                                        repeats: false)
+        var trigger: UNNotificationTrigger
+        if (overTimeLimit) {
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+                                                            repeats: false)
+        } else {
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())),
+                                                            repeats: false)
+        }
+        
         let request = UNNotificationRequest(identifier: "testNotification",
                                             content: notificationContent,
                                             trigger: trigger)
-        
         self.userNotificationCenter.add(request) { (error) in
             if let error = error {
                 self.log.error("Notification error: \(String(describing: error))")
