@@ -115,13 +115,15 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         log.notice("Phone is locking")
-        self.userNotificationCenter.removeAllPendingNotificationRequests()
+        userNotificationCenter.removeAllPendingNotificationRequests()
         checkPhoneUsageBeforeLocking()
     }
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         log.notice("Phone is unlocking")
         print("curr phone usage:" + String(UserDefaults.standard.getCurrentPhoneUsage()))
+        userNotificationCenter.removeAllPendingNotificationRequests()
+        userNotificationCenter.removeAllDeliveredNotifications()
         
         if (UserDefaults.standard.getCurrentPhoneUsage() >= (UserDefaults.standard.getTime() * 60) || UserDefaults.standard.getSendNotificationOnUnlock()) {
             scheduleNotification(overTimeLimit: true) // make it for 5 seconds
@@ -228,10 +230,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func scheduleNotification(overTimeLimit: Bool = false) {
-        print(overTimeLimit)
         print("notification scheduled for \((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())")
 
-        userNotificationCenter.removeAllPendingNotificationRequests()
         // Define the custom actions.
         let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
                                                 title: "Snooze for 15 minutes",
@@ -302,6 +302,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             if (UserDefaults.standard.isAboveTimeLimit()) {
                 usageUpdatesLog.notice("User is above their chosen time limit,  notification should be sent to play Breeze")
                 UserDefaults.standard.resetCurrentPhoneUsage()
+                userNotificationCenter.removeAllDeliveredNotifications()
             }
         } else {
             usageUpdatesLog.notice("Protected data is not available")
@@ -326,18 +327,30 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             UNUserNotificationCenter.current().getDeliveredNotifications { (notifications) in
                 count = notifications.count
             }
-            //outstanding notification exists, so find time since last notification.
+            print("outstanding notification count: \(count)")
+            //outstanding notification exists, so reset streak and find time since last notification.
             if (count > 0) {
+                UserDefaults.standard.resetStreak()
                 let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
-                if (timeSinceNotification > UserDefaults.standard.getTime()) {
+                if (timeSinceNotification > (UserDefaults.standard.getTime() * 60)) {
                     UserDefaults.standard.setSendNotificationOnUnlock(value: true)
                     UserDefaults.standard.resetCurrentPhoneUsage()
                     usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
                 }
                 else {
+                    UserDefaults.standard.setSendNotificationOnUnlock(value: false)
                     UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
                 }
             }
+            //no outstanding notification, so reset current phone usage and send on unlock
+            else {
+                UserDefaults.standard.setSendNotificationOnUnlock(value: true)
+                UserDefaults.standard.resetCurrentPhoneUsage()
+                usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
+            }
+        }
+        else {
+            UserDefaults.standard.setSendNotificationOnUnlock(value: false)
         }
         UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()

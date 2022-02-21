@@ -178,7 +178,7 @@ extension UserDefaults {
         let timeLimit = getTime()
         usageUpdatesLog.notice("Time limit: \(timeLimit)")
         
-        if ((currentPhoneUsage/60) >= timeLimit && timeLimit > 0) {
+        if (currentPhoneUsage >= (timeLimit*60) && timeLimit > 0) {
             return true
         } else {
             return false
@@ -442,7 +442,7 @@ extension UserDefaults {
     }
     
     func setSendNotificationOnUnlock(value: Bool) {
-        set(true, forKey: UserDefaultsKeys.sendNotificationOnUnlock.rawValue)
+        set(value, forKey: UserDefaultsKeys.sendNotificationOnUnlock.rawValue)
     }
     
     func getSendNotificationOnUnlock() -> Bool {
