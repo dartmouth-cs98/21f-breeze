@@ -32,10 +32,31 @@ struct TempTestingDataView: View {
                     })
                     Spacer()
                 }
-                Text("On this view")
+                let s = unpackData()
+                Text("Weekly Screentime:")
+                                .font(.body)
+                                .multilineTextAlignment(.center)
+                Text(s)
                     .font(.body)
                     .multilineTextAlignment(.center)
-               }
+                Spacer()
+
                 }
             }
         }
+    
+    func unpackData() -> String {
+        var string = ""
+
+        userData?.forEach { item in
+            let s = String(describing: item)
+            let trimmed = s.components(separatedBy: .whitespacesAndNewlines).joined()
+            string += trimmed
+            string += "\n"
+        }
+        return string
+
+                
+    }
+}
+
