@@ -1,20 +1,6 @@
 # Breeze
 
-![Team Photo](./groupPhoto.jpg)
-
-Welcome to Breeze! We are an iOS app that helps you build good habits in your social media use. Set time limits on various apps and Breeze will send you push notifications reminding you to leave the app. The more often you click on the notifications, the faster your ship sails along the sea!
-
-## Architecture
-
-Breeze is an iOS app. To build, we are using a stack of Swift, Xcode, Realm DB, Apple ScreenTime API, Family Activity Picker, and Apple Spritekit.
-
-## Setup
-
-For now testing either happens on Mac iOS simulators (pressing play in XCode) or attaching a usb-c to lighting cable to the mac and iPhone and building straight to an iPhone. TestFlight will be coming soon, currently blocked by Apple. 
-
-## Deployment
-
-Testflight coming soon for deployment!
+Welcome to Breeze! We are an iOS app that helps you build good habits in your phone usage. Set screen time limits and Breeze will send you notifications to our game when you meet them. Accepting these notifications means progressing farther in the game and discovering new worlds!
 
 ## Authors
 Laurel Dernbach  
@@ -22,6 +8,14 @@ Grant Dumanian
 Sabrina Jain  
 Katherine Taylor  
 John Weingart
+
+## Architecture
+Breeze is an iOS app. To build, we are using a stack of Swift, Xcode, Apple ScreenTime API, and Apple Spritekit.
+
+
+## Deployment
+Currently, testing access to Breeze is run through Apple TestFlight. Please contact one of the authors of this app if you wish to have access.
+
 
 ## Acknowledgments
 Thank you Tim and Natalie Svoboda!! :D
