@@ -306,7 +306,7 @@ extension UserDefaults {
         Session.shared.authentication = Authentication.apiKey(SG_KEY)
         
         // Send a basic example
-        let personalization = Personalization(recipients: "jrweingart@gmail.com")
+        let personalization = Personalization(recipients: "breezetakeabreak@gmail.com")
         let uuid = UIDevice.current.identifierForVendor?.uuidString ?? ""
         let plainText = Content(contentType: ContentType.plainText, value: "User " + uuid + " spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
         let email = Email(

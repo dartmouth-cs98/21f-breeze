@@ -51,7 +51,7 @@ struct TimeSelectionView: View {
         UserDefaults.standard.resetCurrentPhoneUsage()
         UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-        appDelegate.userNotificationCenter.removeAllPendingNotificationRequests()
+        //appDelegate.userNotificationCenter.removeAllPendingNotificationRequests()
         appDelegate.scheduleNotification()
     }
  }
