@@ -115,13 +115,22 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         log.notice("Phone is locking")
+        self.userNotificationCenter.removeAllPendingNotificationRequests()
         checkPhoneUsageBeforeLocking()
     }
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         log.notice("Phone is unlocking")
+        
+        if (UserDefaults.standard.getCurrentPhoneUsage() >= UserDefaults.standard.getTime()) {
+            scheduleNotification(overTimeLimit: true) // make it for 5 seconds
+        } else {
+            scheduleNotification()
+        }
+        
         UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -195,7 +204,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    func sendNotification() {
+    func scheduleNotification(overTimeLimit: Bool = false) {
         // Define the custom actions.
         let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
               title: "Accept",
@@ -230,12 +239,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
-                                                        repeats: false)
+        var trigger: UNNotificationTrigger
+        if (overTimeLimit) {
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
+                                                            repeats: false)
+        } else {
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())),
+                                                            repeats: false)
+        }
+        
         let request = UNNotificationRequest(identifier: "testNotification",
                                             content: notificationContent,
                                             trigger: trigger)
-        
         self.userNotificationCenter.add(request) { (error) in
             if let error = error {
                 self.log.error("Notification error: \(String(describing: error))")
@@ -264,8 +279,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                 UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
             }
             if (UserDefaults.standard.isAboveTimeLimit()) {
-                usageUpdatesLog.notice("User is above their chosen time limit, sending a notification to play Breeze")
-                sendNotification()
+                usageUpdatesLog.notice("User is above their chosen time limit,  notification should be sent to play Breeze")
                 UserDefaults.standard.resetCurrentPhoneUsage()
             }
         } else {
@@ -286,9 +300,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             usageUpdatesLog.notice("Protected data was not previously available - time interval not captured")
         }
         if (UserDefaults.standard.isAboveTimeLimit()) {
-            usageUpdatesLog.notice("User is above their chosen time limit, sending a notification to play Breeze")
-            sendNotification()
-            UserDefaults.standard.resetCurrentPhoneUsage()
+            usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
         }
         UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
@@ -328,5 +340,14 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         log.notice("Will become active")
     }
     
+    /*
+    func applicationWillTerminate(_ application: UIApplication) {
+        // cancel notification
+        check phone usage
+        // cancel
+    }
+     */
+    
 }
+
 

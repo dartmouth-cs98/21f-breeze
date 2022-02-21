@@ -13,9 +13,6 @@ import OSLog
 
 class MapGameScene: SKScene {
     
-    //var screenWidth = screenSize.width
-    //var screenHeight = screenSize.height
-    
     var screenSize: CGRect = UIScreen.main.bounds
     lazy var screenWidth = screenSize.width
     lazy var screenHeight = screenSize.height
@@ -44,18 +41,11 @@ class MapGameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        // map reset if necessary (comment out until needed)
-        // sets all islands back to lvl 1 (thus "locking" islands 2-5)
-//        UserDefaults.standard.resetMap()
+        // map reset if necessary (comment out until needed) - sets all islands back to lvl 1 (thus "locking" islands 2-5)
+        // UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
-        
-
-        print("width: ")
-        print(screenWidth)
-        print("height: ")
-        print(screenHeight)
         
         island1.size = CGSize(width: island_size, height: island_size)
         island1.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.20)
@@ -63,6 +53,7 @@ class MapGameScene: SKScene {
         island1.removeFromParent()
         addChild(island1)
         island1label = SKLabelNode(fontNamed: "Baloo 2")
+        
         // island1 always starts unlocked
         island1label.text = "Island Open"
         if (UserDefaults.standard.islandGetLevel(value: 1) >= 1 && UserDefaults.standard.islandGetLevel(value: 1) <= num_levels) {
@@ -74,7 +65,6 @@ class MapGameScene: SKScene {
         island1label.fontColor = SKColor.black
         island1label.position = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.20 - island_size*0.5)
         addChild(island1label)
-
         
         island2.size = CGSize(width: island_size, height: island_size)
         island2.position = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.35)
@@ -228,7 +218,6 @@ class MapGameScene: SKScene {
                 for node in touchedNode {
                     if node.name == "island1" {
                         if UserDefaults.standard.islandGetLevel(value: 1) == 0 {
-                            // 78move boat
                             UserDefaults.standard.islandLevelUp(value: 1)
                             island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + " / \(num_levels)"
                             moveSprite(pointA: mapDock.position, pointB: island1.position)
@@ -249,7 +238,6 @@ class MapGameScene: SKScene {
                         }
                         else {
                             if UserDefaults.standard.islandGetLevel(value: 2) == 0 {
-                                //move boat
                                 UserDefaults.standard.islandLevelUp(value: 2)
                                 island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + " / \(num_levels)"
                                 moveSprite(pointA: island1.position, pointB: island2.position)
@@ -272,7 +260,6 @@ class MapGameScene: SKScene {
                         }
                         else {
                             if UserDefaults.standard.islandGetLevel(value: 3) == 0 {
-                                //move boat
                                 UserDefaults.standard.islandLevelUp(value: 3)
                                 island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + " / \(num_levels)"
                                 moveSprite(pointA: island2.position, pointB: island3.position)
@@ -295,7 +282,6 @@ class MapGameScene: SKScene {
                         }
                         else {
                             if UserDefaults.standard.islandGetLevel(value: 4) == 0 {
-                                //move boat
                                 UserDefaults.standard.islandLevelUp(value: 4)
                                 island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + " / \(num_levels)"
                                 moveSprite(pointA: island3.position, pointB: island4.position)
@@ -318,7 +304,6 @@ class MapGameScene: SKScene {
                         }
                         else {
                             if UserDefaults.standard.islandGetLevel(value: 5) == 0 {
-                                //move boat
                                 UserDefaults.standard.islandLevelUp(value: 5)
                                 island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + " / \(num_levels)"
                                 moveSprite(pointA: island4.position, pointB: island5.position)
@@ -337,6 +322,7 @@ class MapGameScene: SKScene {
                 }
             }
         }
+    
     
     func moveSprite(pointA: CGPoint, pointB: CGPoint){
         gameLog.notice("in sprite movement")
@@ -378,7 +364,6 @@ class MapGameScene: SKScene {
         self.view?.presentScene(whirlpool, transition:transition)
     }
     
-    
     func dottedLine(from: CGPoint, to: CGPoint) {
         let pattern : [CGFloat] = [10.0, 10.0]
         let path = CGMutablePath.init()
@@ -391,8 +376,6 @@ class MapGameScene: SKScene {
         line.zPosition = -1
         line.strokeColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
         line.lineWidth = 10
-        addChild(line)
-
-        
+        addChild(line) 
     }
 }

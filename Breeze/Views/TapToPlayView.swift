@@ -8,7 +8,6 @@
 import SwiftUI
 import SpriteKit
 
-@available(iOS 15.0, *)
 struct TapToPlayView: View {
     @Binding var profileViewIsPresenting: Bool
     @State private var isPresenting = false
@@ -21,7 +20,6 @@ struct TapToPlayView: View {
     
 
     var scene: SKScene {
-        //let scene = StartingWhirlpoolGameScene()
         let scene = MapGameScene()
         scene.scaleMode = .resizeFill
         return scene
