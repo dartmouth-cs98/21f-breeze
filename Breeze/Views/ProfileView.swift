@@ -16,123 +16,160 @@ struct ProfileView: View {
     @State private var notificationStreak = UserDefaults.standard.getStreak()
     @State private var currWeekScreenTime = UserDefaults.standard.getCurrentWeekPhoneUsage();
     @State private var prevWeekScreenTime = Int(UserDefaults.standard.getProportionWeekSpent() * Double(UserDefaults.standard.getPreviousWeekPhoneUsage()));
+    @State private var currDayScreenTime = UserDefaults.standard.getCurrentDayPhoneUsage();
     @State private var percentNotifications = 0;
     
     var body: some View {
-        ZStack {
-            Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
-            VStack (alignment: .center) {
-                Text("Profile")
-                    .font(.title).underline().bold()
-                HStack {
-                    // Back arrow which takes user back to tapToPlay
-                    Button(action: {
-                        withAnimation {
-                            isPresenting.toggle()
+        Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
+        ScrollView {
+            ZStack {
+                VStack (alignment: .center) {
+                    HStack {
+                        Button(action: {
+                            withAnimation {
+                                isPresenting.toggle()
+                            }
+                        }, label: {
+                            // credit IconArchive https://iconarchive.com/show/ios7-icons-by-icons8/arrows-back-icon.html
+                            Image("Arrows-Back-icon")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25)
+                                .padding()
+                        })
+                        Spacer()
+                        Text("Profile")
+                            .font(.title).underline().bold()
+                        Spacer()
+                        Spacer()
+                    }
+                        .padding()
+                        // Change notification time
+                        VStack {
+                            Text("Breeze notifies you every...")
+                                .font(.headline)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.black)
+                            Button(minToHourMin(timeInMin: currTime), action: {timeSelectionIsPresenting.toggle()})
+                                .padding()
+                                .font(.body)
+                                .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
                         }
-                    }, label: {
-                        // credit IconArchive https://iconarchive.com/show/ios7-icons-by-icons8/arrows-back-icon.html
-                        Image("Arrows-Back-icon")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50)
                             .padding()
-                    })
-                    // Change notification time
+                        Spacer()
+                    Text("Your Breeze Journey")
+                        .font(.title).underline()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+                    // User statistics
+                    // notification streak
                     VStack {
-                        Text("Breeze notifies you every...")
-                            .font(.headline)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.black)
-                        Button(convertTime(timeInMin: currTime), action: {timeSelectionIsPresenting.toggle()})
-                            .padding()
+                        Text("You've accepted")
                             .font(.body)
+                            .foregroundColor(.black)
+                        Text("\(notificationStreak)")
+                            .font(.title3)
                             .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
-                    }
-                        .padding()
-                    Spacer()
-                }
-                    .padding()
-                Text("Your Breeze Journey")
-                    .font(.title).underline()
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
-                // User statistics
-                // notification streak
-                VStack {
-                    Text("You've accepted")
-                        .font(.body)
-                        .foregroundColor(.black)
-                    Text("\(notificationStreak)")
-                        .font(.headline)
-                        .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
-                        .padding()
-                        .foregroundColor(.black)
-                    Text("notifications in a row")
-                        .font(.body)
-                        .foregroundColor(.black)
-                }
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
-                // screentime percent change
-                VStack {
-                    if (currWeekScreenTime > prevWeekScreenTime) {
-                        Text("Your screentime is up")
+                            .padding()
+                            .foregroundColor(.black)
+                        Text("notifications in a row")
                             .font(.body)
                             .foregroundColor(.black)
                     }
-                    else {
-                        Text("Your screentime is down")
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
+                    // today's screen time
+                    VStack {
+                        Text("Today you've spent")
+                            .font(.body)
+                            .foregroundColor(.black)
+                        Text(secondsToHourMin(timeInSec: currDayScreenTime))
+                            .font(.title3)
+                            .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                            .padding()
+                            .foregroundColor(.black)
+                        Text("on your phone")
                             .font(.body)
                             .foregroundColor(.black)
                     }
-                    Text(calculateScreenTimePercent(currWeek: Float(currWeekScreenTime), prevWeek: Float(prevWeekScreenTime)))
-                        .font(.headline)
-                        .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
                         .padding()
-                    Text("from last week")
-                        .font(.body)
-                        .foregroundColor(.black)
-                }
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
-                // notification acceptance percent
-                VStack {
-                    Text("This week, you accepted")
-                        .font(.body)
-                        .foregroundColor(.black)
-                    Text(calculatePercentNotificationValue())
-                        .font(.headline)
-                        .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
                         .padding()
-                    Text("of notifications")
-                        .font(.body)
-                        .foregroundColor(.black)
+                    // screentime percent change
+                    VStack {
+                        if (currWeekScreenTime > prevWeekScreenTime) {
+                            Text("Your screentime is up")
+                                .font(.body)
+                                .foregroundColor(.black)
+                        }
+                        else {
+                            Text("Your screentime is down")
+                                .font(.body)
+                                .foregroundColor(.black)
+                        }
+                        Text(calculateScreenTimePercent(currWeek: Float(currWeekScreenTime), prevWeek: Float(prevWeekScreenTime)))
+                            .font(.title3)
+                            .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                            .padding()
+                        Text("from last week")
+                            .font(.body)
+                            .foregroundColor(.black)
+                    }
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
+                    // notification acceptance percent
+                    VStack {
+                        Text("This week, you accepted")
+                            .font(.body)
+                            .foregroundColor(.black)
+                        Text(calculatePercentNotificationValue())
+                            .font(.title3)
+                            .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                            .padding()
+                        Text("of notifications")
+                            .font(.body)
+                            .foregroundColor(.black)
+                    }
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
+                        .padding()
+                    Button("FOR TESTING view statistics", action: {testingDataIsPresenting.toggle()})
+                       .padding()
+                       .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                       .foregroundColor(Color.black)
+                       .cornerRadius(6)
                 }
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
-                // TO DO: button to view statistics
-                Button("FOR TESTING view statistics", action: {testingDataIsPresenting.toggle()})
-                   .padding()
-                   .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-                   .foregroundColor(Color.black)
-                   .cornerRadius(6)
             }
-        }
-        // full screen cover for changing notification time
-        .fullScreenCover(isPresented: $timeSelectionIsPresenting,
-                          onDismiss: didDismissTimeSelectionView) {
-            TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
-        }
-        // full screen cover for viewing temporary testing data
-        .fullScreenCover(isPresented: $testingDataIsPresenting,
-                          onDismiss: didDismissTimeSelectionView) {
-            TempTestingDataView(isPresenting: self.$testingDataIsPresenting)
+            // full screen cover for changing notification time
+            .fullScreenCover(isPresented: $timeSelectionIsPresenting,
+                              onDismiss: didDismissTimeSelectionView) {
+                TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
+            }
+            // full screen cover for viewing temporary testing data
+            .fullScreenCover(isPresented: $testingDataIsPresenting,
+                              onDismiss: didDismissTimeSelectionView) {
+                TempTestingDataView(isPresenting: self.$testingDataIsPresenting)
+            }
         }
     }
     
+    func secondsToHourMin(timeInSec: Int) -> String {
+        var hours = 0
+        var mins = 0
+        var leftoverTime = timeInSec
+        while (leftoverTime > 3600) {
+            leftoverTime -= 3600
+            hours += 1
+        }
+        while (leftoverTime > 60) {
+            leftoverTime -= 60
+            mins += 1
+        }
+        return String(hours) + " hr " + String(mins) + " min"
+    }
+    
     // function to convert time in minutes to a string split into hours and minutes
-    func convertTime(timeInMin: Int) -> String {
+    func minToHourMin(timeInMin: Int) -> String {
         var hours = 0
         var mins = 0
         var leftoverTime = timeInMin
