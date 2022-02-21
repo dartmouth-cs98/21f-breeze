@@ -45,7 +45,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let right_edge = 325
     let bottom_edge = -615
     let top_edge = 615
-    
     let offscreen_buffer = 100
     
     //obstacle variables (feel free to change these)
@@ -55,7 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacle_speed = 150
     var gap_size = 150
     
-    //Don't touch these obstacle variables plz
+    //Don't touch these obstacle variables
     var obstacles: Array<String> = []
     var obstacle_count = 0
     var multilevel_obstacle_buffer = 2
@@ -65,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var beach_is_rendered = false
         
     
-    //end scene timer
+    //end scene timer instantiation
     var endSceneTimer: Timer?
     var end_scene_delay = 0
     
@@ -73,45 +72,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private let motionManager = CMMotionManager()
     
-//    func setIslandNumber() {
-//        switch islandNumber{
-//        case 2:
-//            island = Islands.island1
-//        default:
-//            island = Islands.island1
-//        }
-//    }
-    
+
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
-//        setIslandNumber()
         
         //music
         let backgroundSound = SKAudioNode(fileNamed: "ocean1")
         self.addChild(backgroundSound)
         
-        
-//        view.showsPhysics = true
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
         
+        //background (starfield)
         starfield = SKEmitterNode(fileNamed: "Starfield")
         starfield.position = CGPoint(x: 0, y: 1472)
         starfield.advanceSimulationTime(10)
         starfield.particleColor = island.particleColor
-
-    
         self.addChild(starfield)
-        
         starfield.particleZPosition = -2
 
-        //background
-        print("island: ", island)
+        //background color
         self.backgroundColor = island.backgroundColor
-        // game scene physics
         
+        //set physics of frame
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        //self.physicsBody?.categoryBitMask = backgroundCategory
         
         // boat node attributes
         boat.position = CGPoint(x: frame.midX + 5, y: frame.minY + 50)
@@ -141,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //set the difficulty
         setDifficulty()
         
-        //create obstacle array
+        //create obstacle array (plan out the obstacles)
         obstacles = createObstacleArray()
         
         //level timer
@@ -190,8 +174,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func fireObstacleTimer() {
-        //print(seconds_elapsed)
-        //print(end_level_count)
         let end_delay_seconds = 8
 
         //release obstacles at an interval while num_obstacles hasn't been reached
@@ -239,8 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createObstacleArray() -> Array<String> {
-//        let obstacles: [String] = ["basic", "multilevel", "object"]
-        let obstacles: [String] = ["multilevel"]
+        let obstacles: [String] = ["basic", "multilevel", "object"]
         var obstacleArray: [String] = []
         var obstacles_left = num_obstacles
         while obstacles_left > 0 {
@@ -248,6 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacleArray.append(selected)
             obstacles_left -= 1
             
+            //give the larger obstacle a bit more room
             if selected == "multilevel"{
                 obstacleArray.append("BLANK")
                 obstacleArray.append("BLANK")
@@ -307,7 +289,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func renderBasicWall(){
         let islandColor = island.wallColor
         
-        //height of walls
         let obstacle_height = 20
         
         //adjust boundaries inward so that gap isn't offscreen
@@ -329,8 +310,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let right_rect_width = (right_edge + offscreen_buffer) - gap_right
         let right_rect_start = gap_right
 
-        
-        
         //instantiate barriers
         let left_rect_shape = CGRect(x: left_rect_start, y: 100, width: left_rect_width, height: obstacle_height)
         let right_rect_shape = CGRect(x: right_rect_start, y: 100, width: right_rect_width, height: obstacle_height)
@@ -345,10 +324,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         left_obstacle.fillColor = islandColor
         left_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
 
-        
         right_obstacle.fillColor = islandColor
         right_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
-
         
         left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
         left_obstacle.physicsBody?.isDynamic = false
@@ -359,7 +336,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         right_obstacle.physicsBody?.categoryBitMask = obstacleCategory
         
         
-//        create barrier paths
+        //create barrier paths
         let path_buffer = 100
         let leftObstaclePath = UIBezierPath()
         leftObstaclePath.move(to: CGPoint(x: 0, y: top_edge))
@@ -484,7 +461,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let move_bottom_vertical = SKAction.follow(bottom_vertical_path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(obstacle_speed))
 
         
-        //ADD OBSTACLES
         self.addChild(top_horizontal_obstacle)
         top_horizontal_obstacle.run(move_top_horizontal)
         
@@ -496,7 +472,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.addChild(bottom_vertical_obstacle)
         bottom_vertical_obstacle.run(move_bottom_vertical)
-//
     }
     
     func renderLevelEnd(){
@@ -528,23 +503,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func endScene(){
         UserDefaults.standard.set(false, forKey: "hasntFinishedGame")
+        
         // only "level up" once user has finished the level
         let island = UserDefaults.standard.getCurrentIsland()
         UserDefaults.standard.islandLevelUp(value: island)
-        print("made it to end scene")
     }
     
     
     
     override func update(_ currentTime: TimeInterval) {
         let y = boat.position.y
-
         if (y < frame.minY) {
             scene?.view?.isPaused = true
             UserDefaults.standard.set(false, forKey: "hasntLostGame")
         }
         if beach_is_rendered {
-            if (y > (frame.maxY * 0.8)){ // top 1/10th of screen
+            if (y > (frame.maxY * 0.8)){ // top 1/5th of screen
                 scene?.view?.isPaused = true
                 timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireEndSceneTimer), userInfo: nil, repeats: true)
             }

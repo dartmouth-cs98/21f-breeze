@@ -27,10 +27,3 @@ struct EndOfSetUpView: View {
         }
     }
 }
-
-//@available(iOS 15.0, *)
-//struct EndOfSetUpView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EndOfSetUpView()
-//    }
-//}
