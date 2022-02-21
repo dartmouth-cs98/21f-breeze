@@ -21,8 +21,6 @@ struct TempTestingDataView: View {
                     Button(action: {
                         withAnimation {
                             isPresenting.toggle()
-                            print("user data is")
-                            print(userData)
                         }
                     }, label: {
                         // credit IconArchive https://iconarchive.com/show/ios7-icons-by-icons8/arrows-back-icon.html
@@ -37,25 +35,7 @@ struct TempTestingDataView: View {
                 Text("On this view")
                     .font(.body)
                     .multilineTextAlignment(.center)
-//                ForEach(userData) { data in
-//                    Text(data)
-//                        .padding()
-//                }
-//                List {
-//                    while (counter < userData.endIndex) {
-//                        Text(userData[counter])
-//                    }
-////                    ForEach(userData) { data in
-////                        Text(data)
-////                    }
-//                }
+               }
                 }
             }
         }
-    
-//    func displayData() {
-//        while (counter < userData.endIndex) {
-//            Text(userData[counter])
-//        }
-//    }
-}

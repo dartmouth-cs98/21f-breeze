@@ -88,16 +88,13 @@ class StartingWhirlpoolGameScene: SKScene {
     }
     
     @objc func fireTimer() {
-        
         secondsElapsed += 1
-        
         if secondsElapsed == timeTilTransition + 1 {
             swap()
         }
     }
     
     func boatInCenter() {
-        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         
         scene?.physicsWorld.speed = 0
@@ -108,18 +105,17 @@ class StartingWhirlpoolGameScene: SKScene {
         backgroundmed.run(rotateActionFast)
         backgroundlrg.run(op_rotateActionFast)
         backgroundsm.run(op_rotateActionFast)
-        
         boat.run(rotateActionFast)
-        
     }
     
     override func update(_ currentTime: TimeInterval) {
         let x = boat.position.x
         let y = boat.position.y
         let rad = CGFloat(15)
+        
+        //swap to game when boat is in center of screen
         if (x > (frame.size.width / 2) - rad && x < (frame.size.width / 2) + rad && y > (frame.size.height / 2) - rad && y < (frame.size.height / 2) + rad){
             boatInCenter()
-            //swap()
         }
         if let accelerometerData = motionManager.accelerometerData {
             physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
