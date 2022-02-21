@@ -157,11 +157,11 @@ struct ProfileView: View {
         var hours = 0
         var mins = 0
         var leftoverTime = timeInSec
-        while (leftoverTime > 3600) {
+        while (leftoverTime >= 3600) {
             leftoverTime -= 3600
             hours += 1
         }
-        while (leftoverTime > 60) {
+        while (leftoverTime >= 60) {
             leftoverTime -= 60
             mins += 1
         }
@@ -170,10 +170,11 @@ struct ProfileView: View {
     
     // function to convert time in minutes to a string split into hours and minutes
     func minToHourMin(timeInMin: Int) -> String {
+        print(secondsToHourMin(timeInSec: 3660))
         var hours = 0
         var mins = 0
         var leftoverTime = timeInMin
-        while (leftoverTime > 60) {
+        while (leftoverTime >= 60) {
             leftoverTime -= 60
             hours += 1
         }
