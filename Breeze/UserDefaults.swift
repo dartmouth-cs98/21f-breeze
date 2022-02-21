@@ -470,6 +470,7 @@ enum UserDefaultsKeys : String {
     case sendNotificationOnUnlock
     
     //Statistics page
+    case currDayPhoneUsage
     case prevWeekPhoneUsage
     case currWeekPhoneUsage
     case lastUpdatedPhoneUsage
@@ -488,5 +489,4 @@ enum UserDefaultsKeys : String {
     
     //ONLY FOR TESTING! DELETE LATER
     case eachDayPhoneUsage //This variable will be displayed in a view that can be accessed from settings page for user testers - just in case Sendgrid doesn't work...
-    case currDayPhoneUsage
 }
