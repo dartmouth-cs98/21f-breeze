@@ -48,17 +48,11 @@ struct TempTestingDataView: View {
     func unpackData() -> String {
         var string = ""
 
-        //var daysOftheWeek:[String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         userData?.forEach { item in
-            
-            //let day = daysOftheWeek[item[0]]
-            print(item)
-            //print("The code is\(item.0)")
             let s = String(describing: item)
             let trimmed = s.components(separatedBy: .whitespacesAndNewlines).joined()
             string += trimmed
             string += "\n"
-        
         }
         return string
 
