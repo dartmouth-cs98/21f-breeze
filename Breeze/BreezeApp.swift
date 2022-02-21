@@ -127,7 +127,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("streak: \(UserDefaults.standard.getStreak())")
         
         if (UserDefaults.standard.getCurrentPhoneUsage() >= (UserDefaults.standard.getTime() * 60) || UserDefaults.standard.getSendNotificationOnUnlock()) {
-            scheduleNotification(overTimeLimit: true) // make it for 5 seconds
+            scheduleNotification(overTimeLimit: true, identity: "overTimeLimit") // make it for 5 seconds
             UserDefaults.standard.resetCurrentPhoneUsage()
         }
         scheduleNotification()
@@ -232,7 +232,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    func scheduleNotification(overTimeLimit: Bool = false) {
+    func scheduleNotification(overTimeLimit: Bool = false, identity: String = "scheduled") {
         // Define the custom actions.
         let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
                                                 title: "Snooze for 15 minutes",
@@ -268,7 +268,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
         
         var trigger: UNNotificationTrigger
-        var identifier = "scheduled"
+        var identifier = identity
         
         if (overTimeLimit) {
             print("here sending immediately")
@@ -281,7 +281,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
                                                             repeats: false)
         }
         
-        let request = UNNotificationRequest(identifier: identifier,
+        let request = UNNotificationRequest(identifier: identity,
                                             content: notificationContent,
                                             trigger: trigger)
         self.userNotificationCenter.add(request) { (error) in
