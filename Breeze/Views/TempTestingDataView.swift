@@ -22,7 +22,7 @@ struct TempTestingDataView: View {
                         withAnimation {
                             isPresenting.toggle()
                             print("user data is")
-                            print(userData)
+                            //unpackData()
                         }
                     }, label: {
                         // credit IconArchive https://iconarchive.com/show/ios7-icons-by-icons8/arrows-back-icon.html
@@ -34,9 +34,17 @@ struct TempTestingDataView: View {
                     })
                     Spacer()
                 }
-                Text("On this view")
+                let s = unpackData()
+                Text("Weekly Screentime:")
+                                .font(.body)
+                                .multilineTextAlignment(.center)
+                Text(s)
                     .font(.body)
                     .multilineTextAlignment(.center)
+                Spacer()
+//                Text("On this view")
+//                    .font(.body)
+//                    .multilineTextAlignment(.center)
 //                ForEach(userData) { data in
 //                    Text(data)
 //                        .padding()
@@ -45,10 +53,6 @@ struct TempTestingDataView: View {
 //                    while (counter < userData.endIndex) {
 //                        Text(userData[counter])
 //                    }
-////                    ForEach(userData) { data in
-////                        Text(data)
-////                    }
-//                }
                 }
             }
         }
@@ -58,4 +62,23 @@ struct TempTestingDataView: View {
 //            Text(userData[counter])
 //        }
 //    }
+    func unpackData() -> String {
+        var string = ""
+
+        //var daysOftheWeek:[String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        userData?.forEach { item in
+            
+            //let day = daysOftheWeek[item[0]]
+            print(item)
+            //print("The code is\(item.0)")
+            let s = String(describing: item)
+            let trimmed = s.components(separatedBy: .whitespacesAndNewlines).joined()
+            string += trimmed
+            string += "\n"
+        
+        }
+        return string
+
+                
+    }
 }
