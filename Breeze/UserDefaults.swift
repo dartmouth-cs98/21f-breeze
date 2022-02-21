@@ -28,6 +28,18 @@ extension UserDefaults {
         set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
     }
     
+    func getSnoozesCurrPeriod() -> Int {
+        return integer(forKey: UserDefaultsKeys.numSnoozesThisPeriod.rawValue)
+    }
+    
+    func resetSnoozesCurrPeriod() {
+        set(0, forKey: UserDefaultsKeys.numSnoozesThisPeriod.rawValue)
+    }
+    
+    func incrementCurrPeriodSnoozes() {
+        set(getSnoozesCurrPeriod() + 1, forKey: UserDefaultsKeys.numSnoozesThisPeriod.rawValue)
+    }
+    
     func getStreak() -> Int{
         return integer(forKey: UserDefaultsKeys.streak.rawValue)
     }
@@ -130,14 +142,11 @@ extension UserDefaults {
     func getCurrentIsland() -> Int {
         return integer(forKey: UserDefaultsKeys.currentIsland.rawValue)
     }
-    //
+        
     func addIntervalToCurrentPhoneUsage() {
-        var secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
+        let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
         usageUpdatesLog.notice("Seconds elapsed since last check: \(secondsElapsed)")
         
-        if (secondsElapsed > 900) {
-            secondsElapsed = 900
-        }
         let currentPhoneUsage = getCurrentPhoneUsage()
         let currDayPhoneUsage = getCurrentDayPhoneUsage()
         let currWeekPhoneUsage = getCurrentWeekPhoneUsage()
@@ -147,10 +156,18 @@ extension UserDefaults {
         set((currWeekPhoneUsage + Int(secondsElapsed)), forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
     }
     
+    func snoozeCurrentPhoneUsage() {
+        set(getTime() - 900, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
+    }
+    
     func resetCurrentPhoneUsage() {
         set(0, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
         usageUpdatesLog.notice("Reseting current phone usage")
         print(getCurrentPhoneUsage())
+    }
+    
+    func setCurrentPhoneUsage(value: Int) {
+        set(value, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
     }
     
     func isAboveTimeLimit() -> Bool {
@@ -161,7 +178,7 @@ extension UserDefaults {
         let timeLimit = getTime()
         usageUpdatesLog.notice("Time limit: \(timeLimit)")
         
-        if ((currentPhoneUsage/60) >= timeLimit && timeLimit > 0) {
+        if (currentPhoneUsage >= (timeLimit*60) && timeLimit > 0) {
             return true
         } else {
             return false
@@ -289,7 +306,7 @@ extension UserDefaults {
         Session.shared.authentication = Authentication.apiKey(SG_KEY)
         
         // Send a basic example
-        let personalization = Personalization(recipients: "jrweingart@gmail.com")
+        let personalization = Personalization(recipients: "breezetakeabreak@gmail.com")
         let uuid = UIDevice.current.identifierForVendor?.uuidString ?? ""
         let plainText = Content(contentType: ContentType.plainText, value: "User " + uuid + " spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
         let email = Email(
@@ -423,6 +440,14 @@ extension UserDefaults {
         }
         usageUpdatesLog.notice("End of Update Times")
     }
+    
+    func setSendNotificationOnUnlock(value: Bool) {
+        set(value, forKey: UserDefaultsKeys.sendNotificationOnUnlock.rawValue)
+    }
+    
+    func getSendNotificationOnUnlock() -> Bool {
+        return bool(forKey: UserDefaultsKeys.sendNotificationOnUnlock.rawValue)
+    }
 }
 
 enum UserDefaultsKeys : String {
@@ -441,6 +466,8 @@ enum UserDefaultsKeys : String {
     case island4
     case island5
     case currentIsland
+    case numSnoozesThisPeriod
+    case sendNotificationOnUnlock
     
     //Statistics page
     case prevWeekPhoneUsage

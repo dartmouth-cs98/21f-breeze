@@ -47,6 +47,11 @@ struct TimeSelectionView: View {
         UserDefaults.standard.setSetupBool(value: true)
         timeSelectionIsPresenting.toggle()
         appDelegate.requestNotificationAuthorization()
+        UserDefaults.standard.resetSnoozesCurrPeriod()
+        UserDefaults.standard.resetCurrentPhoneUsage()
+        UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
+        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+        //appDelegate.userNotificationCenter.removeAllPendingNotificationRequests()
+        appDelegate.scheduleNotification()
     }
-    
  }

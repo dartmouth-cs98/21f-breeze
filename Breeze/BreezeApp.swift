@@ -115,22 +115,27 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         log.notice("Phone is locking")
-        self.userNotificationCenter.removeAllPendingNotificationRequests()
+        userNotificationCenter.removeAllPendingNotificationRequests()
         checkPhoneUsageBeforeLocking()
     }
     
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         log.notice("Phone is unlocking")
+        print("curr phone usage:" + String(UserDefaults.standard.getCurrentPhoneUsage()))
+        userNotificationCenter.removeAllPendingNotificationRequests()
+        userNotificationCenter.removeAllDeliveredNotifications()
         
-        if (UserDefaults.standard.getCurrentPhoneUsage() >= UserDefaults.standard.getTime()) {
-            scheduleNotification(overTimeLimit: true) // make it for 5 seconds
-        } else {
-            scheduleNotification()
+        if (UserDefaults.standard.getCurrentPhoneUsage() >= (UserDefaults.standard.getTime() * 60) || UserDefaults.standard.getSendNotificationOnUnlock()) {
+            scheduleNotification(overTimeLimit: true, identity: "overTimeLimit") // make it for 5 seconds
+            UserDefaults.standard.resetCurrentPhoneUsage()
         }
-        
+        scheduleNotification()
+        UserDefaults.standard.setSendNotificationOnUnlock(value: false)
         UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-        
+        userNotificationCenter.getPendingNotificationRequests { (notifications) in
+            print(notifications)
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -147,10 +152,32 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         log.notice("\(String(describing: userInfo))")
-        completionHandler()
         //TO-DO: HANDLE NOTIFICATION CLICKS - tap, snooze, decline, and (maybe) adjust Breeze settings button. And, add statistics for this.
-        UserDefaults.standard.setExistsOutstandingNotification(value: false)
-        UserDefaults.standard.incrementStreak()
+        switch response.actionIdentifier {
+            case "SNOOZE_ACTION":
+                UserDefaults.standard.snoozeCurrentPhoneUsage()
+                UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
+                UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+                UserDefaults.standard.addNotificationSnooze()
+                scheduleNotification()
+            case "EDIT_TIME_ACTION":
+                @AppStorage("hasntFinishedSetup") var hasntFinishedSetup: Bool = true
+                @AppStorage("hasntExitedEndOfSetUpView") var hasntExitedEndOfSetUpView: Bool = true
+                @AppStorage("hasntBeenPromptedForLocationAuthorization") var hasntBeenPromptedForLocationAuthorization: Bool = true
+                        
+            case UNNotificationDefaultActionIdentifier,
+                   UNNotificationDismissActionIdentifier:
+                 // The user clicked the notification, so reset current phone usage and update clicked statistics
+                UserDefaults.standard.incrementStreak()
+                UserDefaults.standard.addNotificationClick()
+                UserDefaults.standard.resetSnoozesCurrPeriod()
+                UserDefaults.standard.resetCurrentPhoneUsage()
+                UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
+                UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+            default:
+                break
+        }
+        completionHandler()
     }
     
     func scheduleAppRefresh() {
@@ -204,19 +231,19 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    func scheduleNotification(overTimeLimit: Bool = false) {
+    func scheduleNotification(overTimeLimit: Bool = false, identity: String = "scheduled") {
         // Define the custom actions.
-        let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
-              title: "Accept",
-              options: [])
-        let declineAction = UNNotificationAction(identifier: "DECLINE_ACTION",
-              title: "Decline",
-              options: [])
+        let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
+                                                title: "Snooze for 15 minutes",
+                                                options: [])
+        let changeTimeSettingsOption = UNNotificationAction(identifier: "EDIT_TIME_ACTION",
+                                                            title: "Edit Time",
+                                                            options: [.foreground])
         
         // Define the notification type
         let meetingInviteCategory =
               UNNotificationCategory(identifier: "OVER_TIME_LIMIT",
-              actions: [acceptAction, declineAction],
+              actions: [snoozeAction, changeTimeSettingsOption],
               intentIdentifiers: [],
               hiddenPreviewsBodyPlaceholder: "",
               options: .customDismissAction)
@@ -240,29 +267,26 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
         
         var trigger: UNNotificationTrigger
+        var identifier = identity
+        
         if (overTimeLimit) {
+            print("here sending immediately")
+            identifier = "immediate"
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,
                                                             repeats: false)
         } else {
+            print("notification scheduled for \((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())")
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())),
                                                             repeats: false)
         }
         
-        let request = UNNotificationRequest(identifier: "testNotification",
+        let request = UNNotificationRequest(identifier: identity,
                                             content: notificationContent,
                                             trigger: trigger)
         self.userNotificationCenter.add(request) { (error) in
             if let error = error {
                 self.log.error("Notification error: \(String(describing: error))")
             }
-        }
-        UserDefaults.standard.addNotificationSent() //add this to stats
-        
-        if (UserDefaults.standard.existsOutstandingNotification()) {
-            UserDefaults.standard.resetStreak()
-        }
-        else {
-            UserDefaults.standard.setExistsOutstandingNotification(value: true)
         }
     }
         
@@ -281,6 +305,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             if (UserDefaults.standard.isAboveTimeLimit()) {
                 usageUpdatesLog.notice("User is above their chosen time limit,  notification should be sent to play Breeze")
                 UserDefaults.standard.resetCurrentPhoneUsage()
+                userNotificationCenter.removeAllDeliveredNotifications()
             }
         } else {
             usageUpdatesLog.notice("Protected data is not available")
@@ -290,9 +315,20 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func checkPhoneUsageBeforeLocking() {
+        UserDefaults.standard.setSendNotificationOnUnlock(value: false)
         usageUpdatesLog.notice("Checking phone usage before locking and updating statistics")
         UserDefaults.standard.checkDayRollover()
 
+        var count = 0
+        userNotificationCenter.getDeliveredNotifications { (notifications) in
+            count = notifications.count
+            print("outstanding notification count: \(count)")
+        }
+        
+        if (count > 0) {
+            UserDefaults.standard.resetStreak()
+        }
+        
         if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
             usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
             UserDefaults.standard.addIntervalToCurrentPhoneUsage()
@@ -300,7 +336,31 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             usageUpdatesLog.notice("Protected data was not previously available - time interval not captured")
         }
         if (UserDefaults.standard.isAboveTimeLimit()) {
-            usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
+            //outstanding notification exists, so find time since that notification delivered.
+            if (count > 0) {
+                let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
+                print(timeSinceNotification)
+                if (timeSinceNotification > (UserDefaults.standard.getTime() * 60)) {
+                    UserDefaults.standard.setSendNotificationOnUnlock(value: true)
+                    UserDefaults.standard.resetCurrentPhoneUsage()
+                    usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
+                }
+                else {
+                    UserDefaults.standard.setSendNotificationOnUnlock(value: false)
+                    UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
+                }
+            }
+            //no outstanding notification, so reset current phone usage and send on unlock
+            else {
+                UserDefaults.standard.setSendNotificationOnUnlock(value: true)
+                UserDefaults.standard.resetCurrentPhoneUsage()
+                usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
+            }
+        }
+        
+        //Not above time limit, so do nothing
+        else {
+            UserDefaults.standard.setSendNotificationOnUnlock(value: false)
         }
         UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
