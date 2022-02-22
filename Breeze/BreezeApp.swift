@@ -93,22 +93,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         return true
     }
     
-    func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable : Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
-        log.notice("Received notification - Next will check phone usage")
-        checkPhoneUsage()
-        if let messageID = userInfo[gcmMessageIDKey] {
-            log.notice("Message ID: \(String(describing: messageID))")
-        }
-        
-        if let value = userInfo["some-key"] as? String {
-               print(value) // output: "some-value"
-        }
-        log.notice("\(String(describing: userInfo))")
-        completionHandler(UIBackgroundFetchResult.newData)
-    }
-    
     func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         log.notice("Phone is locking")
         userNotificationCenter.removeAllPendingNotificationRequests()
@@ -136,6 +120,106 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             print("\(notifications)")
         }
     }
+
+    func checkPhoneUsageBeforeLocking() {
+        UserDefaults.standard.setSendNotificationOnUnlock(value: false)
+        usageUpdatesLog.notice("Checking phone usage before locking and updating statistics")
+        // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
+        UserDefaults.standard.checkDayRollover()
+        
+        // add interval
+        if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
+            usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
+            UserDefaults.standard.addIntervalToCurrentPhoneUsage()
+        }
+        // don't add interval
+        else {
+            usageUpdatesLog.notice("Protected data was not previously available - time interval not captured")
+        }
+        UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
+        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+        
+        var count = 0
+        userNotificationCenter.getDeliveredNotifications { (notifications) in
+            count = notifications.count
+            print("outstanding notification count: \(count)")
+            if (count > 0) {
+                // if there is at least one delivered notification when locking, then a notification was ignored -> reset streak
+                UserDefaults.standard.resetStreak()
+                
+                // user is above time limit and there is an outstanding notification (aka they ignored the notification *sad face*)
+                if(UserDefaults.standard.isAboveTimeLimit()) {
+                    let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
+                    self.usageUpdatesLog.notice("Time since notification: \(timeSinceNotification)")
+                    
+                    // not only did they ignore that last notification, but they've been on their phone for longer than their time limit since we sent that notification *double-oof*
+                    if (timeSinceNotification > (UserDefaults.standard.getTime() * 60)) {
+                        // send them another notification when they unlock their phone the next time
+                        UserDefaults.standard.setSendNotificationOnUnlock(value: true)
+                        // set their current phone usage to 0 (since we've already planned to send them an immediate notification when they next start using their phone)
+                        UserDefaults.standard.resetCurrentPhoneUsage()
+                        self.usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
+                    }
+                    // they've been on their phone less than their time limit since we sent them that last notification *better, but still not admirable behavior on their part*
+                    else {
+                        UserDefaults.standard.setSendNotificationOnUnlock(value: false)
+                        // keep track of amount of time they've been using their phone since that notification, rather than reseting all the way to zero
+                        UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
+                    }
+                }
+            }
+            //no outstanding notification and above time limit (this would be the case if they hit their time limit right when they lock their phone)
+            else if (UserDefaults.standard.isAboveTimeLimit()) {
+                // send them a notification right when they open their phone
+                UserDefaults.standard.setSendNotificationOnUnlock(value: true)
+                // set their current phone usage to 0 (since we've already planned to send them an immediate notification when they next start using their phone)
+                UserDefaults.standard.resetCurrentPhoneUsage()
+                self.usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
+            }
+            // no outstanding notifications and below time limit :)
+            else {
+                UserDefaults.standard.setSendNotificationOnUnlock(value: false)
+            }
+        }
+    }
+    
+    // location/visit checks
+    func checkPhoneUsageDuringLocationUpdate() {
+        usageUpdatesLog.notice("Location/Visit Update - checking phone usage and updating statistics")
+        // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
+        UserDefaults.standard.checkDayRollover()
+        
+        // if phone is unlocked
+        if UIApplication.shared.isProtectedDataAvailable {
+            usageUpdatesLog.notice("Protected data is available")
+            // if phone was unlocked at last check -> add this interval to current phone usage
+            if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
+                usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
+                UserDefaults.standard.addIntervalToCurrentPhoneUsage()
+            }
+            // phone was locked during last check
+            else {
+                usageUpdatesLog.notice("Protected data was not previously available - user started using their phone during this time interval")
+                UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
+            }
+            
+            // if the user is above their time limit
+            if (UserDefaults.standard.isAboveTimeLimit()) {
+                usageUpdatesLog.notice("User is above their chosen time limit,  notification should have been sent to play Breeze")
+                let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
+                UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
+            }
+        }
+        // phone is locked
+        else {
+            usageUpdatesLog.notice("Protected data is not available")
+            UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
+        }
+        
+        // update time last checked to @now
+        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
+    }
+
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                   willPresent notification: UNNotification,
@@ -146,7 +230,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         completionHandler([])
     }
 
-    
     //NOTIFICATION CLICKED
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
@@ -245,116 +328,17 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             }
         }
     }
-        
-    // location/visit checks
-    func checkPhoneUsage() {
-        usageUpdatesLog.notice("Location/Visit Update - checking phone usage and updating statistics")
-        // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
-        UserDefaults.standard.checkDayRollover()
-        
-        // if phone is unlocked
-        if UIApplication.shared.isProtectedDataAvailable {
-            usageUpdatesLog.notice("Protected data is available")
-            // if phone was unlocked at last check -> add this interval to current phone usage
-            if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
-                usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
-                UserDefaults.standard.addIntervalToCurrentPhoneUsage()
-            }
-            // phone was locked during last check
-            else {
-                usageUpdatesLog.notice("Protected data was not previously available - user started using their phone during this time interval")
-                UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
-            }
-            
-            // if the user is above their time limit
-            if (UserDefaults.standard.isAboveTimeLimit()) {
-                usageUpdatesLog.notice("User is above their chosen time limit,  notification should have been sent to play Breeze")
-                let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
-                UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
-            }
-        }
-        // phone is locked
-        else {
-            usageUpdatesLog.notice("Protected data is not available")
-            UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
-        }
-        
-        // update time last checked to @now
-        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-    }
-    
-    func checkPhoneUsageBeforeLocking() {
-        UserDefaults.standard.setSendNotificationOnUnlock(value: false)
-        usageUpdatesLog.notice("Checking phone usage before locking and updating statistics")
-        // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
-        UserDefaults.standard.checkDayRollover()
-        
-        // add interval
-        if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
-            usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
-            UserDefaults.standard.addIntervalToCurrentPhoneUsage()
-        }
-        // don't add interval
-        else {
-            usageUpdatesLog.notice("Protected data was not previously available - time interval not captured")
-        }
-        UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
-        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-        
-        var count = 0
-        userNotificationCenter.getDeliveredNotifications { (notifications) in
-            count = notifications.count
-            print("outstanding notification count: \(count)")
-            if (count > 0) {
-                
-                // if there is at least one delivered notification when locking, then a notification was ignored -> reset streak
-                UserDefaults.standard.resetStreak()
-                
-                // user is above time limit and there is an outstanding notification (aka they ignored the notification *sad face*)
-                if(UserDefaults.standard.isAboveTimeLimit()) {
-                    let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
-                    self.usageUpdatesLog.notice("Time since notification: \(timeSinceNotification)")
-                    
-                    // not only did they ignore that last notification, but they've been on their phone for longer than their time limit since we sent that notification *double-oof*
-                    if (timeSinceNotification > (UserDefaults.standard.getTime() * 60)) {
-                        // send them another notification when they unlock their phone the next time
-                        UserDefaults.standard.setSendNotificationOnUnlock(value: true)
-                        // set their current phone usage to 0 (since we've already planned to send them an immediate notification when they next start using their phone)
-                        UserDefaults.standard.resetCurrentPhoneUsage()
-                        self.usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
-                    }
-                    // they've been on their phone less than their time limit since we sent them that last notification *better, but still not admirable behavior on their part*
-                    else {
-                        UserDefaults.standard.setSendNotificationOnUnlock(value: false)
-                        // keep track of amount of time they've been using their phone since that notification, rather than reseting all the way to zero
-                        UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
-                    }
-                }
-            }
-            //no outstanding notification and above time limit (this would be the case if they hit their time limit right when they lock their phone)
-            else if (UserDefaults.standard.isAboveTimeLimit()) {
-                // send them a notification right when they open their phone
-                UserDefaults.standard.setSendNotificationOnUnlock(value: true)
-                // set their current phone usage to 0 (since we've already planned to send them an immediate notification when they next start using their phone)
-                UserDefaults.standard.resetCurrentPhoneUsage()
-                self.usageUpdatesLog.notice("User is above their chosen time limit, will send a notification to play Breeze next time they open their phone")
-            }
-            // no outstanding notifications and below time limit :)
-            else {
-                UserDefaults.standard.setSendNotificationOnUnlock(value: false)
-            }
-        }
-    }
+      
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         usageUpdatesLog.notice("Location update check")
-        checkPhoneUsage()
+        checkPhoneUsageDuringLocationUpdate()
     }
     
     func locationManager(_ manager: CLLocationManager,
                          didVisit visit: CLVisit) {
         usageUpdatesLog.notice("Visit check")
-        checkPhoneUsage()
+        checkPhoneUsageDuringLocationUpdate()
     }
     
     func locationManager(_ manager: CLLocationManager,  didFailWithError error: Error) {
