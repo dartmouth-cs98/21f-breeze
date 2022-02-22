@@ -292,11 +292,16 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             count = notifications.count
             print("outstanding notification count: \(count)")
             if (count > 0) {
+                
+                // if there is at least one delivered notification when locking, then a notification was ignored -> reset streak
                 UserDefaults.standard.resetStreak()
-                //above time limit and outstanding notification
+                
+                // if the user is above time limit and there is an outstanding notification (aka they ignored the notification *sad face*)
                 if(UserDefaults.standard.isAboveTimeLimit()) {
                     let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
                     self.usageUpdatesLog.notice("Time since notification: \(timeSinceNotification)")
+                    
+                    // not only did they ignore that last notification, but they've been on their phone for longer than their time limit since we sent that notification *double-oof*
                     if (timeSinceNotification > (UserDefaults.standard.getTime() * 60)) {
                         UserDefaults.standard.setSendNotificationOnUnlock(value: true)
                         UserDefaults.standard.resetCurrentPhoneUsage()
