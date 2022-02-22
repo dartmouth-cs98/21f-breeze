@@ -246,27 +246,40 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
         
+    // location/visit checks
     func checkPhoneUsage() {
-        usageUpdatesLog.notice("Checking phone usage and updating statistics")
+        usageUpdatesLog.notice("Location/Visit Update - checking phone usage and updating statistics")
+        // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
         UserDefaults.standard.checkDayRollover()
+        
+        // if phone is unlocked
         if UIApplication.shared.isProtectedDataAvailable {
             usageUpdatesLog.notice("Protected data is available")
+            // if phone was unlocked at last check -> add this interval to current phone usage
             if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
                 usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
                 UserDefaults.standard.addIntervalToCurrentPhoneUsage()
-            } else {
+            }
+            // phone was locked during last check
+            else {
                 usageUpdatesLog.notice("Protected data was not previously available - user started using their phone during this time interval")
                 UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
             }
+            
+            // if the user is above their time limit
             if (UserDefaults.standard.isAboveTimeLimit()) {
-                usageUpdatesLog.notice("User is above their chosen time limit,  notification should be sent to play Breeze")
-                UserDefaults.standard.resetCurrentPhoneUsage()
-                userNotificationCenter.removeAllDeliveredNotifications()
+                usageUpdatesLog.notice("User is above their chosen time limit,  notification should have been sent to play Breeze")
+                let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
+                UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
             }
-        } else {
+        }
+        // phone is locked
+        else {
             usageUpdatesLog.notice("Protected data is not available")
             UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
         }
+        
+        // update time last checked to @now
         UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
     }
     
