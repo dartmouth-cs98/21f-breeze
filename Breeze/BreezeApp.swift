@@ -14,8 +14,6 @@ import CoreLocation
 import OSLog
 import os
 
-@available(iOS 15.0, *)
-
 @main
 struct BreezeApp: App {
     
@@ -49,7 +47,6 @@ struct BreezeApp: App {
         
     }
 }
-
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, CLLocationManagerDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
@@ -102,8 +99,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         log.notice("Phone is unlocking")
         log.notice("Current phone usage at unlock: \(UserDefaults.standard.getCurrentPhoneUsage())")
+        
+        // make sure nothing is scheduled
         userNotificationCenter.removeAllPendingNotificationRequests()
-        userNotificationCenter.removeAllDeliveredNotifications()
+        // userNotificationCenter.removeAllDeliveredNotifications()
         log.notice("Your current streak at unlock: \(UserDefaults.standard.getStreak())")
         
         if (UserDefaults.standard.getCurrentPhoneUsage() >= (UserDefaults.standard.getTime() * 60) || UserDefaults.standard.getSendNotificationOnUnlock()) {
