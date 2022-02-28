@@ -133,11 +133,11 @@ struct ProfileView: View {
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
                         .padding()
-                    Button("FOR TESTING view statistics", action: {testingDataIsPresenting.toggle()})
-                       .padding()
-                       .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-                       .foregroundColor(Color.black)
-                       .cornerRadius(6)
+//                    Button("FOR TESTING view statistics", action: {testingDataIsPresenting.toggle()})
+//                       .padding()
+//                       .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+//                       .foregroundColor(Color.black)
+//                       .cornerRadius(6)
                 }
             }
             // full screen cover for changing notification time
