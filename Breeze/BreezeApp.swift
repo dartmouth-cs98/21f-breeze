@@ -273,6 +273,23 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
+    func formatTimeLimit() -> String {
+        let totalMinutes = UserDefaults.standard.getTime()
+        let hours = Int(totalMinutes / 60)
+        let minutes = totalMinutes - (hours * 60)
+        
+        var string = ""
+        if minutes > 0 && hours > 0 {
+            string = String(hours) + " hour and " + String(minutes) + " minute"
+        }else if minutes == 0 && hours > 0 {
+            string = String(totalMinutes) + " hour"
+        }else if hours == 0 {
+            string = String(totalMinutes) + " minute"
+        }
+        print(string)
+        return string
+    }
+    
     func scheduleNotification(overTimeLimit: Bool = false, identity: String = "scheduled") {
         // Define the custom actions.
         let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
@@ -294,7 +311,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         self.userNotificationCenter.setNotificationCategories([meetingInviteCategory])
 
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "You've gone over your " + String(UserDefaults.standard.getTime()) + " minute limit."
+        notificationContent.title = "You've gone over your " + formatTimeLimit() + " limit."
         notificationContent.body = "Click to take a break with Breeze"
         notificationContent.badge = NSNumber(value: 1)
         notificationContent.categoryIdentifier = "OVER_TIME_LIMIT"
