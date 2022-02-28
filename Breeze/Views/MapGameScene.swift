@@ -180,10 +180,11 @@ class MapGameScene: SKScene {
         instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
         instructions1.fontSize = 15
         instructions1.fontColor = SKColor.black
-        instructions1.position = CGPoint(x: screenWidth * 0.30, y: screenHeight * 0.75)
+        instructions1.position = CGPoint(x: screenWidth * 0.30, y: screenHeight * 0.8)
         instructions1.lineBreakMode = NSLineBreakMode.byWordWrapping
         instructions1.numberOfLines = 4
         instructions1.preferredMaxLayoutWidth = screenWidth * 0.5
+        instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
         addChild(instructions1)
         
         dottedLine(from: mapDock.position, to: island1.position)
@@ -193,20 +194,20 @@ class MapGameScene: SKScene {
         dottedLine(from: island4.position, to: island5.position)
         dottedLine(from: island5.position, to: CGPoint(x: screenWidth * 0.5, y: screenHeight))
         
-        let textShadow = SKShapeNode(rect: CGRect(x: screenWidth * 0.05, y: screenHeight * 0.75, width: 200, height: 125))
-        textShadow.strokeColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
-        textShadow.glowWidth = 20
-        textShadow.fillColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
-        textShadow.zPosition = -1
-        addChild(textShadow)
+//        let textShadow = SKShapeNode(rect: CGRect(x: screenWidth * 0.05, y: screenHeight * 0.75, width: 200, height: 125))
+//        textShadow.strokeColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
+//        textShadow.glowWidth = 20
+//        textShadow.fillColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
+//        textShadow.zPosition = -1
+//        addChild(textShadow)
         
         //USER TESTING CODE (DELETE LATER)
-        if let uuid = UIDevice.current.identifierForVendor?.uuidString {
-            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map. TESTING ID: " + uuid
-        }
-        else {
-            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
-        }
+//        if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+//            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map. TESTING ID: " + uuid
+//        }
+//        else {
+//            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
+//        }
         //USER TESTING CODE FINISH
     }
     
