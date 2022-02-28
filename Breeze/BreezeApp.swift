@@ -312,7 +312,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         
         if (overTimeLimit) {
             log.notice("Over time limit - Sending notification immediately")
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 300, repeats: false)
         } else {
             log.notice("Notification scheduled to deliver in \((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage()) seconds")
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(((UserDefaults.standard.getTime() * 60) - UserDefaults.standard.getCurrentPhoneUsage())), repeats: false)
