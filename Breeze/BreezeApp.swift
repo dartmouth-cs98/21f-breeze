@@ -282,11 +282,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         if minutes > 0 && hours > 0 {
             string = String(hours) + " hour and " + String(minutes) + " minute"
         }else if minutes == 0 && hours > 0 {
-            string = String(totalMinutes) + " hour"
+            string = String(hours) + " hour"
         }else if hours == 0 {
             string = String(totalMinutes) + " minute"
         }
-        print(string)
         return string
     }
     
