@@ -12,7 +12,6 @@ import SpriteKit
 let screenWidth  = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 
-@available(iOS 15.0, *)
 struct ContentView: View {
     @State private var showModal = false
     @State private var profileViewIsPresenting = false
