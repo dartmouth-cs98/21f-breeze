@@ -11,8 +11,11 @@ import SwiftUI
 struct ProfileView: View {
     @Binding var isPresenting: Bool
     @State private var timeSelectionIsPresenting = false
+    @State private var difficultySelectionIsPresenting = false
     @State private var testingDataIsPresenting = false
     @State private var currTime = UserDefaults.standard.getTime()
+    @State private var currDifficulty = UserDefaults.standard.getDifficulty()
+
     @State private var notificationStreak = UserDefaults.standard.getStreak()
     @State private var currWeekScreenTime = UserDefaults.standard.getCurrentWeekPhoneUsage();
     @State private var prevWeekScreenTime = Int(UserDefaults.standard.getProportionWeekSpent() * Double(UserDefaults.standard.getPreviousWeekPhoneUsage()));
@@ -57,6 +60,18 @@ struct ProfileView: View {
                         }
                             .padding()
                         Spacer()
+                    VStack {
+                        Text("Difficulty")
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
+                        Button(stringDifficulty(currDifficulty: currDifficulty), action: {difficultySelectionIsPresenting.toggle()})
+                            .padding()
+                            .font(.body)
+                            .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                    }
+                        .padding()
+                    Spacer()
                     Text("Your Breeze Journey")
                         .font(.title).underline()
                         .multilineTextAlignment(.center)
@@ -145,6 +160,13 @@ struct ProfileView: View {
                               onDismiss: didDismissTimeSelectionView) {
                 TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
             }
+            
+            // full screen cover for difficulty selection
+            .fullScreenCover(isPresented: $difficultySelectionIsPresenting,
+                            onDismiss: didDismissDifficultySelectionView) {
+                TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
+            }
+            
             // full screen cover for viewing temporary testing data
             .fullScreenCover(isPresented: $testingDataIsPresenting,
                               onDismiss: didDismissTimeSelectionView) {
@@ -168,6 +190,11 @@ struct ProfileView: View {
         return String(hours) + " hr " + String(mins) + " min"
     }
     
+    //function to return difficulty as a string
+    func stringDifficulty(currDifficulty: Int) -> String {
+        return String(currDifficulty) + " / 4"
+    }
+    
     // function to convert time in minutes to a string split into hours and minutes
     func minToHourMin(timeInMin: Int) -> String {
         print(secondsToHourMin(timeInSec: 3660))
@@ -181,6 +208,7 @@ struct ProfileView: View {
         mins = leftoverTime
         return String(hours) + " hr " + String(mins) + " min"
     }
+    
     
     func calculateScreenTimePercent(currWeek: Float, prevWeek: Float) -> String {
         // avoid dividing by 0
@@ -202,6 +230,12 @@ struct ProfileView: View {
         UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
         // update the user's notification time
         currTime = UserDefaults.standard.getTime()
+    }
+    
+    func didDismissDifficultySelectionView() {
+        UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
+        // update the user's notification time
+        currDifficulty = UserDefaults.standard.getDifficulty()
     }
     
     func didDismissTestingDataView() {
