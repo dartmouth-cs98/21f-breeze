@@ -48,7 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let offscreen_buffer = 100
     
     //obstacle variables (feel free to change these)
-    var difficulty = 2
+//    var difficulty = 2
     var seconds_between_obstacle = 2
     var num_obstacles = 12
     var obstacle_speed = 150
@@ -142,11 +142,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setDifficulty() {
         gameLog.notice("Setting difficulty")
+        if UserDefaults.standard.getDifficulty() == 0 { UserDefaults.standard.setDifficulty(value: 2) }
+        let difficulty = UserDefaults.standard.getDifficulty()
+
         if difficulty == 1 {
             seconds_between_obstacle = 2
             obstacle_speed = 100
             gap_size = 150
-        } else if difficulty == 2 {
+        } else if difficulty == 2 { // default will be 2 difficulty
             seconds_between_obstacle = 2
             obstacle_speed = 135
             gap_size = 130
@@ -159,6 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle_speed = 200
             gap_size = 90
         }
+        gameLog.notice("\(difficulty)")
     }
     
     @objc func fireTimer() {

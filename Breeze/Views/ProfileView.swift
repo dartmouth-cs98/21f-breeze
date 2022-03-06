@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileView: View {
     @Binding var isPresenting: Bool
     @State private var timeSelectionIsPresenting = false
+    @State private var difficultySelectionIsPresenting = false
     @State private var testingDataIsPresenting = false
     @State private var currTime = UserDefaults.standard.getTime()
     @State private var notificationStreak = UserDefaults.standard.getStreak()
@@ -57,6 +58,18 @@ struct ProfileView: View {
                         }
                             .padding()
                         Spacer()
+                    VStack {
+                        Text("Difficulty")
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
+                        Button(minToHourMin(timeInMin: currTime), action: {timeSelectionIsPresenting .toggle()})
+                            .padding()
+                            .font(.body)
+                            .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
+                    }
+                        .padding()
+                    Spacer()
                     Text("Your Breeze Journey")
                         .font(.title).underline()
                         .multilineTextAlignment(.center)
@@ -145,6 +158,12 @@ struct ProfileView: View {
                               onDismiss: didDismissTimeSelectionView) {
                 TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
             }
+            // full screen cover for difficulty selection
+//            .fullScreenCover(isPresented: $difficultySelectionIsPresenting,
+//                            onDismiss: didDismissTimeSelectionView) {
+//                TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
+//            }
+            
             // full screen cover for viewing temporary testing data
             .fullScreenCover(isPresented: $testingDataIsPresenting,
                               onDismiss: didDismissTimeSelectionView) {
@@ -203,6 +222,12 @@ struct ProfileView: View {
         // update the user's notification time
         currTime = UserDefaults.standard.getTime()
     }
+    
+//    func didDismissDifficultySelectionView() {
+////        UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
+////        // update the user's notification time
+////        currTime = UserDefaults.standard.getTime()
+//    }
     
     func didDismissTestingDataView() {
         

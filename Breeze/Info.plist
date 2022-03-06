@@ -29,9 +29,5 @@
 		<key>UIImageRespectsSafeAreaInsets</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>XXXXX</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>XXXX</string>
 </dict>
 </plist>
