@@ -192,7 +192,6 @@ struct ProfileView: View {
     
     // function to convert time in minutes to a string split into hours and minutes
     func minToHourMin(timeInMin: Int) -> String {
-        print(secondsToHourMin(timeInSec: 3660))
         var hours = 0
         var mins = 0
         var leftoverTime = timeInMin

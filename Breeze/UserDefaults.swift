@@ -167,7 +167,6 @@ extension UserDefaults {
     func resetCurrentPhoneUsage() {
         set(0, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
         usageUpdatesLog.notice("Reseting current phone usage")
-        print(getCurrentPhoneUsage())
     }
     
     func setCurrentPhoneUsage(value: Int) {
