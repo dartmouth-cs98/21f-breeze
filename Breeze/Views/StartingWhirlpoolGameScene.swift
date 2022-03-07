@@ -20,12 +20,16 @@ class StartingWhirlpoolGameScene: SKScene {
     var timer: Timer?
     var secondsElapsed = 0
     var timeTilTransition = 3
+    
+    let sceneSpeed = 2
 
     private let motionManager = CMMotionManager()
 
     //triggered if something changed when you render the screen
     override func didMove(to view: SKView) {
         motionManager.startAccelerometerUpdates()
+        
+        scene?.physicsWorld.speed = CGFloat(sceneSpeed)
         
         //background
         self.backgroundColor = UIColor(red: 142/255, green: 193/255, blue: 255/255, alpha: 1)
@@ -118,7 +122,7 @@ class StartingWhirlpoolGameScene: SKScene {
             boatInCenter()
         }
         if let accelerometerData = motionManager.accelerometerData {
-            physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
+            physicsWorld.gravity = CGVector(dx: CGFloat((accelerometerData.acceleration.x)) * 1, dy: CGFloat((accelerometerData.acceleration.y)) * 1)
         }
     }
 }

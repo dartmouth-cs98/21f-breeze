@@ -53,6 +53,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var num_obstacles = 12
     var obstacle_speed = 150
     var gap_size = 150
+    let sceneSpeed = 2.9
+
     
     //Don't touch these obstacle variables
     var obstacles: Array<String> = []
@@ -82,6 +84,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         motionManager.startAccelerometerUpdates()
         physicsWorld.contactDelegate = self
+        
+        scene?.physicsWorld.speed = CGFloat(sceneSpeed)
+
         
         //background (starfield)
         starfield = SKEmitterNode(fileNamed: "Starfield")
@@ -211,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func unpauseScene(){
         //allow stuff to move again
-        scene?.physicsWorld.speed = 1
+        scene?.physicsWorld.speed = CGFloat(sceneSpeed)
         
         //move dock away
         let path = UIBezierPath()
@@ -533,7 +538,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if let accelerometerData = motionManager.accelerometerData {
-            physicsWorld.gravity = CGVector(dx: accelerometerData.acceleration.x * 9.8, dy: accelerometerData.acceleration.y * 9.8)
+            physicsWorld.gravity = CGVector(dx: CGFloat((accelerometerData.acceleration.x)) * 1, dy: CGFloat((accelerometerData.acceleration.y)) * 1)
         }
     }
     
