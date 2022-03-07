@@ -24,7 +24,7 @@ struct ContentView: View {
         ZStack {
             Color(red: 204/255, green: 238/255, blue: 248/255).ignoresSafeArea()
             if profileViewIsPresenting {
-                ProfileView(isPresenting: $profileViewIsPresenting)
+                ExitView(exitViewIsPresenting: $profileViewIsPresenting)
             }
             else {
                 TapToPlayView(profileViewIsPresenting: $profileViewIsPresenting)
