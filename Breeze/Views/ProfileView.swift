@@ -61,7 +61,7 @@ struct ProfileView: View {
                             .padding()
                         Spacer()
                     VStack {
-                        Text("Difficulty")
+                        Text("Your game difficulty is...")
                             .font(.headline)
                             .multilineTextAlignment(.center)
                             .foregroundColor(.black)
@@ -148,11 +148,6 @@ struct ProfileView: View {
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black, lineWidth: 1))
                         .padding()
-//                    Button("FOR TESTING view statistics", action: {testingDataIsPresenting.toggle()})
-//                       .padding()
-//                       .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-//                       .foregroundColor(Color.black)
-//                       .cornerRadius(6)
                 }
             }
             // full screen cover for changing notification time
@@ -164,7 +159,7 @@ struct ProfileView: View {
             // full screen cover for difficulty selection
             .fullScreenCover(isPresented: $difficultySelectionIsPresenting,
                             onDismiss: didDismissDifficultySelectionView) {
-                TimeSelectionView(timeSelectionIsPresenting: self.$timeSelectionIsPresenting)
+                DifficultySelectionView(difficultySelectionIsPresenting: self.$difficultySelectionIsPresenting)
             }
             
             // full screen cover for viewing temporary testing data
@@ -236,10 +231,6 @@ struct ProfileView: View {
         UserDefaults.standard.set(false, forKey: "hasntFinishedSetup")
         // update the user's notification time
         currDifficulty = UserDefaults.standard.getDifficulty()
-    }
-    
-    func didDismissTestingDataView() {
-        
     }
 }
 
