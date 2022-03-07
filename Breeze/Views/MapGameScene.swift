@@ -150,8 +150,7 @@ class MapGameScene: SKScene {
         if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) <= num_levels {
             island5label.text = "Island Locked"
             island5.alpha = 0.4
-        }
-        if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
+        } else if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
             island5label.text = "Island Open"
             island5.alpha = 1
         } else if (UserDefaults.standard.islandGetLevel(value: 5) >= 1 && UserDefaults.standard.islandGetLevel(value: 5) <= num_levels) {
