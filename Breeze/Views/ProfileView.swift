@@ -161,12 +161,6 @@ struct ProfileView: View {
                             onDismiss: didDismissDifficultySelectionView) {
                 DifficultySelectionView(difficultySelectionIsPresenting: self.$difficultySelectionIsPresenting)
             }
-            
-            // full screen cover for viewing temporary testing data
-            .fullScreenCover(isPresented: $testingDataIsPresenting,
-                              onDismiss: didDismissTimeSelectionView) {
-                TempTestingDataView(isPresenting: self.$testingDataIsPresenting)
-            }
         }
     }
     

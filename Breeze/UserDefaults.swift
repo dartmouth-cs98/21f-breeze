@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SendGrid
 import SwiftUI
 import OSLog
 
@@ -269,7 +268,6 @@ extension UserDefaults {
     }
     
     func checkDayRollover() {
-        // if lastTimeProtectedDataStatusChecked is previous day, then store previous day's time and send to Sendgrid??
         let calendar = Calendar.current
         let prevDate = Date(timeIntervalSince1970: double(forKey: UserDefaultsKeys.lastTimeProtectedDataStatusChecked.rawValue))
         let prevComponents = calendar.dateComponents([.weekday], from: prevDate)
@@ -279,21 +277,11 @@ extension UserDefaults {
         let currComponents = calendar.dateComponents([.weekday], from: currDate)
         let currDayOfWeek = currComponents.weekday
         
-        //If it is a new day, then reset the current phone usage and add it to statistics and send to Sendgrid
+        //If it is a new day, then reset the current period phone usage and current day phone usage
         if (prevDayOfWeek != currDayOfWeek) {
             usageUpdatesLog.notice("The date has changed since phone usage was last checked - Reseting current phone usage")
             resetCurrentPhoneUsage()
-            
-            //THIS VARIABLE IS JUST FOR USER TESTING - remove afterwards
-            let currDayUsage = getCurrentDayPhoneUsage()
-            usageUpdatesLog.notice("Phone usage for previous day: \(currDayUsage)")
-            var eachDayArray = array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
-            eachDayArray.append([prevDayOfWeek, currDayUsage])
-            set(eachDayArray, forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue)
-            sendUserDataToBreeze()
-            
             set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) //Now reset current day phone usage
-            //END USER TESTING
 
             
             let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
@@ -305,28 +293,6 @@ extension UserDefaults {
                 set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
                 rollOverNotifications()
             }
-        }
-    }
-    
-    //Sendgrid API call to output data
-    func sendUserDataToBreeze() {
-        let SG_KEY="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"
-        Session.shared.authentication = Authentication.apiKey(SG_KEY)
-        
-        // Send a basic example
-        let personalization = Personalization(recipients: "breezetakeabreak@gmail.com")
-        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? ""
-        let plainText = Content(contentType: ContentType.plainText, value: "User " + uuid + " spent " + String(integer(forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) / 60) + " minutes today on their phone")
-        let email = Email(
-            personalizations: [personalization],
-            from: "jrweingart@gmail.com",
-            content: [plainText],
-            subject: "Hello from Breeze"
-        )
-        do {
-            try Session.shared.send(request: email)
-        } catch {
-            print(error)
         }
     }
     
@@ -413,10 +379,6 @@ extension UserDefaults {
     
     func getUpdateTimes () -> [Any]? {
         return array(forKey: UserDefaultsKeys.updateTimes.rawValue) ?? []
-    }
-    
-    func getEachDayPhoneUsage () -> [Any]? {
-        return array(forKey: UserDefaultsKeys.eachDayPhoneUsage.rawValue) ?? []
     }
     
     func addVisitUpdate () {
@@ -508,7 +470,4 @@ enum UserDefaultsKeys : String {
     case visitUpdates
     case locationUpdates
     case fetchUpdates
-    
-    //ONLY FOR TESTING! DELETE LATER
-    case eachDayPhoneUsage //This variable will be displayed in a view that can be accessed from settings page for user testers - just in case Sendgrid doesn't work...
 }
