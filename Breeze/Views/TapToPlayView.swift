@@ -102,10 +102,10 @@ struct TapToPlayView: View {
                                 .frame(width: gp.size.width, height: gp.size.height)
                         }.ignoresSafeArea()
                     } else {
-                        LosingExitView(losingExitViewIsPresenting: $isPresenting)
+                        LosingExitView(losingExitViewIsPresenting: $isPresenting).transition(AnyTransition.opacity.animation(.easeInOut(duration: 1.0)))
                     }
                 } else {
-                    ExitView(exitViewIsPresenting: $isPresenting)
+                    ExitView(exitViewIsPresenting: $isPresenting).transition(AnyTransition.opacity.animation(.easeInOut(duration: 1.0)))
                 }
                 
   

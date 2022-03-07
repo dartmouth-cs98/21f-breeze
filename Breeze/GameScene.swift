@@ -93,8 +93,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starfield.position = CGPoint(x: 0, y: 1472)
         starfield.advanceSimulationTime(10)
         starfield.particleColor = island.particleColor
-        self.addChild(starfield)
         starfield.particleZPosition = -2
+        self.addChild(starfield)
 
         //background color
         self.backgroundColor = island.backgroundColor
@@ -332,9 +332,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         left_obstacle.fillColor = islandColor
         left_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
+        left_obstacle.strokeColor = .clear
 
         right_obstacle.fillColor = islandColor
         right_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
+        right_obstacle.strokeColor = .clear
         
         left_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: left_rect_shape)
         left_obstacle.physicsBody?.isDynamic = false
@@ -393,6 +395,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         top_horizontal_obstacle.fillColor = islandColor
         top_horizontal_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
+        top_horizontal_obstacle.strokeColor = .clear
      
         top_horizontal_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: top_horizontal_rect_shape)
         top_horizontal_obstacle.physicsBody?.isDynamic = false
@@ -413,6 +416,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         top_vertical_obstacle.fillColor = islandColor
         top_vertical_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTextureVert)!)
+        top_vertical_obstacle.strokeColor = .clear
      
         top_vertical_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: top_vertical_rect_shape)
         top_vertical_obstacle.physicsBody?.isDynamic = false
@@ -437,7 +441,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         bottom_horizontal_obstacle.fillColor = islandColor
         bottom_horizontal_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTexture)!)
-
+        bottom_horizontal_obstacle.strokeColor = .clear
 
         bottom_horizontal_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_horizontal_rect_shape)
         bottom_horizontal_obstacle.physicsBody?.isDynamic = false
@@ -458,7 +462,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         bottom_vertical_obstacle.fillColor = islandColor
         bottom_vertical_obstacle.fillTexture = SKTexture(image: UIImage(named: island.wallTextureVert)!)
-        
+        bottom_vertical_obstacle.strokeColor = .clear
         
         bottom_vertical_obstacle.physicsBody = SKPhysicsBody(edgeLoopFrom: bottom_vertical_rect_shape)
         bottom_vertical_obstacle.physicsBody?.isDynamic = false
