@@ -10,7 +10,6 @@ import UserNotifications
 import BackgroundTasks
 import UIKit
 import Foundation
-import CoreLocation
 import OSLog
 import os
 
@@ -19,7 +18,6 @@ struct BreezeApp: App {
     
     @AppStorage("hasntFinishedSetup") var hasntFinishedSetup: Bool = true
     @AppStorage("hasntExitedEndOfSetUpView") var hasntExitedEndOfSetUpView: Bool = true
-    @AppStorage("hasntBeenPromptedForLocationAuthorization") var hasntBeenPromptedForLocationAuthorization: Bool = true
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -32,12 +30,7 @@ struct BreezeApp: App {
                   if hasntFinishedSetup {
                       TimeLimitInstructionsView()
                   } else {
-                      if hasntBeenPromptedForLocationAuthorization {
-                          LocationAuthorizationView()
-                      } else {
-                          InstructionsView()
-                      }
-                      
+                      InstructionsView()
                   }
                 
               } else {
@@ -48,9 +41,8 @@ struct BreezeApp: App {
     }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, CLLocationManagerDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     let userNotificationCenter = UNUserNotificationCenter.current()
-    let locationManager = CLLocationManager()
     let backgroundTaskID = "com.breeze.CheckPhoneUsage"
     let gcmMessageIDKey = "gcm.message_id"
     let log = Logger.init(subsystem: "edu.dartmouth.Breeze", category: "AppDelegate")
@@ -61,20 +53,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             
         // set this class as the notification delegate
         userNotificationCenter.delegate = self
-            
-        //request authorization to use notifications
-        //self.requestNotificationAuthorization()
-            
-        // request authorization to track updates
-        locationManager.delegate = self
-        // locationManager.requestAlwaysAuthorization()
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = 45
-        locationManager.distanceFilter = 100
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startMonitoringVisits()
-        
+
         // For iOS 10 display notification (sent via APNS)
         UNUserNotificationCenter.current().delegate = self
 
@@ -182,42 +161,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
-    // location/visit checks
-    func checkPhoneUsageDuringLocationUpdate() {
-        usageUpdatesLog.notice("Location/Visit Update - checking phone usage and updating statistics")
-        // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
-        UserDefaults.standard.checkDayRollover()
-        
-        // if phone is unlocked
-        if UIApplication.shared.isProtectedDataAvailable {
-            usageUpdatesLog.notice("Protected data is available")
-            // if phone was unlocked at last check -> add this interval to current phone usage
-            if (UserDefaults.standard.getPreviousProtectedDataStatus()) {
-                usageUpdatesLog.notice("Protected data was previously available - adding this time interval to total phone usage")
-                UserDefaults.standard.addIntervalToCurrentPhoneUsage()
-            }
-            // phone was locked during last check
-            else {
-                usageUpdatesLog.notice("Protected data was not previously available - user started using their phone during this time interval")
-                UserDefaults.standard.setPreviousProtectedDataStatus(value: true)
-            }
-            
-            // if the user is above their time limit
-            if (UserDefaults.standard.isAboveTimeLimit()) {
-                usageUpdatesLog.notice("User is above their chosen time limit,  notification should have been sent to play Breeze")
-                let timeSinceNotification = UserDefaults.standard.getCurrentPhoneUsage() - (UserDefaults.standard.getTime() * 60)
-                UserDefaults.standard.setCurrentPhoneUsage(value: timeSinceNotification)
-            }
-        }
-        // phone is locked
-        else {
-            usageUpdatesLog.notice("Protected data is not available")
-            UserDefaults.standard.setPreviousProtectedDataStatus(value: false)
-        }
-        
-        // update time last checked to @now
-        UserDefaults.standard.setLastTimeProtectedDataStatusChecked()
-    }
 
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -344,32 +287,6 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         }
     }
       
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        usageUpdatesLog.notice("Location update check")
-        checkPhoneUsageDuringLocationUpdate()
-    }
-    
-    func locationManager(_ manager: CLLocationManager,
-                         didVisit visit: CLVisit) {
-        usageUpdatesLog.notice("Visit check")
-        checkPhoneUsageDuringLocationUpdate()
-    }
-    
-    func locationManager(_ manager: CLLocationManager,  didFailWithError error: Error) {
-        usageUpdatesLog.notice("Location manager error: \(error.localizedDescription)")
-        locationManager.stopMonitoringVisits()
-        return
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = 45
-        locationManager.distanceFilter = 100
-        locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startMonitoringVisits()
-    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         log.notice("Will resign active")
