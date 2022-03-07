@@ -15,9 +15,10 @@ struct DifficultySelectionView: View {
     var body: some View {
        VStack {
          Text("Your level of difficulty in the game is:")
+               .font(.headline).foregroundColor(Color.black)
          Picker(selection: $oldDifficultyIndex, label: Text("")) {
              ForEach(0 ..< difficulties.count) {
-                Text(self.difficulties[$0])
+                 Text(self.difficulties[$0]).font(.body).foregroundColor(Color.black)
              }
          }.padding()
         Button("Confirm", action: selectDifficulty)

@@ -48,15 +48,6 @@ struct TapToPlayView: View {
                 // these spacers may seem redundant, but they are keeping tap to play button roughly centered
                 Spacer()
                 Spacer()
-                // NOTE: keeping these for now so I can use for reference with profile screen
-//                Text("Way to go! Here's an update on your healthier habits.").font(Font.custom("Baloo2-Regular", size:30)).multilineTextAlignment(.center).padding()
-//                VStack (spacing: 0, content: {
-//                    Divider()
-//                    Text("Streak:  \(userStreak) days").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
-//                    Divider()
-//                    Text("Est. Time Saved:  \(numClicks) hours").font(Font.custom("Baloo2-Regular", size:30).weight(.bold))
-//                    Divider()
-//                }).padding()
                 // attribution to Alfredo Hernandez for the icon
                 Button(action: {
                     withAnimation {
@@ -84,13 +75,6 @@ struct TapToPlayView: View {
                 Spacer()
                 Spacer()
                 Spacer()
-//                  NOTE: keeping these for now in case I want to easily uncomment for testing set up flow
-//                Button("Go back to setup", action: {restartSetup()})
-//                    .font(Font.custom("Baloo2-Regular", size:30))
-//                    .background(Color.init(UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)))
-//                    .foregroundColor(Color.black)
-//                    .cornerRadius(6)
-//                    .buttonStyle(.bordered)
             }
           if isPresenting {
             ZStack(alignment: .center) {
