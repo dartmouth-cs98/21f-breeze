@@ -215,7 +215,7 @@ class MapGameScene: SKScene {
                         else if UserDefaults.standard.islandGetLevel(value: 1) >= num_levels {
                             island1label.text = "Level: \(num_levels) / \(num_levels)"
                         } else {
-                            island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + " / \(num_levels)"
+                            //island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + " / \(num_levels)"
                         }
                         UserDefaults.standard.setCurrentIsland(value: 1)
                         startGame()
@@ -235,7 +235,7 @@ class MapGameScene: SKScene {
                                 if UserDefaults.standard.islandGetLevel(value: 2) == num_levels {
                                         island2label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + " / \(num_levels)"
+                                    //island2label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 2)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 2)
                                 startGame()
@@ -257,7 +257,7 @@ class MapGameScene: SKScene {
                                 if UserDefaults.standard.islandGetLevel(value: 3) == num_levels {
                                         island3label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + " / \(num_levels)"
+                                    //island3label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 3)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 3)
                                 startGame()
@@ -279,7 +279,7 @@ class MapGameScene: SKScene {
                                 if UserDefaults.standard.islandGetLevel(value: 4) == num_levels {
                                         island4label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + " / \(num_levels)"
+                                    //island4label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 4)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 4)
                                 startGame()
@@ -301,7 +301,7 @@ class MapGameScene: SKScene {
                                 if UserDefaults.standard.islandGetLevel(value: 5) == num_levels {
                                         island5label.text = "Level: \(num_levels) / \(num_levels)"
                                 } else {
-                                    island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + " / \(num_levels)"
+                                    //island5label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 5)) + " / \(num_levels)"
                                 }
                                 UserDefaults.standard.setCurrentIsland(value: 5)
                                 startGame()
