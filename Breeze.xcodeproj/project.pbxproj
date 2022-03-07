@@ -35,7 +35,6 @@
 		46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */; };
 		46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */; };
 		9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 9A45A90027B4622500C4FC45 /* SendGrid */; };
-		9A45A90927D6790200C4FC45 /* BethEllen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A45A90827D6790200C4FC45 /* BethEllen-Regular.ttf */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		A18B974927BC9E0E0056B3FE /* ocean1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A18B974827BC9E0E0056B3FE /* ocean1.mp3 */; };
@@ -111,7 +110,6 @@
 		46FC0D082739C78B002D14F9 /* Breeze.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Breeze.entitlements; sourceTree = "<group>"; };
 		9A117327271E16E800D871B7 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
 		9A45A90427D5B07C00C4FC45 /* BethEllen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BethEllen-Regular.ttf"; path = "../../../Downloads/Beth_Ellen/BethEllen-Regular.ttf"; sourceTree = "<group>"; };
-		9A45A90827D6790200C4FC45 /* BethEllen-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BethEllen-Regular.ttf"; path = "Breeze/Resources/BethEllen-Regular.ttf"; sourceTree = "<group>"; };
 		A14061412741C4BA006110CF /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
 		A18B974827BC9E0E0056B3FE /* ocean1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ocean1.mp3; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 		461E9E112717725E00E6C510 = {
 			isa = PBXGroup;
 			children = (
-				9A45A90827D6790200C4FC45 /* BethEllen-Regular.ttf */,
 				461E9E1C2717725E00E6C510 /* Breeze */,
 				461E9E322717725F00E6C510 /* BreezeTests */,
 				461E9E3C2717725F00E6C510 /* BreezeUITests */,
@@ -380,7 +377,6 @@
 				46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */,
 				A18B974927BC9E0E0056B3FE /* ocean1.mp3 in Resources */,
 				46F6460A273C150700A27DC3 /* Baloo2-Regular.ttf in Resources */,
-				9A45A90927D6790200C4FC45 /* BethEllen-Regular.ttf in Resources */,
 				FFA2155B27BAF36400DE9889 /* Assets.xcassets in Resources */,
 				461E9E902719464E00E6C510 /* GameScene.sks in Resources */,
 				46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */,
