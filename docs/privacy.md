@@ -1,1 +1,1 @@
-While Breeze needs to track location *changes* in order to track total phone usage, Breeze does not actually save that location data. This means that your location  is not stored anywhere and therefore your information cannot be sent anywhere. 
+Breeze does not track, store, or send any user data, ever. 
