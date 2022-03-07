@@ -31,7 +31,6 @@ struct ExitView: View {
                     .font(Font.custom("BethEllen-Regular", size:15)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
-                
             }
         }
     }
