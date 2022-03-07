@@ -66,6 +66,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             log.notice("This application on this device is NOT registered for remote notifications")
         }
 
+        let (quote, author) = getRandomQuote()
+        UserDefaults.standard.setQuote(value: quote)
+        UserDefaults.standard.setAuthor(value: author)
+            
         return true
     }
     
@@ -304,6 +308,16 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
      */
     
+    func getRandomQuote() -> (String, String) {
+        let allQuotes = [ "It is not the mountain we conquer, but ourselves", "If we all did the things we are capable of doing, we would literally astound ourselves", "Breath is the power behind all things . . . I breathe in and know that good things will happen", "A year from now you may wish you had started today", "Yesterday is gone. Tomorrow has not yet come. We have only today. Let us begin"]
+        let allAuthors = ["Sir Edmund Hillary", "Thomas Edison", "Tao Porchon-Lynch", "Karen Lamb", "Mother Teresa"]
+        
+        let randInt = Int.random(in: 0..<allQuotes.count)
+        
+        let quote = allQuotes[randInt]
+        let author = allAuthors[randInt]
+        return (quote, author)
+    }
 }
 
 
