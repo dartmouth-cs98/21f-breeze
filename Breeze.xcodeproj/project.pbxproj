@@ -42,6 +42,7 @@
 		A873B3E827BDA866005CB855 /* TempTestingDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A873B3E727BDA866005CB855 /* TempTestingDataView.swift */; };
 		A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCA27986AA9008D6DD3 /* Time.swift */; };
 		A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */; };
+		A895642D27D5A57200AC0074 /* DifficultySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A895642C27D5A57200AC0074 /* DifficultySelectionView.swift */; };
 		A8C3C77D279717F20027D8F9 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3C77C279717F20027D8F9 /* InstructionsView.swift */; };
 		FF28167C273467BF0022F820 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167B273467BF0022F820 /* UserDefaults.swift */; };
 		FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF28167D273B69710022F820 /* TimeSelectionView.swift */; };
@@ -115,6 +116,7 @@
 		A873B3E727BDA866005CB855 /* TempTestingDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTestingDataView.swift; sourceTree = "<group>"; };
 		A87EDDCA27986AA9008D6DD3 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
+		A895642C27D5A57200AC0074 /* DifficultySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultySelectionView.swift; sourceTree = "<group>"; };
 		A8C3C77C279717F20027D8F9 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		FF28167B273467BF0022F820 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		FF28167D273B69710022F820 /* TimeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionView.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */,
 				A8390C5C27B462B20042BA0F /* ProfileView.swift */,
 				A873B3E727BDA866005CB855 /* TempTestingDataView.swift */,
+				A895642C27D5A57200AC0074 /* DifficultySelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 			files = (
 				4652152D272F26040023C2C0 /* StartingWhirlpoolGameScene.swift in Sources */,
 				FFA2155927A46D1A00DE9889 /* MapGameScene.swift in Sources */,
+				A895642D27D5A57200AC0074 /* DifficultySelectionView.swift in Sources */,
 				A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */,
 				461E9E942719468900E6C510 /* GameScene.swift in Sources */,
 				FF28167E273B69710022F820 /* TimeSelectionView.swift in Sources */,
