@@ -448,28 +448,42 @@ extension UserDefaults {
     func getSendNotificationOnUnlock() -> Bool {
         return bool(forKey: UserDefaultsKeys.sendNotificationOnUnlock.rawValue)
     }
+    
+    func setQuote(value: String) {
+        set(value, forKey: UserDefaultsKeys.quote.rawValue)
+    }
+    func setAuthor(value: String) {
+        set(value, forKey: UserDefaultsKeys.author.rawValue)
+    }
 }
 
 enum UserDefaultsKeys : String {
-    case streak
+    //Screen time tracking and notifications
     case timeInMinutes
-    case endedGame
     case setup
     case numClicks
     case lastDatePlayed
     case previousProtectedDataStatus
     case lastTimeProtectedDataStatusChecked
     case currentPhoneUsage
+    case numSnoozesThisPeriod
+    case sendNotificationOnUnlock
+    
+    //island progress logic
     case island1
     case island2
     case island3
     case island4
     case island5
     case currentIsland
-    case numSnoozesThisPeriod
-    case sendNotificationOnUnlock
+    case endedGame
+    
+    //exit view
+    case quote
+    case author
     
     //Statistics page
+    case streak
     case currDayPhoneUsage
     case prevWeekPhoneUsage
     case currWeekPhoneUsage
@@ -481,7 +495,6 @@ enum UserDefaultsKeys : String {
     case notificationsSentCurrWeek
     case notificationsSnoozedCurrWeek
     case notificationSent
-  
     case updateTimes
     case visitUpdates
     case locationUpdates

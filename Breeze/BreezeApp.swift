@@ -87,6 +87,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
             log.notice("This application on this device is NOT registered for remote notifications")
         }
 
+        let (quote, author) = getRandomQuote()
+        UserDefaults.standard.setQuote(value: quote)
+        UserDefaults.standard.setAuthor(value: author)
+            
         return true
     }
     
@@ -387,6 +391,45 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
      */
     
+    func getRandomQuote() -> (String, String) {
+        let allQuotes = [ "It is not the mountain we conquer, but ourselves", "If we all did the things we are capable of doing, we would literally astound ourselves", "“Breath is the power behind all things . . . I breathe in and know that good things will happen", "A year from now you may wish you had started today", "Yesterday is gone. Tomorrow has not yet come. We have only today. Let us begin"]
+        let allAuthors = ["Sir Edmond Hillary", "Thomas Edison", "Tao Porchon-Lynch", "Karen Lamb", "Mother Teresa"]
+        
+        let randInt1 = Int.random(in: 0..<allQuotes.count)
+        let randInt2 = Int.random(in: 0..<allQuotes.count)
+        let randInt3 = Int.random(in: 0..<allQuotes.count)
+        let randInt4 = Int.random(in: 0..<allQuotes.count)
+        let randInt5 = Int.random(in: 0..<allQuotes.count)
+        let randInt6 = Int.random(in: 0..<allQuotes.count)
+        let randInt7 = Int.random(in: 0..<allQuotes.count)
+        let randInt8 = Int.random(in: 0..<allQuotes.count)
+        let randInt9 = Int.random(in: 0..<allQuotes.count)
+        let randInt10 = Int.random(in: 0..<allQuotes.count)
+        let randInt11 = Int.random(in: 0..<allQuotes.count)
+        let randInt12 = Int.random(in: 0..<allQuotes.count)
+        let randInt13 = Int.random(in: 0..<allQuotes.count)
+        let randInt14 = Int.random(in: 0..<allQuotes.count)
+        let randInt15 = Int.random(in: 0..<allQuotes.count)
+        print(randInt)
+        print(randInt2)
+        print(randInt3)
+        print(randInt4)
+        print(randInt5)
+        print(randInt6)
+        print(randInt7)
+        print(randInt8)
+        print(randInt9)
+        print(randInt10)
+        print(randInt11)
+        print(randInt12)
+        print(randInt13)
+        print(randInt14)
+        print(randInt15)
+        
+        let quote = allQuotes[randInt]
+        let author = allAuthors[randInt]
+        return (quote, author)
+    }
 }
 
 

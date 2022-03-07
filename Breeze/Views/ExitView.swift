@@ -10,6 +10,8 @@ import SwiftUI
 struct ExitView: View {
     
     @Binding var exitViewIsPresenting: Bool
+    @State private var quote = UserDefaults.standard.string(forKey: "quote") ?? ""
+    @State private var author = UserDefaults.standard.string(forKey: "author") ?? ""
     
     var body: some View {
         ZStack {
@@ -19,23 +21,27 @@ struct ExitView: View {
                     .font(Font.custom("Baloo2-Bold", size:20)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
-                 Button("Take me home", action: goToTapToPlay)
                     .padding()
-                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
-                    .foregroundColor(Color.black)
-                    .cornerRadius(6)
-                }
+                Text("\"" + quote + "\"")
+                    .font(Font.custom("Baloo2", size:20)).foregroundColor(Color.black)
+                    .multilineTextAlignment(.center)
+                Text("- " + author)
+                    .font(Font.custom("Baloo2", size:15)).foregroundColor(Color.black)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                
             }
         }
-    
-    func goToTapToPlay () {
-        if (UserDefaults.standard.getDaysFromLastPlay() <= 1) {
-            UserDefaults.standard.setLastDatePlayedToToday()
-        } 
-        UserDefaults.standard.synchronize()
-        UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
-        exitViewIsPresenting.toggle()
     }
+    
+//    func goToTapToPlay () {
+//        if (UserDefaults.standard.getDaysFromLastPlay() <= 1) {
+//            UserDefaults.standard.setLastDatePlayedToToday()
+//        }
+//        UserDefaults.standard.synchronize()
+//        UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
+//        exitViewIsPresenting.toggle()
+//    }
 }
 
 
