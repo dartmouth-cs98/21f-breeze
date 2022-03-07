@@ -34,13 +34,11 @@
 		46F6460D273C150700A27DC3 /* Baloo2-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64608273C150700A27DC3 /* Baloo2-Medium.ttf */; };
 		46F6460E273C150700A27DC3 /* Baloo2-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46F64609273C150700A27DC3 /* Baloo2-Bold.ttf */; };
 		46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F6461627400EEE00A27DC3 /* TimeLimitInstructionsView.swift */; };
-		9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 9A45A90027B4622500C4FC45 /* SendGrid */; };
 		9A45A90B27D67B3E00C4FC45 /* BethEllen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A45A90A27D67B3E00C4FC45 /* BethEllen-Regular.ttf */; };
 		A14061422741C4BA006110CF /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = A14061412741C4BA006110CF /* Starfield.sks */; };
 		A1495ECC2735929B009DA6B1 /* GameSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1495ECB2735929B009DA6B1 /* GameSceneController.swift */; };
 		A18B974927BC9E0E0056B3FE /* ocean1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A18B974827BC9E0E0056B3FE /* ocean1.mp3 */; };
 		A8390C5D27B462B20042BA0F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8390C5C27B462B20042BA0F /* ProfileView.swift */; };
-		A873B3E827BDA866005CB855 /* TempTestingDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A873B3E727BDA866005CB855 /* TempTestingDataView.swift */; };
 		A87EDDCB27986AA9008D6DD3 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCA27986AA9008D6DD3 /* Time.swift */; };
 		A87EDDCD27986AE3008D6DD3 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */; };
 		A895642D27D5A57200AC0074 /* DifficultySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A895642C27D5A57200AC0074 /* DifficultySelectionView.swift */; };
@@ -115,7 +113,6 @@
 		A1495ECB2735929B009DA6B1 /* GameSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneController.swift; sourceTree = "<group>"; };
 		A18B974827BC9E0E0056B3FE /* ocean1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ocean1.mp3; sourceTree = "<group>"; };
 		A8390C5C27B462B20042BA0F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		A873B3E727BDA866005CB855 /* TempTestingDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTestingDataView.swift; sourceTree = "<group>"; };
 		A87EDDCA27986AA9008D6DD3 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
 		A895642C27D5A57200AC0074 /* DifficultySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultySelectionView.swift; sourceTree = "<group>"; };
@@ -131,7 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A45A90127B4622500C4FC45 /* SendGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +254,6 @@
 				A87EDDCA27986AA9008D6DD3 /* Time.swift */,
 				A87EDDCC27986AE3008D6DD3 /* DurationPickerView.swift */,
 				A8390C5C27B462B20042BA0F /* ProfileView.swift */,
-				A873B3E727BDA866005CB855 /* TempTestingDataView.swift */,
 				A895642C27D5A57200AC0074 /* DifficultySelectionView.swift */,
 			);
 			path = Views;
@@ -282,7 +277,6 @@
 			);
 			name = Breeze;
 			packageProductDependencies = (
-				9A45A90027B4622500C4FC45 /* SendGrid */,
 			);
 			productName = Breeze;
 			productReference = 461E9E1A2717725E00E6C510 /* Breeze.app */;
@@ -357,7 +351,6 @@
 			);
 			mainGroup = 461E9E112717725E00E6C510;
 			packageReferences = (
-				9A45A8FF27B4622500C4FC45 /* XCRemoteSwiftPackageReference "sendgrid-swift" */,
 			);
 			productRefGroup = 461E9E1B2717725E00E6C510 /* Products */;
 			projectDirPath = "";
@@ -424,7 +417,6 @@
 				461E9E272717725F00E6C510 /* Persistence.swift in Sources */,
 				A8C3C77D279717F20027D8F9 /* InstructionsView.swift in Sources */,
 				461E9E202717725E00E6C510 /* ContentView.swift in Sources */,
-				A873B3E827BDA866005CB855 /* TempTestingDataView.swift in Sources */,
 				46F6461727400EEF00A27DC3 /* TimeLimitInstructionsView.swift in Sources */,
 				46521531272F26150023C2C0 /* EndOfSetUpView.swift in Sources */,
 				461E9E1E2717725E00E6C510 /* BreezeApp.swift in Sources */,
@@ -789,25 +781,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9A45A8FF27B4622500C4FC45 /* XCRemoteSwiftPackageReference "sendgrid-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scottkawai/sendgrid-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9A45A90027B4622500C4FC45 /* SendGrid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A45A8FF27B4622500C4FC45 /* XCRemoteSwiftPackageReference "sendgrid-swift" */;
-			productName = SendGrid;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		461E9E282717725F00E6C510 /* Breeze.xcdatamodeld */ = {
