@@ -42,7 +42,7 @@ struct ProfileView: View {
                         })
                         Spacer()
                         Text("Profile")
-                            .font(.title).underline().bold()
+                            .font(.title).underline().bold().foregroundColor(Color.black)
                         Spacer()
                         Spacer()
                     }

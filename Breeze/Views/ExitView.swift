@@ -19,7 +19,6 @@ struct ExitView: View {
             VStack {
                 Text("Thanks for playing, enjoy your day!")
                     .font(.title2).bold().foregroundColor(Color.black)
-                    //.font(Font.custom("Baloo2-Bold", size:25)).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
                     .padding()
@@ -35,15 +34,6 @@ struct ExitView: View {
             }
         }
     }
-    
-//    func goToTapToPlay () {
-//        if (UserDefaults.standard.getDaysFromLastPlay() <= 1) {
-//            UserDefaults.standard.setLastDatePlayedToToday()
-//        }
-//        UserDefaults.standard.synchronize()
-//        UserDefaults.standard.set(true, forKey: "hasntFinishedGame")
-//        exitViewIsPresenting.toggle()
-//    }
 }
 
 

@@ -16,11 +16,11 @@ struct LosingExitView: View {
             Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack {
                 Text("Uh-oh! Looks like you misnavigated...")
-                    .font(.body)
+                    .font(.body).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
                 Text("Want to try again?")
-                    .font(.body)
+                    .font(.body).foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
                 Button("Yes please!", action: {tryAgain()})
