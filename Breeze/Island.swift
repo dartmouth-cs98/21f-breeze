@@ -81,7 +81,7 @@ struct Islands {
         boatJPG: "boat",
         dockJPG: "dock",
         //beachJPG: "lighthouse beach",
-        beachJPG: "lighthousebeach_scaled",
+        beachJPG: "lighthousebeach_scaled_1",
         obstacleJPGs: ["rock1", "rock2"],
         wallTextureString: "rock wall",
         wallTextureVertString: "rock wall vert",

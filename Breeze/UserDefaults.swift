@@ -142,6 +142,10 @@ extension UserDefaults {
     func getCurrentIsland() -> Int {
         return integer(forKey: UserDefaultsKeys.currentIsland.rawValue)
     }
+    
+    func getDifficulty() -> Int {
+        return integer(forKey: UserDefaultsKeys.difficulty.rawValue)
+    }
         
     func addIntervalToCurrentPhoneUsage() {
         let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
@@ -227,6 +231,10 @@ extension UserDefaults {
             }
             set(currLevel, forKey: UserDefaultsKeys.island5.rawValue)
         }
+    }
+    
+    func setDifficulty(value: Int) {
+        set(value, forKey: UserDefaultsKeys.difficulty.rawValue)
     }
     
     func islandGetLevel(value: Int) -> Int {
@@ -477,6 +485,7 @@ enum UserDefaultsKeys : String {
     case island5
     case currentIsland
     case endedGame
+    case difficulty
     
     //exit view
     case quote

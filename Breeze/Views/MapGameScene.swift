@@ -37,12 +37,12 @@ class MapGameScene: SKScene {
 
     let boat_speed = 100
     
-    let num_levels = 5
+    let num_levels = 3
     
     override func didMove(to view: SKView) {
         
         // map reset if necessary (comment out until needed) - sets all islands back to lvl 1 (thus "locking" islands 2-5)
-//         UserDefaults.standard.resetMap()
+ //       UserDefaults.standard.resetMap()
         
         //background
         self.backgroundColor = UIColor(red: 100/255, green: 173/255, blue: 218/255, alpha: 1)
@@ -56,6 +56,7 @@ class MapGameScene: SKScene {
         
         // island1 always starts unlocked
         island1label.text = "Island Open"
+        island1.alpha = 1
         if (UserDefaults.standard.islandGetLevel(value: 1) >= 1 && UserDefaults.standard.islandGetLevel(value: 1) <= num_levels) {
             island1label.text = "Level: " + String(UserDefaults.standard.islandGetLevel(value: 1)) + "/ \(num_levels)"
         } else if UserDefaults.standard.islandGetLevel(value: 1) > num_levels {
@@ -72,9 +73,10 @@ class MapGameScene: SKScene {
         island2.removeFromParent()
         addChild(island2)
         island2label = SKLabelNode(fontNamed: "Baloo 2")
-        island2label.text = "Island Locked"
-        island2.alpha = 0.4
-        if UserDefaults.standard.islandGetLevel(value: 2) == 0 && UserDefaults.standard.islandGetLevel(value: 1) > num_levels {
+        if UserDefaults.standard.islandGetLevel(value: 2) == 0 && UserDefaults.standard.islandGetLevel(value: 1) <= num_levels {
+            island2label.text = "Island Locked"
+            island2.alpha = 0.4
+        } else if UserDefaults.standard.islandGetLevel(value: 2) == 0 && UserDefaults.standard.islandGetLevel(value: 1) > num_levels {
             island2label.text = "Island Open"
             island2.alpha = 1
         } else if (UserDefaults.standard.islandGetLevel(value: 2) >= 1 && UserDefaults.standard.islandGetLevel(value: 2) <= num_levels) {
@@ -96,10 +98,10 @@ class MapGameScene: SKScene {
         island3.removeFromParent()
         addChild(island3)
         island3label = SKLabelNode(fontNamed: "Baloo 2")
-        island3label.text = "Island Locked"
-        island3.alpha = 0.4
-        
-        if UserDefaults.standard.islandGetLevel(value: 3) == 0 && UserDefaults.standard.islandGetLevel(value: 2) > num_levels {
+        if UserDefaults.standard.islandGetLevel(value: 3) == 0 && UserDefaults.standard.islandGetLevel(value: 2) <= num_levels {
+            island3label.text = "Island Locked"
+            island3.alpha = 0.4
+        } else if UserDefaults.standard.islandGetLevel(value: 3) == 0 && UserDefaults.standard.islandGetLevel(value: 2) > num_levels {
             island3label.text = "Island Open"
             island3.alpha = 1
         } else if (UserDefaults.standard.islandGetLevel(value: 3) >= 1 && UserDefaults.standard.islandGetLevel(value: 3) <= num_levels) {
@@ -120,9 +122,10 @@ class MapGameScene: SKScene {
         island4.removeFromParent()
         addChild(island4)
         island4label = SKLabelNode(fontNamed: "Baloo 2")
-        island4label.text = "Island Locked"
-        island4.alpha = 0.4
-        if UserDefaults.standard.islandGetLevel(value: 4) == 0 && UserDefaults.standard.islandGetLevel(value: 3) > num_levels {
+        if UserDefaults.standard.islandGetLevel(value: 4) == 0 && UserDefaults.standard.islandGetLevel(value: 3) <= num_levels {
+            island4label.text = "Island Locked"
+            island4.alpha = 0.4
+        } else if UserDefaults.standard.islandGetLevel(value: 4) == 0 && UserDefaults.standard.islandGetLevel(value: 3) > num_levels {
             island4label.text = "Island Open"
             island4.alpha = 1
         } else if (UserDefaults.standard.islandGetLevel(value: 4) >= 1 && UserDefaults.standard.islandGetLevel(value: 4) <= num_levels) {
@@ -144,9 +147,10 @@ class MapGameScene: SKScene {
         island5.removeFromParent()
         addChild(island5)
         island5label = SKLabelNode(fontNamed: "Baloo 2")
-        island5label.text = "Island Locked"
-        island5.alpha = 0.4
-        if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
+        if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) <= num_levels {
+            island5label.text = "Island Locked"
+            island5.alpha = 0.4
+        } else if UserDefaults.standard.islandGetLevel(value: 5) == 0 && UserDefaults.standard.islandGetLevel(value: 4) > num_levels {
             island5label.text = "Island Open"
             island5.alpha = 1
         } else if (UserDefaults.standard.islandGetLevel(value: 5) >= 1 && UserDefaults.standard.islandGetLevel(value: 5) <= num_levels) {
@@ -165,7 +169,6 @@ class MapGameScene: SKScene {
         
         let islandPositions = [CGPoint(x: screenWidth * 0.2 + 30,  y: frame.minY + 30), island1.position, island2.position, island3.position, island4.position, island5.position]
         
-//        boat.position = CGPoint(x: frame.size.width * 0.2 + 30, y: frame.minY + 30)
         boat.position = islandPositions[UserDefaults.standard.getCurrentIsland()]
         boat.size = CGSize(width: 70 * 0.5, height: 120 * 0.5)
         boat.removeFromParent()
@@ -194,21 +197,6 @@ class MapGameScene: SKScene {
         dottedLine(from: island4.position, to: island5.position)
         dottedLine(from: island5.position, to: CGPoint(x: screenWidth * 0.5, y: screenHeight))
         
-//        let textShadow = SKShapeNode(rect: CGRect(x: screenWidth * 0.05, y: screenHeight * 0.75, width: 200, height: 125))
-//        textShadow.strokeColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
-//        textShadow.glowWidth = 20
-//        textShadow.fillColor = UIColor(red: 131/255, green: 205/255, blue: 230/255, alpha: 1)
-//        textShadow.zPosition = -1
-//        addChild(textShadow)
-        
-        //USER TESTING CODE (DELETE LATER)
-//        if let uuid = UIDevice.current.identifierForVendor?.uuidString {
-//            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map. TESTING ID: " + uuid
-//        }
-//        else {
-//            instructions1.text = "Tap an island to play! To unlock an island, play all the levels of the previous island on the map."
-//        }
-        //USER TESTING CODE FINISH
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -332,6 +320,7 @@ class MapGameScene: SKScene {
         path.addLine(to: pointB)
         let move = SKAction.follow(path.cgPath, asOffset: false, orientToPath: false, speed: CGFloat(boat_speed))
         boat.run(move)
+        boat.position = pointB
     }
     
     // shake function by Ged2323 https://gist.github.com/mihailt/d793236f31f0b8f8722e
