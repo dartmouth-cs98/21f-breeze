@@ -104,6 +104,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
 
     func checkPhoneUsageBeforeLocking() {
+        var countPendingNotifications = 0
+        //get num pending notifications and decrease num sent by that count (because they will not actually send!)
+        userNotificationCenter.getPendingNotificationRequests {(notificationRequests) in
+            countPendingNotifications = notificationRequests.count
+            UserDefaults.standard.decreaseNotificationsSent(value: countPendingNotifications)
+        }
         UserDefaults.standard.setSendNotificationOnUnlock(value: false)
         usageUpdatesLog.notice("Checking phone usage before locking and updating statistics")
         // if date has changed, store previous data and reset current day usage (thus the time interval we are looking at now will be added to the new day)
@@ -237,6 +243,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     }
     
     func scheduleNotification(overTimeLimit: Bool = false, identity: String = "scheduled") {
+        UserDefaults.standard.addNotificationSent()
         // Define the custom actions.
         let snoozeAction = UNNotificationAction(identifier: "SNOOZE_ACTION",
                                                 title: "Snooze for 15 minutes",

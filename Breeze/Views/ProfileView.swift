@@ -20,7 +20,8 @@ struct ProfileView: View {
     @State private var currWeekScreenTime = UserDefaults.standard.getCurrentWeekPhoneUsage();
     @State private var prevWeekScreenTime = Int(UserDefaults.standard.getProportionWeekSpent() * Double(UserDefaults.standard.getPreviousWeekPhoneUsage()));
     @State private var currDayScreenTime = UserDefaults.standard.getCurrentDayPhoneUsage();
-    @State private var percentNotifications = 0;
+    
+    @State private var percentNotifications = Double(UserDefaults.standard.getCurrNotificationClicks()) / (Double(UserDefaults.standard.getCurrNotificationSends() - 1) + 0.0001) * 100.0;
     
     var body: some View {
         Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
@@ -137,7 +138,7 @@ struct ProfileView: View {
                         Text("This week, you accepted")
                             .font(.body)
                             .foregroundColor(.black)
-                        Text(calculatePercentNotificationValue())
+                        Text(String(format: "%.0f", percentNotifications) + "%")
                             .font(.title3)
                             .foregroundColor(Color.init(UIColor(red: 54/255, green: 110/255, blue: 163/255, alpha: 1)))
                             .padding()
@@ -199,19 +200,13 @@ struct ProfileView: View {
     
     
     func calculateScreenTimePercent(currWeek: Float, prevWeek: Float) -> String {
+        print(UserDefaults.standard.getCurrNotificationClicks())
+        print(UserDefaults.standard.getCurrNotificationSends())
         // avoid dividing by 0
         if (prevWeek == 0) {
             return "0%"
         }
         return String(Int(((currWeek - prevWeek)/prevWeek*100))) + "%"
-    }
-    
-    func calculatePercentNotificationValue() -> String {
-        // avoid dividing by 0
-        if (UserDefaults.standard.getCurrNotificationSends() != 0) {
-            percentNotifications = UserDefaults.standard.getCurrNotificationClicks()/UserDefaults.standard.getCurrNotificationSends()
-        }
-        return String(percentNotifications) + "%"
     }
     
     func didDismissTimeSelectionView() {
