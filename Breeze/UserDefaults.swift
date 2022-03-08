@@ -15,14 +15,6 @@ extension UserDefaults {
         return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UserDefaults")
     }
     
-    var usageUpdatesLog: Logger {
-        return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UsageUpdates")
-    }
-    
-    var gameLog: Logger {
-        return Logger.init(subsystem: "edu.dartmouth.Breeze.", category: "UsageUpdates")
-    }
-    
     func incrementStreak(){
         set(getStreak() + 1, forKey: UserDefaultsKeys.streak.rawValue)
     }
@@ -148,7 +140,6 @@ extension UserDefaults {
         
     func addIntervalToCurrentPhoneUsage() {
         let secondsElapsed = getSecondsElapsedFromLastTimeProtectedDataStatusChecked()
-        usageUpdatesLog.notice("Seconds elapsed since last check: \(secondsElapsed)")
         
         let currentPhoneUsage = getCurrentPhoneUsage()
         let currDayPhoneUsage = getCurrentDayPhoneUsage()
@@ -165,7 +156,6 @@ extension UserDefaults {
     
     func resetCurrentPhoneUsage() {
         set(0, forKey: UserDefaultsKeys.currentPhoneUsage.rawValue)
-        usageUpdatesLog.notice("Reseting current phone usage")
     }
     
     func setCurrentPhoneUsage(value: Int) {
@@ -174,12 +164,9 @@ extension UserDefaults {
     
     func isAboveTimeLimit() -> Bool {
         let currentPhoneUsage = getCurrentPhoneUsage()
-        usageUpdatesLog.notice("Current phone usage (in seconds): \(currentPhoneUsage)")
-        usageUpdatesLog.notice("Current phone usage (in minutes): \(currentPhoneUsage/60)")
         
         let timeLimit = getTime()
-        usageUpdatesLog.notice("Time limit: \(timeLimit)")
-        
+
         if (currentPhoneUsage >= (timeLimit*60) && timeLimit > 0) {
             return true
         } else {
@@ -193,7 +180,6 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island1.rawValue)
             if currLevel < 5 {
                 currLevel += 1
-                log.notice("Leveling up for Island One to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island1.rawValue)
         }
@@ -201,7 +187,6 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island2.rawValue)
             if currLevel < 5 {
                 currLevel += 1
-                log.notice("Leveling up for Island Two to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island2.rawValue)
         }
@@ -209,7 +194,6 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island3.rawValue)
             if currLevel < 5 {
                 currLevel += 1
-                log.notice("Leveling up for Island Three to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island3.rawValue)
         }
@@ -217,7 +201,6 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island4.rawValue)
             if currLevel < 5 {
                 currLevel += 1
-                log.notice("Leveling up for Island Four to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island4.rawValue)
         }
@@ -225,7 +208,6 @@ extension UserDefaults {
             var currLevel: Int = integer(forKey: UserDefaultsKeys.island5.rawValue)
             if currLevel < 5 {
                 currLevel += 1
-                log.notice("Leveling up for Island Five to level \(currLevel)")
             }
             set(currLevel, forKey: UserDefaultsKeys.island5.rawValue)
         }
@@ -257,7 +239,6 @@ extension UserDefaults {
     }
     
     func resetMap() {
-        log.notice("Resetting map")
         set(0, forKey: UserDefaultsKeys.island1.rawValue)
         set(0, forKey: UserDefaultsKeys.island2.rawValue)
         set(0, forKey: UserDefaultsKeys.island3.rawValue)
@@ -278,16 +259,13 @@ extension UserDefaults {
         
         //If it is a new day, then reset the current period phone usage and current day phone usage
         if (prevDayOfWeek != currDayOfWeek) {
-            usageUpdatesLog.notice("The date has changed since phone usage was last checked - Reseting current phone usage")
             resetCurrentPhoneUsage()
             set(0, forKey: UserDefaultsKeys.currDayPhoneUsage.rawValue) //Now reset current day phone usage
 
             
             let currWeekUsage = integer(forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
-            usageUpdatesLog.notice("Phone usage for current week: \(currWeekUsage)")
             
             if (currDayOfWeek == 1) { //Sunday: roll over statistics
-                usageUpdatesLog.notice("It's Sunday! Rolling over weekly usage statistics: \(currWeekUsage)")
                 set(currWeekUsage, forKey: UserDefaultsKeys.prevWeekPhoneUsage.rawValue)
                 set(0, forKey: UserDefaultsKeys.currWeekPhoneUsage.rawValue)
                 rollOverNotifications()
@@ -334,7 +312,6 @@ extension UserDefaults {
     }
     
     func rollOverNotifications() {
-        usageUpdatesLog.notice("Rolling over notification sends/clicks/snoozes statistics to last week")
         let currNotificationSends = getCurrNotificationSends()
         let currNotificationClicks = getCurrNotificationClicks()
         let currNotificationSnoozes = getCurrNotificationSnoozes()
@@ -351,8 +328,6 @@ extension UserDefaults {
         let dayComponents = calendar.dateComponents([.weekday], from: currDate)
         let dayOfWeek = Int(dayComponents.weekday ?? 1)
         let hourOfDay = calendar.component(.hour, from: currDate)
-        log.notice("day: \(dayOfWeek)")
-        log.notice("hour: \(hourOfDay)") //HOW TO GET THIS TO MILITARY TIME
         return Double((dayOfWeek-1 + (hourOfDay / 24)) / 7)
     }
     
@@ -401,14 +376,6 @@ extension UserDefaults {
         set(fetchUpdates + 1, forKey: UserDefaultsKeys.fetchUpdates.rawValue)
     }
     
-    func printUpdateTimes () {
-        usageUpdatesLog.notice("Update Times")
-        let updateTimes = getUpdateTimes() ?? []
-        for time in updateTimes {
-            usageUpdatesLog.notice("\(String(describing: time))")
-        }
-        usageUpdatesLog.notice("End of Update Times")
-    }
     
     func setSendNotificationOnUnlock(value: Bool) {
         set(value, forKey: UserDefaultsKeys.sendNotificationOnUnlock.rawValue)

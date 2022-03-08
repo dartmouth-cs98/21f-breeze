@@ -6,15 +6,12 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
-import OSLog
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     //instantiate island
     let currentIsland = UserDefaults.standard.getCurrentIsland();
     let islands = [Islands.island1, Islands.island2, Islands.island3, Islands.island4, Islands.island5]
     lazy var island = islands[currentIsland - 1]
-        
-    let gameLog = Logger.init(subsystem: "edu.dartmouth.breeze", category: "GameLog")
         
     //instantiate sprites
     lazy var boat = SKSpriteNode(imageNamed: island.boat)
@@ -146,7 +143,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setDifficulty() {
-        gameLog.notice("Setting difficulty")
         if UserDefaults.standard.getDifficulty() == 0 { UserDefaults.standard.setDifficulty(value: 2) }
         let difficulty = UserDefaults.standard.getDifficulty()
 
@@ -167,7 +163,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             obstacle_speed = 200
             gap_size = 90
         }
-        gameLog.notice("\(difficulty)")
     }
     
     @objc func fireTimer() {
@@ -189,7 +184,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if obstacle_count < num_obstacles && seconds_elapsed % seconds_between_obstacle == 0 {
             let old_count = obstacle_count
             obstacle_count = renderObstacle(count: old_count)
-            gameLog.notice("Obstacle count: \(self.obstacle_count)")
         }
         
         //instantiate end-of-level timer for beach
