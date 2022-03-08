@@ -9,7 +9,7 @@ Read our Medium article: _TODO_ *link*
 ## Authors
 <img src="https://i.imgur.com/NFjMVzJ.jpg" width="500">
 
-Dartmouth College class of 2022 Computer Science majors Sabrina Jain, John Weingart, Katherine Taylor, Grant Dumanian, Laurel Dernbch (shown left to right).
+Dartmouth College class of 2022 Computer Science majors [Sabrina Jain](https://github.com/sab747), [John Weingart](https://github.com/jrweingart), [Katherine Taylor](https://github.com/kattaylor22), [Grant Dumanian](https://github.com/grantrdumanian), [Laurel Dernbach](https://github.com/laureldernbach) (shown left to right).
 
 ## Architecture
 Breeze is an iOS app developed in Xcode 13, written with Swift 5 and Apple SpriteKit.
