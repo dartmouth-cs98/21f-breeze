@@ -16,7 +16,7 @@ struct TimeSelectionView: View {
         ZStack {
            VStack {
                Text("Breeze will notify you every...")
-                   .font(.body).foregroundColor(Color.black)
+                   .font(.body)
                    .multilineTextAlignment(.center)
                DurationPickerView(time: $startTime, changeTriggered: $timeSelected)
                // if user has touched the durationPicker twice (work around to apple's bug)
@@ -34,7 +34,6 @@ struct TimeSelectionView: View {
                        .padding()
                        .font(.body)
                        .background(Color.init(UIColor(red: 196/255, green: 196/255, blue: 196/255, alpha: 1)))
-                       .foregroundColor(Color.black)
                        .cornerRadius(6)
                }
            }

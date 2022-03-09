@@ -10,6 +10,7 @@ struct InstructionsView: View {
     @State private var endViewIsPresenting = false
     var body: some View {
         ZStack {
+            Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack (alignment: .center) {
                 Spacer()
                 Text("When you receive a push notification you can:")
