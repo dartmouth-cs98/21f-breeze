@@ -311,6 +311,11 @@ extension UserDefaults {
         set(currNotificationSnoozes + 1, forKey: UserDefaultsKeys.notificationsSnoozedCurrWeek.rawValue)
     }
     
+    func decreaseNotificationsSent(value: Int) {
+        let currNotificationSends = getCurrNotificationSends()
+        set(currNotificationSends - value, forKey: UserDefaultsKeys.notificationsSentCurrWeek.rawValue)
+    }
+    
     func rollOverNotifications() {
         let currNotificationSends = getCurrNotificationSends()
         let currNotificationClicks = getCurrNotificationClicks()
@@ -436,4 +441,5 @@ enum UserDefaultsKeys : String {
     case visitUpdates
     case locationUpdates
     case fetchUpdates
+    case percentNotifications
 }
