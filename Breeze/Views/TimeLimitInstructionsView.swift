@@ -8,6 +8,7 @@ struct TimeLimitInstructionsView: View {
     @State private var timeSelectionIsPresenting = false
     var body: some View {
         ZStack {
+            Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack {
                 Spacer()
                 Text("**Welcome to Breeze.**")

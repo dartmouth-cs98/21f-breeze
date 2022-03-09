@@ -5,6 +5,7 @@ struct EndOfSetUpView: View {
     @Binding var endViewIsPresenting: Bool
     var body: some View {
         ZStack {
+            Color(red: 255/255, green: 255/255, blue: 255/255).ignoresSafeArea()
             VStack (alignment: .center) {
                 Text("Thank you for configuring Breeze. We will notify you when you reach your time limit.")
                     .font(.body).foregroundColor(Color.black)
