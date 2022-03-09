@@ -31,8 +31,17 @@ struct ExitView: View {
                     .font(.body).italic().foregroundColor(Color.black)
                     .multilineTextAlignment(.center)
                     .padding()
+                Button("Take me home!", action: {goToTapToPlay()})
+                    .padding()
+                    .background(Color.init(UIColor(red: 221/255, green: 247/255, blue: 246/255, alpha: 1)))
+                    .foregroundColor(Color.black)
+                    .cornerRadius(6)
             }
         }
+    }
+    
+    func goToTapToPlay () {
+        exitViewIsPresenting.toggle()
     }
 }
 
