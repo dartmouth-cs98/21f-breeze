@@ -2,7 +2,7 @@
 
 Welcome to Breeze! We are an iOS app designed to help you reduce your screentime with positive reinforcement. Users can set a total screen time limit, and Breeze will send a notification invitation to our game when users meet that limit. Accepting these notifications means progressing farther in the game and discovering new islands!
 
-Read our Medium article: _TODO_ *link*
+Read our [Medium article](https://medium.com/dartmouth-cs98/stuck-scrolling-we-made-reducing-your-screen-time-a-breeze-54582ff3237b).
 
 <img src="https://i.imgur.com/gTIn1fV.png" width="500">
 
