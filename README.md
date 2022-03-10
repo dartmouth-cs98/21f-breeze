@@ -17,7 +17,7 @@ Breeze is an iOS app developed in Xcode 13, written with Swift 5 and Apple Sprit
 ## Deployment
 Breeze is designed to run on an iPhone with iOS 14.4 or greater.
 
-Download Breeze on the Apple App Store: https://apps.apple.com/us/app/breeze-take-a-break/id1592367517
+Download Breeze on the [Apple App Store](https://apps.apple.com/us/app/breeze-take-a-break/id1592367517).
 
 To deploy from this repository:
 1. With a MacOS supported device with Xcode installed, clone this repository locally.
